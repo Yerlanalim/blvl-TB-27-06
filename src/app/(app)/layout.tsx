@@ -22,7 +22,7 @@ import { steps } from '@/lib/onborda';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'techblitz',
+    title: 'bizlevel',
     description: 'Improve your code knowledge, one day at a time.',
   });
 }

@@ -22,8 +22,8 @@ export const sendFeedback = async ({ feedback, emoji }: FeedbackData) => {
   `;
 
   await resend.emails.send({
-    from: 'TechBlitz <team@techblitz.dev>',
-    to: 'team@techblitz.dev',
+    from: 'BizLevel <team@bizlevel.kz>',
+    to: 'team@bizlevel.kz',
     subject: `Feedback from ${user.email} ${emoji || ''}`,
     text: emailText,
   });

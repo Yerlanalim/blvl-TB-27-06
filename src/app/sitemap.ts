@@ -6,7 +6,7 @@ import { getAllPseoPages } from '@/utils/data/misc/get-all-pseo-pages';
 import { getAllChangelogEntries } from '@/lib/changelog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://techblitz.dev';
+  const baseUrl = 'https://bizlevel.kz';
 
   // Fetch all blog posts and questions
   const [studyPaths, changelogEntries] = await Promise.all([

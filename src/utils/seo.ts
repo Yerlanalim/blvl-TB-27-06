@@ -25,16 +25,16 @@ export const createMetadata = ({
 }): Metadata => {
   const defaultKeywords = [
     'roadmaps',
-    'techblitz',
+    'bizlevel',
     'ai',
-    'coding',
-    'programming',
-    'software engineering',
-    'developer',
-    'javascript',
-    'learn to code',
-    'coding course',
-    'coding bootcamp',
+    'business',
+    'entrepreneurship',
+    'business education',
+    'startup',
+    'business skills',
+    'learn business',
+    'business course',
+    'business training',
   ];
 
   // Ensure canonical URL is always the full URL of the current page

@@ -43,7 +43,7 @@ export default function WelcomeEmail({
 
           {/* Hero Section */}
           <Section style={heroSection}>
-            <Heading style={h1}>Welcome to TechBlitz!</Heading>
+            <Heading style={h1}>Welcome to BizLevel!</Heading>
             <Text style={heroText}>
               We're thrilled to have you join our community of tech enthusiasts.
             </Text>
@@ -55,7 +55,7 @@ export default function WelcomeEmail({
           <Section style={section}>
             <Text style={text}>Hey {userName},</Text>
             <Text style={text}>
-              I'm Logan, the founder of TechBlitz, and I wanted to personally thank you for becoming
+              I'm Logan, the founder of BizLevel, and I wanted to personally thank you for becoming
               part of our growing community. Your decision to join us means a lot!
             </Text>
             <Text style={text}>

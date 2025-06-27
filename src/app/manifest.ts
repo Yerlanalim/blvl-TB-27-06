@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'techblitz app',
-    short_name: 'techblitz',
+      name: 'bizlevel app',
+  short_name: 'bizlevel',
     description: '',
     start_url: '/',
     display: 'standalone',

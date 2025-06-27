@@ -84,7 +84,7 @@ const footerItems = [
     links: [
       {
         title: 'Contact Us',
-        href: 'mailto:team@techblitz.dev',
+        href: 'mailto:team@bizlevel.kz',
         ariaLabel: 'Contact Us',
       },
     ],
@@ -155,7 +155,7 @@ export default function MarketingFooter() {
             <Separator className="bg-black-50" />
             <div className="flex flex-col sm:flex-row w-full justify-between items-center">
               <p className="text-xs">
-                &copy; {new Date().getFullYear()} DEV TECHBLITZ Ltd. All rights reserved.
+                &copy; {new Date().getFullYear()} DEV BIZLEVEL Ltd. All rights reserved.
               </p>
               <ul className="flex items-center gap-x-4 text-xs mt-4 sm:mt-0">
                 <li>

@@ -85,8 +85,8 @@ export const metadata: Metadata = {
         alt: 'TechBlitz - Interactive Coding Platform for Beginners',
       },
     ],
-    creator: '@techblitz',
-    site: '@techblitz',
+    creator: '@bizlevel',
+    site: '@bizlevel',
   },
   alternates: {
     canonical: getBaseUrl(),
@@ -115,7 +115,7 @@ export default async function Page() {
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -128,10 +128,10 @@ export default async function Page() {
       'learn to code, coding for beginners, interactive coding, programming practice, javascript tutorials, web development, coding challenges, programming exercises, learn programming online free, interactive coding platform, beginner friendly coding, practice coding online',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.kz/favicon.ico',
       },
     },
     breadcrumb: {

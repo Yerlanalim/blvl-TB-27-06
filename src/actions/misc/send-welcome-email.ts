@@ -25,7 +25,7 @@ export const sendWelcomeEmail = async (user: Partial<UserRecord> | null, coupon:
   const userName = username || 'there';
 
   await resend.emails.send({
-    from: 'Logan from TechBlitz <team@techblitz.dev>',
+    from: 'Logan from BizLevel <team@bizlevel.kz>',
     to: email,
     subject: 'Welcome to TechBlitz!',
     react: WelcomeEmail({
