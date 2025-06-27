@@ -11,10 +11,10 @@ import { getBaseUrl } from '@/utils';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Sign Up | TechBlitz',
-    description: 'Sign up for TechBlitz to get started.',
+    title: 'Sign Up | BizLevel',
+    description: 'Sign up for BizLevel to get started.',
     image: {
-      text: 'Sign Up | TechBlitz',
+              text: 'Sign Up | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },

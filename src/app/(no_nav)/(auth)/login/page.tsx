@@ -7,10 +7,10 @@ import { createMetadata } from '@/utils/seo';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Login | TechBlitz',
+    title: 'Login | BizLevel',
     description: 'Login to your account to continue.',
     image: {
-      text: 'Login | TechBlitz',
+              text: 'Login | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -28,7 +28,7 @@ export default function LoginPage({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/login`,
-    headline: 'Login | TechBlitz',
+          headline: 'Login | BizLevel',
     description:
       'Curated lists of coding questions, ranging from Javascript, React, Node, Web Development. Perfect for your daily coding practice.',
     image:
@@ -52,7 +52,7 @@ export default function LoginPage({
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -65,10 +65,10 @@ export default function LoginPage({
       'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.kz/favicon.ico',
       },
     },
   };

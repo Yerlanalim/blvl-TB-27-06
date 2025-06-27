@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   ).then((res) => res.arrayBuffer());
 
   // Get parameters from URL with defaults
-  const title = searchParams.get('title') || 'TechBlitz';
+  const title = searchParams.get('title') || 'BizLevel';
   const subtitle =
     searchParams.get('subtitle') || 'Learning to code made free and accessible to everyone.';
   const theme = searchParams.get('theme') || 'dark';
@@ -179,7 +179,7 @@ export async function GET(request: NextRequest) {
               fontFamily: '"Onest"',
             }}
           >
-            techblitz.dev
+            bizlevel.kz
           </p>
         </div>
       </div>

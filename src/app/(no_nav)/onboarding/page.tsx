@@ -7,7 +7,7 @@ import OnboardingForm from '@/components/app/onboarding/onboarding-form';
 import { useUserServer } from '@/hooks/use-user-server';
 
 export const metadata = {
-  title: 'Onboarding | TechBlitz',
+      title: 'Onboarding | BizLevel',
 };
 
 export default async function OnboardingPage() {
