@@ -7,7 +7,7 @@
   --foreground: #ededed;
 
   --color-secondary: #ffffff;
-  --color-accent: #5b61d6;
+  --color-accent: #22c55e; /* Зеленый для бизнес-тематики (рост, успех) */
 }
 
 body {

@@ -24,17 +24,17 @@ export const createMetadata = ({
   canonicalUrl?: string;
 }): Metadata => {
   const defaultKeywords = [
-    'roadmaps',
     'bizlevel',
-    'ai',
-    'business',
-    'entrepreneurship',
-    'business education',
-    'startup',
-    'business skills',
-    'learn business',
-    'business course',
-    'business training',
+    'обучение бизнесу',
+    'основы бизнеса', 
+    'предпринимательство',
+    'бизнес-образование',
+    'стартап',
+    'малый бизнес',
+    'бизнес-навыки',
+    'бизнес-курсы',
+    'ai наставник',
+    'бизнес-платформа',
   ];
 
   // Ensure canonical URL is always the full URL of the current page

@@ -8,7 +8,7 @@ import './globals.css';
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ReactQueryClientProvider>
-      <html lang="en">
+      <html lang="ru">
         <body
           className={`${InterFont.variable} ${SatoshiFont.variable} ${UbuntuFont.variable} ${OnestFont.variable} antialiased`}
           suppressHydrationWarning

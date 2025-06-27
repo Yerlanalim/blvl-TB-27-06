@@ -34,29 +34,29 @@ import RoadmapIcon from '@/components/ui/icons/roadmap';
 import MaterialSymbolsFilterListRounded from '@/components/ui/icons/filter';
 import Document from '@/components/ui/icons/document';
 
-const title = 'The free, fun way to master coding | BizLevel';
+const title = 'Обучение бизнесу с нуля | BizLevel - Платформа для предпринимателей';
 const description =
-  'BizLevel helps you go from beginner to coding expert with hands-on challenges, personalized practice, and instant AI feedback.';
+  'BizLevel поможет вам изучить основы бизнеса и предпринимательства. Интерактивные уроки, практические задания и персональная поддержка AI-наставника Leo.';
 
 export const metadata: Metadata = {
   title,
   description,
   keywords: [
     // Primary keywords
-    'learn to code',
-    'coding for beginners',
-    'interactive coding',
-    'programming practice',
+    'обучение бизнесу',
+    'основы бизнеса',
+    'предпринимательство',
+    'бизнес для начинающих',
     // Secondary keywords
-    'javascript tutorials',
-    'web development',
-    'coding challenges',
-    'programming exercises',
+    'бизнес-образование',
+    'стартап',
+    'малый бизнес',
+    'бизнес-навыки',
     // Long-tail keywords
-    'learn programming online free',
-    'interactive coding platform',
-    'beginner friendly coding',
-    'practice coding online',
+    'изучить бизнес онлайн бесплатно',
+    'интерактивная платформа обучения бизнесу',
+    'бизнес-курсы для начинающих',
+    'как начать свой бизнес',
   ],
   openGraph: {
     title,
@@ -66,10 +66,10 @@ export const metadata: Metadata = {
     siteName: 'BizLevel',
     images: [
       {
-        url: 'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
+        url: '/api/og?text=BizLevel&accentColor=%2322c55e',
         width: 1200,
         height: 630,
-        alt: 'BizLevel - Interactive Coding Platform for Beginners',
+        alt: 'BizLevel - Платформа для обучения бизнесу и предпринимательству',
       },
     ],
   },
@@ -79,10 +79,10 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: 'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
+        url: '/api/og?text=BizLevel&accentColor=%2322c55e',
         width: 1200,
         height: 630,
-        alt: 'BizLevel - Interactive Coding Platform for Beginners',
+        alt: 'BizLevel - Платформа для обучения бизнесу и предпринимательству',
       },
     ],
     creator: '@bizlevel',
@@ -111,8 +111,7 @@ export default async function Page() {
     url: getBaseUrl(),
     headline: title,
     description,
-    image:
-      'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
+    image: '/api/og?text=BizLevel&accentColor=%2322c55e',
     author: {
       '@type': 'Organization',
       name: 'BizLevel',
@@ -125,7 +124,7 @@ export default async function Page() {
       '@id': getBaseUrl(),
     },
     keywords:
-      'learn to code, coding for beginners, interactive coding, programming practice, javascript tutorials, web development, coding challenges, programming exercises, learn programming online free, interactive coding platform, beginner friendly coding, practice coding online',
+      'обучение бизнесу, основы бизнеса, предпринимательство, бизнес для начинающих, бизнес-образование, стартап, малый бизнес, бизнес-навыки, изучить бизнес онлайн бесплатно, интерактивная платформа обучения бизнесу, бизнес-курсы для начинающих, как начать свой бизнес',
     publisher: {
       '@type': 'Organization',
       name: 'BizLevel',

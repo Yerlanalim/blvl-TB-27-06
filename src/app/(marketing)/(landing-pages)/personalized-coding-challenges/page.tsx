@@ -187,7 +187,7 @@ export default function PersonalizedCodingChallengesPage() {
     description:
       'Master coding with BizLevel’s personalized coding challenges. Learn JavaScript, web development, and programming through real-world challenges tailored to your skill level.',
     image:
-      'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
+      '/api/og?text=BizLevel&accentColor=%2322c55e',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
