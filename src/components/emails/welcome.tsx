@@ -222,7 +222,7 @@ export default function WelcomeEmail({
             <Text style={footerText}>Let's revolutionize the tech world together!</Text>
             <Text style={footerText}>Best regards,</Text>
             <Text style={footerSignature}>Logan</Text>
-            <Text style={footerFounder}>Founder, TechBlitz</Text>
+            <Text style={footerFounder}>Founder, BizLevel</Text>
 
             {/* Social Links */}
             <Section style={socialLinks}>
@@ -252,7 +252,7 @@ export default function WelcomeEmail({
               </Link>{' '}
             </Section>
 
-            <Text style={footerFine}>© 2025 DEV TECHBLITZ LTD. All rights reserved.</Text>
+            <Text style={footerFine}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
             <Text style={footerFine}>
               You're receiving this email because you signed up for TechBlitz.
             </Text>

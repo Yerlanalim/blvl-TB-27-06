@@ -21,7 +21,7 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
   return (
     <Html>
       <Head />
-      <Preview>You've been invited to join TechBlitz! 🚀</Preview>
+      <Preview>You've been invited to join BizLevel! 🚀</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logoContainer}>
@@ -33,7 +33,7 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
               style={logo}
             />
           </Section>
-          <Heading style={h1}>Welcome to TechBlitz!</Heading>
+          <Heading style={h1}>Welcome to BizLevel!</Heading>
           <Text style={text}>
             {referrerEmail ? (
               <>
@@ -91,7 +91,7 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
             here to help!
           </Text>
           <Section style={footer}>
-            <Text style={footerText}>© 2025 Dev TechBlitz. All rights reserved.</Text>
+            <Text style={footerText}>© 2025 Dev BizLevel. All rights reserved.</Text>
           </Section>
         </Container>
       </Body>

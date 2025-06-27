@@ -101,7 +101,7 @@ export default function HomepageHero({ userCountPromise }: { userCountPromise: P
         </h1>
 
         <p className="font-onest max-w-3xl text-gray-400 text-xl tracking-tight mt-6 md:mt-2 text-focus-in animate-fade-in-up [animation-delay:600ms] leading-relaxed">
-          TechBlitz helps you go from beginner to coding expert with hands-on challenges,
+                      BizLevel helps you go from beginner to business expert with hands-on challenges,
           personalized practice, and instant AI feedback.
         </p>
 
