@@ -1,11 +1,4 @@
-enum StudyPathType {
-  LEARN
-  PRACTICE
-  BUILD
-  REVIEW  
-}
-
-///  * StudyPath is a study path that a user can enroll in.
+/// * StudyPath is a study path that a user can enroll in.
 model StudyPath {
   uid                   String          @id @default(uuid())
   createdAt             DateTime        @default(now())
@@ -14,68 +7,58 @@ model StudyPath {
   title                 String
   description           String
   heroChip              String
-  questionSlugs         String[]        // LEGACY
-  type                  StudyPathType   @default(LEARN)
-
-  overviewData          Json?
-
+  questionSlugs         String[]
   educationLevel        String
   averageCompletionTime Int?
   category              String?
-  categoryToolTip       String?
-  
-  goals                 StudyPathGoal[]
-  enrollments           UserStudyPath[]
   icon                  String?
   isPublished           Boolean         @default(false)
   nextStudyPathSlug     String?
-
+  overviewData          Json?
+  type                  StudyPathType   @default(LEARN)
+  categoryToolTip       String?
+  goals                 StudyPathGoal[]
+  enrollments           UserStudyPath[]
 }
 
 model UserStudyPath {
-  uid          String    @id @default(uuid())
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  userUid      String
-  studyPathUid String
-  enrolledAt   DateTime  @default(now())
-  completedAt  DateTime?
-  progress     Float     @default(0)
-  
-  studyPath    StudyPath @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
-  user         Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  uid           String          @id @default(uuid())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  userUid       String
+  studyPathUid  String
+  enrolledAt    DateTime        @default(now())
+  completedAt   DateTime?
+  progress      Float           @default(0)
   StudyPathGoal StudyPathGoal[]
+  studyPath     StudyPath       @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
+  user          Users           @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 
   @@unique([userUid, studyPathUid])
 }
 
 model StudyPathGoal {
-  uid          String    @id @default(uuid())
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  // when the goal was set
-  dateSet      DateTime
-  // is the goal active?
-  isActive     Boolean   @default(true)
-  // when the goal was set
-  targetDate   DateTime
-  // is the goal completed?
-  completed    Boolean   @default(false)
-  // when the goal was completed
-  completedAt  DateTime?
-
-  // relations 
-
-  userUid      String
-  studyPathUid String
+  uid              String         @id @default(uuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  dateSet          DateTime
+  targetDate       DateTime
+  completed        Boolean        @default(false)
+  completedAt      DateTime?
+  userUid          String
+  studyPathUid     String
+  isActive         Boolean        @default(true)
   userStudyPathUid String?
-
-  // the study path the goal is for
-  studyPath    StudyPath @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
-  // the user the goal is for
-  user         Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
-  // the users study path enrollment
-  userStudyPath UserStudyPath? @relation(fields: [userStudyPathUid], references: [uid], onDelete: Cascade)
+  studyPath        StudyPath      @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
+  userStudyPath    UserStudyPath? @relation(fields: [userStudyPathUid], references: [uid], onDelete: Cascade)
+  user             Users          @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 
   @@unique([userUid, studyPathUid])
+}
+
+enum StudyPathType {
+  LEARN
+  PRACTICE
+  BUILD
+  REVIEW
 }

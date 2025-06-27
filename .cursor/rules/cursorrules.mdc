@@ -1,0 +1,163 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+// BizLevel (форк TechBlitz) .cursorrules
+
+// КРИТИЧЕСКИ ВАЖНО - Контекст проекта
+const projectContext = `
+BizLevel - это платформа для обучения бизнесу, созданная на основе форка TechBlitz.
+Мы ПОЛНОСТЬЮ заменили программистскую тематику на бизнес-обучение.
+НЕ добавляй никакого кода связанного с программированием, coding challenges, или техническими темами.
+`;
+
+// Правила замены бренда
+const brandingRules = [
+  "Всегда используй 'BizLevel' вместо 'TechBlitz'",
+  "Email: team@bizlevel.kz (НЕ techblitz.dev)",
+  "Домен: bizlevel.com во всех ссылках",
+  "Название в package.json и метаданных: BizLevel",
+];
+
+// Next.js App Router best practices (оставляем как есть)
+const nextjsAppRouterBestPractices = [
+  "Use server components by default",
+  "Implement client components only when necessary", 
+  "Utilize the new file-based routing system",
+  "Use layout.tsx for shared layouts",
+  "Implement loading.js for loading states",
+  "Use error.js for error handling",
+  "Utilize route handlers for API routes",
+];
+
+// Структура папок с пометками
+const folderStructure = `app/
+  layout.tsx
+  page.tsx
+  (app)/
+    playground/ # ЗАГЛУШКА - не удалять, возвращать "Раздел в разработке"
+    admin/      # Оставить для управления контентом
+components/
+  app/
+  auth/
+  business/   # НОВАЯ ПАПКА для бизнес-компонентов
+  global/
+  marketing/
+  mdx/
+  templates/
+  ui/
+lib/
+types/
+utils/
+  ai/         # Промпты для Leo (бизнес-контекст)
+  constants/  # business-levels.ts вместо study-paths
+public/`;
+
+// Правила работы с видео
+const videoRules = `
+1. Используй Vimeo (@vimeo/player) для всех видео
+2. Видео вертикальные (9:16) как в TikTok
+3. На мобильных - полная ширина экрана
+4. На десктопе - max-height: 80vh с центрированием
+5. playsinline: true для предотвращения открытия в приложении
+6. НЕ используй YouTube embed
+`;
+
+// Правила безопасного удаления функционала
+const removalRules = `
+НИКОГДА не удаляй файлы полностью! Вместо этого:
+
+1. Code Playground - верни компонент-заглушку:
+   return (
+     <div className="flex items-center justify-center min-h-screen">
+       <div className="text-center">
+         <h2>Раздел в разработке</h2>
+         <p>Эта функция появится в следующих обновлениях</p>
+       </div>
+     </div>
+   )
+
+2. В навигации - закомментируй или добавь disabled: true
+3. В типах (QuestionType) - оставь CODING_CHALLENGE, просто не используй
+4. API endpoints - оставь, но верни { message: "Not implemented" }
+`;
+
+// Правила для Leo (AI помощник)
+const leoAIRules = `
+Leo - это бизнес-наставник, НЕ технический ассистент:
+1. Промпт должен запрещать любые технические темы
+2. Фокус на бизнес-концепциях и предпринимательстве
+3. Примеры из реального бизнеса, НЕ из IT
+4. Простой язык без технических терминов
+5. Мотивационный и поддерживающий тон
+`;
+
+// Правила работы с контентом
+const contentRules = `
+1. Вопросы группируются по уровням через теги (level-1, level-2...)
+2. Структура уровня:
+   - VIDEO тип для видео-уроков
+   - MULTIPLE_CHOICE для тестов
+   - Материалы как обычные вопросы с ссылками
+3. НЕ создавай вопросы типа CODING_CHALLENGE
+4. Используй бизнес-терминологию во всех текстах
+`;
+
+// Дополнительные инструкции
+const additionalInstructions = `
+1. Use TypeScript for type safety
+2. Implement proper metadata for SEO (BizLevel брендинг)
+3. Utilize Next.js Image component for optimized images
+4. Use Tailwind CSS for styling (адаптируй цвета под бизнес)
+5. Implement proper error boundaries
+6. Follow Next.js naming conventions for special files
+7. Use environment variables for configuration
+8. Do not remove any comments
+9. ВСЕГДА проверяй что не добавляешь программистский контент
+10. При сомнениях - спрашивай уточнения
+
+КРИТИЧНО: Если видишь код связанный с:
+- Code execution
+- Syntax highlighting  
+- Programming languages
+- GitHub integration
+- Code snippets
+- Technical documentation
+
+Замени на бизнес-эквивалент или заглушку!
+`;
+
+// Проверочный чеклист для каждого изменения
+const reviewChecklist = [
+  "Бренд изменен на BizLevel?",
+  "Нет технических терминов в UI?",
+  "Видео используют Vimeo компонент?",
+  "Заглушки вместо удаления?",
+  "Leo настроен на бизнес-контекст?",
+  "Метаданные обновлены?",
+];
+
+// Частые ошибки которых нужно избегать
+const commonMistakes = [
+  "НЕ оставляй упоминания TechBlitz в комментариях",
+  "НЕ используй примеры кода в контенте",
+  "НЕ создавай ссылки на технические ресурсы",
+  "НЕ забывай про мобильную версию при работе с видео",
+  "НЕ удаляй enum значения - это сломает типизацию",
+];
+
+// Экспорт для удобства
+module.exports = {
+  projectContext,
+  brandingRules,
+  nextjsAppRouterBestPractices,
+  folderStructure,
+  videoRules,
+  removalRules,
+  leoAIRules,
+  contentRules,
+  additionalInstructions,
+  reviewChecklist,
+  commonMistakes,
+};

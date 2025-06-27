@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useOnboardingContext } from '@/contexts/onboarding-context';
 import { updateUser } from '@/actions/user/authed/update-user';
-import { createCouponOnSignup } from '@/actions/user/account/create-coupon';
-import { sendWelcomeEmail } from '@/actions/misc/send-welcome-email';
+// ВРЕМЕННО ЗАКОММЕНТИРОВАНО: отключаем Stripe функциональность до настройки API ключей
+// import { createCouponOnSignup } from '@/actions/user/account/create-coupon';
+// import { sendWelcomeEmail } from '@/actions/misc/send-welcome-email';
 
 export const STEPS = {
   USER_DETAILS: 'USER_DETAILS', // get the users info
@@ -142,11 +143,14 @@ export function useOnboardingSteps() {
         await updateUser({ userDetails: user });
 
         // if this is false, we need to create a coupon and send the welcome email
+        // ВРЕМЕННО ЗАКОММЕНТИРОВАНО: отключаем Stripe функциональность до настройки API ключей
+        /*
         if (!user.hasCreatedCustomSignupCoupon) {
           const coupon = await createCouponOnSignup();
           // send the welcome email
           await sendWelcomeEmail(serverUser, coupon?.name ?? '');
         }
+        */
 
         setCurrentStepState(stepConfig[STEPS.USER_DETAILS].next as StepKey);
       } else if (currentStep === STEPS.INITIAL_QUESTIONS) {

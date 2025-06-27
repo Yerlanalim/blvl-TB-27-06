@@ -25,9 +25,6 @@ model Questions {
   isPremiumQuestion    Boolean             @default(false)
   afterQuestionInfo    String?
   aiTimeToComplete     Int?
-  
-  // relations
-
   userAnswers          Answers[]
   DemoAnswers          DemoAnswers[]
   answers              QuestionAnswers[]
@@ -127,7 +124,7 @@ enum QuestionAnswerType {
 }
 
 enum QuestionType {
-  CODING_CHALLENGE // answer question with code
-  MULTIPLE_CHOICE // answer question with multiple choice
-  SIMPLE_MULTIPLE_CHOICE // answer question with multiple choice, with the simple layout.
+  CODING_CHALLENGE
+  MULTIPLE_CHOICE
+  SIMPLE_MULTIPLE_CHOICE
 }

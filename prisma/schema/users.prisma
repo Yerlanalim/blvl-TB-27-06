@@ -1,85 +1,49 @@
-enum userLevel {
-  STANDARD
-  ADMIN
-  TRIAL
-  FREE
-  PREMIUM
-  LIFETIME // different to premium as they have limited ai credit & roadmap generation
-}
-
-enum UserExperienceLevel {
-  BEGINNER
-  INTERMEDIATE
-  ADVANCED
-  MASTER
-}
-
-enum UserTimeSpendingPerDay {
-  LESS_THAN_5_MINUTES
-  BETWEEN_5_AND_15_MINUTES
-  BETWEEN_15_AND_30_MINUTES
-  BETWEEN_30_AND_60_MINUTES
-  MORE_THAN_60_MINUTES
-}
-
 model Users {
-  uid                         String              @id
-  email                       String              @unique
-  createdAt                   DateTime            @default(now())
-  updatedAt                   DateTime            @updatedAt
-  lastLogin                   DateTime?
-  userLevel                   userLevel           @default(STANDARD)
-  correctDailyStreak          Int?                @default(0)
-  totalDailyStreak            Int?                @default(0)
-  userProfilePicture          String?
-  showTimeTaken               Boolean             @default(false)
-  firstName                   String?
-  lastName                    String?
-  username                    String?
-  sendPushNotifications       Boolean             @default(false)
-  codeEditorTheme             String?             @default("vs-dark")
-  stripeEmails                String[]            @default([])
-  aiQuestionHelpTokens        Int                 @default(10)
-  experienceLevel             UserExperienceLevel @default(BEGINNER)
-  isCustomUsername            Boolean             @default(false)
-  howDidYouHearAboutTechBlitz String?
-  referralCode                String?
-  aboutMeAiHelp               String?
-  // this prevents us sending it every day after the first time
-  hasSent7DayNoChallengeEmail Boolean             @default(false)
-  timeSpendingPerDay          UserTimeSpendingPerDay? @default(LESS_THAN_5_MINUTES)
-  sendPromotionalEmails       Boolean             @default(false)
-  // total user xp
-  userXp                Int                 @default(0)
-  weeklyUserXp               Int                 @default(0)
-
-  // this is the coupon code that we created for the user
-  userCustomCoupon            String?
-  // this is to prevent us from creating the same coupon code for the same user
-  hasCreatedCustomSignupCoupon Boolean             @default(false)
-  // expires at
-  userCustomCouponExpiresAt   DateTime?
-  // user opt into faster than an ai game mode
-  fasterThanAiGameMode        Boolean             @default(false)
-
-  // relations
-  achievements                Achievement[]
-  answers                     Answers[]
-  Profile                     Profile?
-  StatisticsReport            StatisticsReport[]
-  streak                      Streaks?
-  studyPathGoals              StudyPathGoal[]
-  subscription                Subscriptions?
-  bookmarks                   UserBookmarks[]
-  roadmaps                    UserRoadmaps[]
-  studyPathEnrollments        UserStudyPath[]
-  userMissions                UserMission[]
-
-  LeagueHistory LeagueHistory[]
-
-  LeagueAchievement LeagueAchievement[]
-
-  UserLeague UserLeague[]
+  uid                          String                  @id
+  email                        String                  @unique
+  createdAt                    DateTime                @default(now())
+  updatedAt                    DateTime                @updatedAt
+  lastLogin                    DateTime?
+  userLevel                    userLevel               @default(STANDARD)
+  correctDailyStreak           Int?                    @default(0)
+  totalDailyStreak             Int?                    @default(0)
+  userProfilePicture           String?
+  showTimeTaken                Boolean                 @default(false)
+  firstName                    String?
+  lastName                     String?
+  username                     String?
+  sendPushNotifications        Boolean                 @default(false)
+  codeEditorTheme              String?                 @default("vs-dark")
+  stripeEmails                 String[]                @default([])
+  aiQuestionHelpTokens         Int                     @default(10)
+  experienceLevel              UserExperienceLevel     @default(BEGINNER)
+  isCustomUsername             Boolean                 @default(false)
+  howDidYouHearAboutTechBlitz  String?
+  referralCode                 String?
+  aboutMeAiHelp                String?
+  hasSent7DayNoChallengeEmail  Boolean                 @default(false)
+  timeSpendingPerDay           UserTimeSpendingPerDay? @default(LESS_THAN_5_MINUTES)
+  sendPromotionalEmails        Boolean                 @default(false)
+  userCustomCoupon             String?
+  hasCreatedCustomSignupCoupon Boolean                 @default(false)
+  userCustomCouponExpiresAt    DateTime?
+  userXp                       Int                     @default(0)
+  weeklyUserXp                 Int                     @default(0)
+  fasterThanAiGameMode         Boolean                 @default(false)
+  achievements                 Achievement[]
+  answers                      Answers[]
+  LeagueAchievement            LeagueAchievement[]
+  LeagueHistory                LeagueHistory[]
+  Profile                      Profile?
+  StatisticsReport             StatisticsReport[]
+  streak                       Streaks?
+  studyPathGoals               StudyPathGoal[]
+  subscription                 Subscriptions?
+  bookmarks                    UserBookmarks[]
+  UserLeague                   UserLeague[]
+  userMissions                 UserMission[]
+  roadmaps                     UserRoadmaps[]
+  studyPathEnrollments         UserStudyPath[]
 }
 
 model Streaks {
@@ -147,3 +111,26 @@ model Profile {
   user                 Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
 
+enum userLevel {
+  STANDARD
+  ADMIN
+  TRIAL
+  FREE
+  PREMIUM
+  LIFETIME
+}
+
+enum UserExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  MASTER
+}
+
+enum UserTimeSpendingPerDay {
+  LESS_THAN_5_MINUTES
+  BETWEEN_5_AND_15_MINUTES
+  BETWEEN_15_AND_30_MINUTES
+  BETWEEN_30_AND_60_MINUTES
+  MORE_THAN_60_MINUTES
+}

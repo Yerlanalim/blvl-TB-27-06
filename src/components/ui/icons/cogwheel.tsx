@@ -26,7 +26,7 @@ const SettingsGearIcon = forwardRef<SettingsGearIconHandle, SettingsGearIconProp
         startAnimation: () => controls.start('animate'),
         stopAnimation: () => controls.start('normal'),
       };
-    });
+    }, [controls]);
 
     const handleMouseEnter = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {

@@ -34,7 +34,7 @@ export const UilPadlock = forwardRef<LockIconHandle, LockIconProps>(
           keyControls.start('hidden');
         },
       };
-    });
+    }, [controls, keyControls]);
 
     const handleMouseEnter = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {

@@ -69,6 +69,7 @@
     "ai": "4.1.47",
     "bad-words": "^4.0.0",
     "canvas-confetti": "^1.9.3",
+    "chart.js": "4.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookie": "^0.7.0",
@@ -121,9 +122,6 @@
   "devDependencies": {
     "@builder.io/partytown": "0.10.3",
     "@chromatic-com/storybook": "^3",
-    "@content-collections/core": "^0.8.0",
-    "@content-collections/mdx": "^0.2.0",
-    "@content-collections/next": "^0.2.4",
     "@storybook/addon-essentials": "8.6.7",
     "@storybook/addon-interactions": "8.6.7",
     "@storybook/addon-links": "8.6.7",

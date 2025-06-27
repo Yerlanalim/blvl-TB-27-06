@@ -12,10 +12,8 @@ import { toast } from 'sonner';
  */
 const getEnv = () => process.env.NODE_ENV;
 
-export const getBaseUrl = () => {
-  const publicRootDomain = process.env.NEXT_PUBLIC_URL || '';
-  return getEnv() === 'development' ? 'http://localhost:3000' : publicRootDomain;
-};
+// Re-export getBaseUrl from dedicated file
+export { getBaseUrl } from './get-base-url';
 
 export const capitalise = (string: string) => {
   if (!string) return '';
