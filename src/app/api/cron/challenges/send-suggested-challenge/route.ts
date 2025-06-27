@@ -46,11 +46,11 @@ async function sendEmail(user: UserRecord, challenge: QuestionWithTags) {
   );
 
   await resend.emails.send({
-    from: 'TechBlitz <team@techblitz.dev>',
+    from: 'BizLevel <team@bizlevel.dev>',
     to: user.email,
     subject,
     html,
-    replyTo: 'team@techblitz.dev',
+    replyTo: 'team@bizlevel.dev',
   });
 }
 

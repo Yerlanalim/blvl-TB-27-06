@@ -27,7 +27,7 @@ export default function WelcomeEmail({
   return (
     <Html>
       <Head />
-      <Preview>Welcome to TechBlitz - Your journey to tech mastery begins!</Preview>
+      <Preview>Welcome to BizLevel - Your journey to tech mastery begins!</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with Logo */}
@@ -59,7 +59,7 @@ export default function WelcomeEmail({
               part of our growing community. Your decision to join us means a lot!
             </Text>
             <Text style={text}>
-              At TechBlitz, we're building a vibrant community of tech enthusiasts who are dedicated
+              At BizLevel, we're building a vibrant community of tech enthusiasts who are dedicated
               to continuous learning and growth. Whether you're preparing for technical interviews,
               expanding your programming knowledge, or simply love solving challenging problems -
               you're in the right place.
@@ -69,7 +69,7 @@ export default function WelcomeEmail({
           {/* Feature Showcase */}
           <Section style={featureSection}>
             <Heading as="h2" style={h2}>
-              Discover What TechBlitz Offers
+              Discover What BizLevel Offers
             </Heading>
 
             <table style={featureRow}>
@@ -161,7 +161,7 @@ export default function WelcomeEmail({
               <Text style={couponCode}>{couponCodeText}</Text>
               <Text style={couponText}>Use this code at checkout</Text>
             </Section>
-            <Button href="https://dub.sh/upgrade-techblitz" style={button}>
+            <Button href="https://dub.sh/upgrade-bizlevel" style={button}>
               Upgrade Now
             </Button>
           </Section>
@@ -174,19 +174,19 @@ export default function WelcomeEmail({
             <Text style={text}>Here are a few things you can do right away:</Text>
             <ul style={list}>
               <li style={listItem}>
-                <Link href="https://techblitz.dev/profile" style={link}>
+                <Link href="https://bizlevel.dev/profile" style={link}>
                   Complete your profile
                 </Link>{' '}
                 to personalize your experience
               </li>
               <li style={listItem}>
-                <Link href="https://techblitz.dev/paths" style={link}>
+                <Link href="https://bizlevel.dev/paths" style={link}>
                   Explore study paths
                 </Link>{' '}
                 that match your interests
               </li>
               <li style={listItem}>
-                <Link href="https://techblitz.dev/challenges" style={link}>
+                <Link href="https://bizlevel.dev/challenges" style={link}>
                   Try a coding challenge
                 </Link>{' '}
                 to test your skills
@@ -197,7 +197,7 @@ export default function WelcomeEmail({
           {/* Follow Development */}
           <Section style={section}>
             <Text style={text}>
-              If you want to follow along with the development of TechBlitz, you can do so{' '}
+              If you want to follow along with the development of BizLevel, you can do so{' '}
               <Link href="https://git.new/blitz" style={link}>
                 here
               </Link>
@@ -206,7 +206,7 @@ export default function WelcomeEmail({
             <Text style={text}>
               If you have questions or feedback, please don't hesitate to reach out to me by{' '}
               <Link
-                href={`mailto:team@techblitz.dev?subject=Question from ${userEmail}`}
+                href={`mailto:team@bizlevel.dev?subject=Question from ${userEmail}`}
                 style={link}
               >
                 email
@@ -226,7 +226,7 @@ export default function WelcomeEmail({
 
             {/* Social Links */}
             <Section style={socialLinks}>
-              <Link href="https://x.com/techblitz_dev" style={socialLink}>
+              <Link href="https://x.com/bizlevel_dev" style={socialLink}>
                 <svg
                   data-testid="geist-icon"
                   height="24"
@@ -254,7 +254,7 @@ export default function WelcomeEmail({
 
             <Text style={footerFine}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
             <Text style={footerFine}>
-              You're receiving this email because you signed up for TechBlitz.
+              You're receiving this email because you signed up for BizLevel.
             </Text>
           </Section>
         </Container>

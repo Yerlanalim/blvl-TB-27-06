@@ -18,11 +18,11 @@ const LeaderboardMostQuestionsAnswered = dynamic(
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Leaderboard | TechBlitz',
+    title: 'Leaderboard | BizLevel',
     description: 'See how you stack up against the rest of the community.',
     canonicalUrl: '/leaderboard',
     image: {
-      text: 'Leaderboard | TechBlitz',
+      text: 'Leaderboard | BizLevel',
       bgColor: '#000000',
       textColor: '#ffffff',
     },
@@ -86,7 +86,7 @@ export default async function Page({
       <aside className="w-full xl:w-1/4">
         <div className="sticky top-10 space-y-5 w-full">
           <UpgradeCard
-            title="Try TechBlitz premium"
+            title="Try BizLevel premium"
             description="Premium questions, personalized roadmaps, and unlimited AI credits!"
           />
         </div>

@@ -24,7 +24,7 @@ export const SuggestedChallengeEmailTemplate: React.FC<EmailTemplateProps> = ({
               src="https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//logo.png"
               width="100"
               height="100"
-              alt="TechBlitz Logo"
+              alt="BizLevel Logo"
               style={styles.logo}
             />
             <Text style={styles.title}>{title}</Text>
@@ -48,7 +48,7 @@ export const SuggestedChallengeEmailTemplate: React.FC<EmailTemplateProps> = ({
               Stay consistent, keep coding, and watch your skills grow!
             </Text>
             <Section style={styles.footer}>
-              <Text style={styles.footerText}>© 2025 Dev TechBlitz. All rights reserved.</Text>
+              <Text style={styles.footerText}>© 2025 Dev BizLevel. All rights reserved.</Text>
               <Text style={styles.footerText}>
                 Want to stop receiving these emails?{' '}
                 <Link

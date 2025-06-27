@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { getLeagues } from '@/utils/data/leagues/get';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | League List',
+  title: 'BizLevel | League List',
   description: 'View and manage all leagues',
 };
 

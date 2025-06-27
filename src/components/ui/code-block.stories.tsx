@@ -114,7 +114,7 @@ const App: React.FC = () => {
             <UserProfile />
           </main>
           <footer>
-            <p>&copy; 2023 TechBlitz</p>
+            <p>&copy; 2023 BizLevel</p>
           </footer>
         </div>
       </UserProvider>
@@ -709,7 +709,7 @@ export const JSONConfiguration: Story = {
       {
         title: 'package.json',
         code: `{
-  "name": "techblitz-platform",
+  "name": "bizlevel-platform",
   "version": "1.5.0",
   "private": true,
   "scripts": {

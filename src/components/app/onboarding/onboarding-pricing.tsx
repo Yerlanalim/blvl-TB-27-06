@@ -42,7 +42,7 @@ export default function OnboardingPricing() {
                 Offer ends {user?.userCustomCouponExpiresAt?.toLocaleDateString()}.
               </>
             ) : (
-              "Join developers worldwide learning to code through TechBlitz's personalized coding platform."
+              "Join developers worldwide learning to code through BizLevel's personalized coding platform."
             )}
           </motion.p>
         </div>

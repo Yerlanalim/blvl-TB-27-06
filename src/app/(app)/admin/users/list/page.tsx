@@ -6,7 +6,7 @@ import UserRoleBadge from '@/components/app/admin/user/user-role-badge';
 import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | User Management',
+  title: 'BizLevel | User Management',
   description: 'Manage user accounts',
 };
 

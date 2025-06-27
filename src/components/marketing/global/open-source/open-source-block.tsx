@@ -42,7 +42,7 @@ export default function OpenSourceBlock(opts: { linkToInternalPage?: boolean }) 
       buildSuccess: true,
     },
     {
-      contributorName: 'techblitz',
+      contributorName: 'bizlevel',
       actionType: 'owner',
       component: 'OpenSourceCard',
       cardStyle: 'comment',

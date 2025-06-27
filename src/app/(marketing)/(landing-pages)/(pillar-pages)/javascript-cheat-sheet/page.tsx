@@ -20,19 +20,19 @@ import Link from 'next/link';
 
 const faqs = [
   {
-    question: 'How does TechBlitz help me learn JavaScript effectively?',
+    question: 'How does BizLevel help me learn JavaScript effectively?',
     answer:
-      'TechBlitz offers real-world coding challenges designed to simulate professional scenarios. Our platform adapts to your skill level, providing personalized challenges that guide you from beginner to advanced JavaScript mastery.',
+      'BizLevel offers real-world coding challenges designed to simulate professional scenarios. Our platform adapts to your skill level, providing personalized challenges that guide you from beginner to advanced JavaScript mastery.',
   },
   {
-    question: 'How many JavaScript challenges are available on TechBlitz?',
-    answer: `With over ${QUESTIONS_COUNT}+ coding challenges, TechBlitz covers a wide range of JavaScript topics, including syntax, functions, and web development. Each challenge is crafted to enhance your problem-solving skills.`,
+    question: 'How many JavaScript challenges are available on BizLevel?',
+    answer: `With over ${QUESTIONS_COUNT}+ coding challenges, BizLevel covers a wide range of JavaScript topics, including syntax, functions, and web development. Each challenge is crafted to enhance your problem-solving skills.`,
   },
   {
-    question: 'What is TechBlitz, and how does it work?',
+    question: 'What is BizLevel, and how does it work?',
     answer: (
       <>
-        TechBlitz is a cutting-edge coding challenge platform that helps you learn JavaScript
+        BizLevel is a cutting-edge coding challenge platform that helps you learn JavaScript
         through interactive, real-world exercises.{' '}
         <Link href="/signup" className="text-accent underline">
           Sign up for a free account
@@ -42,12 +42,12 @@ const faqs = [
     ),
   },
   {
-    question: 'What makes TechBlitz stand out from other coding platforms?',
+    question: 'What makes BizLevel stand out from other coding platforms?',
     answer:
-      'TechBlitz stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential JavaScript skills faster with tailored challenges, progress tracking, and expert support.',
+      'BizLevel stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential JavaScript skills faster with tailored challenges, progress tracking, and expert support.',
   },
   {
-    question: 'How do I get started with TechBlitz?',
+    question: 'How do I get started with BizLevel?',
     answer: (
       <>
         Getting started is easy! Simply{' '}
@@ -59,29 +59,29 @@ const faqs = [
     ),
   },
   {
-    question: 'Does TechBlitz offer discounts for students?',
+    question: 'Does BizLevel offer discounts for students?',
     answer:
       'Yes, we offer a 30% discount for students. Contact our support team with your student email to redeem this offer.',
   },
   {
-    question: 'Can I use TechBlitz on my mobile device?',
+    question: 'Can I use BizLevel on my mobile device?',
     answer:
-      'Absolutely! TechBlitz is fully optimized for mobile devices, allowing you to practice JavaScript coding on your phone or tablet anytime, anywhere.',
+      'Absolutely! BizLevel is fully optimized for mobile devices, allowing you to practice JavaScript coding on your phone or tablet anytime, anywhere.',
   },
   {
-    question: 'What programming languages does TechBlitz support?',
+    question: 'What programming languages does BizLevel support?',
     answer:
-      'TechBlitz primarily focuses on JavaScript and web development. We are working on adding more languages in the future.',
+      'BizLevel primarily focuses on JavaScript and web development. We are working on adding more languages in the future.',
   },
   {
-    question: 'Is TechBlitz suitable for beginners?',
+    question: 'Is BizLevel suitable for beginners?',
     answer:
-      'Yes, TechBlitz is perfect for beginners. Our challenges start with foundational JavaScript concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
+      'Yes, BizLevel is perfect for beginners. Our challenges start with foundational JavaScript concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
   },
   {
-    question: 'How does TechBlitz ensure my progress is tracked effectively?',
+    question: 'How does BizLevel ensure my progress is tracked effectively?',
     answer:
-      'TechBlitz provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey.',
+      'BizLevel provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey.',
   },
   {
     question: 'How can I master string methods in JavaScript?',
@@ -191,11 +191,11 @@ const items = [
 // metadata
 export async function generateMetadata() {
   return createMetadata({
-    title: 'The Ultimate JavaScript Syntax Cheat Sheet | TechBlitz',
+    title: 'The Ultimate JavaScript Syntax Cheat Sheet | BizLevel',
     description:
-      'Master JavaScript syntax with our comprehensive cheat sheet. Learn JavaScript syntax, tips, and best practices with TechBlitz. Perfect for beginners and advanced developers alike.',
+      'Master JavaScript syntax with our comprehensive cheat sheet. Learn JavaScript syntax, tips, and best practices with BizLevel. Perfect for beginners and advanced developers alike.',
     image: {
-      text: 'The Ultimate JavaScript Cheat Sheet | TechBlitz',
+      text: 'The Ultimate JavaScript Cheat Sheet | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -248,9 +248,9 @@ export default function JavascriptCheatSheet() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/javascript-cheat-sheet`,
-    headline: 'The Ultimate JavaScript Cheat Sheet | TechBlitz',
+    headline: 'The Ultimate JavaScript Cheat Sheet | BizLevel',
     description:
-      'Master JavaScript with our comprehensive javascript cheat sheet. Learn JavaScript syntax, tips, and best practices with TechBlitz. Perfect for beginners and advanced developers alike.',
+      'Master JavaScript with our comprehensive javascript cheat sheet. Learn JavaScript syntax, tips, and best practices with BizLevel. Perfect for beginners and advanced developers alike.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -267,7 +267,7 @@ export default function JavascriptCheatSheet() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: `${getBaseUrl()}/javascript-cheat-sheet`,
     },
     dateModified: new Date().toISOString(),
@@ -280,10 +280,10 @@ export default function JavascriptCheatSheet() {
       'javascript cheat sheet, js cheat sheet, javascript syntax cheat sheet, js syntax cheat sheet, cheatsheet javascript, learn javascript, javascript tips, javascript syntax',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -302,7 +302,7 @@ export default function JavascriptCheatSheet() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="JavaScript Syntax Cheat Sheet: Master JavaScript Syntax"
-          subheader="Discover the ultimate JavaScript cheat sheet with TechBlitz. Learn JavaScript syntax, best practices, and tips to become a pro developer. Perfect for beginners and advanced coders."
+          subheader="Discover the ultimate JavaScript cheat sheet with BizLevel. Learn JavaScript syntax, best practices, and tips to become a pro developer. Perfect for beginners and advanced coders."
           animatedSpan="Start mastering JavaScript today"
           className="xl:w-2/3"
           leftCta={{
@@ -331,13 +331,13 @@ export default function JavascriptCheatSheet() {
 
         <StatsReportSection
           header="Track Your JavaScript Progress"
-          subheader="Learning JavaScript syntax is a journey. With TechBlitz, you can easily generate code reports to track your progress and understand your weaknesses. Get actionable insights with personalized performance analytics. Monitor your progress, identify areas for improvement, and celebrate your achievements as you learn JavaScript syntax."
+          subheader="Learning JavaScript syntax is a journey. With BizLevel, you can easily generate code reports to track your progress and understand your weaknesses. Get actionable insights with personalized performance analytics. Monitor your progress, identify areas for improvement, and celebrate your achievements as you learn JavaScript syntax."
           learnMoreLink={true}
         />
 
         <QuestionMarquee
           header="Learn JavaScript Syntax with Free Challenges"
-          subheader="With TechBlitz, you can learn JavaScript syntax with free challenges. No need to sign up for a subscription. Just practice and improve your skills at your own pace.."
+          subheader="With BizLevel, you can learn JavaScript syntax with free challenges. No need to sign up for a subscription. Just practice and improve your skills at your own pace.."
         />
 
         <MarketingContentGrid
@@ -349,7 +349,7 @@ export default function JavascriptCheatSheet() {
 
         <CallToActionBlock
           title="Master JavaScript Syntax Today"
-          description="Join TechBlitz and unlock your potential with real-world JavaScript challenges, personalized learning paths, and a supportive community."
+          description="Join BizLevel and unlock your potential with real-world JavaScript challenges, personalized learning paths, and a supportive community."
         />
       </div>
     </>

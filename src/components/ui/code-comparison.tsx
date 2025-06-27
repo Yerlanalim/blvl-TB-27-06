@@ -66,7 +66,7 @@ export default async function CodeComparison({
             >
               <div className="flex items-center">
                 <FileIcon className="mr-2 h-4 w-4" />
-                <span className="font-medium font-onest">techblitz</span>
+                <span className="font-medium font-onest">bizlevel</span>
               </div>
               {/* Move CopyCode outside of Suspense since dynamic import already handles loading */}
               <CopyCode />

@@ -71,7 +71,7 @@ export default function OnboardingFooter({
             isLoading ||
             !canContinue ||
             (!user?.username && currentStep === STEPS.USER_DETAILS) ||
-            (!user?.howDidYouHearAboutTechBlitz && currentStep === STEPS.USER_DETAILS)
+            (!user?.howDidYouHearAboutBizLevel && currentStep === STEPS.USER_DETAILS)
           }
         >
           Continue

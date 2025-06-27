@@ -18,7 +18,7 @@ const faqs = [
     question: 'What are the most common JavaScript interview questions?',
     answer: (
       <>
-        TechBlitz provides comprehensive JavaScript interview questions and answers, from basic JS
+        BizLevel provides comprehensive JavaScript interview questions and answers, from basic JS
         coding questions to advanced JavaScript technical interview questions. Access our
         <Link href="/roadmaps/javascript-fundamentals" className="text-accent underline">
           free JavaScript tutorial
@@ -45,7 +45,7 @@ const faqs = [
     ),
   },
   {
-    question: 'What makes TechBlitz the best website to learn JavaScript?',
+    question: 'What makes BizLevel the best website to learn JavaScript?',
     answer: (
       <>
         Our JavaScript online course combines theory with hands-on practice. We offer a complete{' '}
@@ -96,7 +96,7 @@ const faqs = [
       'Our platform tracks your progress through JavaScript programming exercises and coding challenges, providing detailed performance analytics for continuous improvement.',
   },
   {
-    question: 'Why choose TechBlitz for JavaScript training?',
+    question: 'Why choose BizLevel for JavaScript training?',
     answer:
       'As the best site to learn JavaScript, we offer comprehensive JavaScript resources from basic web development to advanced programming, with detailed explanations and hands-on practice.',
   },
@@ -198,11 +198,11 @@ const items = [
 // metadata
 export async function generateMetadata() {
   return createMetadata({
-    title: 'JavaScript Interview Questions and Answers | TechBlitz',
+    title: 'JavaScript Interview Questions and Answers | BizLevel',
     description:
       'Access comprehensive JavaScript interview questions and answers, including live coding problems and technical challenges. Perfect for experienced developers preparing for interviews.',
     image: {
-      text: 'JavaScript Interview Questions and Answers | TechBlitz',
+      text: 'JavaScript Interview Questions and Answers | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -215,7 +215,7 @@ export default function JavascriptInterviewQuestions() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/javascript-coding-interview-questions-and-answers`,
-    headline: 'JavaScript Interview Questions and Answers | TechBlitz',
+    headline: 'JavaScript Interview Questions and Answers | BizLevel',
     description:
       'Access comprehensive JavaScript interview questions and answers, including live coding problems and technical challenges. Perfect for experienced developers preparing for interviews.',
     image:
@@ -234,7 +234,7 @@ export default function JavascriptInterviewQuestions() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: `${getBaseUrl()}/javascript-coding-interview-questions-and-answers`,
     },
     dateModified: new Date().toISOString(),
@@ -245,10 +245,10 @@ export default function JavascriptInterviewQuestions() {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {

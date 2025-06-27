@@ -24,19 +24,19 @@ const faqs = [
       'Creating a coding roadmap is easy. We start by assessing your current skill level and then create a roadmap that is tailored to your needs.',
   },
   {
-    question: 'Are the coding challenges on TechBlitz really free?',
+    question: 'Are the coding challenges on BizLevel really free?',
     answer:
-      'Yes, all coding challenges on TechBlitz are completely free. We believe in making coding education accessible to everyone, regardless of their financial situation.',
+      'Yes, all coding challenges on BizLevel are completely free. We believe in making coding education accessible to everyone, regardless of their financial situation.',
   },
   {
-    question: 'How many free coding challenges are available on TechBlitz?',
-    answer: `With over ${QUESTIONS_COUNT}+ free coding challenges, TechBlitz covers a wide range of topics, including JavaScript, web development, algorithms, and more. Each challenge is designed to enhance your problem-solving skills.`,
+    question: 'How many free coding challenges are available on BizLevel?',
+    answer: `With over ${QUESTIONS_COUNT}+ free coding challenges, BizLevel covers a wide range of topics, including JavaScript, web development, algorithms, and more. Each challenge is designed to enhance your problem-solving skills.`,
   },
   {
-    question: 'What is TechBlitz, and how does it work?',
+    question: 'What is BizLevel, and how does it work?',
     answer: (
       <>
-        TechBlitz is a cutting-edge platform offering free coding challenges to help you learn
+        BizLevel is a cutting-edge platform offering free coding challenges to help you learn
         programming through interactive, real-world exercises.{' '}
         <Link href="/signup" className="text-accent underline">
           Sign up for a free account
@@ -46,12 +46,12 @@ const faqs = [
     ),
   },
   {
-    question: 'What makes TechBlitz stand out from other free coding platforms?',
+    question: 'What makes BizLevel stand out from other free coding platforms?',
     answer:
-      'TechBlitz stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential coding skills faster with tailored challenges, progress tracking, and expert support—all for free.',
+      'BizLevel stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential coding skills faster with tailored challenges, progress tracking, and expert support—all for free.',
   },
   {
-    question: 'How do I get started with free coding challenges on TechBlitz?',
+    question: 'How do I get started with free coding challenges on BizLevel?',
     answer: (
       <>
         Getting started is easy! Simply{' '}
@@ -63,24 +63,24 @@ const faqs = [
     ),
   },
   {
-    question: 'Does TechBlitz offer free coding challenges for beginners?',
+    question: 'Does BizLevel offer free coding challenges for beginners?',
     answer:
-      'Yes, TechBlitz is perfect for beginners. Our free coding challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
+      'Yes, BizLevel is perfect for beginners. Our free coding challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
   },
   {
-    question: 'Can I use TechBlitz on my mobile device?',
+    question: 'Can I use BizLevel on my mobile device?',
     answer:
-      'Absolutely! TechBlitz is fully optimized for mobile devices, allowing you to practice coding on your phone or tablet anytime, anywhere.',
+      'Absolutely! BizLevel is fully optimized for mobile devices, allowing you to practice coding on your phone or tablet anytime, anywhere.',
   },
   {
     question: 'What programming languages are supported in the free challenges?',
     answer:
-      'TechBlitz primarily focuses on JavaScript and web development in its free coding challenges. We are working on adding more languages in the future.',
+      'BizLevel primarily focuses on JavaScript and web development in its free coding challenges. We are working on adding more languages in the future.',
   },
   {
-    question: 'How does TechBlitz ensure my progress is tracked effectively?',
+    question: 'How does BizLevel ensure my progress is tracked effectively?',
     answer:
-      'TechBlitz provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your coding journey—all for free.',
+      'BizLevel provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your coding journey—all for free.',
   },
 ];
 
@@ -174,11 +174,11 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Free Coding Challenges | TechBlitz',
+    title: 'Free Coding Challenges | BizLevel',
     description:
-      'Master coding with TechBlitz’s free coding challenges. Learn JavaScript, web development, and programming through real-world challenges tailored to your skill level. Start your coding journey today!',
+      'Master coding with BizLevel’s free coding challenges. Learn JavaScript, web development, and programming through real-world challenges tailored to your skill level. Start your coding journey today!',
     image: {
-      text: 'Free Coding Challenges | TechBlitz',
+      text: 'Free Coding Challenges | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -194,9 +194,9 @@ export default function CodingRoadmapPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/coding-roadmap`,
-    headline: 'Coding Roadmap | TechBlitz',
+    headline: 'Coding Roadmap | BizLevel',
     description:
-      'TechBlitz is the ultimate platform for free coding challenges. Whether you’re a beginner or a professional, our real-world exercises help you master JavaScript, web development, and more—all for free.',
+      'BizLevel is the ultimate platform for free coding challenges. Whether you’re a beginner or a professional, our real-world exercises help you master JavaScript, web development, and more—all for free.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -213,7 +213,7 @@ export default function CodingRoadmapPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -226,10 +226,10 @@ export default function CodingRoadmapPage() {
       'coding roadmap, free coding challenges, free JavaScript challenges, learn to code for free, free web development challenges, free coding practice, free programming challenges, free coding for beginners',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -248,7 +248,7 @@ export default function CodingRoadmapPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="Coding Roadmap"
-          subheader="TechBlitz is the ultimate platform for free coding challenges. Whether you're a beginner or a professional, our real-world exercises help you master JavaScript, web development, and more—all for free."
+          subheader="BizLevel is the ultimate platform for free coding challenges. Whether you're a beginner or a professional, our real-world exercises help you master JavaScript, web development, and more—all for free."
           animatedSpan="Coding Roadmap"
         />
 
@@ -256,7 +256,7 @@ export default function CodingRoadmapPage() {
 
         <QuestionMarquee
           header="Hundreds of free coding challenges"
-          subheader="From your first challenge to your first job. TechBlitz assists you every step of the way."
+          subheader="From your first challenge to your first job. BizLevel assists you every step of the way."
           cta={true}
           className="md:pt-32"
         />

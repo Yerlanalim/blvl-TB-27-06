@@ -6,7 +6,7 @@ import { getBaseUrl } from '@/utils';
 import PseoPublishToggle from '@/components/app/admin/pseo/pseo-publish-toggle';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | PSEO Pages List',
+  title: 'BizLevel | PSEO Pages List',
   description: 'Manage existing PSEO pages',
 };
 

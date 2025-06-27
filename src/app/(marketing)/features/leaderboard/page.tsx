@@ -16,9 +16,9 @@ import QuestionMarquee from '@/components/marketing/global/blocks/question-marqu
 
 // metadata
 export async function generateMetadata() {
-  const title = 'Coding Leaderboard & Developer Rankings | TechBlitz';
+  const title = 'Coding Leaderboard & Developer Rankings | BizLevel';
   const description =
-    "Compare your coding skills on TechBlitz's interactive leaderboard. Track progress, compete with developers worldwide, and improve your programming skills through daily challenges.";
+    "Compare your coding skills on BizLevel's interactive leaderboard. Track progress, compete with developers worldwide, and improve your programming skills through daily challenges.";
 
   return createMetadata({
     title,
@@ -53,7 +53,7 @@ const faqs = [
   {
     question: 'What is the leaderboard?',
     answer:
-      'The leaderboard is a showcase of the top developers on TechBlitz. Giving you a chance to see how you stack up against the rest of the community.',
+      'The leaderboard is a showcase of the top developers on BizLevel. Giving you a chance to see how you stack up against the rest of the community.',
   },
   {
     question: 'How is the leaderboard calculated?',
@@ -71,20 +71,20 @@ const faqs = [
       'That\'s fine! You can opt out of the leaderboard by going to your profile settings and toggling the "Show on leaderboard" option. No pressure.',
   },
   {
-    question: 'Is TechBlitz free?',
+    question: 'Is BizLevel free?',
     answer:
-      'Yes! TechBlitz is 100% free. We believe that everyone should have access to the tools and resources they need to learn to code. You can sign up for free and start coding today!',
+      'Yes! BizLevel is 100% free. We believe that everyone should have access to the tools and resources they need to learn to code. You can sign up for free and start coding today!',
   },
   {
-    question: 'What are the key benefits of using TechBlitz?',
+    question: 'What are the key benefits of using BizLevel?',
     answer:
-      'TechBlitz provides engaging, short-form coding questions and practical roadmaps to help developers enhance their skills and tackle real-world challenges. Learn faster, smarter, and with less overwhelm!',
+      'BizLevel provides engaging, short-form coding questions and practical roadmaps to help developers enhance their skills and tackle real-world challenges. Learn faster, smarter, and with less overwhelm!',
   },
   {
-    question: 'Is TechBlitz open source?',
+    question: 'Is BizLevel open source?',
     answer: (
       <>
-        Yes, TechBlitz is completely open source! Explore our source code on{' '}
+        Yes, BizLevel is completely open source! Explore our source code on{' '}
         <a href="https://git.new/blitz" target="_blank" className="!text-accent underline">
           GitHub
         </a>{' '}
@@ -111,7 +111,7 @@ const featureShowcaseItems: MarketingContentGridProps[] = [
     icon: <Code />,
     title: 'Enjoyable way to learn',
     description:
-      'The TechBlitz is a great way to make coding fun and engaging. We have a wide range of challenges to choose from, and you can even generate your own challenges, personalized to you!',
+      'The BizLevel is a great way to make coding fun and engaging. We have a wide range of challenges to choose from, and you can even generate your own challenges, personalized to you!',
   },
   {
     icon: <MobileIcon />,
@@ -178,9 +178,9 @@ export default function LeaderboardPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/features/leaderboard`,
-    headline: 'Coding Leaderboard & Developer Rankings | TechBlitz',
+    headline: 'Coding Leaderboard & Developer Rankings | BizLevel',
     description:
-      "Compare your coding skills on TechBlitz's interactive leaderboard. Track progress, compete with developers worldwide, and improve your programming skills through daily challenges.",
+      "Compare your coding skills on BizLevel's interactive leaderboard. Track progress, compete with developers worldwide, and improve your programming skills through daily challenges.",
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -203,7 +203,7 @@ export default function LeaderboardPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -216,10 +216,10 @@ export default function LeaderboardPage() {
       'coding leaderboard, developer rankings, programming leaderboard, coding skills tracker, competitive coding, developer competition, coding challenges, programming skills, compare coding skills online, track programming progress, daily coding challenges, interactive developer leaderboard',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };

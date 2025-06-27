@@ -17,7 +17,7 @@ export const steps = (): Tour[] => [
       },
       {
         content:
-          'You can find external websites (not affiliated with TechBlitz) that can help you with the question.',
+          'You can find external websites (not affiliated with BizLevel) that can help you with the question.',
         selector: '#question-card-tabs-resources',
         side: 'bottom-left',
         showControls: true,

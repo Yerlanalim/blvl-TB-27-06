@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useUserServer } from '@/hooks/use-user-server';
 import type { UserRecord } from '@/types';
-import JakeMackieTestimonial from '@/public/images/testimonials/jake-mackie-techblitz-testimonial.jpeg';
+import JakeMackieTestimonial from '@/public/images/testimonials/jake-mackie-bizlevel-testimonial.jpeg';
 import Link from 'next/link';
 import AnimatedSpan from '@/components/ui/animated-span';
 
@@ -143,7 +143,7 @@ export default function HomepageHero({ userCountPromise }: { userCountPromise: P
             {/* Main image */}
             <Image
               src="https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//Screenshot%202025-03-14%20at%2022.40.40-min%202.png"
-              alt="TechBlitz study path interface showing interactive coding challenges and learning progress"
+              alt="BizLevel study path interface showing interactive coding challenges and learning progress"
               width={1200}
               height={675}
               className="rounded-lg transition-all duration-300 group-hover:blur-sm"

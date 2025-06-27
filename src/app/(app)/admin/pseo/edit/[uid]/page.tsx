@@ -7,7 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { getBaseUrl } from '@/utils';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Edit PSEO Page',
+  title: 'BizLevel | Edit PSEO Page',
   description: 'Edit an existing PSEO page',
 };
 

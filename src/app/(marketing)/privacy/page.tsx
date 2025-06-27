@@ -7,10 +7,10 @@ import { createMetadata } from '@/utils/seo';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Privacy Policy | TechBlitz',
-    description: 'Privacy Policy for TechBlitz',
+    title: 'Privacy Policy | BizLevel',
+    description: 'Privacy Policy for BizLevel',
     image: {
-      text: 'Privacy Policy | TechBlitz',
+      text: 'Privacy Policy | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -32,9 +32,9 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-6">
               <div>
                 <p className="text-muted-foreground mb-4">
-                  This Privacy Policy describes how techblitz (the "Site", "we", "us", or "our")
+                  This Privacy Policy describes how bizlevel (the "Site", "we", "us", or "our")
                   collects, uses, and discloses your personal information when you visit, use our
-                  services, or subscribe to techblitz.dev (the "Site") or otherwise communicate with
+                  services, or subscribe to bizlevel.dev (the "Site") or otherwise communicate with
                   us (collectively, the "Services").
                 </p>
               </div>
@@ -185,10 +185,10 @@ export default function PrivacyPolicyPage() {
                 <p className="text-muted-foreground">
                   For questions about this Privacy Policy or to exercise your rights, contact us at{' '}
                   <Link
-                    href="mailto:team@techblitz.dev"
+                    href="mailto:team@bizlevel.dev"
                     className="text-blue-400 hover:text-blue-300"
                   >
-                    team@techblitz.dev
+                    team@bizlevel.dev
                   </Link>
                 </p>
               </div>

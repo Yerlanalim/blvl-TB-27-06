@@ -124,7 +124,7 @@ export default function SignupForm(opts: { prefilledEmail?: string }) {
                     <InputWithLabel
                       label="Email"
                       type="email"
-                      placeholder="team@techblitz.dev"
+                      placeholder="team@bizlevel.dev"
                       {...field}
                       autoComplete="email"
                     />

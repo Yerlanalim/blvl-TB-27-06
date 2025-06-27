@@ -1,6 +1,6 @@
-# Contributing to TechBlitz
+# Contributing to BizLevel
 
-First off, thank you for considering contributing to TechBlitz! It's people like you that make TechBlitz such a great tool for developers worldwide.
+First off, thank you for considering contributing to BizLevel! It's people like you that make BizLevel such a great tool for developers worldwide.
 
 ## Table of Contents
 
@@ -14,12 +14,12 @@ First off, thank you for considering contributing to TechBlitz! It's people like
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to [team@techblitz.dev].
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to [team@bizlevel.kz].
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone git@github.com/{username}/TechBlitz.git`
+2. Clone your fork: `git clone git@github.com/{username}/BizLevel.git`
 3. Create your feature branch: `git checkout -b feature/your-feature-name`
 4. Make your changes
 5. Commit your changes: `git commit -m 'feat(more-info): Add some feature'`
@@ -34,7 +34,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 
 ## How Can I Contribute?
 
-There are many ways you can contribute to TechBlitz:
+There are many ways you can contribute to BizLevel:
 
 ### Reporting Bugs
 
@@ -47,7 +47,7 @@ There are many ways you can contribute to TechBlitz:
 
 - **Use the GitHub Issues section** with the enhancement label
 - **Provide clear use cases** for the feature
-- **Explain the benefit** to the wider TechBlitz community
+- **Explain the benefit** to the wider BizLevel community
 - Use the feature request template when creating a new issue
 
 ### Contributing Code
@@ -142,6 +142,6 @@ pnpm run lint
 Don't hesitate to ask questions! You can reach us at:
 
 - GitHub Issues
-- Email: team@techblitz.dev
+- Email: team@bizlevel.kz
 
-Thank you for contributing to TechBlitz! 🚀
+Thank you for contributing to BizLevel! 🚀

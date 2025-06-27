@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation';
 import { useUserServer } from '@/hooks/use-user-server';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Admin',
-  description: 'TechBlitz Administration',
+  title: 'BizLevel | Admin',
+  description: 'BizLevel Administration',
 };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

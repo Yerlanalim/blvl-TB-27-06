@@ -14,7 +14,7 @@ import MarketingContentGrid from '@/components/marketing/global/blocks/content-g
 
 const faqs = [
   {
-    question: 'How will TechBlitz help me learn React?',
+    question: 'How will BizLevel help me learn React?',
     answer:
       'Our challenges have been crafted to mimic real-world problems, that aim to guide you from a beginner React developer to a pro.',
   },
@@ -24,26 +24,26 @@ const faqs = [
       'We currently have a wide range of React challenges for you to complete. From beginner to advanced, including React Hooks, React context, React Router, and more. We are constantly adding new challenges to help you learn React.',
   },
   {
-    question: 'How will TechBlitz help me learn React?',
+    question: 'How will BizLevel help me learn React?',
     answer:
       'Our challenges have been crafted to mimic real-world problems, that aim to guide you from a beginner React developer to a pro. We offer personalized challenges and roadmaps, in depth performance analytics, and more!',
   },
   {
-    question: 'What else can I do on TechBlitz?',
+    question: 'What else can I do on BizLevel?',
     answer:
-      'TechBlitz is the best platform for you to learn web development. We offer a wide range of challenges, roadmaps, and more to help you learn JavaScript, React, Node, and more.',
+      'BizLevel is the best platform for you to learn web development. We offer a wide range of challenges, roadmaps, and more to help you learn JavaScript, React, Node, and more.',
   },
   {
-    question: 'What is TechBlitz?',
-    answer: 'TechBlitz is a coding challenge platform that helps you learn React.',
+    question: 'What is BizLevel?',
+    answer: 'BizLevel is a coding challenge platform that helps you learn React.',
   },
   {
-    question: 'How does TechBlitz work?',
+    question: 'How does BizLevel work?',
     answer:
-      'TechBlitz works by providing you with a wide range of real-world React challenges with a focus on real-world problems.',
+      'BizLevel works by providing you with a wide range of real-world React challenges with a focus on real-world problems.',
   },
   {
-    question: 'What makes TechBlitz different?',
+    question: 'What makes BizLevel different?',
     answer:
       'Our core values are in providing you a personalized experience. We ensure you learn essential coding skills faster than ever with your own AI-assistant, personalized challenges & roadmaps, stats tracking, and more!',
   },
@@ -123,9 +123,9 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'React Coding Challenges | TechBlitz',
+    title: 'React Coding Challenges | BizLevel',
     description:
-      'TechBlitz provides a wide range of React coding challenges to help you improve your skills and learn new concepts.',
+      'BizLevel provides a wide range of React coding challenges to help you improve your skills and learn new concepts.',
   });
 }
 
@@ -134,9 +134,9 @@ export default function ReactCodingChallengesPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: getBaseUrl(),
-    headline: 'React Coding Challenges | TechBlitz',
+    headline: 'React Coding Challenges | BizLevel',
     description:
-      'TechBlitz provides a wide range of React coding challenges to help you improve your skills and learn new concepts.',
+      'BizLevel provides a wide range of React coding challenges to help you improve your skills and learn new concepts.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -153,7 +153,7 @@ export default function ReactCodingChallengesPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -166,10 +166,10 @@ export default function ReactCodingChallengesPage() {
       'learn to code, learn to code for free, learn react, react coding challenges, react coding challenges, web development, tech skills assessment, learn to code on phone',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -200,7 +200,7 @@ export default function ReactCodingChallengesPage() {
         </div>
         <FeatureRoadmapThreeGridBlock
           title="React roadmaps for everyone"
-          description="Every React roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with TechBlitz."
+          description="Every React roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with BizLevel."
         />
         <MarketingContentGrid
           title="Save time, money and effort while learning React"
@@ -217,7 +217,7 @@ export default function ReactCodingChallengesPage() {
         <FAQsBlock faqs={faqs} />
         <CallToActionBlock
           title="Learning React Made Simple"
-          description="TechBlitz is the number one place to learn React. Bringing you new React coding challenges every day."
+          description="BizLevel is the number one place to learn React. Bringing you new React coding challenges every day."
         />
       </div>
     </>

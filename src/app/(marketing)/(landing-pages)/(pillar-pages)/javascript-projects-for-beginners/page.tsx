@@ -20,9 +20,9 @@ const faqs = [
         There are many excellent free resources to learn JavaScript:
         <ul className="list-disc pl-5 mt-2">
           <li>
-            TechBlitz - Comprehensive JavaScript curriculum with interactive exercises.
+            BizLevel - Comprehensive JavaScript curriculum with interactive exercises.
             <Link href="/signup" className="text-accent underline">
-              Try TechBlitz for free
+              Try BizLevel for free
             </Link>
             .
           </li>
@@ -44,9 +44,9 @@ const faqs = [
     question: 'Where can I find the best JavaScript courses online?',
     answer: (
       <>
-        TechBlitz offers a comprehensive JavaScript curriculum with interactive exercises.
+        BizLevel offers a comprehensive JavaScript curriculum with interactive exercises.
         <Link href="/signup" className="text-accent underline">
-          Try TechBlitz for free
+          Try BizLevel for free
         </Link>
         .
       </>
@@ -77,9 +77,9 @@ const faqs = [
         Top websites for learning JavaScript include:
         <ul className="list-disc pl-5 mt-2">
           <li>
-            TechBlitz - Comprehensive JavaScript curriculum with interactive exercises.
+            BizLevel - Comprehensive JavaScript curriculum with interactive exercises.
             <Link href="/signup" className="text-accent underline">
-              Try TechBlitz for free
+              Try BizLevel for free
             </Link>
             .
           </li>
@@ -236,7 +236,7 @@ export default function JavascriptProjectsForBeginners() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: `${getBaseUrl()}/javascript-projects-for-beginners`,
     },
     dateModified: new Date().toISOString(),
@@ -249,10 +249,10 @@ export default function JavascriptProjectsForBeginners() {
       'javascript projects for beginners, free javascript course, best site to learn javascript, javascript tutorial, javascript programming classes, javascript resources, javascript programming course, where to learn javascript for free, html css js projects, simple javascript projects',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {

@@ -6,7 +6,7 @@ import NewCodingChallengeQuestionModal from '@/components/app/admin/questions/ne
 import NewSimpleMultipleChoiceModal from '@/components/app/admin/questions/new-simple-multiple-choice-modal';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Question Management',
+  title: 'BizLevel | Question Management',
   description: 'Manage coding questions and challenges',
 };
 

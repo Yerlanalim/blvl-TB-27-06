@@ -23,11 +23,11 @@ import Document from '@/components/ui/icons/document';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Personalized Coding Roadmaps | TechBlitz',
+    title: 'Personalized Coding Roadmaps | BizLevel',
     description:
       'Create your own coding progression paths with our personalized roadmaps. Our AI-powered roadmap generator helps you stay on track and achieve your goals.',
     image: {
-      text: 'Personalized Coding Roadmaps | TechBlitz',
+      text: 'Personalized Coding Roadmaps | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -38,7 +38,7 @@ export async function generateMetadata() {
 // faqs
 const faqs = [
   {
-    question: "How do TechBlitz's AI-powered roadmaps work?",
+    question: "How do BizLevel's AI-powered roadmaps work?",
     answer:
       'Our AI-powered roadmaps analyze your current skills, learning goals, and preferred pace to create a personalized learning path. The system adapts as you progress, recommending resources and challenges that match your evolving skill level.',
   },
@@ -48,12 +48,12 @@ const faqs = [
       'Absolutely! You can modify your roadmap at any time. Add new skills you want to learn, adjust the difficulty level, or change your learning timeline to match your schedule and goals.',
   },
   {
-    question: 'How often are new technologies and learning paths added to TechBlitz?',
+    question: 'How often are new technologies and learning paths added to BizLevel?',
     answer:
       'We regularly update our platform with new technologies and learning paths. Our team monitors industry trends and adds relevant content monthly, ensuring you always have access to the most current and in-demand skills in the tech industry.',
   },
   {
-    question: 'How do roadmaps integrate with other TechBlitz features?',
+    question: 'How do roadmaps integrate with other BizLevel features?',
     answer:
       "Your personalized roadmap seamlessly connects with our daily coding challenges, tutorials, and practice exercises. As you progress through your roadmap, you'll be recommended relevant learning materials that reinforce your current focus area.",
   },
@@ -63,7 +63,7 @@ const faqs = [
       'Yes! Our roadmaps are designed for all skill levels. For beginners, we create paths that start with fundamentals and gradually introduce more complex concepts. The AI adapts to your pace, ensuring you build a solid foundation before moving to advanced topics.',
   },
   {
-    question: 'What makes TechBlitz roadmaps different from other learning paths?',
+    question: 'What makes BizLevel roadmaps different from other learning paths?',
     answer: (
       <>
         Unlike static learning paths, our AI-powered roadmaps evolve with you. They identify
@@ -120,7 +120,7 @@ const featureShowcaseItems: MarketingContentGridProps[] = [
 const roadmapShowcaseSubHeader = () => (
   <>
     <p className="text-gray-400">
-      As if Duolingo and LeetCode had a baby - TechBlitz is the perfect place to learn to code for
+      As if Duolingo and LeetCode had a baby - BizLevel is the perfect place to learn to code for
       people of all ages. Ensuring you receive a personalized learning experience tailored to your
       needs.
     </p>
@@ -137,10 +137,10 @@ export default function FeatureDailyQuestionPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: getBaseUrl(),
-    headline: 'Personalized Coding Roadmaps | TechBlitz',
+    headline: 'Personalized Coding Roadmaps | BizLevel',
     description:
       'Create your own coding progression paths with our personalized roadmaps. Our AI-powered roadmap generator helps you stay on track and achieve your goals.',
-    image: 'https://techblitz.dev/favicon.ico',
+    image: 'https://bizlevel.dev/favicon.ico',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -160,7 +160,7 @@ export default function FeatureDailyQuestionPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -173,10 +173,10 @@ export default function FeatureDailyQuestionPage() {
       'learn to code, learn to code for free, learn javascript, coding challenges, daily coding challenges, web development, tech skills assessment, learn to code on phone',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };

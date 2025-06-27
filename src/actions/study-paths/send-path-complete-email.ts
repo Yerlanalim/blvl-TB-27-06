@@ -31,7 +31,7 @@ export const sendStudyPathCompleteEmail = async ({ studyPathUid }: { studyPathUi
   );
 
   await resend.emails.send({
-    from: 'TechBlitz <techblitz@techblitz.io>',
+    from: 'BizLevel <bizlevel@bizlevel.io>',
     to: user.email,
     subject: '🥳 Congratulations on completing your study path!',
     react: html,

@@ -5,7 +5,7 @@ import { getUser } from '../authed/get-user';
 
 /**
  * Upon user signup, we create a 60% off their first 3 three
- * months of TechBlitz premium.
+ * months of BizLevel premium.
  * Eligible for 72 hours after signup.
  *
  * We are only hitting this action from within other actions,

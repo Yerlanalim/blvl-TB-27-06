@@ -13,7 +13,7 @@ export default function ShareThisPost({ title, slug }: { title: string; slug: st
             window.open(
               `https://twitter.com/intent/tweet?text=${encodeURIComponent(
                 title
-              )}&url=${encodeURIComponent(`https://techblitz.dev/blog/${slug}`)}`,
+              )}&url=${encodeURIComponent(`https://bizlevel.dev/blog/${slug}`)}`,
               '_blank'
             );
           }}
@@ -27,7 +27,7 @@ export default function ShareThisPost({ title, slug }: { title: string; slug: st
           onClick={() => {
             window.open(
               `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                `https://techblitz.dev/blog/${slug}`
+                `https://bizlevel.dev/blog/${slug}`
               )}`,
               '_blank'
             );
@@ -42,7 +42,7 @@ export default function ShareThisPost({ title, slug }: { title: string; slug: st
           onClick={() => {
             window.open(
               `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                `https://techblitz.dev/blog/${slug}`
+                `https://bizlevel.dev/blog/${slug}`
               )}`,
               '_blank'
             );

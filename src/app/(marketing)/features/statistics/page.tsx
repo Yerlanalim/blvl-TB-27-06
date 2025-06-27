@@ -10,7 +10,7 @@ import { getBaseUrl } from '@/utils';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'In-depth Coding Statistics | TechBlitz',
+    title: 'In-depth Coding Statistics | BizLevel',
     description:
       'Understand your strengths and weaknesses with our in-depth coding statistics. Ensuring you are on the right track to become a better developer.',
     keywords: [
@@ -24,7 +24,7 @@ export async function generateMetadata() {
       'coding challenges dashboard',
     ],
     image: {
-      text: 'In-depth Coding Statistics | TechBlitz',
+      text: 'In-depth Coding Statistics | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -83,9 +83,9 @@ export default function StatisticsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: getBaseUrl(),
-    headline: 'Track your coding journey | TechBlitz',
+    headline: 'Track your coding journey | BizLevel',
     description: 'Track your coding journey with our statistics dashboard.',
-    image: 'https://techblitz.dev/favicon.ico',
+    image: 'https://bizlevel.dev/favicon.ico',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -105,7 +105,7 @@ export default function StatisticsPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -118,10 +118,10 @@ export default function StatisticsPage() {
       'track coding progress, coding statistics, developer analytics, coding performance insights, improve coding skills, coding improvement tools, coding mastery, coding challenges dashboard',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };

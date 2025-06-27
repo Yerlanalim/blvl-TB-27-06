@@ -14,7 +14,7 @@ export const changelogEntries: ChangelogEntry[] = [
     slug: 'faster-than-ai-game-mode',
     title: 'Faster than AI game mode',
     date: '29/03/25',
-    description: "We've added our first game mode to TechBlitz. Faster than AI.",
+    description: "We've added our first game mode to BizLevel. Faster than AI.",
     image:
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//Screenshot%202025-03-29%20at%2016.23.08.png',
     content: (
@@ -31,7 +31,7 @@ export const changelogEntries: ChangelogEntry[] = [
         </div>
         <h5 className="text-white font-normal mt-8 text-xl">Faster than AI game mode</h5>
         <p className="text-gray-400 font-normal mt-4">
-          We've added our first game mode to TechBlitz. Faster than AI. This is a fun way to
+          We've added our first game mode to BizLevel. Faster than AI. This is a fun way to
           challenge yourself and see how much faster you can solve a question than widely available
           AI models.
         </p>
@@ -76,15 +76,15 @@ export const changelogEntries: ChangelogEntry[] = [
         </p>
         <br />
         <p className="text-gray-400">
-          These questions will pop up during your learning journey with TechBlitz, and more are
+          These questions will pop up during your learning journey with BizLevel, and more are
           being added to the platform regularly.
         </p>
         <br />
         <p className="text-gray-400">
           We are always looking for feedback and suggestions for new features. If you have any
           feedback, please let us know at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>
           .
         </p>
@@ -137,18 +137,18 @@ export const changelogEntries: ChangelogEntry[] = [
         <br />
         <p className="text-gray-400">
           You can also now sign up and sign in with Google. This is a much faster and easier way to
-          sign up for TechBlitz.
+          sign up for BizLevel.
         </p>
         <br />
         <p className="text-gray-400">
-          We also added a new referral program. When you refer a friend to TechBlitz, you will earn
+          We also added a new referral program. When you refer a friend to BizLevel, you will earn
           10% off all paid plans once they sign up!
         </p>
         <br />
         <p className="text-gray-400">
           If you have any feedback, or any suggestions for new features, please let us know at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>
           .
         </p>
@@ -190,8 +190,8 @@ export const changelogEntries: ChangelogEntry[] = [
         <p className="text-gray-400">
           We are adding new roadmaps regularly, and are always looking for feedback to improve them.
           So if you have any suggestions, please let us know at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>
           .
         </p>
@@ -219,8 +219,8 @@ export const changelogEntries: ChangelogEntry[] = [
         <br />
         <p className="text-gray-400">
           If you have any feedback, or any suggestions for new features, please let us know at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>
           .
         </p>
@@ -289,7 +289,7 @@ export const changelogEntries: ChangelogEntry[] = [
           </p>
           <br />
           <p className="text-gray-400">
-            Finally, as TechBlitz is growing, we have added pagination to the leaderboard page.
+            Finally, as BizLevel is growing, we have added pagination to the leaderboard page.
             Allowing you to view your position in the leaderboard, no matter what place you are!
           </p>
           <br />
@@ -298,8 +298,8 @@ export const changelogEntries: ChangelogEntry[] = [
               Try out the new features
             </Link>{' '}
             and let us know what you think! If you have any feedback, please let us know at{' '}
-            <Link href="mailto:team@techblitz.dev" className="text-accent">
-              team@techblitz.dev
+            <Link href="mailto:team@bizlevel.dev" className="text-accent">
+              team@bizlevel.dev
             </Link>
             .
           </p>

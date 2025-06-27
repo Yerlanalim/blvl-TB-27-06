@@ -34,9 +34,9 @@ import RoadmapIcon from '@/components/ui/icons/roadmap';
 import MaterialSymbolsFilterListRounded from '@/components/ui/icons/filter';
 import Document from '@/components/ui/icons/document';
 
-const title = 'The free, fun way to master coding | TechBlitz';
+const title = 'The free, fun way to master coding | BizLevel';
 const description =
-  'TechBlitz helps you go from beginner to coding expert with hands-on challenges, personalized practice, and instant AI feedback.';
+  'BizLevel helps you go from beginner to coding expert with hands-on challenges, personalized practice, and instant AI feedback.';
 
 export const metadata: Metadata = {
   title,
@@ -63,13 +63,13 @@ export const metadata: Metadata = {
     description,
     type: 'website',
     url: getBaseUrl(),
-    siteName: 'TechBlitz',
+    siteName: 'BizLevel',
     images: [
       {
         url: 'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
         width: 1200,
         height: 630,
-        alt: 'TechBlitz - Interactive Coding Platform for Beginners',
+        alt: 'BizLevel - Interactive Coding Platform for Beginners',
       },
     ],
   },
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
         url: 'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
         width: 1200,
         height: 630,
-        alt: 'TechBlitz - Interactive Coding Platform for Beginners',
+        alt: 'BizLevel - Interactive Coding Platform for Beginners',
       },
     ],
     creator: '@bizlevel',
@@ -191,7 +191,7 @@ export default async function Page() {
     {
       title: 'No Credit Card Required',
       description:
-        'Try TechBlitz for free, no credit card required. Perfect for learning to code and improving your skills.',
+        'Try BizLevel for free, no credit card required. Perfect for learning to code and improving your skills.',
       icon: <CreditCardIcon className="size-6" />,
     },
   ];
@@ -259,7 +259,7 @@ export default async function Page() {
           align="left"
         />
         <MarketingContentGrid
-          title='"With TechBlitz, learning to code has never been easier"'
+          title='"With BizLevel, learning to code has never been easier"'
           subheading={`- You, ${marketingContentGridSubHeading}`}
           items={contentGridItems}
         />
@@ -267,7 +267,7 @@ export default async function Page() {
         <OpenSourceBlock />
         <CallToActionBlock
           title="Ready to unlock your full potential?"
-          description="Join developers taking their development journey seriously. Try TechBlitz for free, no credit card required."
+          description="Join developers taking their development journey seriously. Try BizLevel for free, no credit card required."
         />
       </div>
     </>

@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: ChangelogEntryPageProps) {
 
   if (!entry) {
     return createMetadata({
-      title: 'Changelog Entry Not Found | TechBlitz',
+      title: 'Changelog Entry Not Found | BizLevel',
       description: 'The requested changelog entry could not be found.',
     });
   }
 
   return createMetadata({
-    title: `${entry.title} | TechBlitz Changelog`,
+    title: `${entry.title} | BizLevel Changelog`,
     description: entry.description,
     image: {
       text: entry.title,
@@ -46,7 +46,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
     url: `${getBaseUrl()}/changelog/${entry.slug}`,
     headline: entry.title,
     description: entry.description,
-    image: entry.image || 'https://techblitz.dev/favicon.ico',
+    image: entry.image || 'https://bizlevel.dev/favicon.ico',
     datePublished: entry.date,
     breadcrumb: {
       '@type': 'BreadcrumbList',

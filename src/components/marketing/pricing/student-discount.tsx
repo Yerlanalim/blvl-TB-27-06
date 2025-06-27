@@ -14,7 +14,7 @@ export default function StudentDiscountBlock() {
             </p>
           </div>
         </div>
-        <Button href="mailto:team@techblitz.dev" variant="premium" className="w-full sm:w-auto">
+        <Button href="mailto:team@bizlevel.dev" variant="premium" className="w-full sm:w-auto">
           Claim Discount
         </Button>
       </div>

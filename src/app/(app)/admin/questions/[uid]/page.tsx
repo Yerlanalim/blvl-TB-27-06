@@ -12,7 +12,7 @@ interface QuestionEditPageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Edit Question',
+  title: 'BizLevel | Edit Question',
   description: 'Edit an existing coding question',
 };
 

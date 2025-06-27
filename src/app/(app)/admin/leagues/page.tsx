@@ -5,7 +5,7 @@ import { Trophy, Users, Award, ArrowUpRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | League Management',
+  title: 'BizLevel | League Management',
   description: 'Manage leagues, achievements, and user rankings',
 };
 

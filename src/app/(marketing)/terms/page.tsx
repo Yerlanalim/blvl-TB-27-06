@@ -7,8 +7,8 @@ import { createMetadata } from '@/utils/seo';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Terms of Service | TechBlitz',
-    description: 'Terms of Service for TechBlitz',
+    title: 'Terms of Service | BizLevel',
+    description: 'Terms of Service for BizLevel',
     canonicalUrl: '/terms',
   });
 }
@@ -68,27 +68,27 @@ export default function TermsOfService() {
                   <p>The Lifetime Deal Programme is subject to the following scope:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>
-                      The Promotional Period may end at any time subject to TechBlitz's sole
+                      The Promotional Period may end at any time subject to BizLevel's sole
                       discretion.
                     </li>
                     <li>
-                      The Lifetime Deal Programme shall be made to the holder of the TechBlitz
+                      The Lifetime Deal Programme shall be made to the holder of the BizLevel
                       Account for the duration of that user's lifetime. Such right shall immediately
                       terminate upon the user being declared deceased. Such right shall not be
                       transferable.
                     </li>
                     <li>
-                      The Lifetime Deal Programme shall be made available so long as the TechBlitz
+                      The Lifetime Deal Programme shall be made available so long as the BizLevel
                       Service is made available.
                     </li>
-                    <li>The TechBlitz Service and its features may change at any time.</li>
+                    <li>The BizLevel Service and its features may change at any time.</li>
                     <li>
                       The Lifetime Deal shall not continue where technological changes make the
-                      Products of DEV TechBlitz Ltd obsolete.
+                      Products of DEV BizLevel Ltd obsolete.
                     </li>
                     <li>
-                      The Lifetime Deal shall not continue where DEV TechBlitz Ltd ceases to
-                      operate, suspends the TechBlitz Service, is declared bankrupt, or otherwise
+                      The Lifetime Deal shall not continue where DEV BizLevel Ltd ceases to
+                      operate, suspends the BizLevel Service, is declared bankrupt, or otherwise
                       ceases to operate.
                     </li>
                     <li>
@@ -107,8 +107,8 @@ export default function TermsOfService() {
                     </li>
                     <li>
                       If you have any questions, please contact us at{' '}
-                      <Link href="mailto:team@techblitz.dev" className="text-accent">
-                        team@techblitz.dev
+                      <Link href="mailto:team@bizlevel.dev" className="text-accent">
+                        team@bizlevel.dev
                       </Link>
                       .
                     </li>

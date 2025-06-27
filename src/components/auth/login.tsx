@@ -137,7 +137,7 @@ export default function LoginForm(opts: { redirectUrl: string; onboarding: strin
                     <InputWithLabel
                       label="Email"
                       type="email"
-                      placeholder="team@techblitz.dev"
+                      placeholder="team@bizlevel.dev"
                       {...field}
                       autoComplete="email"
                     />

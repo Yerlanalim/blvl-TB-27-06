@@ -23,11 +23,11 @@ export const revalidate = 600;
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Coding Challenges | TechBlitz',
+    title: 'Coding Challenges | BizLevel',
     description:
       'Explore a diverse set of coding challenges across various topics to enhance your knowledge.',
     image: {
-      text: 'Coding Challenges | TechBlitz',
+      text: 'Coding Challenges | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -68,7 +68,7 @@ export default async function QuestionsDashboard({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/coding-challenges`,
-    headline: 'Coding Challenges | TechBlitz',
+    headline: 'Coding Challenges | BizLevel',
     description:
       'Explore a diverse set of coding challenges across various topics to enhance your knowledge.',
     image:
@@ -86,7 +86,7 @@ export default async function QuestionsDashboard({
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -99,10 +99,10 @@ export default async function QuestionsDashboard({
       'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };

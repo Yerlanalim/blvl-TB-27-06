@@ -24,19 +24,19 @@ const faqs = [
       'Creating your React roadmap is straightforward. Begin with a skill assessment, and our platform will generate a personalized learning path to guide you through mastering React effectively.',
   },
   {
-    question: 'Are the React challenges on TechBlitz free?',
+    question: 'Are the React challenges on BizLevel free?',
     answer:
-      'Yes, all React challenges on TechBlitz are completely free. We believe in making high-quality React education accessible to everyone.',
+      'Yes, all React challenges on BizLevel are completely free. We believe in making high-quality React education accessible to everyone.',
   },
   {
-    question: 'How many React challenges are available on TechBlitz?',
-    answer: `With over ${QUESTIONS_COUNT}+ free React challenges, TechBlitz covers everything from basic components to advanced state management. Each challenge is carefully crafted to build your React expertise.`,
+    question: 'How many React challenges are available on BizLevel?',
+    answer: `With over ${QUESTIONS_COUNT}+ free React challenges, BizLevel covers everything from basic components to advanced state management. Each challenge is carefully crafted to build your React expertise.`,
   },
   {
-    question: 'What is TechBlitz, and how does it help with React?',
+    question: 'What is BizLevel, and how does it help with React?',
     answer: (
       <>
-        TechBlitz is a cutting-edge platform offering free React challenges to help you learn modern
+        BizLevel is a cutting-edge platform offering free React challenges to help you learn modern
         web development through hands-on, practical exercises.{' '}
         <Link href="/signup" className="text-accent underline">
           Sign up for a free account
@@ -47,12 +47,12 @@ const faqs = [
     ),
   },
   {
-    question: 'What makes TechBlitz stand out for learning React?',
+    question: 'What makes BizLevel stand out for learning React?',
     answer:
-      'TechBlitz delivers a unique learning experience with AI-powered feedback, personalized progression, and an active developer community. Our platform helps you master React faster through targeted challenges, detailed progress tracking, and expert guidance—all at no cost.',
+      'BizLevel delivers a unique learning experience with AI-powered feedback, personalized progression, and an active developer community. Our platform helps you master React faster through targeted challenges, detailed progress tracking, and expert guidance—all at no cost.',
   },
   {
-    question: 'How do I get started with React challenges on TechBlitz?',
+    question: 'How do I get started with React challenges on BizLevel?',
     answer: (
       <>
         Starting is simple! Just{' '}
@@ -64,24 +64,24 @@ const faqs = [
     ),
   },
   {
-    question: 'Does TechBlitz offer React challenges for beginners?',
+    question: 'Does BizLevel offer React challenges for beginners?',
     answer:
-      'Absolutely! TechBlitz is ideal for beginners. Our React challenges start with core concepts and progressively introduce more advanced topics, ensuring a comfortable and effective learning experience.',
+      'Absolutely! BizLevel is ideal for beginners. Our React challenges start with core concepts and progressively introduce more advanced topics, ensuring a comfortable and effective learning experience.',
   },
   {
-    question: 'Can I use TechBlitz to learn React on my mobile device?',
+    question: 'Can I use BizLevel to learn React on my mobile device?',
     answer:
-      'Yes! TechBlitz features a fully responsive design optimized for mobile devices, enabling you to practice React development on your smartphone or tablet whenever and wherever you want.',
+      'Yes! BizLevel features a fully responsive design optimized for mobile devices, enabling you to practice React development on your smartphone or tablet whenever and wherever you want.',
   },
   {
     question: 'What React topics are covered in the challenges?',
     answer:
-      'TechBlitz provides comprehensive coverage of React topics, including hooks, components, state management, routing, performance optimization, and integration with popular tools like Redux and Next.js.',
+      'BizLevel provides comprehensive coverage of React topics, including hooks, components, state management, routing, performance optimization, and integration with popular tools like Redux and Next.js.',
   },
   {
-    question: 'How does TechBlitz track my React learning progress?',
+    question: 'How does BizLevel track my React learning progress?',
     answer:
-      'TechBlitz offers comprehensive analytics and progress monitoring, helping you visualize your learning journey, identify areas for improvement, and celebrate achievements as you advance in your React development skills—completely free.',
+      'BizLevel offers comprehensive analytics and progress monitoring, helping you visualize your learning journey, identify areas for improvement, and celebrate achievements as you advance in your React development skills—completely free.',
   },
 ];
 
@@ -175,11 +175,11 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'React Roadmap | Master Modern Web Development | TechBlitz',
+    title: 'React Roadmap | Master Modern Web Development | BizLevel',
     description:
-      "Master React.js with TechBlitz's comprehensive learning platform. Access free, hands-on coding challenges from basics to advanced concepts. Start building modern web applications today!",
+      "Master React.js with BizLevel's comprehensive learning platform. Access free, hands-on coding challenges from basics to advanced concepts. Start building modern web applications today!",
     image: {
-      text: 'React Roadmap | TechBlitz',
+      text: 'React Roadmap | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -195,9 +195,9 @@ export default function ReactRoadmapPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/react-roadmap`,
-    headline: 'React Roadmap | Master Modern Web Development | TechBlitz',
+    headline: 'React Roadmap | Master Modern Web Development | BizLevel',
     description:
-      'TechBlitz is your complete platform for mastering React development. From beginners to professionals, our practical exercises help you build modern web applications with React—completely free.',
+      'BizLevel is your complete platform for mastering React development. From beginners to professionals, our practical exercises help you build modern web applications with React—completely free.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -214,7 +214,7 @@ export default function ReactRoadmapPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -227,10 +227,10 @@ export default function ReactRoadmapPage() {
       'React.js, React components, React hooks, state management, modern web development, React best practices, React tutorial',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -249,7 +249,7 @@ export default function ReactRoadmapPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="Master React Development"
-          subheader="TechBlitz provides the most comprehensive platform for learning React.js. From components to advanced state management, our hands-on exercises help developers of all levels build modern web applications—completely free."
+          subheader="BizLevel provides the most comprehensive platform for learning React.js. From components to advanced state management, our hands-on exercises help developers of all levels build modern web applications—completely free."
           animatedSpan="React Mastery"
         />
 
@@ -264,7 +264,7 @@ export default function ReactRoadmapPage() {
 
         <QuestionMarquee
           header="Extensive React Challenge Library"
-          subheader="Progress from basic components to advanced React patterns. TechBlitz guides you through every step of your development journey."
+          subheader="Progress from basic components to advanced React patterns. BizLevel guides you through every step of your development journey."
           cta={true}
           className="md:pt-32"
         />

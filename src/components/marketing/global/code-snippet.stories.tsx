@@ -236,7 +236,7 @@ print(f"Emails: {emails}")`,
 export const JSONExample: Story = {
   args: {
     code: `{
-  "app": "TechBlitz",
+  "app": "BizLevel",
   "version": "1.0.0",
   "config": {
     "themes": {
@@ -293,7 +293,7 @@ export const JSONExample: Story = {
 
 export const ShortExample: Story = {
   args: {
-    code: `const greeting = "Hello, TechBlitz!";
+    code: `const greeting = "Hello, BizLevel!";
 console.log(greeting);`,
     language: 'javascript',
     filename: 'greeting.js',

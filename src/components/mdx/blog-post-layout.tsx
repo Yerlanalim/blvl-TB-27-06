@@ -81,7 +81,7 @@ export default function BlogPostLayout({
           <div className="mt-10">
             <CallToActionBlock
               title="Land your dream tech job faster"
-              description={`Join ${userCount}+ developers who are accelerating their coding skills with TechBlitz.`}
+              description={`Join ${userCount}+ developers who are accelerating their coding skills with BizLevel.`}
               leftCta={{
                 title: 'Begin Your Journey',
                 href: '/signup',
@@ -102,7 +102,7 @@ export default function BlogPostLayout({
           <Card className="w-full border border-black-50 text-white shadow-lg">
             <CardHeader className="pb-2">
               <CardTitle className="font-onest text-2xl flex items-center justify-center">
-                Try TechBlitz for free
+                Try BizLevel for free
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">

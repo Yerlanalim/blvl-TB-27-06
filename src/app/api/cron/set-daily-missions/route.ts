@@ -55,8 +55,8 @@ async function resetUserMissions({ dailyMissions }: { dailyMissions: Mission[] }
 
 async function sendDailyMissionsEmail(activeMissions: any[]) {
   await resend.emails.send({
-    from: 'Cron Job <team@techblitz.dev>',
-    to: 'team@techblitz.dev',
+    from: 'Cron Job <team@bizlevel.dev>',
+    to: 'team@bizlevel.dev',
     subject: 'Daily missions set successfully',
     html: `
       <p>Daily missions set successfully</p>

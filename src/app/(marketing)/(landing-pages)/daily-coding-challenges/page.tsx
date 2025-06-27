@@ -14,19 +14,19 @@ import Link from 'next/link';
 
 const faqs = [
   {
-    question: 'How does TechBlitz help me learn to code effectively?',
+    question: 'How does BizLevel help me learn to code effectively?',
     answer:
-      'TechBlitz offers real-world coding challenges designed to simulate professional scenarios. Our platform adapts to your skill level, providing personalized challenges that guide you from beginner to advanced coding mastery.',
+      'BizLevel offers real-world coding challenges designed to simulate professional scenarios. Our platform adapts to your skill level, providing personalized challenges that guide you from beginner to advanced coding mastery.',
   },
   {
-    question: 'How many coding challenges are available on TechBlitz?',
-    answer: `With over ${QUESTIONS_COUNT}+ coding challenges, TechBlitz covers a wide range of topics, including JavaScript, web development, algorithms, and more. Each challenge is crafted to enhance your problem-solving skills.`,
+    question: 'How many coding challenges are available on BizLevel?',
+    answer: `With over ${QUESTIONS_COUNT}+ coding challenges, BizLevel covers a wide range of topics, including JavaScript, web development, algorithms, and more. Each challenge is crafted to enhance your problem-solving skills.`,
   },
   {
-    question: 'What is TechBlitz, and how does it work?',
+    question: 'What is BizLevel, and how does it work?',
     answer: (
       <>
-        TechBlitz is a cutting-edge coding challenge platform that helps you learn programming
+        BizLevel is a cutting-edge coding challenge platform that helps you learn programming
         through interactive, real-world exercises.{' '}
         <Link href="/signup" className="text-accent underline">
           Sign up for a free account
@@ -36,12 +36,12 @@ const faqs = [
     ),
   },
   {
-    question: 'What makes TechBlitz stand out from other coding platforms?',
+    question: 'What makes BizLevel stand out from other coding platforms?',
     answer:
-      'TechBlitz stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential coding skills faster with tailored challenges, progress tracking, and expert support.',
+      'BizLevel stands out with its personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn essential coding skills faster with tailored challenges, progress tracking, and expert support.',
   },
   {
-    question: 'How do I get started with TechBlitz?',
+    question: 'How do I get started with BizLevel?',
     answer: (
       <>
         Getting started is easy! Simply{' '}
@@ -53,29 +53,29 @@ const faqs = [
     ),
   },
   {
-    question: 'Does TechBlitz offer discounts for students?',
+    question: 'Does BizLevel offer discounts for students?',
     answer:
       'Yes, we offer a 30% discount for students. Contact our support team with your student email to redeem this offer.',
   },
   {
-    question: 'Can I use TechBlitz on my mobile device?',
+    question: 'Can I use BizLevel on my mobile device?',
     answer:
-      'Absolutely! TechBlitz is fully optimized for mobile devices, allowing you to practice coding on your phone or tablet anytime, anywhere.',
+      'Absolutely! BizLevel is fully optimized for mobile devices, allowing you to practice coding on your phone or tablet anytime, anywhere.',
   },
   {
-    question: 'What programming languages does TechBlitz support?',
+    question: 'What programming languages does BizLevel support?',
     answer:
-      'TechBlitz primarily focuses on JavaScript and web development. We are working on adding more languages in the future.',
+      'BizLevel primarily focuses on JavaScript and web development. We are working on adding more languages in the future.',
   },
   {
-    question: 'Is TechBlitz suitable for beginners?',
+    question: 'Is BizLevel suitable for beginners?',
     answer:
-      'Yes, TechBlitz is perfect for beginners. Our challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
+      'Yes, BizLevel is perfect for beginners. Our challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve for all skill levels.',
   },
   {
-    question: 'How does TechBlitz ensure my progress is tracked effectively?',
+    question: 'How does BizLevel ensure my progress is tracked effectively?',
     answer:
-      'TechBlitz provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your coding journey.',
+      'BizLevel provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your coding journey.',
   },
 ];
 
@@ -169,11 +169,11 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Daily Coding Challenges | Learn JavaScript & Web Development | TechBlitz',
+    title: 'Daily Coding Challenges | Learn JavaScript & Web Development | BizLevel',
     description:
-      'Master coding with TechBlitz’s daily coding challenges. Learn JavaScript, web development, and programming through real-world challenges tailored to your skill level. Start your coding journey today!',
+      'Master coding with BizLevel’s daily coding challenges. Learn JavaScript, web development, and programming through real-world challenges tailored to your skill level. Start your coding journey today!',
     image: {
-      text: 'Daily Coding Challenges | TechBlitz',
+      text: 'Daily Coding Challenges | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -189,9 +189,9 @@ export default function DailyCodingChallengesPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/daily-coding-challenges`,
-    headline: 'Daily Coding Challenges | TechBlitz',
+    headline: 'Daily Coding Challenges | BizLevel',
     description:
-      'TechBlitz transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
+      'BizLevel transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -208,7 +208,7 @@ export default function DailyCodingChallengesPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -221,10 +221,10 @@ export default function DailyCodingChallengesPage() {
       'daily coding challenge, daily javascript challenge, how to learn javascript, how to learn to code, how to learn programming, how to learn coding, how to learn javascript, how to learn to code, how to learn programming, how to learn coding',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -242,7 +242,7 @@ export default function DailyCodingChallengesPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="Daily Coding Challenges"
-          subheader="TechBlitz is the number one coding challenge platform to learn to code. Supplying you with a wide range of real-world coding challenges."
+          subheader="BizLevel is the number one coding challenge platform to learn to code. Supplying you with a wide range of real-world coding challenges."
           animatedSpan="Daily Coding Challenges"
         />
 
@@ -254,7 +254,7 @@ export default function DailyCodingChallengesPage() {
 
         <FeatureRoadmapThreeGridBlock
           title="Coding roadmaps for everyone"
-          description="Every coding roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with TechBlitz."
+          description="Every coding roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with BizLevel."
           cta={true}
         />
 
@@ -270,7 +270,7 @@ export default function DailyCodingChallengesPage() {
 
         <CallToActionBlock
           title="Learning to code made simple"
-          description="TechBlitz is the number one place to learn to code. Supplying you with a wide range of real-world coding challenges."
+          description="BizLevel is the number one place to learn to code. Supplying you with a wide range of real-world coding challenges."
         />
       </div>
     </>

@@ -3,7 +3,7 @@ import { Webhook } from 'https://esm.sh/standardwebhooks@1.0.0';
 import { Resend } from 'resend';
 import { renderAsync } from '@react-email/components';
 import { MagicLinkEmail } from './_templates/magic-link.tsx';
-import { TechBlitzSignUpEmail } from './_templates/sign-up.tsx';
+import { BizLevelSignUpEmail } from './_templates/sign-up.tsx';
 import { ResetPasswordEmail } from './_templates/reset-password.tsx';
 import { EmailChangeEmail } from './_templates/email-change.tsx';
 const resend = new Resend(Deno.env.get('RESEND_API_KEY') as string);
@@ -44,18 +44,18 @@ Deno.serve(async (req: Request): Promise<Response> => {
     // init for the email template & subject
     let html: string;
     let subject: string;
-    let from: string = 'TechBlitz <team@techblitz.dev>';
+    let from: string = 'BizLevel <team@bizlevel.kz>';
 
     if (email_action_type === 'signup') {
       const redirect_to_url = `${redirect_to}/login?onboarding=true`;
-      from = 'TechBlitz <team@techblitz.dev>';
+      from = 'BizLevel <team@bizlevel.kz>';
       html = await renderAsync(
-        React.createElement(TechBlitzSignUpEmail, {
+        React.createElement(BizLevelSignUpEmail, {
           username: user['user_metadata'].lang,
           confirmationLink: `${supabaseUrl}/auth/v1/verify?token=${token_hash}&type=signup&redirect_to=${redirect_to_url}`,
         })
       );
-      subject = 'Welcome to TechBlitz!';
+      subject = 'Welcome to BizLevel!';
     } else if (email_action_type == 'login') {
       html = await renderAsync(
         React.createElement(MagicLinkEmail, {
@@ -66,13 +66,13 @@ Deno.serve(async (req: Request): Promise<Response> => {
           email_action_type,
         })
       );
-      subject = 'Sign in to TechBlitz';
+      subject = 'Sign in to BizLevel';
     }
     // for sending pass word reset emails
     else if (email_action_type === 'recovery') {
       // redirect the user to the update password page
       const redirect_to_url = `${redirect_to}/update-password`;
-      from = 'TechBlitz <team@techblitz.dev>';
+      from = 'BizLevel <team@bizlevel.kz>';
       // go grab the react email template
       html = await renderAsync(
         React.createElement(ResetPasswordEmail, {

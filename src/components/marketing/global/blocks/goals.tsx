@@ -1,5 +1,5 @@
 /**
- * Showcases the 'goals' feature of TechBlitz.
+ * Showcases the 'goals' feature of BizLevel.
  * The ability for a user to enrol in a roadmap, then receive
  * daily reminders to complete the next step in their roadmap.
  * The date is customizable, and will guide/motivate the user to

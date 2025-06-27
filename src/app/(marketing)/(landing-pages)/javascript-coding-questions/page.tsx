@@ -14,12 +14,12 @@ import Link from 'next/link';
 
 const faqs = [
   {
-    question: 'What makes TechBlitz stand out for learning JavaScript?',
+    question: 'What makes BizLevel stand out for learning JavaScript?',
     answer:
-      'TechBlitz offers a personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn JavaScript faster with tailored challenges, progress tracking, and expert support—all for free.',
+      'BizLevel offers a personalized learning experience, AI-powered feedback, and a vibrant community. Our platform ensures you learn JavaScript faster with tailored challenges, progress tracking, and expert support—all for free.',
   },
   {
-    question: 'How do I get started with JavaScript challenges on TechBlitz?',
+    question: 'How do I get started with JavaScript challenges on BizLevel?',
     answer: (
       <>
         Getting started is easy! Simply{' '}
@@ -31,19 +31,19 @@ const faqs = [
     ),
   },
   {
-    question: 'Are the JavaScript challenges on TechBlitz free?',
+    question: 'Are the JavaScript challenges on BizLevel free?',
     answer:
-      'Yes, all JavaScript challenges on TechBlitz are completely free. We aim to make JavaScript learning accessible to everyone.',
+      'Yes, all JavaScript challenges on BizLevel are completely free. We aim to make JavaScript learning accessible to everyone.',
   },
   {
-    question: 'How many JavaScript challenges are available on TechBlitz?',
-    answer: `With over ${QUESTIONS_COUNT}+ free JavaScript challenges, TechBlitz covers a wide range of topics, from basic syntax to advanced frameworks. Each challenge is designed to enhance your JavaScript skills.`,
+    question: 'How many JavaScript challenges are available on BizLevel?',
+    answer: `With over ${QUESTIONS_COUNT}+ free JavaScript challenges, BizLevel covers a wide range of topics, from basic syntax to advanced frameworks. Each challenge is designed to enhance your JavaScript skills.`,
   },
   {
-    question: 'What is TechBlitz, and how does it help with JavaScript?',
+    question: 'What is BizLevel, and how does it help with JavaScript?',
     answer: (
       <>
-        TechBlitz is a platform offering free JavaScript challenges to help you learn programming
+        BizLevel is a platform offering free JavaScript challenges to help you learn programming
         through interactive, real-world exercises.{' '}
         <Link href="/signup" className="text-accent underline">
           Sign up for a free account
@@ -53,29 +53,29 @@ const faqs = [
     ),
   },
   {
-    question: 'Does TechBlitz offer JavaScript challenges for beginners?',
+    question: 'Does BizLevel offer JavaScript challenges for beginners?',
     answer:
-      'Yes, TechBlitz is perfect for beginners. Our JavaScript challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve.',
+      'Yes, BizLevel is perfect for beginners. Our JavaScript challenges start with foundational concepts and gradually increase in complexity, ensuring a smooth learning curve.',
   },
   {
-    question: 'Can I use TechBlitz to learn JavaScript on my mobile device?',
+    question: 'Can I use BizLevel to learn JavaScript on my mobile device?',
     answer:
-      'Absolutely! TechBlitz is fully optimized for mobile devices, allowing you to practice JavaScript on your phone or tablet anytime, anywhere.',
+      'Absolutely! BizLevel is fully optimized for mobile devices, allowing you to practice JavaScript on your phone or tablet anytime, anywhere.',
   },
   {
     question: 'What JavaScript topics are covered in the challenges?',
     answer:
-      'TechBlitz covers a wide range of JavaScript topics, including ES6+, DOM manipulation, asynchronous programming, and popular frameworks like React.',
+      'BizLevel covers a wide range of JavaScript topics, including ES6+, DOM manipulation, asynchronous programming, and popular frameworks like React.',
   },
   {
-    question: 'How does TechBlitz track my JavaScript learning progress?',
+    question: 'How does BizLevel track my JavaScript learning progress?',
     answer:
-      'TechBlitz provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey—all for free.',
+      'BizLevel provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey—all for free.',
   },
   {
-    question: 'How does TechBlitz track my JavaScript learning progress?',
+    question: 'How does BizLevel track my JavaScript learning progress?',
     answer:
-      'TechBlitz provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey—all for free.',
+      'BizLevel provides detailed analytics and progress reports, allowing you to track your performance, identify weak areas, and celebrate milestones as you advance in your JavaScript journey—all for free.',
   },
 ];
 
@@ -169,11 +169,11 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'JavaScript Roadmap | TechBlitz',
+    title: 'JavaScript Roadmap | BizLevel',
     description:
-      'Master JavaScript with TechBlitz’s free coding challenges. Learn JavaScript from basics to advanced concepts through real-world challenges tailored to your skill level. Start your JavaScript journey today!',
+      'Master JavaScript with BizLevel’s free coding challenges. Learn JavaScript from basics to advanced concepts through real-world challenges tailored to your skill level. Start your JavaScript journey today!',
     image: {
-      text: 'JavaScript Roadmap | TechBlitz',
+      text: 'JavaScript Roadmap | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -189,9 +189,9 @@ export default function JavascriptCodingQuestionsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/javascript-coding-questions`,
-    headline: 'JavaScript Coding Questions | TechBlitz',
+    headline: 'JavaScript Coding Questions | BizLevel',
     description:
-      'TechBlitz is the ultimate platform for mastering JavaScript. Whether you’re a beginner or a professional, our real-world exercises help you learn JavaScript from basics to advanced concepts—all for free.',
+      'BizLevel is the ultimate platform for mastering JavaScript. Whether you’re a beginner or a professional, our real-world exercises help you learn JavaScript from basics to advanced concepts—all for free.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -208,7 +208,7 @@ export default function JavascriptCodingQuestionsPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -221,10 +221,10 @@ export default function JavascriptCodingQuestionsPage() {
       'JavaScript coding questions, free JavaScript challenges, learn JavaScript for free, JavaScript learning path, JavaScript for beginners, advanced JavaScript, JavaScript frameworks',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -243,7 +243,7 @@ export default function JavascriptCodingQuestionsPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="JavaScript Coding Questions"
-          subheader="TechBlitz is the ultimate platform for mastering JavaScript. Whether you’re a beginner or a professional, our real-world coding questions help you learn JavaScript from basics to advanced concepts—all for free."
+          subheader="BizLevel is the ultimate platform for mastering JavaScript. Whether you’re a beginner or a professional, our real-world coding questions help you learn JavaScript from basics to advanced concepts—all for free."
           animatedSpan="JavaScript Coding Questions"
         />
 
@@ -251,7 +251,7 @@ export default function JavascriptCodingQuestionsPage() {
 
         <QuestionMarquee
           header="Hundreds of free JavaScript coding questions"
-          subheader="From your first JavaScript coding question to your first job interview. TechBlitz assists you every step of the way."
+          subheader="From your first JavaScript coding question to your first job interview. BizLevel assists you every step of the way."
           cta={true}
           className="md:pt-32"
         />

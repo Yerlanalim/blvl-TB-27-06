@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const typedFrontmatter = frontmatter as unknown as BlogFrontmatter;
 
     return createMetadata({
-      title: `${typedFrontmatter.title} | TechBlitz Blog`,
+      title: `${typedFrontmatter.title} | BizLevel Blog`,
       description: typedFrontmatter.description,
       keywords: ['blog', 'article', typedFrontmatter.title.toLowerCase()],
       image: {

@@ -37,7 +37,7 @@ export default function SocialProof({
                 </span>
               </div>
               <Link
-                href="https://github.com/techblitzdev/TechBlitz"
+                href="https://github.com/bizleveldev/BizLevel"
                 target="_blank"
                 className="flex items-center gap-x-2"
               >

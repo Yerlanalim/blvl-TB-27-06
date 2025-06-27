@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   const defaultQuestionDescription = `Practice ${capitalise(
     title
-  )} and improve your coding skills with interactive challenges on TechBlitz`;
+  )} and improve your coding skills with interactive challenges on BizLevel`;
 
   const description =
     question?.questionType === 'SIMPLE_MULTIPLE_CHOICE'
@@ -44,10 +44,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       : defaultQuestionDescription;
 
   return createMetadata({
-    title: `${capitalise(title)} | TechBlitz`,
+    title: `${capitalise(title)} | BizLevel`,
     description,
     image: {
-      text: `${title} | TechBlitz`,
+      text: `${title} | BizLevel`,
       bgColor: '#000000',
       textColor: '#ffffff',
     },
@@ -75,7 +75,7 @@ export default async function QuestionUidLayout({
 
   const defaultQuestionDescription = `Practice ${capitalise(
     question?.title || question?.slug?.replace(/-/g, ' ') || 'Coding Question'
-  )} and improve your coding skills with interactive challenges on TechBlitz`;
+  )} and improve your coding skills with interactive challenges on BizLevel`;
 
   const description =
     question?.questionType === 'SIMPLE_MULTIPLE_CHOICE'
@@ -92,7 +92,7 @@ export default async function QuestionUidLayout({
     educationLevel: getQuestionEducationLevel(question?.difficulty || 'EASY'),
     educationalUse: 'practice',
     learningResourceType: ['quiz', 'learning activity'],
-    creator: { '@type': 'Organization', name: 'TechBlitz', url: getBaseUrl() },
+    creator: { '@type': 'Organization', name: 'BizLevel', url: getBaseUrl() },
     assesses: ['coding'],
     dateCreated: question?.createdAt.toISOString() || '',
     dateModified: question?.updatedAt.toISOString() || '',

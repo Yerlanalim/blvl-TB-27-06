@@ -96,7 +96,7 @@ export default function StudyReminderEmail({
 
           {/* Footer */}
           <Section style={footer}>
-            <Text style={footerText}>© 2025 DEV TECHBLITZ LTD. All rights reserved.</Text>
+            <Text style={footerText}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
           </Section>
         </Container>
       </Body>

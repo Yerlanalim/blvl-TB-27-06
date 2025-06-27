@@ -8,7 +8,7 @@ import { prisma } from '@/lib/prisma';
 import RecentUsers from '@/components/app/admin/user/recent-users';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | User Analytics',
+  title: 'BizLevel | User Analytics',
   description: 'User statistics and analytics',
 };
 

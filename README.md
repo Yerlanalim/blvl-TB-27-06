@@ -1,6 +1,6 @@
 <img src="https://pbs.twimg.com/profile_banners/1110662360564408321/1736793148/1500x500" alt="Logo">
 <div align="center">
-  <h3><a href="https://www.techblitz.dev">TechBlitz</a></h3>
+  <h3><a href="https://www.techblitz.dev">BizLevel</a></h3>
 </div>
 
 <div align="center">
@@ -11,7 +11,7 @@
 
 ## Overview
 
-TechBlitz is designed to empower developers by providing a comprehensive platform for learning, practicing, and improving technical skills. Unlike traditional coding platforms, we focus on holistic developer growth across various technologies and skill levels, without taking your hours to complete, as well as being a mobile-friendly platform. Complete coding challenges from any device, anywhere.
+BizLevel is designed to empower developers by providing a comprehensive platform for learning, practicing, and improving technical skills. Unlike traditional coding platforms, we focus on holistic developer growth across various technologies and skill levels, without taking your hours to complete, as well as being a mobile-friendly platform. Complete coding challenges from any device, anywhere.
 
 ## Features
 
@@ -28,7 +28,7 @@ TechBlitz is designed to empower developers by providing a comprehensive platfor
 We love to be transparent with our users, so below are the next features we have planned.
 
 - **Roadmaps**: Sharing roadmaps with other users
-- **TechBlitz for schools**: Education groups, create your student's questions, roadmaps and allow them to battle with one another for the top spot of the class!
+- **BizLevel for schools**: Education groups, create your student's questions, roadmaps and allow them to battle with one another for the top spot of the class!
 - **Social**: Profiles, friends/coworkers
 - **Statistics**: A more in-depth statistics dashboard, giving you a greater insight on your current ability.
 - **Multi-language support**: Currently we only support JavaScript. However, we are looking into: Python, Typescript, and GoLang for our first wave of other languages to support.
@@ -53,7 +53,7 @@ We love to be transparent with our users, so below are the next features we have
 
 1. Clone the repository
    ```bash
-   git clone git@github.com:techblitzdev/TechBlitz.git
+   git clone git@github.com:techblitzdev/BizLevel.git
    ```
 2. Install dependencies
 
@@ -123,15 +123,15 @@ StoryBook is used for component development and testing in isolation. Follow the
 
 ## Contributing
 
-We welcome contributions! Please see our <a href="https://github.com/techblitzdev/TechBlitz/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
+We welcome contributions! Please see our <a href="https://github.com/techblitzdev/BizLevel/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
 
 ## Feedback
 
-If you have any feedback, please reach out to us at team@techblitz.dev
+If you have any feedback, please reach out to us at team@bizlevel.kz
 
 ## Security
 
-You can view our security policy [here](https://github.com/techblitzdev/TechBlitz/blob/main/SECURITY.MD)
+You can view our security policy [here](https://github.com/techblitzdev/BizLevel/blob/main/SECURITY.MD)
 
 ## License
 

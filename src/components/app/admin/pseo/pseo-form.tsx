@@ -373,7 +373,7 @@ export default function PseoForm({ initialData, isEditing = false }: PseoFormPro
                 id="metaTitle"
                 name="metaTitle"
                 ref={metaTitleRef}
-                placeholder="e.g., Learn JavaScript - Complete Tutorial | TechBlitz"
+                placeholder="e.g., Learn JavaScript - Complete Tutorial | BizLevel"
                 defaultValue={initialData?.metaTitle || ''}
                 className="bg-black-100 border-black-50 text-white"
                 required
@@ -442,7 +442,7 @@ export default function PseoForm({ initialData, isEditing = false }: PseoFormPro
               <Input
                 id="canonicalUrl"
                 name="canonicalUrl"
-                placeholder="https://techblitz.dev/web-development-roadmap"
+                placeholder="https://bizlevel.dev/web-development-roadmap"
                 defaultValue={initialData?.canonicalUrl || ''}
                 className="bg-black-100 border-black-50 text-white"
               />
@@ -458,7 +458,7 @@ export default function PseoForm({ initialData, isEditing = false }: PseoFormPro
               <Input
                 id="ogImage"
                 name="ogImage"
-                placeholder="https://techblitz.dev/images/web-dev-og.jpg"
+                placeholder="https://bizlevel.dev/images/web-dev-og.jpg"
                 defaultValue={initialData?.ogImage || ''}
                 className="bg-black-100 border-black-50 text-white"
               />

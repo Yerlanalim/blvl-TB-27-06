@@ -16,12 +16,12 @@ import Link from 'next/link';
 
 const faqs = [
   {
-    question: 'Is TechBlitz suitable for complete JavaScript beginners?',
+    question: 'Is BizLevel suitable for complete JavaScript beginners?',
     answer:
-      'Absolutely! TechBlitz is designed with beginners in mind. We start with basic JavaScript concepts like variables, functions, and loops, gradually progressing to more advanced topics. Each challenge comes with detailed explanations and hints to help you learn.',
+      'Absolutely! BizLevel is designed with beginners in mind. We start with basic JavaScript concepts like variables, functions, and loops, gradually progressing to more advanced topics. Each challenge comes with detailed explanations and hints to help you learn.',
   },
   {
-    question: 'How do I start learning JavaScript as a beginner on TechBlitz?',
+    question: 'How do I start learning JavaScript as a beginner on BizLevel?',
     answer: (
       <>
         Getting started is simple! Just{' '}
@@ -43,7 +43,7 @@ const faqs = [
     answer: `We offer ${QUESTIONS_COUNT}+ JavaScript challenges, with a significant portion dedicated to beginners. The challenges gradually increase in difficulty as you build confidence with the basics.`,
   },
   {
-    question: 'How long does it take to learn JavaScript basics on TechBlitz?',
+    question: 'How long does it take to learn JavaScript basics on BizLevel?',
     answer:
       'With consistent practice of 30 minutes daily, most beginners can grasp JavaScript fundamentals within 4-6 weeks. Our structured learning path ensures you build a solid foundation before moving to advanced concepts.',
   },
@@ -140,11 +140,11 @@ const items = [
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'JavaScript for Beginners | Learn JavaScript from Scratch | TechBlitz',
+    title: 'JavaScript for Beginners | Learn JavaScript from Scratch | BizLevel',
     description:
-      "Start your JavaScript journey with TechBlitz's free beginner-friendly coding challenges. Learn JavaScript from scratch with step-by-step guidance, instant feedback, and a supportive community. Perfect for complete beginners!",
+      "Start your JavaScript journey with BizLevel's free beginner-friendly coding challenges. Learn JavaScript from scratch with step-by-step guidance, instant feedback, and a supportive community. Perfect for complete beginners!",
     image: {
-      text: 'JavaScript for Beginners | TechBlitz',
+      text: 'JavaScript for Beginners | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -160,9 +160,9 @@ export default function JavascriptForBeginnersPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/javascript-for-beginners`,
-    headline: 'JavaScript for Beginners | Start Learning to Code | TechBlitz',
+    headline: 'JavaScript for Beginners | Start Learning to Code | BizLevel',
     description:
-      "Start your coding journey with TechBlitz's beginner-friendly JavaScript course. Learn JavaScript from scratch with interactive challenges, step-by-step guidance, and instant feedback—all completely free.",
+      "Start your coding journey with BizLevel's beginner-friendly JavaScript course. Learn JavaScript from scratch with interactive challenges, step-by-step guidance, and instant feedback—all completely free.",
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -179,7 +179,7 @@ export default function JavascriptForBeginnersPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -192,10 +192,10 @@ export default function JavascriptForBeginnersPage() {
       'JavaScript for beginners, learn JavaScript, JavaScript basics, JavaScript tutorial, beginner JavaScript, start coding, learn to code, JavaScript fundamentals',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -214,7 +214,7 @@ export default function JavascriptForBeginnersPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="JavaScript for Beginners"
-          subheader="Start your coding journey with TechBlitz! Our beginner-friendly platform helps you learn JavaScript from scratch through interactive challenges and step-by-step guidance—completely free and designed for newcomers to programming."
+          subheader="Start your coding journey with BizLevel! Our beginner-friendly platform helps you learn JavaScript from scratch through interactive challenges and step-by-step guidance—completely free and designed for newcomers to programming."
           animatedSpan="Start Coding Today"
           rightCta={{
             title: 'Explore Beginner Roadmaps',
@@ -231,13 +231,13 @@ export default function JavascriptForBeginnersPage() {
 
         <FeatureLeftRightSection
           leftHeader="Perfect for Beginners"
-          leftSubheader="TechBlitz offers challenge designed for beginners. We start with basic JavaScript concepts like variables, functions, and loops, gradually progressing to more advanced topics. Each challenge comes with detailed explanations and hints to help you learn. You will also be able to start a streak to keep you motivated."
+          leftSubheader="BizLevel offers challenge designed for beginners. We start with basic JavaScript concepts like variables, functions, and loops, gradually progressing to more advanced topics. Each challenge comes with detailed explanations and hints to help you learn. You will also be able to start a streak to keep you motivated."
           learnMoreLink={true}
         />
 
         <QuestionMarquee
           header="Learn JavaScript Step by Step"
-          subheader="From writing your first line of code to building interactive web pages. TechBlitz guides beginners through every step of the JavaScript learning journey."
+          subheader="From writing your first line of code to building interactive web pages. BizLevel guides beginners through every step of the JavaScript learning journey."
           cta={true}
           className="md:pt-32"
         />
@@ -254,7 +254,7 @@ export default function JavascriptForBeginnersPage() {
 
         <CallToActionBlock
           title="Begin Your Coding Adventure"
-          description="Learn JavaScript from scratch with guidance every step of the way. Join thousands of beginners who started their coding journey with TechBlitz."
+          description="Learn JavaScript from scratch with guidance every step of the way. Join thousands of beginners who started their coding journey with BizLevel."
           leftCta={{
             title: 'Start Learning for Free',
             href: '/signup',

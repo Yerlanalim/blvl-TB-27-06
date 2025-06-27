@@ -75,7 +75,7 @@ export default function PersonalizedRight() {
       <div className="flex flex-col gap-2.5">
         <h3 className="text-3xl text-gradient from-white to-white/75">Custom Code Challenges</h3>
         <p className="text-gray-400 font-onest">
-          Personalized coding challenges generated from your current TechBlitz journey. You'll never
+          Personalized coding challenges generated from your current BizLevel journey. You'll never
           run out of things to code.
         </p>
         <Button

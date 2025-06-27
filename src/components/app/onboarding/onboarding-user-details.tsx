@@ -28,7 +28,7 @@ import { toast } from 'sonner';
 import { checkUsername } from '@/actions/user/authed/check-username';
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 
-const whereDidYouHearAboutTechBlitz = [
+const whereDidYouHearAboutBizLevel = [
   'Reddit',
   'Google',
   'X (Twitter)',
@@ -57,7 +57,7 @@ export default function OnboardingStepOne() {
       showTimeTaken: user?.showTimeTaken || false,
       sendPushNotifications: user?.sendPushNotifications || false,
       experienceLevel: user?.experienceLevel || 'BEGINNER',
-      howDidYouHearAboutTechBlitz: user?.howDidYouHearAboutTechBlitz || '',
+      howDidYouHearAboutBizLevel: user?.howDidYouHearAboutBizLevel || '',
       sendPromotionalEmails: user?.sendPromotionalEmails || false,
       fasterThanAiGameMode: user?.fasterThanAiGameMode || false,
       userXp: user?.userXp || 0,
@@ -394,11 +394,11 @@ export default function OnboardingStepOne() {
             >
               <FormField
                 control={form.control}
-                name="howDidYouHearAboutTechBlitz"
+                name="howDidYouHearAboutBizLevel"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      How did you hear about TechBlitz? <span className="text-red-500">*</span>
+                      How did you hear about BizLevel? <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
                       <Select
@@ -415,7 +415,7 @@ export default function OnboardingStepOne() {
                           {field.value ? field.value : 'Select an option'}
                         </SelectTrigger>
                         <SelectContent>
-                          {whereDidYouHearAboutTechBlitz.map((option) => (
+                          {whereDidYouHearAboutBizLevel.map((option) => (
                             <SelectItem key={option} value={option}>
                               {option}
                             </SelectItem>

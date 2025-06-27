@@ -100,7 +100,7 @@ export const sendNoChallengesEmail = async ({
 
   // Send the email
   await resend.emails.send({
-    from: 'TechBlitz <team@techblitz.dev>',
+    from: 'BizLevel <team@bizlevel.dev>',
     to: user.email,
     subject: emailTemplate.subject,
     html,

@@ -14,7 +14,7 @@ import { MobileIcon } from '@radix-ui/react-icons';
 
 const faqs = [
   {
-    question: 'How will TechBlitz help me learn JavaScript?',
+    question: 'How will BizLevel help me learn JavaScript?',
     answer:
       'Our challenges have been crafted to mimic real-world problems, that aim to guide you from a beginner JavaScript developer to a pro.',
   },
@@ -23,16 +23,16 @@ const faqs = [
     answer: `We currently have ${QUESTIONS_COUNT}+ JavaScript challenges for you to complete. One for each level of JavaScript mastery.`,
   },
   {
-    question: 'What is TechBlitz?',
-    answer: 'TechBlitz is a coding challenge platform that helps you learn JavaScript.',
+    question: 'What is BizLevel?',
+    answer: 'BizLevel is a coding challenge platform that helps you learn JavaScript.',
   },
   {
-    question: 'How does TechBlitz work?',
+    question: 'How does BizLevel work?',
     answer:
-      'TechBlitz works by providing you with a wide range of real-world JavaScript challenges.',
+      'BizLevel works by providing you with a wide range of real-world JavaScript challenges.',
   },
   {
-    question: 'What makes TechBlitz different?',
+    question: 'What makes BizLevel different?',
     answer:
       'Our core values are in providing you a personalized experience. We ensure you learn essential coding skills faster than ever with your own AI-assistant, personalized challenges & roadmaps, stats tracking, and more!',
   },
@@ -138,11 +138,11 @@ const items = [
 // metadata
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Learn JavaScript | TechBlitz',
+    title: 'Learn JavaScript | BizLevel',
     description:
-      'TechBlitz transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
+      'BizLevel transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
     image: {
-      text: 'Learn JavaScript | TechBlitz',
+      text: 'Learn JavaScript | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -155,9 +155,9 @@ export default function LearnJavascriptPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: getBaseUrl(),
-    headline: 'Learn JavaScript | TechBlitz',
+    headline: 'Learn JavaScript | BizLevel',
     description:
-      'TechBlitz transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
+      'BizLevel transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -174,7 +174,7 @@ export default function LearnJavascriptPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -187,10 +187,10 @@ export default function LearnJavascriptPage() {
       'learn to code, learn to code for free, learn javascript, coding challenges, daily coding challenges, web development, tech skills assessment, learn to code on phone',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -208,7 +208,7 @@ export default function LearnJavascriptPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="Learning JavaScript made simple"
-          subheader="TechBlitz is the number one coding challenge platform to learn JavaScript. Supplying you with a wide range of real-world JavaScript challenges."
+          subheader="BizLevel is the number one coding challenge platform to learn JavaScript. Supplying you with a wide range of real-world JavaScript challenges."
           animatedSpan="Learn JavaScript"
         />
 
@@ -220,7 +220,7 @@ export default function LearnJavascriptPage() {
 
         <FeatureRoadmapThreeGridBlock
           title="JavaScript roadmaps for everyone"
-          description="Every coding roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with TechBlitz."
+          description="Every coding roadmap is created based on your current coding skills. We analyze your current skills set, and are able to create a roadmap that is tailored to you. Meaning every user will be getting a unique experience with BizLevel."
         />
 
         <ComparisonBlock
@@ -240,7 +240,7 @@ export default function LearnJavascriptPage() {
 
         <CallToActionBlock
           title="Learning JavaScript Made Simple"
-          description="TechBlitz is the number one place to learn JavaScript. Supplying you with a wide range of real-world JavaScript challenges."
+          description="BizLevel is the number one place to learn JavaScript. Supplying you with a wide range of real-world JavaScript challenges."
         />
       </div>
     </>

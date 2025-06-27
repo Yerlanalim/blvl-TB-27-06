@@ -36,7 +36,7 @@ export default async function LeaderboardXPRankings({
             <div>
               <CardTitle className="text-white">Experience Points Ranking</CardTitle>
               <CardDescription className="text-gray-400">
-                Battle your way to the top of TechBlitz!
+                Battle your way to the top of BizLevel!
               </CardDescription>
             </div>
           </div>

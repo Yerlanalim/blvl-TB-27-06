@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import CreateLeagueForm from '@/components/app/admin/leagues/create-league-form';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Create League',
+  title: 'BizLevel | Create League',
   description: 'Create a new league and configure its settings',
 };
 

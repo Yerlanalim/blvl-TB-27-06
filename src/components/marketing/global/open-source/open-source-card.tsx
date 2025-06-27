@@ -55,7 +55,7 @@ export default function OpenSourceCard(opts: {
         }
       >
         <div className="flex flex-row items-center gap-x-2">
-          <span className="font-semibold">{contributorName || 'techblitz'}</span>
+          <span className="font-semibold">{contributorName || 'bizlevel'}</span>
           <span className="text-gray-400">commented 11 hours ago</span>
         </div>
         <div className="flex items-center gap-x-2">

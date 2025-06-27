@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   const canonicalUrl = `/${params.slug.join('/')}`;
 
   return createMetadata({
-    title: `${data?.metaTitle || data?.heroHeader} | TechBlitz`,
+    title: `${data?.metaTitle || data?.heroHeader} | BizLevel`,
     description: data?.metaDescription || data?.heroSubheader || '',
     canonicalUrl,
   });
@@ -53,7 +53,7 @@ const createJsonLd = (title: string, description: string, slug: string) => {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: fullUrl,
     },
     dateModified: new Date().toISOString(),
@@ -64,7 +64,7 @@ const createJsonLd = (title: string, description: string, slug: string) => {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/favicon.ico`,
@@ -168,7 +168,7 @@ const defaultMarketingContent = [
 
 const defaultFAQs = [
   {
-    question: 'How will TechBlitz help me learn JavaScript?',
+    question: 'How will BizLevel help me learn JavaScript?',
     answer:
       'Our challenges have been crafted to mimic real-world problems, that aim to guide you from a beginner JavaScript developer to a pro.',
   },
@@ -177,16 +177,16 @@ const defaultFAQs = [
     answer: `We currently have ${QUESTIONS_COUNT}+ JavaScript challenges for you to complete. One for each level of JavaScript mastery.`,
   },
   {
-    question: 'What is TechBlitz?',
-    answer: 'TechBlitz is a coding challenge platform that helps you learn JavaScript.',
+    question: 'What is BizLevel?',
+    answer: 'BizLevel is a coding challenge platform that helps you learn JavaScript.',
   },
   {
-    question: 'How does TechBlitz work?',
+    question: 'How does BizLevel work?',
     answer:
-      'TechBlitz works by providing you with a wide range of real-world JavaScript challenges.',
+      'BizLevel works by providing you with a wide range of real-world JavaScript challenges.',
   },
   {
-    question: 'What makes TechBlitz different?',
+    question: 'What makes BizLevel different?',
     answer:
       'Our core values are in providing you a personalized experience. We ensure you learn essential coding skills faster than ever with your own AI-assistant, personalized challenges & roadmaps, stats tracking, and more!',
   },

@@ -61,7 +61,7 @@ const GeneratedContentSchema = z.object({
     ),
   roadmapDescription: z.string(),
   questionHeader: z.string(),
-  questionSubheader: z.string().describe('Show cases a marquee of questions on TechBlitz.'),
+  questionSubheader: z.string().describe('Show cases a marquee of questions on BizLevel.'),
   contentGridTitle: z.string(),
   contentGridItems: z.array(ContentGridItemSchema),
   ctaTitle: z.string(),
@@ -92,7 +92,7 @@ export async function generatePseoContent(input: GeneratePseoInput) {
     // Create system prompt for AI
     const systemPrompt = `You are an expert in SEO and content creation. Your task is to generate content for a PSEO (Programmatic SEO) page based on the provided targeting keywords and slug.  
     You are trying to entice the user to want to sign up for a service, optimize for the keywords and provide value to the user. Ensure you are solving a problem that the user is trying to solve.
-    You must invoke an emotion in the user, make them feel something and show how TechBlitz solves their problem. These pages are landing pages, not blog posts.
+    You must invoke an emotion in the user, make them feel something and show how BizLevel solves their problem. These pages are landing pages, not blog posts.
     The content should be optimized for search engines and provide value to readers. Do not use placeholder text. Generate engaging, informative content that accurately targets the keywords. The marketingItems must be six items. 
     `;
 

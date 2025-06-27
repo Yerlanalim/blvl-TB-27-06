@@ -17,7 +17,7 @@ function reverseString(str) {
 }
 
 console.log(mysteryFunction([1, 2, 3]));
-console.log(reverseString('TechBlitz'));
+console.log(reverseString('BizLevel'));
 `;
 
 const afterCode = `// this is a challenge to learn JavaScript,

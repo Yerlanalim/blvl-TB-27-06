@@ -57,7 +57,7 @@ const ReferralToast = memo(function ReferralToast() {
           <X className="h-4 w-4" />
         </Button>
         <h3 className="font-semibold text-lg text-white mb-2">
-          TechBlitz is more fun with friends!
+          BizLevel is more fun with friends!
         </h3>
         <p className="text-sm text-gray-400 mb-4">
           Invite a friend and receive 10% off all paid plans once they sign up!

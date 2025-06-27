@@ -10,7 +10,7 @@ const defaultDescription = () => {
     <span>
       Every coding roadmap is created based on your current coding skills. We analyze your current
       skills set, and are able to create a roadmap that is tailored to you. Meaning every user will
-      be getting a unique experience with TechBlitz.
+      be getting a unique experience with BizLevel.
     </span>
   );
 };

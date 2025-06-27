@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import JakeMackieTestimonial from '@/public/images/testimonials/jake-mackie-techblitz-testimonial.jpeg';
+import JakeMackieTestimonial from '@/public/images/testimonials/jake-mackie-bizlevel-testimonial.jpeg';
 
 import Link from 'next/link';
 import GithubLogo from '@/components/ui/icons/github';
@@ -9,17 +9,17 @@ const testimonials = [
     name: 'Jake Mackie',
     title: 'Full Stack Developer',
     shortQuote:
-      'TechBlitz simplifies coding concepts compared to LeetCode, offering real-world questions that make upskilling easy.',
+      'BizLevel simplifies coding concepts compared to LeetCode, offering real-world questions that make upskilling easy.',
     longQuote:
-      '"After landing my first job as a Software Developer, I wanted to keep up with my peers by learning programming languages in more depth. TechBlitz made that learning curve feel less daunting compared to LeetCode. Initially, advanced JavaScript and React seemed overwhelming, but with clear question breakdowns and insightful tooltips, I realized that upskilling isn\'t as hard as it seems."',
+      '"After landing my first job as a Software Developer, I wanted to keep up with my peers by learning programming languages in more depth. BizLevel made that learning curve feel less daunting compared to LeetCode. Initially, advanced JavaScript and React seemed overwhelming, but with clear question breakdowns and insightful tooltips, I realized that upskilling isn\'t as hard as it seems."',
     image: JakeMackieTestimonial,
     githubUrl: 'https://github.com/jakemackie',
   },
   {
     name: 'britishpowerlifter',
     title: 'Software Developer',
-    shortQuote: 'I use TechBlitz and recommend it to anyone who wants to learn to code!',
-    longQuote: 'I use TechBlitz and recommend it to anyone who wants to learn to code!',
+    shortQuote: 'I use BizLevel and recommend it to anyone who wants to learn to code!',
+    longQuote: 'I use BizLevel and recommend it to anyone who wants to learn to code!',
     image: '',
   },
   /**
@@ -52,7 +52,7 @@ export default function Testimonials(opts: { header?: string; subheader?: string
             {opts.header || 'Loved by developers just like you'}
           </h2>
           <p className="text-gray-400 text-sm text-center lg:text-left">
-            Discover how TechBlitz has empowered developers to level up their coding skills.
+            Discover how BizLevel has empowered developers to level up their coding skills.
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-10 lg:w-2/3">

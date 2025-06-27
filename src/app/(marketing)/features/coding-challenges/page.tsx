@@ -21,11 +21,11 @@ import { Code, UserRoundIcon } from 'lucide-react';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Free Coding Challenges | TechBlitz',
+    title: 'Free Coding Challenges | BizLevel',
     description:
       'Learn to code with our free coding challenges. Perfect for web developers looking to master JavaScript programming, HTML, CSS and modern JavaScript frameworks through hands-on practice.',
     image: {
-      text: `Free Coding Challenges | TechBlitz`,
+      text: `Free Coding Challenges | BizLevel`,
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -125,7 +125,7 @@ const faqs = [
   {
     question: 'Where can I learn JavaScript for free?',
     answer:
-      'TechBlitz offers a comprehensive free JavaScript course with daily coding challenges, perfect for beginners and experienced developers alike.',
+      'BizLevel offers a comprehensive free JavaScript course with daily coding challenges, perfect for beginners and experienced developers alike.',
   },
   {
     question: 'What makes this the best place to learn JavaScript?',
@@ -162,27 +162,27 @@ const faqs = [
   {
     question: 'What is the best site to learn JavaScript?',
     answer:
-      'TechBlitz is the best site to learn JavaScript. We offer a comprehensive free JavaScript course with daily coding challenges, perfect for beginners and experienced developers alike.',
+      'BizLevel is the best site to learn JavaScript. We offer a comprehensive free JavaScript course with daily coding challenges, perfect for beginners and experienced developers alike.',
   },
   {
     question: 'How can I receive recommendations straight to my inbox?',
     answer:
-      'You can receive recommendations straight to your inbox by signing up for a free TechBlitz account, and opting into email notifications.',
+      'You can receive recommendations straight to your inbox by signing up for a free BizLevel account, and opting into email notifications.',
   },
   {
     question: 'How can I get instant feedback on my code?',
     answer:
-      'You can get instant feedback on your code by signing up for a TechBlitz account and upgrading to a premium plan. If you are a student, you are eligible for a 30% discount on a TechBlitz premium plan.',
+      'You can get instant feedback on your code by signing up for a BizLevel account and upgrading to a premium plan. If you are a student, you are eligible for a 30% discount on a BizLevel premium plan.',
   },
   {
-    question: 'What coding topics can I learn on TechBlitz?',
+    question: 'What coding topics can I learn on BizLevel?',
     answer:
-      'You can learn JavaScript, React, Git, and many other coding topics on TechBlitz. We are constantly adding new coding topics to our platform.',
+      'You can learn JavaScript, React, Git, and many other coding topics on BizLevel. We are constantly adding new coding topics to our platform.',
   },
   {
     question: 'How can I get free JavaScript coding challenges?',
     answer:
-      'You can get free JavaScript coding challenges by signing up for a TechBlitz account and opting into email notifications.',
+      'You can get free JavaScript coding challenges by signing up for a BizLevel account and opting into email notifications.',
   },
   {
     question: 'Do you offer project-based learning?',
@@ -206,7 +206,7 @@ export default async function FeatureDailyQuestionPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: getBaseUrl(),
-    headline: 'Free Coding Challenges | TechBlitz',
+    headline: 'Free Coding Challenges | BizLevel',
     description:
       'Learn to code with our free coding challenges. Perfect for web developers looking to master JavaScript programming, HTML, CSS and modern JavaScript frameworks through hands-on practice.',
     image:
@@ -230,7 +230,7 @@ export default async function FeatureDailyQuestionPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -243,10 +243,10 @@ export default async function FeatureDailyQuestionPage() {
       'javascript course, free javascript course, javascript online course, learn javascript online, javascript training, web development, javascript programming, html css and javascript, javascript frameworks, software development',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };
@@ -290,7 +290,7 @@ export default async function FeatureDailyQuestionPage() {
         <FeatureDailyChallengeHero
           animatedSpan="Coding Challenges"
           header="Free JavaScript coding challenges"
-          subheader="TechBlitz provides free JavaScript coding challenges to help you master your skills. Learn new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!"
+          subheader="BizLevel provides free JavaScript coding challenges to help you master your skills. Learn new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!"
           className="xl:w-1/2"
           rightCta={{
             href: '/challenges',
@@ -300,9 +300,9 @@ export default async function FeatureDailyQuestionPage() {
 
         <FeatureLeftRightSection
           leftHeader="Free JavaScript coding challenges"
-          leftSubheader="TechBlitz transforms learning to code into bite-sized, engaging coding challenges. Master new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!"
+          leftSubheader="BizLevel transforms learning to code into bite-sized, engaging coding challenges. Master new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!"
           rightHeader="Personalized coding challenges"
-          rightSubheader="TechBlitz adapts to your weaknesses. Receive recommendations straight to your inbox, and get instant feedback on your code. Improving your coding skills has never been easier."
+          rightSubheader="BizLevel adapts to your weaknesses. Receive recommendations straight to your inbox, and get instant feedback on your code. Improving your coding skills has never been easier."
           paddingBottom="lg:pb-10"
         />
 
@@ -329,7 +329,7 @@ export default async function FeatureDailyQuestionPage() {
 
         <MarketingContentGrid
           title="The best site to learn to code"
-          subheading={`Discover why ${userCount}+ users choose TechBlitz to learn to code`}
+          subheading={`Discover why ${userCount}+ users choose BizLevel to learn to code`}
           items={items}
         />
 

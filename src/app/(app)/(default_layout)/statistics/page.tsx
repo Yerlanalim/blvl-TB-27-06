@@ -14,7 +14,7 @@ import StatisticsOverviewMenu from '@/components/app/statistics/statistics-overv
 import QuestionTracker from '@/components/app/statistics/question-tracker';
 
 export const metadata = {
-  title: 'Statistics | techblitz',
+  title: 'Statistics | bizlevel',
   description: 'View your coding statistics and progress',
 };
 
@@ -47,7 +47,7 @@ export default async function StatisticsPage({
         <Hero
           heading="Coding Journey"
           container={false}
-          subheading="An overview of your coding journey on TechBlitz."
+          subheading="An overview of your coding journey on BizLevel."
         />
         <div className="flex gap-3">
           <StatsRangePicker selectedRange={STATISTICS[range].label} />

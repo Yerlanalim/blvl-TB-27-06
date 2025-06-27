@@ -19,7 +19,7 @@ export const EmailChangeEmail = ({ username, redirect_to }: EmailUpdateProps) =>
   return (
     <Html>
       <Head />
-      <Preview>Your TechBlitz email has been updated</Preview>
+      <Preview>Your BizLevel email has been updated</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={h1}>Email Address Updated</Text>
@@ -40,8 +40,8 @@ export const EmailChangeEmail = ({ username, redirect_to }: EmailUpdateProps) =>
             <Text style={footerText}>© 2025 DEV TECHBLITZ Ltd. All rights reserved.</Text>
             <Text style={footerText}>
               If you have any questions, please contact our support team at{' '}
-              <Link href={`mailto:team@techblitz.dev`} style={footerLink}>
-                team@techblitz.dev
+              <Link href={`mailto:team@bizlevel.kz`} style={footerLink}>
+                team@bizlevel.kz
               </Link>
               or reply to this email.
             </Text>

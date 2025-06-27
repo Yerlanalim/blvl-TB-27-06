@@ -56,7 +56,7 @@ export default async function SignupPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/signup`,
-    headline: 'Sign Up for free | TechBlitz',
+    headline: 'Sign Up for free | BizLevel',
     description:
       'The best coding platform for beginners to learn to code for free. No credit card required.',
     image:
@@ -80,7 +80,7 @@ export default async function SignupPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -93,10 +93,10 @@ export default async function SignupPage() {
       'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };
@@ -118,7 +118,7 @@ export default async function SignupPage() {
           <div className="w-full space-y-6 max-w-md">
             <div className="flex flex-col gap-y-1">
               <h1 className="!text-start font-bold font-onest text-xl lg:text-3xl mb-2 text-gradient from-white/75 to-white">
-                Create your TechBlitz account
+                Create your BizLevel account
               </h1>
               <p className="text-sm text-gray-400 mb-4">
                 Start your journey to becoming a tech expert for free. Upgrade for a more

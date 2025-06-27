@@ -12,11 +12,11 @@ import StudentDiscountBlock from '@/components/marketing/pricing/student-discoun
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Pricing | TechBlitz',
+    title: 'Pricing | BizLevel',
     description:
       'Start for free and unlock premium features with our affordable plans to help you become a better developer.',
     image: {
-      text: 'Pricing | TechBlitz',
+      text: 'Pricing | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -38,12 +38,12 @@ export async function generateMetadata() {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'techblitz SaaS Platform',
+  name: 'bizlevel SaaS Platform',
   description:
-    'techblitz is an online platform that helps users enhance their development knowledge through interactive questions and quizzes.',
+    'bizlevel is an online platform that helps users enhance their development knowledge through interactive questions and quizzes.',
   brand: {
     '@type': 'Brand',
-    name: 'techblitz',
+    name: 'bizlevel',
   },
   offers: [
     {
@@ -53,7 +53,7 @@ const jsonLd = {
       priceCurrency: 'USD',
       description:
         'Access to all coding questions and daily challenges, leaderboards, statistics and more.',
-      url: 'https://techblitz.dev/pricing',
+      url: 'https://bizlevel.dev/pricing',
       category: 'Free',
     },
     {
@@ -62,7 +62,7 @@ const jsonLd = {
       price: '5.99',
       priceCurrency: 'USD',
       description: 'Unlock all questions, daily challenges, and personalized AI roadmaps.',
-      url: 'https://techblitz.dev/pricing',
+      url: 'https://bizlevel.dev/pricing',
       category: 'Paid',
     },
     {
@@ -72,11 +72,11 @@ const jsonLd = {
       priceCurrency: 'USD',
       description:
         'Unlock all questions, daily challenges, and personalized AI roadmaps. Lifetime access.',
-      url: 'https://techblitz.dev/pricing',
+      url: 'https://bizlevel.dev/pricing',
       category: 'Paid',
     },
   ],
-  url: 'https://techblitz.dev/pricing',
+  url: 'https://bizlevel.dev/pricing',
   image:
     'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
 };
@@ -92,10 +92,10 @@ export default async function PricingPage() {
 
   const faqs = [
     {
-      question: 'Can I use TechBlitz for free?',
+      question: 'Can I use BizLevel for free?',
       answer: (
         <>
-          Absolutely! TechBlitz offers a free plan to get you started right away.{' '}
+          Absolutely! BizLevel offers a free plan to get you started right away.{' '}
           <Link href="/signup" className="text-accent">
             Sign up for a free account
           </Link>{' '}
@@ -105,14 +105,14 @@ export default async function PricingPage() {
       ),
     },
     {
-      question: 'What is TechBlitz, and how can it help developers?',
+      question: 'What is BizLevel, and how can it help developers?',
       answer:
-        'TechBlitz is an innovative online learning platform designed for developers of all skill levels. Our tools, including quizzes, coding roadmaps, and tutorials, help you sharpen your skills, boost productivity, and stay ahead in the tech industry.',
+        'BizLevel is an innovative online learning platform designed for developers of all skill levels. Our tools, including quizzes, coding roadmaps, and tutorials, help you sharpen your skills, boost productivity, and stay ahead in the tech industry.',
     },
     {
-      question: 'What makes TechBlitz different from other coding platforms?',
+      question: 'What makes BizLevel different from other coding platforms?',
       answer:
-        'TechBlitz stands out by offering concise, interactive coding challenges that are both fun and educational. Our platform is designed to be a quick and efficient way to improve your skills, without the need for extensive tutorials or long-form content.',
+        'BizLevel stands out by offering concise, interactive coding challenges that are both fun and educational. Our platform is designed to be a quick and efficient way to improve your skills, without the need for extensive tutorials or long-form content.',
     },
     {
       question: 'What is the AI assistant?',
@@ -120,10 +120,10 @@ export default async function PricingPage() {
         "The AI assistant is your own personal coding assistant that can give you tips and guidance to answer our challenges. Struggling to answer a question? Ask the AI assistant for help. Don't understand an answer? Ask the AI assistant for help!",
     },
     {
-      question: 'What are the key benefits of using TechBlitz?',
+      question: 'What are the key benefits of using BizLevel?',
       answer: (
         <>
-          TechBlitz provides engaging, short-form coding questions and practical roadmaps to help
+          BizLevel provides engaging, short-form coding questions and practical roadmaps to help
           developers enhance their skills and tackle real-world challenges. We aim to improve your
           skills as a developer by only 10 minutes a day. You can check out our study paths{' '}
           <Link href={`/questions/explore`} className="text-accent">
@@ -134,7 +134,7 @@ export default async function PricingPage() {
       ),
     },
     {
-      question: 'How can I get started with TechBlitz?',
+      question: 'How can I get started with BizLevel?',
       answer: (
         <>
           It’s easy!{' '}
@@ -151,8 +151,8 @@ export default async function PricingPage() {
       answer: (
         <>
           You can get a refund within 14 days of your purchase. Please contact us at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>{' '}
           to request a refund.
         </>
@@ -162,10 +162,10 @@ export default async function PricingPage() {
       question: 'Do you offer any discounts?',
       answer: (
         <>
-          Yes! We believe that TechBlitz should be available to all students. To claim your
+          Yes! We believe that BizLevel should be available to all students. To claim your
           discount, please email us at{' '}
-          <a href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <a href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </a>{' '}
           using your student email address. We are currently running a limited time, 50% discount
           for students. This will be available until the end of February 2025, after which the
@@ -178,8 +178,8 @@ export default async function PricingPage() {
       answer: (
         <>
           Please contact us at{' '}
-          <Link href="mailto:team@techblitz.dev" className="text-accent">
-            team@techblitz.dev
+          <Link href="mailto:team@bizlevel.dev" className="text-accent">
+            team@bizlevel.dev
           </Link>{' '}
           and we will get back to you as soon as possible.
         </>

@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     // generate the metadata for the blog post
     return createMetadata({
-      title: `${typedFrontmatter.title} | TechBlitz Blog`,
+      title: `${typedFrontmatter.title} | BizLevel Blog`,
       description: typedFrontmatter.description,
       keywords: ['blog', 'article', typedFrontmatter.title.toLowerCase()],
       image: {
@@ -122,7 +122,7 @@ export default async function JavascriptProgrammingChallengesForBeginners({
             <div className="mt-10">
               <CallToActionBlock
                 title="Learn to code, faster"
-                description={`Join ${userCount}+ developers who are accelerating their coding skills with TechBlitz.`}
+                description={`Join ${userCount}+ developers who are accelerating their coding skills with BizLevel.`}
                 leftCta={{
                   title: 'Begin Your Journey',
                   href: '/signup',
@@ -144,7 +144,7 @@ export default async function JavascriptProgrammingChallengesForBeginners({
             <Card className="w-full border border-black-50 text-white shadow-lg">
               <CardHeader className="pb-2">
                 <CardTitle className="font-onest text-2xl flex items-center justify-center">
-                  Try TechBlitz for free
+                  Try BizLevel for free
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center">

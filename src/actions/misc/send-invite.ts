@@ -35,11 +35,11 @@ export const sendInvite = async (email: string) => {
   }
 
   const subject = user
-    ? 'Invite to TechBlitz from ' + user.email
-    : "You've been invited to TechBlitz!";
+    ? 'Invite to BizLevel from ' + user.email
+    : "You've been invited to BizLevel!";
 
   await resend.emails.send({
-    from: 'TechBlitz <team@techblitz.dev>',
+    from: 'BizLevel <team@bizlevel.dev>',
     to: email,
     subject,
     html,

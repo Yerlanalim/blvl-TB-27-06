@@ -9,7 +9,7 @@ import { getStudyPath } from '@/utils/data/study-paths/get';
  *
  * 'Built for modern teams' - https://mintlify.com/
  *
- * Used to showcase 3 features of TechBlitz.
+ * Used to showcase 3 features of BizLevel.
  * No link to other pages, just a simple 3 block showcase.
  *
  * Either shows default values in the boxes, or they can be customized

@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability, we appreciate your help in improving the security of this project. Please report it to us responsibly. Here's how you can do it:
 
-1. **Do not create a public issue**. Instead, contact us privately at team@techblitz.dev.
+1. **Do not create a public issue**. Instead, contact us privately at team@bizlevel.kz.
 2. Provide a detailed description of the vulnerability, how it can be reproduced, and any relevant steps to mitigate it.
 
 We will respond to your report within 48 hours.

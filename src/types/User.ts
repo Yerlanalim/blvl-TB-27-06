@@ -9,7 +9,7 @@ import { RequireAtLeastOne } from './Utils';
  * - STANDARD: the user is a standard user (DEPRECATED)
  * - ADMIN: the user is an admin - has access to all features
  * - TRIAL: the user is on a trial - Limited access - not currently implemented
- * - FREE: the user is on the free plan - A standard user of TechBlitz
+ * - FREE: the user is on the free plan - A standard user of BizLevel
  * - PREMIUM: the user is on the premium plan - This user is subscribed to the premium plan (unlimited features)
  * - LIFETIME: the user is on the lifetime plan - This user has lifetime access to all features (limited ai credits & roadmap generation) (no subscription required)
  */
@@ -51,8 +51,8 @@ export interface User extends BaseRecord {
   // optional stripe emails for paid users
   stripeEmails?: string[];
 
-  // where the user found out about techblitz
-  howDidYouHearAboutTechBlitz?: string | null;
+  // where the user found out about bizlevel
+  howDidYouHearAboutBizLevel?: string | null;
 
   // the user's referral code
   referralCode?: string | null;
@@ -118,7 +118,7 @@ export type UserRecord = Pick<
   | 'isCustomUsername'
   | 'experienceLevel'
   | 'stripeEmails'
-  | 'howDidYouHearAboutTechBlitz'
+  | 'howDidYouHearAboutBizLevel'
   | 'referralCode'
   | 'aboutMeAiHelp'
   | 'studyPathEnrollments'

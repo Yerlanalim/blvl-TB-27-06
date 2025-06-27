@@ -5,7 +5,7 @@ import { ArrowLeft, Award, Trophy, Clock, Star, Shield, Zap } from 'lucide-react
 import { Card } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | League Achievements',
+  title: 'BizLevel | League Achievements',
   description: 'Manage league achievements and rewards',
 };
 

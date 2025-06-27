@@ -42,7 +42,7 @@ export default function FeatureDailyChallengeHero(opts: {
         <p className="text-white/70 max-w-xl text-base font-onest text-center">
           {subheader
             ? subheader
-            : 'TechBlitz transforms learning to code into bite-sized, engaging daily coding challenges. Master new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!'}
+            : 'BizLevel transforms learning to code into bite-sized, engaging daily coding challenges. Master new skills in just 5 minutes a day—anytime, anywhere, on any device. Even learn to code on your phone!'}
         </p>
 
         <div className={cn('flex flex-col items-center md:flex-row gap-4', ctaWrapperClassName)}>

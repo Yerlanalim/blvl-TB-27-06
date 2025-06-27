@@ -26,10 +26,10 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
         <Container style={container}>
           <Section style={logoContainer}>
             <Img
-              src="https://techblitz.dev/logo.png"
+              src="https://bizlevel.dev/logo.png"
               width="111"
               height="26"
-              alt="TechBlitz Logo"
+              alt="BizLevel Logo"
               style={logo}
             />
           </Section>
@@ -37,10 +37,10 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
           <Text style={text}>
             {referrerEmail ? (
               <>
-                You've been invited to join TechBlitz by <strong>{referrerEmail}</strong>.
+                You've been invited to join BizLevel by <strong>{referrerEmail}</strong>.
               </>
             ) : (
-              <>You've been invited to join TechBlitz!</>
+              <>You've been invited to join BizLevel!</>
             )}
           </Text>
           <Text style={text}>
@@ -48,7 +48,7 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
             developers!
           </Text>
           <Section style={buttonContainer}>
-            <Link href={`https://techblitz.dev/signup?ref=${referrerUid || ''}`} style={button}>
+            <Link href={`https://bizlevel.dev/signup?ref=${referrerUid || ''}`} style={button}>
               Accept Invitation
             </Link>
           </Section>
@@ -61,7 +61,7 @@ const ReferralEmail = ({ referrerUid, referrerEmail }: ReferralEmailProps) => {
             </Link>
           </Section>
           <Section style={socialContainer}>
-            <Link href="https://x.com/techblitz_dev" style={socialLink}>
+            <Link href="https://x.com/bizlevel_dev" style={socialLink}>
               <svg
                 data-testid="geist-icon"
                 height="24"

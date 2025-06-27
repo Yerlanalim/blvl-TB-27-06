@@ -89,7 +89,7 @@ export async function generateMetadata({
 
   if (!studyPath) {
     return createMetadata({
-      title: 'Roadmap Lesson Not Found | TechBlitz',
+      title: 'Roadmap Lesson Not Found | BizLevel',
       description: 'Roadmap lesson not found',
     });
   }
@@ -119,10 +119,10 @@ export async function generateMetadata({
   }
 
   return createMetadata({
-    title: `${studyPath?.title}${subsectionName} - Lesson | TechBlitz`,
+    title: `${studyPath?.title}${subsectionName} - Lesson | BizLevel`,
     description: studyPath?.description,
     image: {
-      text: `${studyPath?.title}${subsectionName} - Lesson | TechBlitz`,
+      text: `${studyPath?.title}${subsectionName} - Lesson | BizLevel`,
       bgColor: '#000',
       textColor: '#fff',
     },

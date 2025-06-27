@@ -54,8 +54,8 @@ export default function ClientPage({
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // if the user has no username or who not specified where they heard about techblitz, redirect them to onboarding
-    if (!user?.username || !user?.howDidYouHearAboutTechBlitz) {
+    // if the user has no username or who not specified where they heard about bizlevel, redirect them to onboarding
+    if (!user?.username || !user?.howDidYouHearAboutBizLevel) {
       router.push('/onboarding');
     }
 
@@ -104,7 +104,7 @@ export default function ClientPage({
               <p>
                 <span className="font-semibold">{getUserDisplayName(user)}</span>, thank you for
                 purchasing the
-                <span className="font-bold"> TechBlitz Premium </span>
+                <span className="font-bold"> BizLevel Premium </span>
                 plan!
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">

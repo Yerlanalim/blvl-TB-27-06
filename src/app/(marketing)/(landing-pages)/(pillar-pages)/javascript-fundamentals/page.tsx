@@ -56,7 +56,7 @@ const faqs = [
     question: 'How can I learn JavaScript online?',
     answer: (
       <>
-        TechBlitz is the #1 platform for learning to code JavaScript. We offer a wide range of
+        BizLevel is the #1 platform for learning to code JavaScript. We offer a wide range of
         coding challenges for beginners and professionals. You can learn JavaScript by solving
         challenges tailored to your skill level.{' '}
         <Link href="/signup" className="text-accent underline">
@@ -70,7 +70,7 @@ const faqs = [
     question: 'How can I learn JavaScript for free?',
     answer: (
       <>
-        TechBlitz is the #1 platform for learning to code JavaScript for free. We offer a wide range
+        BizLevel is the #1 platform for learning to code JavaScript for free. We offer a wide range
         of coding challenges for beginners and professionals. You can learn JavaScript by solving
         challenges tailored to your skill level.
         <Link href="/signup" className="text-accent underline">
@@ -117,7 +117,7 @@ const faqs = [
     question: 'Where can I find a free javascript online course?',
     answer: (
       <>
-        TechBlitz is the #1 platform for learning to code JavaScript for free. We offer a wide range
+        BizLevel is the #1 platform for learning to code JavaScript for free. We offer a wide range
         of coding challenges for beginners and professionals.
       </>
     ),
@@ -306,11 +306,11 @@ const items = [
 // Metadata
 export async function generateMetadata() {
   return createMetadata({
-    title: 'JavaScript Fundamentals | Learn JavaScript & Web Development | TechBlitz',
+    title: 'JavaScript Fundamentals | Learn JavaScript & Web Development | BizLevel',
     description:
-      'TechBlitz offers a wide range of coding challenges for beginners and professionals. Master JavaScript, web development, and programming with real-world exercises designed to enhance your coding skills.',
+      'BizLevel offers a wide range of coding challenges for beginners and professionals. Master JavaScript, web development, and programming with real-world exercises designed to enhance your coding skills.',
     image: {
-      text: 'JavaScript Fundamentals | TechBlitz',
+      text: 'JavaScript Fundamentals | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -326,9 +326,9 @@ export default async function JavaScriptFundamentalsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/javascript-fundamentals`,
-    headline: 'JavaScript Fundamentals | TechBlitz',
+    headline: 'JavaScript Fundamentals | BizLevel',
     description:
-      'TechBlitz offers a wide range of coding challenges for beginners and professionals. Master JavaScript, web development, and programming with real-world exercises designed to enhance your coding skills.',
+      'BizLevel offers a wide range of coding challenges for beginners and professionals. Master JavaScript, web development, and programming with real-world exercises designed to enhance your coding skills.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -350,7 +350,7 @@ export default async function JavaScriptFundamentalsPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -361,10 +361,10 @@ export default async function JavaScriptFundamentalsPage() {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -415,7 +415,7 @@ export default async function JavaScriptFundamentalsPage() {
 
         <StatsReportSection
           header="The Best Site to Learn JavaScript"
-          subheader="Learn the fundamentals of JavaScript with TechBlitz. Our free JavaScript tutorials and online classes provide the perfect environment to master JavaScript programming at your own pace."
+          subheader="Learn the fundamentals of JavaScript with BizLevel. Our free JavaScript tutorials and online classes provide the perfect environment to master JavaScript programming at your own pace."
           learnMoreLink={true}
         />
 
@@ -429,7 +429,7 @@ export default async function JavaScriptFundamentalsPage() {
           title="Learn the fundamentals of JavaScript today"
           description={`Join over ${await userCountPromise.then(
             (count) => Math.round(count / 10) * 10
-          )}+ users learning to code on TechBlitz. Our free JavaScript tutorials and online classes provide the perfect environment to master JavaScript programming at your own pace.`}
+          )}+ users learning to code on BizLevel. Our free JavaScript tutorials and online classes provide the perfect environment to master JavaScript programming at your own pace.`}
         />
       </div>
     </>

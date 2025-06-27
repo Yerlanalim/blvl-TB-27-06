@@ -7,11 +7,11 @@ import type { WebPageJsonLd } from '@/types';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Changelog | TechBlitz',
+    title: 'Changelog | BizLevel',
     description:
       "View the latest updates and improvements to our platform. We're always working to improve your experience and make learning more enjoyable.",
     image: {
-      text: 'Changelog | TechBlitz',
+      text: 'Changelog | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -24,10 +24,10 @@ export default function ChangelogPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/changelog`,
-    headline: 'Changelog | TechBlitz',
+    headline: 'Changelog | BizLevel',
     description:
       "View the latest updates and improvements to our platform. We're always working to improve your experience and make learning more enjoyable.",
-    image: 'https://techblitz.dev/favicon.ico',
+    image: 'https://bizlevel.dev/favicon.ico',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [

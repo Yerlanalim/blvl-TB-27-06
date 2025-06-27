@@ -4,7 +4,7 @@ import AdminContainer from '@/components/app/admin/admin-container';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | PSEO Page Management',
+  title: 'BizLevel | PSEO Page Management',
   description: 'Create and manage PSEO pages for SEO optimization',
 };
 

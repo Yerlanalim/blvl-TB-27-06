@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import EditLeagueForm from '@/components/app/admin/leagues/edit-league-form';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Edit League',
+  title: 'BizLevel | Edit League',
   description: 'View and modify league settings',
 };
 

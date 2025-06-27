@@ -28,16 +28,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!studyPath) {
     return createMetadata({
-      title: 'Roadmap not found | TechBlitz',
+      title: 'Roadmap not found | BizLevel',
       description: 'Roadmap not found',
     });
   }
 
   return createMetadata({
-    title: `${studyPath?.title} | TechBlitz`,
+    title: `${studyPath?.title} | BizLevel`,
     description: studyPath?.description,
     image: {
-      text: `${studyPath?.title} | TechBlitz`,
+      text: `${studyPath?.title} | BizLevel`,
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -81,7 +81,7 @@ function createJsonLd(studyPath: StudyPath, slug: string): QuizJsonLd {
     learningResourceType: ['quiz', 'learning activity'],
     creator: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     assesses: ['coding'],

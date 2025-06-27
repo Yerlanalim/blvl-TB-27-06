@@ -17,7 +17,7 @@ export default async function QuestionPageSidebar() {
       <div className="sticky top-10 space-y-5 w-full">
         {user?.userLevel === 'FREE' && (
           <UpgradeCard
-            title="Try TechBlitz premium"
+            title="Try BizLevel premium"
             description="Premium questions, personalized roadmaps, and unlimited AI credits!"
           />
         )}

@@ -74,8 +74,8 @@ export async function GET(request: NextRequest) {
     });
 
     await resend.emails.send({
-      from: 'team@techblitz.dev',
-      to: 'team@techblitz.dev',
+      from: 'team@bizlevel.dev',
+      to: 'team@bizlevel.dev',
       subject: 'Streaks updated successfully',
       html: `<p>Streaks updated successfully</p>
       <p>Total users: ${allUserIds.length}</p>

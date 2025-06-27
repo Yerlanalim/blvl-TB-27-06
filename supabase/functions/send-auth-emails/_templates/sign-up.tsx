@@ -12,16 +12,16 @@ import {
 import * as React from 'npm:react';
 import { GitHubLogoIcon, TwitterLogoIcon } from 'npm:@radix-ui/react-icons';
 
-interface TechBlitzSignUpEmailProps {
+interface BizLevelSignUpEmailProps {
   username: string;
   confirmationLink: string;
 }
 
-export const TechBlitzSignUpEmail = ({ username, confirmationLink }: TechBlitzSignUpEmailProps) => {
+export const BizLevelSignUpEmail = ({ username, confirmationLink }: BizLevelSignUpEmailProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Welcome to TechBlitz - Confirm Your Email</Preview>
+      <Preview>Welcome to BizLevel - Confirm Your Email</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logoContainer}>
@@ -54,7 +54,7 @@ export const TechBlitzSignUpEmail = ({ username, confirmationLink }: TechBlitzSi
               </defs>
             </svg>
           </Section>
-          <Heading style={h1}>Welcome to TechBlitz!</Heading>
+          <Heading style={h1}>Welcome to BizLevel!</Heading>
           <Text style={text}>
             We're so glad to have you on board, and ready to help you in your software journey! To
             get started, please confirm your email address.
@@ -65,7 +65,7 @@ export const TechBlitzSignUpEmail = ({ username, confirmationLink }: TechBlitzSi
             </Link>
           </Section>
           <Text style={text}>
-            If you didn't create an account with TechBlitz, you can safely ignore this email.
+            If you didn't create an account with BizLevel, you can safely ignore this email.
           </Text>
           <Section style={socialButtonsContainer}>
             <Link href="https://x.com/techblitz_dev" target="_blank" style={socialButton}>
@@ -88,12 +88,12 @@ export const TechBlitzSignUpEmail = ({ username, confirmationLink }: TechBlitzSi
   );
 };
 
-TechBlitzSignUpEmail.PreviewProps = {
+BizLevelSignUpEmail.PreviewProps = {
   username: 'Alice',
   confirmationLink: 'https://techblitz.com/confirm?token=123456',
-} as TechBlitzSignUpEmailProps;
+} as BizLevelSignUpEmailProps;
 
-export default TechBlitzSignUpEmail;
+export default BizLevelSignUpEmail;
 
 const accent = '#5b61d6';
 

@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: { params: { uid: string } }) 
   const title = question?.slug?.replace(/-/g, ' ') || 'Coding Question';
 
   return createMetadata({
-    title: `${capitalise(title)} | TechBlitz`,
-    description: 'Boost your coding skills for free with TechBlitz',
+    title: `${capitalise(title)} | BizLevel`,
+    description: 'Boost your coding skills for free with BizLevel',
     image: {
-      text: `${title} | TechBlitz`,
+      text: `${title} | BizLevel`,
       bgColor: '#000000',
       textColor: '#ffffff',
     },

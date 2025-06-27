@@ -9,7 +9,7 @@ export type QuizJsonLd = {
   learningResourceType: string[];
   creator: {
     '@type': 'Organization';
-    name: 'TechBlitz';
+    name: 'BizLevel';
     url: string;
   };
   assesses: string[];

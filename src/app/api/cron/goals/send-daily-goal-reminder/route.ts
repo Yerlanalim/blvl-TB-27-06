@@ -23,7 +23,7 @@ type GoalWithRelations = StudyPathGoal & {
 
 async function SendEmail(goal: GoalWithRelations) {
   const displayName = getUserDisplayName(goal.user);
-  const subject = `TechBlitz - Daily Goal Reminder`;
+  const subject = `BizLevel - Daily Goal Reminder`;
   const link = `${process.env.NEXT_PUBLIC_URL}/roadmap/${goal.studyPathUid}`;
 
   // calculate the days remaining by comparing the target date to the current date
@@ -46,11 +46,11 @@ async function SendEmail(goal: GoalWithRelations) {
   );
 
   await resend.emails.send({
-    from: 'TechBlitz <team@techblitz.dev>',
+    from: 'BizLevel <team@bizlevel.dev>',
     to: goal.user.email,
     subject,
     html,
-    replyTo: 'team@techblitz.dev',
+    replyTo: 'team@bizlevel.dev',
   });
 }
 

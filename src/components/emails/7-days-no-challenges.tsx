@@ -30,7 +30,7 @@ export default function NoChallengesEmail({
   suggestedChallenge = {
     title: 'Writing Your First Function',
     difficulty: 'Beginner',
-    url: 'https://techblitz.dev/question/writing-your-first-function',
+    url: 'https://bizlevel.dev/question/writing-your-first-function',
   },
   streakCount = 0,
   daysInactive = 7,
@@ -38,7 +38,7 @@ export default function NoChallengesEmail({
   return (
     <Html>
       <Head />
-      <Preview>We miss you at TechBlitz! Jump back into coding with a quick challenge</Preview>
+      <Preview>We miss you at BizLevel! Jump back into coding with a quick challenge</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with Logo */}
@@ -113,7 +113,7 @@ export default function NoChallengesEmail({
                 Just 5 minutes of coding practice each day can significantly improve your skills
                 over time. Let's rebuild that momentum together!
               </Text>
-              <Button href="https://techblitz.dev/dashboard" style={buttonLarge}>
+              <Button href="https://bizlevel.dev/dashboard" style={buttonLarge}>
                 Resume Your Coding Journey
               </Button>
             </div>
@@ -125,7 +125,7 @@ export default function NoChallengesEmail({
           <Section style={footer}>
             {/* Social Links */}
             <Section style={socialLinks}>
-              <Link href="https://x.com/techblitz_dev" style={socialLink}>
+              <Link href="https://x.com/bizlevel_dev" style={socialLink}>
                 <svg
                   data-testid="geist-icon"
                   height="24"
@@ -151,11 +151,11 @@ export default function NoChallengesEmail({
               </Link>{' '}
             </Section>
 
-            <Text style={footerFine}>© 2025 DEV TECHBLITZ LTD. All rights reserved.</Text>
+            <Text style={footerFine}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
             <Text style={footerFine}>
               You're receiving this email because you agreed to receive daily reminders from
-              TechBlitz. Want to stop receiving these emails? <br />
-              <Link href={`https://techblitz.dev/settings/`} style={footerLink}>
+              BizLevel. Want to stop receiving these emails? <br />
+              <Link href={`https://bizlevel.dev/settings/`} style={footerLink}>
                 Update your email preferences
               </Link>
             </Text>

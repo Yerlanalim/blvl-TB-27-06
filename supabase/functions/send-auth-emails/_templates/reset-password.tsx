@@ -19,7 +19,7 @@ export const ResetPasswordEmail = ({ username, resetLink }: ResetPasswordEmailPr
   return (
     <Html>
       <Head />
-      <Preview>Reset your TechBlitz password</Preview>
+      <Preview>Reset your BizLevel password</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logoContainer}>
@@ -55,7 +55,7 @@ export const ResetPasswordEmail = ({ username, resetLink }: ResetPasswordEmailPr
           <Text style={h1}>Reset Your Password</Text>
           <Text style={text}>Hello {username},</Text>
           <Text style={text}>
-            We received a request to reset your password for your TechBlitz account. If you didn't
+            We received a request to reset your password for your BizLevel account. If you didn't
             make this request, you can safely ignore this email.
           </Text>
           <Section style={buttonContainer}>
@@ -76,8 +76,8 @@ export const ResetPasswordEmail = ({ username, resetLink }: ResetPasswordEmailPr
             <Text style={footerText}>© 2025 DEV TECHBLITZ Ltd. All rights reserved.</Text>
             <Text style={footerText}>
               If you have any questions, please contact our support team at{' '}
-              <Link href="mailto:team@techblitz.dev" style={footerLink}>
-                team@techblitz.dev
+              <Link href="mailto:team@bizlevel.kz" style={footerLink}>
+                team@bizlevel.kz
               </Link>
             </Text>
           </Section>

@@ -38,7 +38,7 @@ export default function UpgradeModal() {
           Supercharge Your Learning
         </DialogTitle>
         <DialogDescription className="mb-6">
-          Take your TechBlitz experience to the next level with our premium features:
+          Take your BizLevel experience to the next level with our premium features:
         </DialogDescription>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           {features.map((feature, index) => (

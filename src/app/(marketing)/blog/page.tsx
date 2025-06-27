@@ -17,12 +17,12 @@ interface BlogPageProps {
 
 export async function generateMetadata({ searchParams }: BlogPageProps) {
   const page = Number(searchParams.page) || 1;
-  const pageTitle = page === 1 ? 'Blog | TechBlitz' : `Blog - Page ${page} | TechBlitz`;
+  const pageTitle = page === 1 ? 'Blog | BizLevel' : `Blog - Page ${page} | BizLevel`;
 
   return createMetadata({
     title: pageTitle,
     description:
-      'Stay up to date with the latest news and insights from TechBlitz. Gather insights on how to level up your skills, beyond our coding challenges.',
+      'Stay up to date with the latest news and insights from BizLevel. Gather insights on how to level up your skills, beyond our coding challenges.',
     image: {
       text: pageTitle,
       bgColor: '#000',
@@ -57,9 +57,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}${currentPage === 1 ? '/blog' : `/blog/page/${currentPage}`}`,
-    headline: currentPage === 1 ? 'Blog | TechBlitz' : `Blog - Page ${currentPage} | TechBlitz`,
+    headline: currentPage === 1 ? 'Blog | BizLevel' : `Blog - Page ${currentPage} | BizLevel`,
     description:
-      'Stay up to date with the latest news and insights from TechBlitz. Gather insights on how to level up your skills, beyond our coding challenges.',
+      'Stay up to date with the latest news and insights from BizLevel. Gather insights on how to level up your skills, beyond our coding challenges.',
     image:
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
     breadcrumb: {
@@ -103,7 +103,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             Blog
           </h1>
           <p className="text-gray-400 max-w-2xl">
-            Stay up to date with the latest news and insights from TechBlitz. Gather insights on how
+            Stay up to date with the latest news and insights from BizLevel. Gather insights on how
             to level up your skills, beyond our coding challenges.
           </p>
 

@@ -20,11 +20,11 @@ const LeaderboardMostQuestionsAnswered = dynamic(
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Leaderboard | TechBlitz',
+    title: 'Leaderboard | BizLevel',
     description: 'See how you stack up against the rest of the community.',
     canonicalUrl: '/leaderboard',
     image: {
-      text: 'Leaderboard | TechBlitz',
+      text: 'Leaderboard | BizLevel',
       bgColor: '#000000',
       textColor: '#ffffff',
     },

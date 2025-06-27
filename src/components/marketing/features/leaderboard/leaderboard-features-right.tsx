@@ -20,7 +20,7 @@ export default async function LeaderboardFeaturesRight() {
     {
       name: 'Open Source',
       icon: <Code className="size-6 text-green-400" />,
-      description: 'Contributed to TechBlitz',
+      description: 'Contributed to BizLevel',
     },
   ];
 

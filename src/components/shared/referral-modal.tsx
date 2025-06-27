@@ -60,7 +60,7 @@ export default function ReferralModal({ children }: { children: React.ReactNode 
                 transition={{ delay: 0.1, duration: 0.3 }}
               >
                 <DialogTitle className="text-lg font-semibold">
-                  TechBlitz is more fun with friends!
+                  BizLevel is more fun with friends!
                 </DialogTitle>
               </motion.div>
               <motion.div

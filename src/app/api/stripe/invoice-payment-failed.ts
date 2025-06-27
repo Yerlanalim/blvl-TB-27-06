@@ -67,7 +67,7 @@ export const invoicePaymentFailed = async (event: Stripe.Event) => {
     to: userEmail,
     subject: 'Payment Failed',
     text: 'Your payment has failed. Please update your payment information.',
-    from: 'team@techblitz.dev',
+    from: 'team@bizlevel.dev',
   });
 
   return true;

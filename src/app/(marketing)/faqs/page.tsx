@@ -6,10 +6,10 @@ import type { FaqJsonLd } from '@/types';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Frequently Asked Questions | TechBlitz',
+    title: 'Frequently Asked Questions | BizLevel',
     description: 'Got a question? We have an answer.',
     image: {
-      text: 'Frequently Asked Questions | TechBlitz',
+      text: 'Frequently Asked Questions | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -19,37 +19,37 @@ export async function generateMetadata() {
 
 const commonFaqs = [
   {
-    question: 'What is techblitz?',
+    question: 'What is bizlevel?',
     answer:
-      'TechBlitz is an online platform that helps developers of all abilities to learn and grow. We offer a range of tools and resources to help you become a better developer, including questions, roadmaps, tutorials, and more.',
+      'BizLevel is an online platform that helps developers of all abilities to learn and grow. We offer a range of tools and resources to help you become a better developer, including questions, roadmaps, tutorials, and more.',
     jsonLdText:
-      'TechBlitz is an online platform that helps developers of all abilities to learn and grow. We offer a range of tools and resources to help you become a better developer, including questions, roadmaps, tutorials, and more.',
+      'BizLevel is an online platform that helps developers of all abilities to learn and grow. We offer a range of tools and resources to help you become a better developer, including questions, roadmaps, tutorials, and more.',
   },
   {
-    question: 'Is techblitz open source?',
+    question: 'Is bizlevel open source?',
     answer: (
       <>
-        Yes! TechBlitz is open source. You can find our source{' '}
+        Yes! BizLevel is open source. You can find our source{' '}
         <a href="https://git.new/blitz" target="_blank" className="text-accent">
           here
         </a>
         .
       </>
     ),
-    jsonLdText: 'Yes! TechBlitz is open source. You can find our source here.',
+    jsonLdText: 'Yes! BizLevel is open source. You can find our source here.',
   },
   {
-    question: 'Is techblitz free to use?',
+    question: 'Is bizlevel free to use?',
     answer:
-      'Yes, TechBlitz will be free to use. You will be able to sign up for a free account and start using our software right away.',
+      'Yes, BizLevel will be free to use. You will be able to sign up for a free account and start using our software right away.',
     jsonLdText:
-      'Yes, TechBlitz will be free to use. You will be able to sign up for a free account and start using our software right away.',
+      'Yes, BizLevel will be free to use. You will be able to sign up for a free account and start using our software right away.',
   },
   {
-    question: 'What will you be adding to techblitz in the future?',
+    question: 'What will you be adding to bizlevel in the future?',
     answer: (
       <>
-        We are always working on new features and improvements to TechBlitz. You can find our
+        We are always working on new features and improvements to BizLevel. You can find our
         roadmap{' '}
         <a href="/roadmap" className="text-accent">
           here
@@ -58,18 +58,18 @@ const commonFaqs = [
       </>
     ),
     jsonLdText:
-      'We are always working on new features and improvements to TechBlitz. You can find our roadmap here.',
+      'We are always working on new features and improvements to BizLevel. You can find our roadmap here.',
   },
   {
-    question: 'What are the benefits of using techblitz?',
+    question: 'What are the benefits of using bizlevel?',
     answer: 'We offer short-form questions on various topics to help you learn and grow.',
     jsonLdText: 'We offer short-form questions on various topics to help you learn and grow.',
   },
   {
-    question: 'How do I get started with techblitz?',
+    question: 'How do I get started with bizlevel?',
     answer: (
       <>
-        To get started with TechBlitz, simply sign up for a free account. You can sign up{' '}
+        To get started with BizLevel, simply sign up for a free account. You can sign up{' '}
         <Link href="/signup" className="text-accent">
           here
         </Link>
@@ -77,13 +77,13 @@ const commonFaqs = [
       </>
     ),
     jsonLdText:
-      'To get started with TechBlitz, simply sign up for a free account. You can sign up here.',
+      'To get started with BizLevel, simply sign up for a free account. You can sign up here.',
   },
   {
-    question: 'Can I contribute to techblitz?',
+    question: 'Can I contribute to bizlevel?',
     answer: (
       <>
-        Yes! You can contribute to TechBlitz by submitting a pull request on our{' '}
+        Yes! You can contribute to BizLevel by submitting a pull request on our{' '}
         <a href="https://git.new/blitz" target="_blank" className="text-accent">
           GitHub repository
         </a>
@@ -91,7 +91,7 @@ const commonFaqs = [
       </>
     ),
     jsonLdText:
-      'Yes! You can contribute to TechBlitz by submitting a pull request on our GitHub repository.',
+      'Yes! You can contribute to BizLevel by submitting a pull request on our GitHub repository.',
   },
   {
     question: 'Can I get a refund?',
@@ -103,29 +103,29 @@ const commonFaqs = [
     answer: (
       <>
         If you have any other questions, feel free to reach out to us at{' '}
-        <a href="mailto:team@techblitz.dev" className="text-accent">
-          team@techblitz.dev
+        <a href="mailto:team@bizlevel.dev" className="text-accent">
+          team@bizlevel.dev
         </a>
         .
       </>
     ),
     jsonLdText:
-      'If you have any other questions, feel free to reach out to us at team@techblitz.dev.',
+      'If you have any other questions, feel free to reach out to us at team@bizlevel.dev.',
   },
   {
     question: 'Do you offer a student discount?',
     answer: (
       <>
-        Yes! We believe that TechBlitz should be available to all students. To claim your 30%
+        Yes! We believe that BizLevel should be available to all students. To claim your 30%
         lifetime discount, please email us at{' '}
-        <a href="mailto:team@techblitz.dev" className="text-accent">
-          team@techblitz.dev
+        <a href="mailto:team@bizlevel.dev" className="text-accent">
+          team@bizlevel.dev
         </a>{' '}
         using your student email address.
       </>
     ),
     jsonLdText:
-      'Yes! We believe that TechBlitz should be available to all students. To claim your discount, please email us at team@techblitz.dev using your student email address.',
+      'Yes! We believe that BizLevel should be available to all students. To claim your discount, please email us at team@bizlevel.dev using your student email address.',
   },
 ];
 
@@ -160,8 +160,8 @@ const planFaqs = [
     answer: (
       <>
         Yes, we offer a 30% discount for students. To claim your discount, please email us at{' '}
-        <a href="mailto:team@techblitz.dev" className="text-accent">
-          team@techblitz.dev
+        <a href="mailto:team@bizlevel.dev" className="text-accent">
+          team@bizlevel.dev
         </a>{' '}
         using your student email address.
       </>
@@ -230,7 +230,7 @@ export default function FAQsPage() {
         <div className="flex flex-col gap-y-10">
           <FAQsBlock
             title="Most commonly asked questions"
-            description="Got a question? We have an answer. Here are some of the most commonly asked questions about techblitz."
+            description="Got a question? We have an answer. Here are some of the most commonly asked questions about bizlevel."
             faqs={commonFaqs}
           />
           <FAQsBlock title="Questions about our plans" faqs={planFaqs} showSpan={false} />

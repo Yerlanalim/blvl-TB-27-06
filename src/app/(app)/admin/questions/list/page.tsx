@@ -4,7 +4,7 @@ import AdminContainer from '@/components/app/admin/admin-container';
 import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Questions List',
+  title: 'BizLevel | Questions List',
   description: 'View and manage all coding questions',
 };
 

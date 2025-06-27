@@ -30,13 +30,13 @@ const faqs = [
         <Link href="/signup" className="text-accent">
           Sign up here
         </Link>{' '}
-        to access a world of free daily coding challenges. TechBlitz is your gateway to mastering
+        to access a world of free daily coding challenges. BizLevel is your gateway to mastering
         coding skills with ease and efficiency.
       </>
     ),
   },
   {
-    question: 'What makes TechBlitz different?',
+    question: 'What makes BizLevel different?',
     answer:
       'We ensure all challenges mimic real-world problems. Ensuring you can learn essential coding skills faster than ever. From JavaScript, Node.js, React, and more, we have you covered.',
   },
@@ -85,7 +85,7 @@ const items = [
     ),
     title: 'Vibrant JavaScript Community',
     description:
-      'Help shape the future of TechBlitz. Share your ideas, feedback, and suggestions to improve our platform. Perfect for those engaging in daily coding challenges for beginners.',
+      'Help shape the future of BizLevel. Share your ideas, feedback, and suggestions to improve our platform. Perfect for those engaging in daily coding challenges for beginners.',
   },
   {
     icon: (
@@ -164,11 +164,11 @@ const items = [
 // metadata
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Daily Coding Challenges for Beginners | TechBlitz',
+    title: 'Daily Coding Challenges for Beginners | BizLevel',
     description:
-      'TechBlitz transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
+      'BizLevel transforms your coding journey into a personalized, engaging, and effective experience. Ensuring you learn essential coding skills faster than ever.',
     image: {
-      text: 'Daily Coding Challenges for Beginners | TechBlitz',
+      text: 'Daily Coding Challenges for Beginners | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -181,9 +181,9 @@ export default function DailyCodingChallengesForBeginnersPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/daily-coding-challenges-for-beginners`,
-    headline: 'Daily Coding Challenges for Beginners | TechBlitz',
+    headline: 'Daily Coding Challenges for Beginners | BizLevel',
     description:
-      'Embark on a transformative coding journey with TechBlitz. Our platform offers personalized, engaging challenges that accelerate your learning of essential coding skills.',
+      'Embark on a transformative coding journey with BizLevel. Our platform offers personalized, engaging challenges that accelerate your learning of essential coding skills.',
     image:
       'https://opengraph.b-cdn.net/production/images/cd5047e6-d495-4666-928e-37d9e52e1806.png?token=hJkK0Ghd13chZ2eBfAOxNQ8ejBMfE_oTwEuHkvxu9aQ&height=667&width=1200&expires=33269844531',
     breadcrumb: {
@@ -200,7 +200,7 @@ export default function DailyCodingChallengesForBeginnersPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -213,10 +213,10 @@ export default function DailyCodingChallengesForBeginnersPage() {
       'Daily coding challenges for beginners, coding challenges for beginners, daily coding challenges, coding challenges, beginner coding challenges, coding challenges for beginners, daily coding challenges for beginners, coding challenges for beginners, beginner coding challenges for beginners',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
     potentialAction: {
@@ -235,7 +235,7 @@ export default function DailyCodingChallengesForBeginnersPage() {
       <div className="container">
         <FeatureDailyChallengeHero
           header="Daily Coding Challenges for Beginners"
-          subheader="Join TechBlitz today and dive into our free daily coding challenges tailored for beginners. Enhance your skills with real-world problems and track your progress."
+          subheader="Join BizLevel today and dive into our free daily coding challenges tailored for beginners. Enhance your skills with real-world problems and track your progress."
           animatedSpan="Daily Coding Challenges"
         />
         <FeatureLeftRightSection
@@ -250,13 +250,13 @@ export default function DailyCodingChallengesForBeginnersPage() {
         <MarketingContentGrid title="Your all in one coding challenge platform" items={items} />
         <QuestionMarquee
           header="Learn to code effortlessly with beginner-friendly coding challenges"
-          subheader="Join TechBlitz today and dive into our free daily coding challenges tailored for beginners. Enhance your skills with real-world problems and track your progress."
+          subheader="Join BizLevel today and dive into our free daily coding challenges tailored for beginners. Enhance your skills with real-world problems and track your progress."
           cta={true}
         />
         <FAQsBlock faqs={faqs} />
         <CallToActionBlock
           title="Start Your Coding Adventure Today"
-          description="Sign up now to access a world of free daily coding challenges. TechBlitz is your gateway to mastering coding skills with ease and efficiency."
+          description="Sign up now to access a world of free daily coding challenges. BizLevel is your gateway to mastering coding skills with ease and efficiency."
         />
       </div>
     </>

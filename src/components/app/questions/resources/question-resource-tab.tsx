@@ -28,7 +28,7 @@ export default function QuestionResourceTab(opts: {
         </p>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button href="mailto:team@techblitz.dev">Suggest a resource</Button>
+            <Button href="mailto:team@bizlevel.dev">Suggest a resource</Button>
           </AlertDialogTrigger>
           <AlertDialogContent className="bg-black-100 border border-black-50">
             <AlertDialogHeader>
@@ -47,7 +47,7 @@ export default function QuestionResourceTab(opts: {
             <AlertDialogFooter>
               <AlertDialogCancel className="bg-white text-black">Cancel</AlertDialogCancel>
               <AlertDialogAction>
-                <Link href="mailto:team@techblitz.dev">Send resource</Link>
+                <Link href="mailto:team@bizlevel.dev">Send resource</Link>
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

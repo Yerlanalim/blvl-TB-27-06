@@ -18,11 +18,11 @@ import { WebPageJsonLd } from '@/types';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Learning Paths | TechBlitz',
+    title: 'Learning Paths | BizLevel',
     description:
       'A collection of learning paths, ranging from Javascript, React, Node, Web Development. Created to help you learn and grow your skills in different areas of programming.',
     image: {
-      text: 'Learning Paths | TechBlitz',
+      text: 'Learning Paths | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -64,7 +64,7 @@ export default async function ExploreQuestionsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/roadmaps`,
-    headline: 'Learning Paths | TechBlitz',
+    headline: 'Learning Paths | BizLevel',
     description:
       'Curated lists of coding questions, ranging from Javascript, React, Node, Web Development. Perfect for your daily coding practice.',
     image:
@@ -78,7 +78,7 @@ export default async function ExploreQuestionsPage() {
     },
     author: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       url: getBaseUrl(),
     },
     dateModified: new Date().toISOString(),
@@ -91,10 +91,10 @@ export default async function ExploreQuestionsPage() {
       'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
     publisher: {
       '@type': 'Organization',
-      name: 'TechBlitz',
+      name: 'BizLevel',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://techblitz.dev/favicon.ico',
+        url: 'https://bizlevel.dev/favicon.ico',
       },
     },
   };

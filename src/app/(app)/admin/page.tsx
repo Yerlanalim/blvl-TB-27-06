@@ -12,8 +12,8 @@ import { addUserMissions } from '@/scripts/add-user-missions';
 import { addUserXp } from '@/scripts/add-user-xp';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Admin Dashboard',
-  description: 'TechBlitz Administration Dashboard',
+  title: 'BizLevel | Admin Dashboard',
+  description: 'BizLevel Administration Dashboard',
 };
 
 export default function AdminDashboardPage() {
@@ -21,7 +21,7 @@ export default function AdminDashboardPage() {
     <div className="max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-white">Admin Dashboard</h1>
       <p className="text-gray-300 mb-8">
-        Welcome to the TechBlitz administration area. Use the cards below to navigate to different
+        Welcome to the BizLevel administration area. Use the cards below to navigate to different
         sections.
       </p>
 

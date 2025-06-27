@@ -68,7 +68,7 @@ export default function TestimonialModal({
         <DialogHeader>
           <DialogTitle className="text-3xl">Sorry to bother you...</DialogTitle>
           <DialogDescription>
-            But we'd love to hear about your experience with our TechBlitz. Your feedback helps us
+            But we'd love to hear about your experience with our BizLevel. Your feedback helps us
             improve and inspires others. As a thank you, you will receive 10% off of our premium
             plans.
           </DialogDescription>
@@ -110,7 +110,7 @@ export default function TestimonialModal({
           </div>
           <div className="flex justify-end space-x-2">
             <p className="text-sm text-gray-500">
-              By pressing submit, you give TechBlitz permission to use your testimonial, profile
+              By pressing submit, you give BizLevel permission to use your testimonial, profile
               picture, and name on our website and social media.
             </p>
             <Button

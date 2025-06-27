@@ -10,12 +10,12 @@ import { TwitterLogoIcon } from '@radix-ui/react-icons';
 
 // Author metadata for SEO
 export const metadata: Metadata = createMetadata({
-  title: 'Logan Ford | TechBlitz',
+  title: 'Logan Ford | BizLevel',
   description:
-    'Logan Ford is a software engineer, educator, and founder of TechBlitz, focused on helping developers improve their coding skills.',
-  keywords: ['Logan Ford', 'TechBlitz', 'software engineer', 'educator', 'developer advocate'],
+    'Logan Ford is a software engineer, educator, and founder of BizLevel, focused on helping developers improve their coding skills.',
+  keywords: ['Logan Ford', 'BizLevel', 'software engineer', 'educator', 'developer advocate'],
   image: {
-    text: 'Logan Ford | TechBlitz',
+    text: 'Logan Ford | BizLevel',
     bgColor: '#000',
     textColor: '#fff',
   },
@@ -51,7 +51,7 @@ const Header = () => {
           <GithubIcon size={20} />
         </a>
         <a
-          href="https://x.com/techblitz_dev"
+          href="https://x.com/bizlevel_dev"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 rounded-full bg-black-100 hover:bg-primary-500 transition-colors duration-200"

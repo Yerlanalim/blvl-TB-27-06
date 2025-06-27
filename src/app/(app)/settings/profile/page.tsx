@@ -407,7 +407,7 @@ export default function SettingsProfilePage() {
                     </p>
                     <Textarea
                       id="aboutMeAiHelp"
-                      placeholder="Enter a short description to help us make TechBlitz a more personalized experience for you."
+                      placeholder="Enter a short description to help us make BizLevel a more personalized experience for you."
                       className="resize-none"
                       {...field}
                       value={field.value || ''}

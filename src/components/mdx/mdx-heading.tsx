@@ -21,7 +21,7 @@ export default function MdxHeading({ children, heading, ...props }: MdxHeadingPr
   // get the headingSize for the component passed in
   const headingSize = headingSizes[heading];
 
-  // Create an ID that handles numbered headings like "1. TechBlitz" properly
+  // Create an ID that handles numbered headings like "1. BizLevel" properly
   const headingText = children?.toString() || '';
   // Replace periods following numbers with hyphens and remove other special characters
   const id = headingText

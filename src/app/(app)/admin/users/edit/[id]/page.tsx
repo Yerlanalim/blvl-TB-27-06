@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import UserEditForm from '@/components/app/admin/user/user-edit-form';
 
 export const metadata: Metadata = {
-  title: 'TechBlitz | Edit User',
+  title: 'BizLevel | Edit User',
   description: 'Update user information',
 };
 
