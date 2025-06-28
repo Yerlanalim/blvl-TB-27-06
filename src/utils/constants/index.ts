@@ -1,5 +1,5 @@
 export * from './answer-content';
-export * from './coding-facts';
+export * from './business-facts';
 export * from './error-codes';
 export * from './language-options';
 export * from './misc';

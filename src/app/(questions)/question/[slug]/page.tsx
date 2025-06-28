@@ -138,6 +138,38 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
 
   const rightBottomContent = question?.testCases?.length ? <TestCaseSection /> : null;
 
+  // BIZLEVEL: Специальная обработка для VIDEO типа на мобильных
+  if (question.questionType === 'VIDEO') {
+    return (
+      <PremiumContentWrapper>
+        <TourStartModal user={user} />
+        <div className="lg:hidden video-fullscreen-mode">
+          {/* Мобильная версия - полноэкранное видео с улучшенной навигацией */}
+          <Suspense fallback={<LoadingSpinner />}>
+            <QuestionCard
+              questionPromise={questionPromise}
+              totalSubmissions={totalSubmissions}
+              user={user}
+              nextQuestion={nextQuestion}
+              identifier="slug"
+              nextAndPreviousQuestion={nextAndPreviousQuestion}
+            />
+          </Suspense>
+        </div>
+        <div className="hidden lg:block">
+          {/* Десктопная версия - обычный layout */}
+          <ResizableLayout
+            leftContent={leftContent}
+            rightTopContent={rightContent}
+            rightBottomContent={rightBottomContent}
+            initialLeftWidth={50}
+            initialRightTopHeight={question?.testCases?.length ? 70 : 100}
+          />
+        </div>
+      </PremiumContentWrapper>
+    );
+  }
+
   return (
     <PremiumContentWrapper>
       <TourStartModal user={user} />

@@ -349,3 +349,138 @@ html {
   transform: scale(0.95);
   background-color: rgba(91, 97, 214, 0.2);
 }
+
+/* BIZLEVEL: Стили для полноэкранного режима видео */
+.video-fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: black;
+  overflow: hidden;
+}
+
+.video-fullscreen-mode .scrollable-element {
+  height: 100vh !important;
+  overflow-y: auto;
+}
+
+/* Убираем padding для видео в полноэкранном режиме */
+.video-fullscreen-mode .p-4 {
+  padding: 0 !important;
+}
+
+/* Убираем все отступы и границы в полноэкранном режиме */
+.video-fullscreen-mode .bg-black-75,
+.video-fullscreen-mode .border {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Скрываем навигацию и UI элементы в полноэкранном режиме */
+.video-fullscreen-mode .bg-black-25 {
+  display: none !important;
+}
+
+/* Полноэкранный режим для мобильных устройств */
+@media (max-width: 768px) {
+  .video-fullscreen-mode {
+    /* Убираем возможные отступы браузера */
+    margin: 0;
+    padding: 0;
+    /* Полный захват экрана на мобильных */
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height для современных браузеров */
+  }
+  
+  /* Скрываем системные элементы на мобильных */
+  .video-fullscreen-mode .scrollable-element::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Убираем все возможные отступы в полноэкранном режиме */
+  .video-fullscreen-mode * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  /* Исключения для видео плеера и контролов */
+  .video-fullscreen-mode .vimeo-player,
+  .video-fullscreen-mode button,
+  .video-fullscreen-mode .motion-div {
+    margin: revert;
+    padding: revert;
+    border: revert;
+  }
+}
+
+/* Анимации для входа/выхода из полноэкранного режима */
+@keyframes fullscreen-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fullscreen-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.video-fullscreen-mode {
+  animation: fullscreen-enter 0.3s ease-out;
+}
+
+.video-fullscreen-mode.exiting {
+  animation: fullscreen-exit 0.3s ease-in;
+}
+
+/* Стили для свайп-индикаторов */
+.swipe-indicator {
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.swipe-indicator.active {
+  opacity: 1;
+}
+
+/* Улучшенные стили для вертикального видео плеера */
+.vertical-video-container {
+  /* Обеспечиваем правильное соотношение сторон */
+  aspect-ratio: 9/16;
+  max-height: 80vh;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .vertical-video-container {
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+  
+  /* В полноэкранном режиме занимаем весь экран */
+  .video-fullscreen-mode .vertical-video-container {
+    aspect-ratio: unset;
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100vw;
+    width: 100vw;
+  }
+}

@@ -161,14 +161,16 @@ export default function QuestionCard(opts: {
           </div>
         </div>
         <div className="flex flex-wrap gap-2 justify-between items-center">
-          <Button
-            variant="ghost"
-            onClick={toggleLayout}
-            className="text-xs block lg:hidden"
-            padding="none"
-          >
-            {switcherText()}
-          </Button>
+          {question.questionType !== 'VIDEO' && (
+            <Button
+              variant="ghost"
+              onClick={toggleLayout}
+              className="text-xs block lg:hidden"
+              padding="none"
+            >
+              {switcherText()}
+            </Button>
+          )}
         </div>
       </div>
       <Separator className="bg-black-50" />
@@ -176,13 +178,34 @@ export default function QuestionCard(opts: {
         {currentLayout === 'questions' && userCanAccess && (
           <>
             {question.questionType === 'VIDEO' ? (
-              <div className="p-4">
+              <div className="p-4 lg:p-0 h-full flex items-center justify-center"> {/* Центрируем видео */}
                 <VerticalVideoPlayer
                   videoId={question.codeSnippet || 'demo-video-id'} // BIZLEVEL: videoId хранится в codeSnippet поле
+                  title={question.title || undefined} // Добавляем заголовок урока
+                  enableSwipeNavigation={true} // Включаем свайп-жесты на мобильных
                   onComplete={() => {
                     // Автоматически отмечаем видео как просмотренное
                     setCurrentLayout('answer');
                   }}
+                  onPlay={() => {
+                    // Отметить начало просмотра
+                    console.log('Video started:', question.uid);
+                    // TODO: Добавить трекинг начала просмотра видео
+                    // trackVideoStart(question.uid);
+                  }}
+                  onNext={() => {
+                    // Переход к следующему уроку
+                    console.log('Next lesson requested');
+                    // TODO: Реализовать навигацию к следующему уроку
+                    // navigateToNextLesson();
+                  }}
+                  onPrevious={() => {
+                    // Переход к предыдущему уроку
+                    console.log('Previous lesson requested');
+                    // TODO: Реализовать навигацию к предыдущему уроку
+                    // navigateToPreviousLesson();
+                  }}
+                  className="vertical-video-container"
                 />
               </div>
             ) : (
@@ -233,7 +256,7 @@ export default function QuestionCard(opts: {
       </div>
       <Separator className="bg-black-50" />
       <div className="w-full space-y-4 bg-black">
-        {question.hint && userCanAccess && (
+        {question.hint && userCanAccess && question.questionType !== 'VIDEO' && (
           <QuestionAccordion
             hint={question.hint}
             showHint={showHint}
