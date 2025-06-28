@@ -50,6 +50,12 @@ interface QuestionSingleContextType {
   totalSeconds: number;
   runningCode: boolean;
   testRunResult: TestRunResult | null;
+  progress: {
+    current: number;
+    total: number;
+    level: string;
+    percentage: number;
+  } | null;
 
   // Data
   relatedQuestions: Promise<QuestionWithoutAnswers[]> | null;
@@ -70,6 +76,12 @@ interface QuestionSingleContextType {
   setPreviousQuestion: (previousQuestion: string | null | undefined) => void;
   setTotalSeconds: (totalSeconds: number) => void;
   setRunningCode: (runningCode: boolean) => void;
+  setProgress: (progress: {
+    current: number;
+    total: number;
+    level: string;
+    percentage: number;
+  } | null) => void;
 
   // Methods
   submitQuestionAnswer: (
@@ -142,6 +154,14 @@ export const QuestionSingleContextProvider = ({
   // Navigation
   const [nextQuestion, setNextQuestion] = useState<string | null | undefined>(null);
   const [previousQuestion, setPreviousQuestion] = useState<string | null | undefined>(null);
+  
+  // BIZLEVEL: Прогресс уровня
+  const [progress, setProgress] = useState<{
+    current: number;
+    total: number;
+    level: string;
+    percentage: number;
+  } | null>(null);
 
   // AI Help
   const [answerHelp, setAnswerHelp] = useState('');
@@ -436,6 +456,7 @@ export const QuestionSingleContextProvider = ({
         totalSeconds,
         runningCode,
         testRunResult,
+        progress,
         relatedQuestions,
         suggestedQuestions,
         studyPath,
@@ -452,6 +473,7 @@ export const QuestionSingleContextProvider = ({
         setPreviousQuestion,
         setTotalSeconds,
         setRunningCode,
+        setProgress,
         submitQuestionAnswer,
         resetQuestionState,
         generateAiAnswerHelp,

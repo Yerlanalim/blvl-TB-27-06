@@ -2,6 +2,145 @@ import { getUser } from '@/actions/user/authed/get-user';
 import { prisma } from '@/lib/prisma';
 import { cache } from 'react';
 
+// BIZLEVEL: Новая функция для навигации по уровням
+export const getLevelBasedNavigation = cache(async (uid: string) => {
+  const user = await getUser();
+  
+  // Получить текущий вопрос с тегами
+  const currentQuestion = await prisma.questions.findUnique({
+    where: { uid },
+    select: {
+      uid: true,
+      slug: true,
+      createdAt: true,
+      questionType: true,
+      tags: {
+        select: {
+          tag: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
+    },
+  });
+
+  if (!currentQuestion) return null;
+
+  // Найти теги уровня (level-1, level-2, etc.)
+  const levelTags = currentQuestion.tags
+    .map(t => t.tag.name)
+    .filter(name => name.startsWith('level-'));
+
+  if (levelTags.length === 0) {
+    // Если нет тегов уровня, использовать старую логику
+    return getNextAndPreviousQuestion(uid);
+  }
+
+  const levelTag = levelTags[0]; // Берем первый тег уровня
+
+  // Получить все вопросы этого уровня, отсортированные по createdAt
+  const levelQuestions = await prisma.questions.findMany({
+    where: {
+      tags: {
+        some: {
+          tag: {
+            name: levelTag
+          }
+        }
+      },
+      isPremiumQuestion: user?.userLevel === 'FREE' ? false : true,
+      customQuestion: user?.userLevel === 'FREE' ? false : true,
+    },
+    select: {
+      uid: true,
+      slug: true,
+      createdAt: true,
+      questionType: true,
+      title: true,
+      tags: {
+        select: {
+          tag: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
+    },
+    orderBy: {
+      createdAt: 'asc'
+    }
+  });
+
+  // Найти индекс текущего вопроса
+  const currentIndex = levelQuestions.findIndex(q => q.uid === uid);
+  if (currentIndex === -1) return null;
+
+  // Логика последовательного прохождения
+  const nextQuestion = getNextQuestionInSequence(levelQuestions, currentIndex);
+  const previousQuestion = getPreviousQuestionInSequence(levelQuestions, currentIndex);
+
+  // Подсчитать прогресс
+  const progress = {
+    current: currentIndex + 1,
+    total: levelQuestions.length,
+    level: levelTag,
+    percentage: Math.round(((currentIndex + 1) / levelQuestions.length) * 100)
+  };
+
+  return {
+    nextQuestion: nextQuestion?.slug || null,
+    previousQuestion: previousQuestion?.slug || null,
+    progress
+  };
+});
+
+// Вспомогательная функция для определения следующего вопроса в последовательности
+function getNextQuestionInSequence(
+  questions: Array<{
+    uid: string;
+    slug: string | null;
+    questionType: any;
+    tags: Array<{ tag: { name: string } }>;
+  }>,
+  currentIndex: number
+) {
+  if (currentIndex >= questions.length - 1) return null;
+
+  const currentQuestion = questions[currentIndex];
+  const isVideo = currentQuestion.questionType === 'VIDEO';
+
+  // Если текущий вопрос - видео, следующий должен быть тест (если есть)
+  if (isVideo) {
+    // Ищем следующий тест в том же уровне
+    for (let i = currentIndex + 1; i < questions.length; i++) {
+      const nextQ = questions[i];
+      const isNextTest = nextQ.tags.some(t => t.tag.name.includes('test'));
+      if (isNextTest) {
+        return nextQ;
+      }
+    }
+  }
+
+  // Для всех остальных случаев - просто следующий вопрос
+  return questions[currentIndex + 1];
+}
+
+// Вспомогательная функция для определения предыдущего вопроса
+function getPreviousQuestionInSequence(
+  questions: Array<{
+    uid: string;
+    slug: string | null;
+    questionType: any;
+  }>,
+  currentIndex: number
+) {
+  if (currentIndex <= 0) return null;
+  return questions[currentIndex - 1];
+}
+
 export const getNextAndPreviousQuestion = cache(async (uid: string) => {
   const user = await getUser();
 
@@ -45,7 +184,7 @@ export const getNextAndPreviousQuestion = cache(async (uid: string) => {
 
       return {
         nextQuestion: nextQuestion.slug,
-        previousQuestion: randomPrevious?.slug,
+        previousQuestion: randomPrevious?.slug || null,
       };
     }
 
@@ -60,7 +199,7 @@ export const getNextAndPreviousQuestion = cache(async (uid: string) => {
       });
 
       return {
-        nextQuestion: randomNext?.slug,
+        nextQuestion: randomNext?.slug || null,
         previousQuestion: previousQuestion.slug,
       };
     }
@@ -121,7 +260,7 @@ export const getNextAndPreviousQuestion = cache(async (uid: string) => {
       : null;
 
   return {
-    nextQuestion: nextQuestion?.slug || randomQuestion?.[1]?.slug,
-    previousQuestion: previousQuestion?.slug || randomQuestion?.[0]?.slug,
+    nextQuestion: nextQuestion?.slug || randomQuestion?.[1]?.slug || null,
+    previousQuestion: previousQuestion?.slug || randomQuestion?.[0]?.slug || null,
   };
 });

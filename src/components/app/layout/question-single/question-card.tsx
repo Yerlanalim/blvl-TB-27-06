@@ -47,6 +47,12 @@ export default function QuestionCard(opts: {
   nextAndPreviousQuestion?: {
     nextQuestion: string | null;
     previousQuestion: string | null;
+    progress?: {
+      current: number;
+      total: number;
+      level: string;
+      percentage: number;
+    };
   };
   studyPathMetadata?: {
     studyPathSlug: string;

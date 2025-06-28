@@ -10,17 +10,25 @@ import { Button } from '@/components/ui/button';
 import { RoadmapUserQuestions } from '@prisma/client';
 
 import { studyPaths } from '@/utils/constants/study-paths';
+import LevelProgress from './level-progress';
 
 import { useQuestionSingle } from '@/contexts/question-single-context';
 
 /**
  * Component for navigation between different questions from within the
  * app.
+ * BIZLEVEL: Обновлен для поддержки навигации по уровням
  */
 export default function QuestionNavigation(opts: {
   nextPrevPromise: Promise<{
     nextQuestion: string | null | undefined;
     previousQuestion: string | null | undefined;
+    progress?: {
+      current: number;
+      total: number;
+      level: string;
+      percentage: number;
+    };
   } | null>;
   navigationType: 'question' | 'roadmap';
   slug: string;
@@ -37,7 +45,7 @@ export default function QuestionNavigation(opts: {
     return null;
   }
 
-  const { previousQuestion, setPreviousQuestion, nextQuestion, setNextQuestion } =
+  const { previousQuestion, setPreviousQuestion, nextQuestion, setNextQuestion, progress, setProgress } =
     useQuestionSingle();
 
   useEffect(() => {
@@ -90,16 +98,28 @@ export default function QuestionNavigation(opts: {
       }
     } else {
       // Use the provided promise for non-study-path questions
+      // BIZLEVEL: Обновлено для поддержки прогресса уровня
       nextPrevPromise.then((nextPrev) => {
         setNextQuestion(nextPrev?.nextQuestion);
         setPreviousQuestion(nextPrev?.previousQuestion);
+        
+        // Устанавливаем прогресс если он есть
+        if (nextPrev?.progress && setProgress) {
+          setProgress(nextPrev.progress);
+        }
       });
     }
-  }, [pathname, searchParams, slug, type, nextPrevPromise, studyPathSlug]);
+  }, [pathname, searchParams, slug, type, nextPrevPromise, studyPathSlug, setNextQuestion, setPreviousQuestion, setProgress]);
 
   return (
-    <div className="flex items-center">
+    <div className="flex flex-col gap-3">
+      {/* BIZLEVEL: Прогресс уровня */}
+      {progress && (
+        <LevelProgress progress={progress} className="px-2" />
+      )}
+      
       <div className="flex items-center">
+        <div className="flex items-center">
         {/* Previous Question */}
         <TooltipProvider delayDuration={0} skipDelayDuration={100}>
           <Tooltip>
@@ -150,7 +170,8 @@ export default function QuestionNavigation(opts: {
           </Tooltip>
         </TooltipProvider>
 
-        {randomQuestionComponent}
+          {randomQuestionComponent}
+        </div>
       </div>
     </div>
   );

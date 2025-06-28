@@ -16,9 +16,16 @@ import QuestionPageHeaderMiddle from './page-header-middle';
 import { cn } from '@/lib/utils';
 
 // Define navigation interface to match the data from getNextAndPreviousQuestion
+// BIZLEVEL: Обновлено для поддержки прогресса уровня
 interface NavigationData {
   nextQuestion: string | null | undefined;
   previousQuestion: string | null | undefined;
+  progress?: {
+    current: number;
+    total: number;
+    level: string;
+    percentage: number;
+  };
 }
 
 interface QuestionPageHeaderProps {

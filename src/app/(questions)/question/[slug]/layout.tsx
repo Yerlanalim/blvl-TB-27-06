@@ -13,7 +13,7 @@ import { getQuestion } from '@/utils/data/questions/get';
 import { getUser } from '@/actions/user/authed/get-user';
 import { getRelatedQuestions } from '@/utils/data/questions/get-related';
 import { getUserAnswer } from '@/utils/data/answers/get-user-answer';
-import { getNextAndPreviousQuestion } from '@/utils/data/questions/question-navigation';
+import { getNextAndPreviousQuestion, getLevelBasedNavigation } from '@/utils/data/questions/question-navigation';
 import type { QuizJsonLd } from '@/types';
 import { userHasAnsweredAnyQuestion } from '@/utils/data/questions/user-has-answered-any-question';
 
@@ -124,7 +124,14 @@ export default async function QuestionUidLayout({
 
   // not resolving the promises here - passing the promises and
   // using 'use' to resolve them in their own components
-  const nextAndPreviousQuestion = getNextAndPreviousQuestion(question.uid); // cached
+  // BIZLEVEL: Используем новую логику навигации по уровням
+  const nextAndPreviousQuestion = (async () => {
+    let result = await getLevelBasedNavigation(question.uid);
+    if (!result) {
+      result = await getNextAndPreviousQuestion(question.uid);
+    }
+    return result;
+  })(); // cached
 
   const relatedQuestions = getRelatedQuestions({
     questionSlug: question.slug,

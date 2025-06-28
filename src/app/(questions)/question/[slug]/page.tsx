@@ -62,7 +62,7 @@ import EditorIcon from '@/components/ui/icons/editor';
 import WindowCode2 from '@/components/ui/icons/window-code';
 import QuestionCardLoading from '@/components/app/layout/question-single/question-card-loading';
 import MultipleChoiceLayout from '@/components/app/questions/multiple-choice/layout';
-import { getNextAndPreviousQuestion } from '@/utils/data/questions/question-navigation';
+import { getNextAndPreviousQuestion, getLevelBasedNavigation } from '@/utils/data/questions/question-navigation';
 
 export default async function TodaysQuestionPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -82,7 +82,14 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
   }
 
   const questionPromise = getQuestion('slug', slug);
-  const nextAndPreviousQuestion = await getNextAndPreviousQuestion(question.uid); // cached
+  
+  // BIZLEVEL: Используем новую логику навигации по уровням
+  let nextAndPreviousQuestion = await getLevelBasedNavigation(question.uid);
+  
+  // Если нет данных по уровням, используем старую логику
+  if (!nextAndPreviousQuestion) {
+    nextAndPreviousQuestion = await getNextAndPreviousQuestion(question.uid);
+  }
 
   if (question.questionType === 'SIMPLE_MULTIPLE_CHOICE') {
     return (
@@ -152,7 +159,7 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
               user={user}
               nextQuestion={nextQuestion}
               identifier="slug"
-              nextAndPreviousQuestion={nextAndPreviousQuestion}
+              nextAndPreviousQuestion={nextAndPreviousQuestion || undefined}
             />
           </Suspense>
         </div>
