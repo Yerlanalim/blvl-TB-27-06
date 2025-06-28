@@ -22,7 +22,7 @@ const level1Questions = [
     type: 'VIDEO' as const,
     title: 'Урок 1: Что такое бизнес-модель?',
     question: 'Посмотрите видео о типах бизнес-моделей',
-    videoId: '123456789', // Vimeo ID
+    videoId: '76979871', // Публичное Vimeo видео для демонстрации
     tags: ['level-1', 'video-lesson', 'business-basics'],
     slug: 'business-model-intro',
     hint: 'Изучите различные типы бизнес-моделей и выберите подходящую для вашего проекта',
@@ -56,7 +56,7 @@ const level1Questions = [
     type: 'VIDEO' as const,
     title: 'Урок 2: SMART-цели для предпринимателей',
     question: 'Изучите принципы целеполагания в бизнесе',
-    videoId: '987654321', // Vimeo ID
+    videoId: '148751763', // Публичное Vimeo видео для демонстрации
     tags: ['level-1', 'video-lesson', 'goal-setting'],
     slug: 'smart-goals-video',
     hint: 'Научитесь ставить конкретные, измеримые цели',
@@ -90,7 +90,7 @@ const level1Questions = [
     type: 'VIDEO' as const,
     title: 'Урок 3: Целевая аудитория и клиенты',
     question: 'Узнайте, как найти и понять свою целевую аудиторию',
-    videoId: '456789123', // Vimeo ID
+    videoId: '394233151', // Публичное Vimeo видео для демонстрации
     tags: ['level-1', 'video-lesson', 'business-basics'],
     slug: 'target-audience-video',
     hint: 'Изучите методы исследования и сегментации аудитории',
@@ -154,6 +154,7 @@ async function seedLevel1() {
           codeSnippet: questionData.type === 'VIDEO' ? questionData.videoId : undefined,
           hint: questionData.hint,
           slug: questionData.slug,
+          slugGenerated: true, // BIZLEVEL: Важно для фильтрации в getQuestionsByTag
           questionDate: new Date().toISOString().split('T')[0],
           previousQuestionSlug: prevQuestion?.slug,
           nextQuestionSlug: nextQuestion?.slug,

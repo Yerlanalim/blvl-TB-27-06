@@ -4,12 +4,27 @@ import AllQuestionsDashboardBentoBox from '@/components/app/dashboard/all-questi
 import NextQuestionBentoBox from '@/components/app/dashboard/next-question-bento-box';
 import ProgressBentoBox from '@/components/app/dashboard/progression-bento-box';
 import NextRoadmapBentoBox from '@/components/app/dashboard/next-roadmap-bento-box';
+import WelcomeBentoBox from '@/components/app/dashboard/welcome-bento-box';
 import { getDashboardStudyPath } from '@/utils/data/study-paths/get';
+import { userHasAnsweredAnyQuestion } from '@/utils/data/questions/user-has-answered-any-question';
 
 export default async function DashboardBentoGrid() {
   const studyPath = await getDashboardStudyPath();
+  
+  // Проверяем отвечал ли пользователь на вопросы
+  const { hasAnsweredEnoughQuestions } = await userHasAnsweredAnyQuestion({
+    numberOfQuestions: 1,
+  });
 
   const items = [
+    // BIZLEVEL: Приветственный блок для новых пользователей
+    {
+      header: <WelcomeBentoBox hasAnsweredAnyQuestion={hasAnsweredEnoughQuestions} />,
+      className:
+        'h-full text-white justify-center lg:min-h-auto lg:h-[370px] col-span-2 lg:col-span-1',
+      padded: false,
+      gradientBg: false,
+    },
     {
       header: <NextQuestionBentoBox />,
       className:

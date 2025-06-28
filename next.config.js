@@ -102,6 +102,25 @@ const nextConfig = {
       },
     ];
   },
+  webpack: (config, { isServer }) => {
+    config.performance = {
+      ...config.performance,
+      maxAssetSize: 1000000,
+      maxEntrypointSize: 1000000,
+    };
+
+    if (!isServer && process.env.NODE_ENV === 'development') {
+      config.stats = {
+        ...config.stats,
+        warningsFilter: [
+          'Serializing big strings',
+          /Serializing big strings/,
+        ],
+      };
+    }
+
+    return config;
+  },
 };
 
 // Merge MDX config with Next.js config

@@ -63,50 +63,53 @@ export default function QuestionTabs({
 
   return (
     <>
-      <TabsList className="p-4 grid lg:hidden h-auto w-full place-items-center grid-cols-3 gap-5 text-white rounded-lg bg-transparent">
-        <TabsTrigger
-          value="description"
-          onClick={() => setActiveTab('description')}
-          className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
-        >
-          <div className="mr-2 hidden md:block">
-            {activeTab === 'description' ? (
-              <FileText className="size-4" />
-            ) : (
-              <FileIcon className="size-4" />
-            )}
-          </div>
-          Description
-        </TabsTrigger>
-        <TabsTrigger
-          value="resources"
-          onClick={() => setActiveTab('resources')}
-          className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
-        >
-          <div className="mr-2 hidden md:block">
-            {activeTab === 'resources' ? (
-              <BookOpen className="size-4" />
-            ) : (
-              <BookIcon className="size-4" />
-            )}
-          </div>
-          Resources
-        </TabsTrigger>
-        <TabsTrigger
-          value="stats"
-          onClick={() => setActiveTab('stats')}
-          className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
-        >
-          <div className="mr-2 hidden md:block">
-            {activeTab === 'stats' ? (
-              <BarChart className="size-4" />
-            ) : (
-              <PieChart className="size-4" />
-            )}
-          </div>
-          Stats
-        </TabsTrigger>
-      </TabsList>
+      {/* BIZLEVEL: Скрываем мобильные вкладки для VIDEO типа */}
+      {question.questionType !== 'VIDEO' && (
+        <TabsList className="p-4 grid lg:hidden h-auto w-full place-items-center grid-cols-3 gap-5 text-white rounded-lg bg-transparent">
+          <TabsTrigger
+            value="description"
+            onClick={() => setActiveTab('description')}
+            className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
+          >
+            <div className="mr-2 hidden md:block">
+              {activeTab === 'description' ? (
+                <FileText className="size-4" />
+              ) : (
+                <FileIcon className="size-4" />
+              )}
+            </div>
+            Description
+          </TabsTrigger>
+          <TabsTrigger
+            value="resources"
+            onClick={() => setActiveTab('resources')}
+            className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
+          >
+            <div className="mr-2 hidden md:block">
+              {activeTab === 'resources' ? (
+                <BookOpen className="size-4" />
+              ) : (
+                <BookIcon className="size-4" />
+              )}
+            </div>
+            Resources
+          </TabsTrigger>
+          <TabsTrigger
+            value="stats"
+            onClick={() => setActiveTab('stats')}
+            className="flex items-center justify-center text-sm font-medium transition-colors rounded-md text-gray-400 data-[state=active]:text-white data-[state=active]:bg-transparent data-[state=active]:underline border-0 w-fit px-0"
+          >
+            <div className="mr-2 hidden md:block">
+              {activeTab === 'stats' ? (
+                <BarChart className="size-4" />
+              ) : (
+                <PieChart className="size-4" />
+              )}
+            </div>
+            Stats
+          </TabsTrigger>
+        </TabsList>
+      )}
       <TabsContent value="description" className="pt-2 lg:pt-4">
         {question.questionType === 'CODING_CHALLENGE' ? (
           <CodingChallengeDescription question={question} />

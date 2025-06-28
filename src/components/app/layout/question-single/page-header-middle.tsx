@@ -41,6 +41,21 @@ export default function QuestionPageHeaderMiddle({
             >
               <SinglePageProgress totalLessons={studyPathMetadata.totalLessons} />
             </motion.div>
+          ) : question.questionType === 'VIDEO' ? (
+            // BIZLEVEL: Для VIDEO типа не показываем кнопки действий
+            <motion.div
+              key="video-placeholder"
+              className="absolute inset-0 w-full flex items-center justify-center"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{
+                duration: 0.3,
+                ease: 'easeInOut',
+              }}
+            >
+              {/* Пустое место для VIDEO типа */}
+            </motion.div>
           ) : (
             <motion.div
               key="actions"
