@@ -134,7 +134,7 @@ pnpm run lint
 
 ## Community
 
-- Follow us on [X](https://x.com/techblitz_dev/)
+- Follow us on [X](https://x.com/bizlevel_dev/)
 - Star us on GitHub!
 
 ## Questions?

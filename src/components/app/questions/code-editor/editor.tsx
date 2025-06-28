@@ -6,14 +6,14 @@ import LoadingSpinner from '@/components/ui/loading';
 import { useQuestionSingle } from '@/contexts/question-single-context';
 import { capitalize } from 'lodash';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CODING_FACTS } from '@/utils/constants';
+import { BUSINESS_FACTS } from '@/utils/constants/business-facts';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 
 // memo the LoadingState component to prevent re-renders
 const LoadingState = memo(function LoadingState() {
   // Use useState instead of useMemo to persist the random fact between re-renders
   const [randomFact] = useState(
-    () => CODING_FACTS[Math.floor(Math.random() * CODING_FACTS.length)]
+    () => BUSINESS_FACTS[Math.floor(Math.random() * BUSINESS_FACTS.length)]
   );
 
   return (

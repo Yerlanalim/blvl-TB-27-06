@@ -37,7 +37,7 @@ export const EmailChangeEmail = ({ username, redirect_to }: EmailUpdateProps) =>
           </Section>
 
           <Section style={footer}>
-            <Text style={footerText}>© 2025 DEV TECHBLITZ Ltd. All rights reserved.</Text>
+            <Text style={footerText}>© 2025 BizLevel Ltd. All rights reserved.</Text>
             <Text style={footerText}>
               If you have any questions, please contact our support team at{' '}
               <Link href={`mailto:team@bizlevel.kz`} style={footerLink}>
@@ -55,8 +55,8 @@ export const EmailChangeEmail = ({ username, redirect_to }: EmailUpdateProps) =>
 EmailChangeEmail.PreviewProps = {
   username: 'John Doe',
   newEmail: 'john.doe@example.com',
-  supportEmail: 'team@techblitz.com',
-  redirect_to: 'https://techblitz.dev/api/user/update',
+  supportEmail: 'team@bizlevel.kz',
+  redirect_to: 'https://bizlevel.kz/api/user/update',
 } as EmailUpdateProps;
 
 const main = {

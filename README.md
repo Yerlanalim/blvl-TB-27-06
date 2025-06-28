@@ -1,26 +1,26 @@
 <img src="https://pbs.twimg.com/profile_banners/1110662360564408321/1736793148/1500x500" alt="Logo">
 <div align="center">
-  <h3><a href="https://www.techblitz.dev">BizLevel</a></h3>
+  <h3><a href="https://www.bizlevel.kz">BizLevel</a></h3>
 </div>
 
 <div align="center">
-   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/techblitzdev/techblitz">
-   <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/techblitzdev/techblitz">
-   <img alt="GitHub branch status" src="https://img.shields.io/github/checks-status/techblitzdev/techblitz/main">
+   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Yerlanalim/blvl-TB-27-06">
+   <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Yerlanalim/blvl-TB-27-06">
+   <img alt="GitHub branch status" src="https://img.shields.io/github/checks-status/Yerlanalim/blvl-TB-27-06/main">
 </div>
 
 ## Overview
 
-BizLevel is designed to empower developers by providing a comprehensive platform for learning, practicing, and improving technical skills. Unlike traditional coding platforms, we focus on holistic developer growth across various technologies and skill levels, without taking your hours to complete, as well as being a mobile-friendly platform. Complete coding challenges from any device, anywhere.
+BizLevel is designed to empower entrepreneurs by providing a comprehensive platform for learning, practicing, and improving business skills. Unlike traditional business education platforms, we focus on holistic entrepreneur growth across various business areas and skill levels, without taking your hours to complete, as well as being a mobile-friendly platform. Complete business challenges from any device, anywhere.
 
 ## Features
 
-- **Personalized coding roadmaps**: [Personalized coding challenges generated through a series of onboarding questions to gauge your strengths and weaknesses.](https://techblitz.dev/features/roadmap)
-- **Coding questions**: [Repetition in the form of daily questions, and streaks to ensure you never miss a day!](https://www.techblitz.dev/features/coding-challenges)
-- **Skill Tracking**: [Monitor your progress and identify areas for improvement](https://techblitz.dev/features/statistics)
+- **Personalized business roadmaps**: [Personalized business challenges generated through a series of onboarding questions to gauge your strengths and weaknesses.](https://bizlevel.kz/features/roadmap)
+- **Business questions**: [Repetition in the form of daily questions, and streaks to ensure you never miss a day!](https://www.bizlevel.kz/features/business-challenges)
+- **Skill Tracking**: [Monitor your progress and identify areas for improvement](https://bizlevel.kz/features/statistics)
 - **Leaderboard**: Battle with other users for a chance to win prizes at the end of each month!
 - **Community-Driven**: Open-source and community-powered platform
-- **Statistics**: [Analysis your current skillset, and be guided on how to improve.](https://techblitz.dev/features/statistics)
+- **Statistics**: [Analysis your current skillset, and be guided on how to improve.](https://bizlevel.kz/features/statistics)
 - **Game modes**: Learn through fun, engaging game modes to help you keep coming back for more.
 
 ## Roadmap
@@ -31,7 +31,7 @@ We love to be transparent with our users, so below are the next features we have
 - **BizLevel for schools**: Education groups, create your student's questions, roadmaps and allow them to battle with one another for the top spot of the class!
 - **Social**: Profiles, friends/coworkers
 - **Statistics**: A more in-depth statistics dashboard, giving you a greater insight on your current ability.
-- **Multi-language support**: Currently we only support JavaScript. However, we are looking into: Python, Typescript, and GoLang for our first wave of other languages to support.
+- **Multi-topic support**: Currently we focus on general business. However, we are looking into: Marketing, Finance, and Management for our first wave of specialized topics to support.
 - **Searching**: Implement elastic search to easily find questions that you want to answer
 - **Slack bot**: Daily challenges sent to a Slack channel of your choice. Compete with co-workers and learn new skills!
 
@@ -53,12 +53,12 @@ We love to be transparent with our users, so below are the next features we have
 
 1. Clone the repository
    ```bash
-   git clone git@github.com:techblitzdev/BizLevel.git
+   git clone git@github.com:Yerlanalim/blvl-TB-27-06.git
    ```
 2. Install dependencies
 
    ```bash
-   cd techblitz
+   cd blvl-TB-27-06
    pnpm install
    ```
 
@@ -123,7 +123,7 @@ StoryBook is used for component development and testing in isolation. Follow the
 
 ## Contributing
 
-We welcome contributions! Please see our <a href="https://github.com/techblitzdev/BizLevel/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
+We welcome contributions! Please see our <a href="https://github.com/Yerlanalim/blvl-TB-27-06/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
 
 ## Feedback
 
@@ -131,7 +131,7 @@ If you have any feedback, please reach out to us at team@bizlevel.kz
 
 ## Security
 
-You can view our security policy [here](https://github.com/techblitzdev/BizLevel/blob/main/SECURITY.MD)
+You can view our security policy [here](https://github.com/Yerlanalim/blvl-TB-27-06/blob/main/SECURITY.MD)
 
 ## License
 

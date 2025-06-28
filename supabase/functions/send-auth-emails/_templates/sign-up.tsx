@@ -68,11 +68,11 @@ export const BizLevelSignUpEmail = ({ username, confirmationLink }: BizLevelSign
             If you didn't create an account with BizLevel, you can safely ignore this email.
           </Text>
           <Section style={socialButtonsContainer}>
-            <Link href="https://x.com/techblitz_dev" target="_blank" style={socialButton}>
+            <Link href="https://x.com/bizlevel_dev" target="_blank" style={socialButton}>
               <TwitterLogoIcon />
             </Link>
             <Link
-              href="https://github.com/techblitzdev/techblitz"
+              href="https://github.com/Yerlanalim/blvl-TB-27-06"
               target="_blank"
               style={socialButton}
             >
@@ -80,7 +80,7 @@ export const BizLevelSignUpEmail = ({ username, confirmationLink }: BizLevelSign
             </Link>
           </Section>
           <Section style={footer}>
-            <Text style={footerText}>© 2025 DEV TECHBLITZ Ltd. All rights reserved.</Text>
+            <Text style={footerText}>© 2025 BizLevel Ltd. All rights reserved.</Text>
           </Section>
         </Container>
       </Body>
@@ -90,7 +90,7 @@ export const BizLevelSignUpEmail = ({ username, confirmationLink }: BizLevelSign
 
 BizLevelSignUpEmail.PreviewProps = {
   username: 'Alice',
-  confirmationLink: 'https://techblitz.com/confirm?token=123456',
+  confirmationLink: 'https://bizlevel.kz/confirm?token=123456',
 } as BizLevelSignUpEmailProps;
 
 export default BizLevelSignUpEmail;

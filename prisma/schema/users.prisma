@@ -18,7 +18,7 @@ model Users {
   aiQuestionHelpTokens         Int                     @default(10)
   experienceLevel              UserExperienceLevel     @default(BEGINNER)
   isCustomUsername             Boolean                 @default(false)
-  howDidYouHearAboutTechBlitz  String?
+  howDidYouHearAboutBizLevel   String?
   referralCode                 String?
   aboutMeAiHelp                String?
   hasSent7DayNoChallengeEmail  Boolean                 @default(false)

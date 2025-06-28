@@ -73,7 +73,7 @@ export const ResetPasswordEmail = ({ username, resetLink }: ResetPasswordEmailPr
           </Text>
           <Text style={text}>{resetLink}</Text>
           <Section style={footer}>
-            <Text style={footerText}>© 2025 DEV TECHBLITZ Ltd. All rights reserved.</Text>
+            <Text style={footerText}>© 2025 BizLevel Ltd. All rights reserved.</Text>
             <Text style={footerText}>
               If you have any questions, please contact our support team at{' '}
               <Link href="mailto:team@bizlevel.kz" style={footerLink}>
@@ -88,8 +88,8 @@ export const ResetPasswordEmail = ({ username, resetLink }: ResetPasswordEmailPr
 };
 
 ResetPasswordEmail.PreviewProps = {
-  username: 'John Doe',
-  resetLink: 'https://techblitz.com/reset-password?token=123456',
+  username: 'Alice',
+  resetLink: 'https://bizlevel.kz/reset-password?token=123456',
 } as ResetPasswordEmailProps;
 
 const accent = '#5b61d6';
