@@ -259,7 +259,7 @@ export default function OnboardingInitialQuestions() {
               ))}
             </div>
             <p className="text-gray-400 mt-4 text-sm">
-              Based on your answers, we'll customize your learning journey.
+              На основе ваших ответов мы настроим ваш путь обучения бизнесу.
             </p>
           </motion.div>
         ) : (

@@ -28,9 +28,9 @@ interface NoChallengesEmailProps {
 export default function NoChallengesEmail({
   userName = 'there',
   suggestedChallenge = {
-    title: 'Writing Your First Function',
-    difficulty: 'Beginner',
-    url: 'https://bizlevel.dev/question/writing-your-first-function',
+    title: 'Основы бизнес-планирования',
+    difficulty: 'Начальный',
+    url: 'https://bizlevel.kz/question/business-planning-basics',
   },
   streakCount = 0,
   daysInactive = 7,
@@ -38,7 +38,7 @@ export default function NoChallengesEmail({
   return (
     <Html>
       <Head />
-      <Preview>We miss you at BizLevel! Jump back into coding with a quick challenge</Preview>
+      <Preview>Мы скучаем по вам в BizLevel! Вернитесь к изучению бизнеса с быстрым заданием</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with Logo */}
@@ -54,9 +54,9 @@ export default function NoChallengesEmail({
 
           {/* Hero Section */}
           <Section style={heroSection}>
-            <Heading style={h1}>We Miss You!</Heading>
+            <Heading style={h1}>Мы скучаем по вам!</Heading>
             <Text style={heroText}>
-              It's been {daysInactive} days since your last coding challenge.
+              Прошло {daysInactive} дней с вашего последнего бизнес-задания.
             </Text>
           </Section>
 
@@ -64,21 +64,21 @@ export default function NoChallengesEmail({
 
           {/* Personal Message */}
           <Section style={section}>
-            <Text style={text}>Hey {userName},</Text>
+            <Text style={text}>Привет, {userName}!</Text>
             <Text style={text}>
-              We've noticed you haven't completed any coding challenges lately. Consistent practice
-              is key to coding mastery, and we'd love to see you back on track!
+              Мы заметили, что вы не выполняли бизнес-задания в последнее время. Постоянная практика
+              - ключ к мастерству в бизнесе, и мы хотели бы видеть вас снова на правильном пути!
             </Text>
             <Text style={text}>
               {streakCount > 0 ? (
                 <>
-                  You were on a <strong>{streakCount}-day streak</strong> before. Let's get that
-                  momentum going again!
+                  У вас была <strong>серия из {streakCount} дней</strong> ранее. Давайте вернем этот
+                  импульс!
                 </>
               ) : (
                 <>
-                  Building a coding streak can dramatically improve your skills over time. Even just
-                  5 minutes a day makes a huge difference.
+                  Создание серии изучения бизнеса может значительно улучшить ваши навыки со временем. Даже
+                  5 минут в день имеют огромное значение.
                 </>
               )}
             </Text>
@@ -87,18 +87,18 @@ export default function NoChallengesEmail({
           {/* Challenge Recommendation */}
           <Section style={challengeSection}>
             <Heading as="h2" style={h2}>
-              A Challenge Just For You
+              Задание специально для вас
             </Heading>
             <div style={challengeCard}>
               <Heading as="h3" style={h3}>
                 {suggestedChallenge.title}
               </Heading>
               <Text style={challengeDescription}>
-                This challenge takes only 3-5 minutes to complete and will help you get back into
-                your coding routine.
+                Это задание займет всего 3-5 минут и поможет вам вернуться к изучению
+                бизнеса.
               </Text>
               <Button href={suggestedChallenge.url} style={button}>
-                Solve This Challenge
+                Выполнить задание
               </Button>
             </div>
           </Section>
@@ -107,14 +107,14 @@ export default function NoChallengesEmail({
           <Section style={section}>
             <div style={ctaSection}>
               <Heading as="h2" style={h2}>
-                Ready to Jump Back In?
+                Готовы вернуться?
               </Heading>
               <Text style={text}>
-                Just 5 minutes of coding practice each day can significantly improve your skills
-                over time. Let's rebuild that momentum together!
+                Всего 5 минут изучения бизнеса каждый день могут значительно улучшить ваши навыки
+                со временем. Давайте восстановим этот импульс вместе!
               </Text>
-              <Button href="https://bizlevel.dev/dashboard" style={buttonLarge}>
-                Resume Your Coding Journey
+              <Button href="https://bizlevel.kz/dashboard" style={buttonLarge}>
+                Продолжить ваш путь в бизнесе
               </Button>
             </div>
           </Section>
@@ -123,7 +123,7 @@ export default function NoChallengesEmail({
 
           {/* Footer */}
           <Section style={footer}>
-            {/* Social Links */}
+            {/* Social Links - BIZLEVEL: Скрыто GitHub для бизнес-версии */}
             <Section style={socialLinks}>
               <Link href="https://x.com/bizlevel_dev" style={socialLink}>
                 <svg
@@ -141,22 +141,14 @@ export default function NoChallengesEmail({
                   ></path>
                 </svg>
               </Link>
-              <Link href="https://git.new/blitz" style={socialLink}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                  />
-                </svg>
-              </Link>{' '}
             </Section>
 
             <Text style={footerFine}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
             <Text style={footerFine}>
-              You're receiving this email because you agreed to receive daily reminders from
-              BizLevel. Want to stop receiving these emails? <br />
-              <Link href={`https://bizlevel.dev/settings/`} style={footerLink}>
-                Update your email preferences
+              Вы получаете это письмо, потому что согласились получать ежедневные напоминания от
+              BizLevel. Хотите перестать получать эти письма? <br />
+              <Link href={`https://bizlevel.kz/settings/`} style={footerLink}>
+                Обновить настройки email
               </Link>
             </Text>
           </Section>

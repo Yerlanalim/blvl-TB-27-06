@@ -18,7 +18,8 @@ interface MenuItem {
 
 const featureLinks = [
   { label: 'Roadmaps', href: '/features/roadmap' },
-  { label: 'Coding Challenges', href: '/features/coding-challenges' },
+  // BIZLEVEL: Скрыто для бизнес-версии
+  // { label: 'Coding Challenges', href: '/features/coding-challenges' },
   { label: 'Statistics', href: '/features/statistics' },
   { label: 'Leaderboard', href: '/features/leaderboard' },
 ];
@@ -46,9 +47,10 @@ const menuItems: MenuItem[] = [
     label: 'Learn',
     href: '/roadmaps',
     children: [
-      { label: 'JavaScript', href: '/coding-challenges?tag=javascript' },
-      { label: 'React', href: '/coding-challenges?tag=react' },
-      { label: 'Roadmaps', href: '/roadmaps' },
+      // BIZLEVEL: Заменено на бизнес-темы
+      { label: 'Основы бизнеса', href: '/roadmaps?category=business-basics' },
+      { label: 'Предпринимательство', href: '/roadmaps?category=entrepreneurship' },
+      { label: 'Все курсы', href: '/roadmaps' },
     ],
   },
   { label: 'Pricing', href: '/pricing' },

@@ -5,7 +5,8 @@ import { Answer } from './Answers';
 
 export type QuestionDifficulty = 'BEGINNER' | 'EASY' | 'MEDIUM' | 'HARD';
 
-export type QuestionType = 'MULTIPLE_CHOICE' | 'CODING_CHALLENGE' | 'SIMPLE_MULTIPLE_CHOICE';
+// BIZLEVEL: Добавлен VIDEO тип для бизнес-уроков
+export type QuestionType = 'MULTIPLE_CHOICE' | 'CODING_CHALLENGE' | 'SIMPLE_MULTIPLE_CHOICE' | 'VIDEO';
 
 /**
  * This type represents the shape of the data of a question.

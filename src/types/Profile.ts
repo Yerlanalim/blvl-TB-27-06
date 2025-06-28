@@ -4,7 +4,7 @@ export type Profile = {
 
   // Social links
   instagram?: string | null;
-  github?: string | null;
+  github?: string | null; // BIZLEVEL: скрыто в UI для бизнес-версии
   linkedin?: string | null;
   twitter?: string | null;
   youtube?: string | null;
@@ -27,8 +27,8 @@ export type Profile = {
   yearsOfExperience?: number | null;
 
   // Skills and interests
-  programmingLanguages: string[];
-  frameworks: string[];
+  programmingLanguages: string[]; // BIZLEVEL: скрыто в UI для бизнес-версии
+  frameworks: string[]; // BIZLEVEL: скрыто в UI для бизнес-версии
   interests: string[];
 
   // Projects

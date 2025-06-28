@@ -20,15 +20,15 @@ interface StudyCompletionEmailProps {
 }
 
 export default function RoadmapCompleteEmail({
-  headingText = 'Congratulations on your achievement, Alex!',
+  headingText = 'Поздравляем с вашим достижением, Alex!',
   username = 'Alex',
-  studyPathTitle = 'JavaScript Fundamentals',
+  studyPathTitle = 'Основы предпринимательства',
   completionDate = 'June 1, 2025',
 }: StudyCompletionEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>Congratulations! You've completed {studyPathTitle} - View your certificate</Preview>
+      <Preview>Поздравляем! Вы завершили {studyPathTitle} - Посмотрите ваш сертификат</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with logo */}
@@ -46,7 +46,7 @@ export default function RoadmapCompleteEmail({
           <Section style={heroSection}>
             <Heading style={heading}>{headingText}</Heading>
             <Text style={subheading}>
-              You've successfully completed <strong>{studyPathTitle}</strong>
+              Вы успешно завершили <strong>{studyPathTitle}</strong>
             </Text>
           </Section>
 
@@ -55,35 +55,35 @@ export default function RoadmapCompleteEmail({
           {/* Achievement section */}
           <Section style={achievementSection}>
             <Text style={achievementText}>
-              <strong>Congratulations, {username}!</strong> You've demonstrated dedication and
-              perseverance in completing this learning path.
+              <strong>Поздравляем, {username}!</strong> Вы продемонстрировали преданность и
+              настойчивость в прохождении этого пути обучения.
             </Text>
           </Section>
 
           {/* Certificate details */}
           <Section style={certificateSection}>
-            <Text style={certificateTitle}>Your Certificate Details</Text>
+            <Text style={certificateTitle}>Детали вашего сертификата</Text>
             <div style={certificateBox}>
               <Text style={certificateDetail}>
-                <span style={certificateLabel}>Study Path:</span> {studyPathTitle}
+                <span style={certificateLabel}>Путь обучения:</span> {studyPathTitle}
               </Text>
               <Text style={certificateDetail}>
-                <span style={certificateLabel}>Completion Date:</span> {completionDate}
+                <span style={certificateLabel}>Дата завершения:</span> {completionDate}
               </Text>
             </div>
           </Section>
 
           {/* Next steps section */}
           <Section style={nextStepsSection}>
-            <Text style={nextStepsTitle}>Continue Your Learning Journey</Text>
+            <Text style={nextStepsTitle}>Продолжите ваш путь обучения</Text>
             <Text style={nextStepsText}>
-              Don't stop here! Check out some of our other paths to keep learning and growing.
+              Не останавливайтесь на достигнутом! Ознакомьтесь с другими нашими путями для продолжения обучения и роста.
             </Text>
             <Button
               style={{ ...button, padding: '12px 20px' }}
               href={`${process.env.NEXT_PUBLIC_URL}/roadmaps`}
             >
-              Explore Other Paths
+              Изучить другие пути
             </Button>
           </Section>
 
@@ -93,7 +93,7 @@ export default function RoadmapCompleteEmail({
           <Section style={footer}>
             <Text style={footerText}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>
             <Text style={footerText}>
-              You are receiving this email as you completed a study path on BizLevel.
+              Вы получаете это письмо, потому что завершили путь обучения на BizLevel.
             </Text>
           </Section>
         </Container>

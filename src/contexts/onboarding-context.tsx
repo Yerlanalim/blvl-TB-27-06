@@ -104,35 +104,35 @@ export const UserOnboardingContextProvider = ({
 
   const [totalXp, setTotalXp] = useState(0);
 
-  // Questions data with correct answers
+  // BIZLEVEL: Questions data with correct answers - заменено на бизнес-вопросы
   const questions = [
     {
       uid: 'fj9348dhj2839h8d7wj9c0-dwn89nb2ubuc8w', // uid so we can save the user's answer to the db
-      question: 'What is a function in programming?',
+      question: 'Что такое бизнес-модель?',
       options: [
-        'A type of variable',
-        'A programming language',
-        'A block of code designed to perform a particular task',
-        "I'm not sure",
+        'Способ зарабатывать деньги',
+        'План развития компании',
+        'Описание того, как компания создает, предоставляет и получает ценность',
+        'Не уверен',
       ],
       correctAnswerIndex: 2,
     },
     {
       uid: 'dh3982dh893ucb98nc90-cnuw2-xchmovkd',
-      question: 'What is Git?',
+      question: 'Что такое целевая аудитория?',
       options: [
-        'A programming language',
-        'A version control system',
-        'A container for storing data',
-        "I'm not sure",
+        'Все люди на планете',
+        'Группа людей, которым предназначен ваш продукт или услуга',
+        'Только богатые клиенты',
+        'Не уверен',
       ],
       correctAnswerIndex: 1,
     },
     {
       uid: 'dn3u29x98n23n9cm0c3-d32nuixwenciub',
-      question: 'Which of these is a programming loop?',
-      options: ['For loop', 'Around loop', 'Circle loop', "I'm not sure"],
-      correctAnswerIndex: 0,
+      question: 'Что важнее всего при запуске бизнеса?',
+      options: ['Большой стартовый капитал', 'Понимание потребностей клиентов', 'Красивый офис', 'Не уверен'],
+      correctAnswerIndex: 1,
     },
   ];
 

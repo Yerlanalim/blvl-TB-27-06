@@ -38,7 +38,8 @@ export const newQuestionSchema = z
       .optional(),
     afterQuestionInfo: z.string().optional(),
     questionType: z
-      .enum(['MULTIPLE_CHOICE', 'CODING_CHALLENGE', 'SIMPLE_MULTIPLE_CHOICE'])
+      // BIZLEVEL: Добавлен VIDEO тип для бизнес-уроков
+  .enum(['MULTIPLE_CHOICE', 'CODING_CHALLENGE', 'SIMPLE_MULTIPLE_CHOICE', 'VIDEO'])
       .optional(),
     slug: z.string().optional(),
   })

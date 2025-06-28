@@ -29,11 +29,11 @@ export const SuggestedChallengeEmailTemplate: React.FC<EmailTemplateProps> = ({
             />
             <Text style={styles.title}>{title}</Text>
             <Link href={link} style={styles.button}>
-              Take the Challenge
+              Принять вызов
             </Link>
             <Hr style={styles.hr} />
             <Text style={styles.description}>{description}</Text>
-            <Text style={styles.tagLabel}>Your suggested challenge involves:</Text>
+            <Text style={styles.tagLabel}>Ваше предложенное задание включает:</Text>
             {tags?.length > 0 && (
               <Section style={styles.tagContainer}>
                 {tags?.map((tag, index) => (
@@ -45,17 +45,17 @@ export const SuggestedChallengeEmailTemplate: React.FC<EmailTemplateProps> = ({
             )}
             <Hr style={styles.hr} />
             <Text style={styles.footer}>
-              Stay consistent, keep coding, and watch your skills grow!
+              Будьте последовательны, продолжайте изучать бизнес и наблюдайте, как растут ваши навыки!
             </Text>
             <Section style={styles.footer}>
               <Text style={styles.footerText}>© 2025 Dev BizLevel. All rights reserved.</Text>
               <Text style={styles.footerText}>
-                Want to stop receiving these emails?{' '}
+                Хотите перестать получать эти письма?{' '}
                 <Link
                   href={`${process.env.NEXT_PUBLIC_URL}/settings/profile`}
                   style={styles.listItem}
                 >
-                  Manage your email preferences
+                  Управление настройками email
                 </Link>
               </Text>
             </Section>
@@ -66,12 +66,12 @@ export const SuggestedChallengeEmailTemplate: React.FC<EmailTemplateProps> = ({
   );
 };
 
-// default content
+// default content - BIZLEVEL: Заменены технические теги на бизнес-теги
 // @ts-ignore
 SuggestedChallengeEmailTemplate.PreviewProps = {
-  title: 'Your daily challenge is ready!',
-  description: "Sharpen your coding skills with today's exciting challenge. Are you up for it?",
-  tags: ['JavaScript', 'Algorithms', 'Problem Solving', 'React'],
+  title: 'Ваше ежедневное задание готово!',
+  description: "Развивайте свои бизнес-навыки с сегодняшним увлекательным заданием. Готовы принять вызов?",
+  tags: ['Маркетинг', 'Финансы', 'Стратегия', 'Управление'],
   link: 'https://example.com/daily-challenge',
   difficulty: 'Medium',
 } as EmailTemplateProps;

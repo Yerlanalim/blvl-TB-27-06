@@ -47,9 +47,9 @@ export async function middleware(req: NextRequest) {
   }
 
   // Get current user session
-  const { user, error: AuthError } = await updateSession(req);
+  const { user } = await updateSession(req); // BIZLEVEL: error временно не используется
   const isAuthenticated = !!user?.user?.id;
-  const isAuthError = !!AuthError;
+  // const isAuthError = !!AuthError; // BIZLEVEL: временно не используется
 
   // Handle different route types
   if (route.config.requiresAuth && !isAuthenticated) {

@@ -7,85 +7,67 @@ export interface StudyPath {
   educationLevel: string;
 }
 
+// BIZLEVEL: Заменены технические пути на бизнес-обучение
 export const studyPaths: StudyPath[] = [
   {
-    title: 'JavaScript Fundamentals',
-    slug: 'javascript-fundamentals',
+    title: 'Основы предпринимательства',
+    slug: 'business-fundamentals',
     description:
-      'Learn the essential concepts of JavaScript to get you started on your journey to becoming a JavaScript developer. Learn the basics of variables, flow control, functions, arrays, objects, and more.',
-    heroChip: 'Everything you need to kickstart your JavaScript journey',
+      'Изучите основные концепции ведения бизнеса. Узнайте о бизнес-моделях, планировании, анализе рынка и создании стратегии развития.',
+    heroChip: 'Все что нужно для начала вашего бизнес-пути',
     questionSlugs: [
-      'javascript-if-statement-basics',
-      'determine-age-group',
-      'number-is-odd-or-even',
-      'javascript-string-concatenation',
-      'javascript-greeting-string-concatenation',
-      'reverse-a-string',
-      'count-the-vowels',
-      'capitalize-each-word',
-      'remove-duplicate-characters',
-      'find-longest-word-in-sentence',
-      'for-loop-sum-of-array',
+      // BIZLEVEL: Здесь будут бизнес-вопросы когда они будут созданы
     ],
     educationLevel: 'beginner',
   },
   {
-    title: 'Arrays',
-    slug: 'arrays',
-    description: 'Learn how to use different array methods in JavaScript.',
-    heroChip: 'Learn how to use Arrays in JavaScript',
+    title: 'Маркетинг и продвижение',
+    slug: 'marketing-fundamentals',
+    description: 'Научитесь продвигать ваш продукт или услугу. Изучите основы маркетинга, рекламы и работы с клиентами.',
+    heroChip: 'Изучите как привлекать и удерживать клиентов',
     questionSlugs: [
-      // getting the length of an array
-      'get-array-length-javascript',
-      // find largest number in array
-      'find-largest-number',
-      // sum of array with for loop
-      'for-loop-sum-of-array',
-      // merge two arrays without modifying original
-      'merge-arrays-without-modifying-original',
-      // difference between map and foreach
-      'difference-map-foreach-javascript-array-methods',
-      // array reassignment push output
-      'array-reassignment-push-output',
-      // Calculate Sum of Even Numbers in JavaScript Array Using Array Methods
-      'combining-array-methods',
-      // remove falsy values from array
-      'remove-falsy-values-from-array',
-      // double the numbers
-      'double-the-numbers',
+      // BIZLEVEL: Здесь будут маркетинговые вопросы когда они будут созданы
     ],
     educationLevel: 'beginner',
   },
   {
-    title: 'JavaScript Objects',
-    slug: 'javascript-objects',
-    description: 'Learn how to use JavaScript objects',
-    heroChip: 'Learn how to use JavaScript objects',
-    questionSlugs: [],
-    educationLevel: 'beginner',
-  },
-  {
-    title: 'React Hooks',
-    slug: 'react-hooks',
-    description: 'Learn the basics of React Hooks',
-    heroChip: 'Learn how to use React Hooks through interactive coding challenges',
-    questionSlugs: [],
+    title: 'Финансовое планирование',
+    slug: 'financial-planning',
+    description: 'Основы финансового планирования в бизнесе. Бюджетирование, инвестиции и управление денежными потоками.',
+    heroChip: 'Научитесь управлять финансами бизнеса',
+    questionSlugs: [
+      // BIZLEVEL: Здесь будут финансовые вопросы когда они будут созданы
+    ],
     educationLevel: 'intermediate',
   },
   {
-    title: 'Asynchronous Programming',
-    slug: 'asynchronous-programming',
-    description: 'Learn the basics of Asynchronous Programming',
-    heroChip: 'Learn what Asynchronous Programming is and how to use it in JavaScript',
-    questionSlugs: [],
+    title: 'Управление командой',
+    slug: 'team-management',
+    description: 'Изучите основы управления людьми в бизнесе. Мотивация, делегирование и построение эффективной команды.',
+    heroChip: 'Научитесь эффективно управлять командой',
+    questionSlugs: [
+      // BIZLEVEL: Здесь будут вопросы по управлению когда они будут созданы
+    ],
     educationLevel: 'intermediate',
   },
   {
-    title: 'React Hooks',
-    slug: 'react-hooks-fundamentals',
-    description: 'Learn the basics of React Hooks',
-    heroChip: 'Learn how to use React Hooks through interactive coding challenges',
-    questionSlugs: [],
+    title: 'Продажи и переговоры',
+    slug: 'sales-negotiations',
+    description: 'Основы продаж и ведения переговоров. Техники убеждения, работа с возражениями и закрытие сделок.',
+    heroChip: 'Изучите искусство продаж и переговоров',
+    questionSlugs: [
+      // BIZLEVEL: Здесь будут вопросы по продажам когда они будут созданы
+    ],
     educationLevel: 'intermediate',
+  },
+  {
+    title: 'Цифровой маркетинг',
+    slug: 'digital-marketing',
+    description: 'Современные методы продвижения в интернете. Социальные сети, контент-маркетинг и онлайн-реклама.',
+    heroChip: 'Освойте цифровые каналы продвижения',
+    questionSlugs: [
+      // BIZLEVEL: Здесь будут вопросы по цифровому маркетингу когда они будут созданы
+    ],
+    educationLevel: 'advanced',
   },
 ];

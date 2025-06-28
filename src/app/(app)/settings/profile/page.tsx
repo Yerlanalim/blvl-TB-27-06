@@ -147,8 +147,8 @@ export default function SettingsProfilePage() {
   return (
     <div className="flex flex-col">
       <div className="space-y-1 p-8">
-        <h1 className="text-3xl">Profile Settings</h1>
-        <p className="text-base">Update your profile details and preferences.</p>
+        <h1 className="text-3xl">Настройки профиля</h1>
+        <p className="text-base">Обновите данные вашего профиля и предпочтения.</p>
       </div>
       <Separator className="w-full bg-black-50" />
       <Form {...form}>
@@ -171,14 +171,14 @@ export default function SettingsProfilePage() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="logo-file-upload" className="text-base font-medium">
-                      Profile Picture
+                      Фото профиля
                     </Label>
                     <div className="flex gap-2">
                       <label
                         htmlFor="logo-file-upload"
                         className="cursor-pointer bg-primary hover:bg-primary/90 border border-black-50 text-primary-foreground px-4 py-2 rounded-md text-base"
                       >
-                        Choose File
+                        Выбрать файл
                       </label>
                       <Input
                         id="logo-file-upload"
@@ -191,7 +191,7 @@ export default function SettingsProfilePage() {
                       />
                     </div>
                     <p className="text-sm text-gray-500">
-                      Recommended: Square image, at least 200x200px (max 2MB)
+                      Рекомендуется: квадратное изображение, минимум 200x200px (макс. 2MB)
                     </p>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ export default function SettingsProfilePage() {
               <FormItem>
                 <FormControl>
                   <InputWithLabel
-                    label="Username"
+                    label="Имя пользователя"
                     type="text"
                     autoComplete="username"
                     placeholder={user?.username || 'Username'}
@@ -228,7 +228,7 @@ export default function SettingsProfilePage() {
               <FormItem>
                 <FormControl>
                   <InputWithLabel
-                    label="First name"
+                    label="Имя"
                     type="text"
                     autoComplete="given-name"
                     placeholder={user?.firstName || 'First name'}
@@ -249,7 +249,7 @@ export default function SettingsProfilePage() {
               <FormItem>
                 <FormControl>
                   <InputWithLabel
-                    label="Last name"
+                    label="Фамилия"
                     type="text"
                     autoComplete="family-name"
                     placeholder={user?.lastName || 'Last name'}
@@ -282,7 +282,7 @@ export default function SettingsProfilePage() {
                             className="bg-black-50"
                           />
                           <Label htmlFor="showTimeTaken" className="text-base">
-                            Show on leaderboard
+                            Показывать в рейтинге
                           </Label>
                         </div>
                       </TooltipTrigger>
@@ -314,7 +314,7 @@ export default function SettingsProfilePage() {
                             className="bg-black-50"
                           />
                           <Label htmlFor="sendPushNotifications" className="text-base">
-                            Send daily reminders
+                            Ежедневные напоминания
                           </Label>
                         </div>
                       </TooltipTrigger>
@@ -346,7 +346,7 @@ export default function SettingsProfilePage() {
                             className="bg-black-50"
                           />
                           <Label htmlFor="fasterThanAiGameMode" className="text-base">
-                            Faster than AI game mode
+                            Режим "Быстрее ИИ"
                           </Label>
                         </div>
                       </TooltipTrigger>
@@ -377,7 +377,7 @@ export default function SettingsProfilePage() {
                             className="bg-black-50"
                           />
                           <Label htmlFor="sendPromotionalEmails" className="text-base">
-                            Send promotional emails
+                            Рекламные письма
                           </Label>
                         </div>
                       </TooltipTrigger>
@@ -398,16 +398,15 @@ export default function SettingsProfilePage() {
                 <FormControl>
                   <>
                     <Label htmlFor="aboutMeAiHelp" className="text-base">
-                      Personalize your AI
+                      Персонализация AI
                     </Label>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Provide a short description of yourself to help our AI understand you better.
-                      This can include topics that interest you, or code weaknesses you want to
-                      improve on.
+                      Опишите себя кратко, чтобы помочь нашему AI лучше понимать вас.
+                      Это может включать ваши бизнес-интересы или области, которые вы хотите изучить.
                     </p>
                     <Textarea
                       id="aboutMeAiHelp"
-                      placeholder="Enter a short description to help us make BizLevel a more personalized experience for you."
+                      placeholder="Введите краткое описание, чтобы помочь нам сделать BizLevel более персонализированным для вас."
                       className="resize-none"
                       {...field}
                       value={field.value || ''}
@@ -416,9 +415,9 @@ export default function SettingsProfilePage() {
                     />
                     {user?.userLevel === 'FREE' && (
                       <div className="mt-2 text-sm text-red-500">
-                        Upgrade to a premium account to enhance your AI.
+                        Обновитесь до премиум аккаунта, чтобы улучшить ваш AI.
                         <a href={getUpgradeUrl()} className="text-accent underline ml-1">
-                          Upgrade now
+                          Обновить сейчас
                         </a>
                       </div>
                     )}
@@ -429,37 +428,39 @@ export default function SettingsProfilePage() {
             )}
           />
 
-          {/** Code editor theme */}
-          <FormField
-            control={form.control}
-            name="codeEditorTheme"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="space-y-4">
-                    <Select value={field.value || 'vs-dark'} onValueChange={field.onChange}>
-                      <SelectTrigger className="border border-black-50 w-full md:w-[250px]">
-                        {field.value || user?.codeEditorTheme || 'Select a code editor theme'}
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Object.entries(themes).map(([key]) => (
-                          <SelectItem key={key} value={key}>
-                            {key}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <CodeEditorPreview theme={(field.value as keyof typeof themes) || 'vs-dark'} />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {/* BIZLEVEL: Скрыто для бизнес-версии - Code editor theme */}
+          {false && (
+            <FormField
+              control={form.control}
+              name="codeEditorTheme"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="space-y-4">
+                      <Select value={field.value || 'vs-dark'} onValueChange={field.onChange}>
+                        <SelectTrigger className="border border-black-50 w-full md:w-[250px]">
+                          {field.value || user?.codeEditorTheme || 'Select a code editor theme'}
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Object.entries(themes).map(([key]) => (
+                            <SelectItem key={key} value={key}>
+                              {key}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <CodeEditorPreview theme={(field.value as keyof typeof themes) || 'vs-dark'} />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
           <div className="flex flex-wrap gap-4">
             <Button type="submit" variant="secondary" disabled={isPending} className="text-base">
-              {isPending ? <LoadingSpinner /> : 'Save changes'}
+              {isPending ? <LoadingSpinner /> : 'Сохранить изменения'}
             </Button>
             <LogoutButton variant="destructive" />
           </div>

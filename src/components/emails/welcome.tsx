@@ -27,7 +27,7 @@ export default function WelcomeEmail({
   return (
     <Html>
       <Head />
-      <Preview>Welcome to BizLevel - Your journey to tech mastery begins!</Preview>
+      <Preview>Добро пожаловать в BizLevel - Ваш путь к мастерству в бизнесе начинается!</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with Logo */}
@@ -43,9 +43,9 @@ export default function WelcomeEmail({
 
           {/* Hero Section */}
           <Section style={heroSection}>
-            <Heading style={h1}>Welcome to BizLevel!</Heading>
+            <Heading style={h1}>Добро пожаловать в BizLevel!</Heading>
             <Text style={heroText}>
-              We're thrilled to have you join our community of tech enthusiasts.
+              Мы рады приветствовать вас в нашем сообществе предпринимателей.
             </Text>
           </Section>
 
@@ -53,23 +53,23 @@ export default function WelcomeEmail({
 
           {/* Personal Welcome */}
           <Section style={section}>
-            <Text style={text}>Hey {userName},</Text>
+            <Text style={text}>Привет, {userName}!</Text>
             <Text style={text}>
-              I'm Logan, the founder of BizLevel, and I wanted to personally thank you for becoming
-              part of our growing community. Your decision to join us means a lot!
+              Я Логан, основатель BizLevel, и я хотел лично поблагодарить вас за то, что стали
+              частью нашего растущего сообщества. Ваше решение присоединиться к нам очень много значит!
             </Text>
             <Text style={text}>
-              At BizLevel, we're building a vibrant community of tech enthusiasts who are dedicated
-              to continuous learning and growth. Whether you're preparing for technical interviews,
-              expanding your programming knowledge, or simply love solving challenging problems -
-              you're in the right place.
+              В BizLevel мы создаем яркое сообщество предпринимателей, которые посвящены
+              непрерывному обучению и росту. Готовитесь ли вы к собеседованиям в бизнесе,
+              расширяете свои знания в предпринимательстве или просто любите решать сложные бизнес-задачи -
+              вы попали по адресу.
             </Text>
           </Section>
 
           {/* Feature Showcase */}
           <Section style={featureSection}>
             <Heading as="h2" style={h2}>
-              Discover What BizLevel Offers
+              Узнайте, что предлагает BizLevel
             </Heading>
 
             <table style={featureRow}>
@@ -79,15 +79,15 @@ export default function WelcomeEmail({
                     src={`https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//08-02-25-roadmap-redesign.png`}
                     width="200"
                     height="auto"
-                    alt="Study Paths"
+                    alt="Пути обучения"
                     style={featureIcon}
                   />
                   <Heading as="h3" style={h3}>
-                    Personalized Study Paths
+                    Персонализированные пути обучения
                   </Heading>
                   <Text style={featureText}>
-                    Customize your learning journey with our adaptive study paths tailored to your
-                    goals and skill level.
+                    Настройте свой путь обучения с помощью наших адаптивных программ, созданных под ваши
+                    цели и уровень навыков в бизнесе.
                   </Text>
                 </td>
 
@@ -96,15 +96,15 @@ export default function WelcomeEmail({
                     src={`https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//Screenshot%202025-03-04%20at%2022.28.57.png`}
                     width="200"
                     height="auto"
-                    alt="Coding Challenges"
+                    alt="Бизнес-задания"
                     style={featureIcon}
                   />
                   <Heading as="h3" style={h3}>
-                    Interactive Challenges
+                    Интерактивные задания
                   </Heading>
                   <Text style={featureText}>
-                    Practice with our extensive library of coding challenges designed to sharpen
-                    your problem-solving skills.
+                    Практикуйтесь с нашей обширной библиотекой бизнес-заданий, разработанных для развития
+                    ваших навыков решения проблем.
                   </Text>
                 </td>
               </tr>
@@ -117,14 +117,14 @@ export default function WelcomeEmail({
                     src={`https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//leaderboard-hero-redesign.png`}
                     width="200"
                     height="auto"
-                    alt="Community"
+                    alt="Сообщество"
                     style={featureIcon}
                   />
                   <Heading as="h3" style={h3}>
-                    Supportive Community
+                    Поддерживающее сообщество
                   </Heading>
                   <Text style={featureText}>
-                    Connect with like-minded tech enthusiasts, share knowledge, and grow together.
+                    Общайтесь с единомышленниками-предпринимателями, делитесь знаниями и растите вместе.
                   </Text>
                 </td>
 
@@ -133,15 +133,15 @@ export default function WelcomeEmail({
                     src={`https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images//Screenshot%202025-03-04%20at%2022.31.23.png`}
                     width="200"
                     height="auto"
-                    alt="Analytics"
+                    alt="Аналитика"
                     style={featureIcon}
                   />
                   <Heading as="h3" style={h3}>
-                    Progress Analytics
+                    Аналитика прогресса
                   </Heading>
                   <Text style={featureText}>
-                    Track your learning journey with detailed analytics and insights to optimize
-                    your growth.
+                    Отслеживайте свой путь обучения с подробной аналитикой и инсайтами для оптимизации
+                    вашего роста.
                   </Text>
                 </td>
               </tr>
@@ -151,45 +151,45 @@ export default function WelcomeEmail({
           {/* Special Offer */}
           <Section style={offerSection}>
             <Heading as="h2" style={h2}>
-              Special Offer Just for You
+              Специальное предложение для вас
             </Heading>
             <Text style={text}>
-              As a special thank you for joining us, we're offering you a 60% discount on your first
-              three months of a premium subscription.
+              В знак благодарности за присоединение к нам мы предлагаем вам скидку 60% на первые
+              три месяца премиум-подписки.
             </Text>
             <Section style={couponContainer}>
               <Text style={couponCode}>{couponCodeText}</Text>
-              <Text style={couponText}>Use this code at checkout</Text>
+              <Text style={couponText}>Используйте этот код при оформлении</Text>
             </Section>
             <Button href="https://dub.sh/upgrade-bizlevel" style={button}>
-              Upgrade Now
+              Обновить сейчас
             </Button>
           </Section>
 
           {/* Getting Started */}
           <Section style={section}>
             <Heading as="h2" style={h2}>
-              Ready to Get Started?
+              Готовы начать?
             </Heading>
-            <Text style={text}>Here are a few things you can do right away:</Text>
+            <Text style={text}>Вот несколько вещей, которые вы можете сделать прямо сейчас:</Text>
             <ul style={list}>
               <li style={listItem}>
-                <Link href="https://bizlevel.dev/profile" style={link}>
-                  Complete your profile
+                <Link href="https://bizlevel.kz/profile" style={link}>
+                  Заполните свой профиль
                 </Link>{' '}
-                to personalize your experience
+                чтобы персонализировать ваш опыт
               </li>
               <li style={listItem}>
-                <Link href="https://bizlevel.dev/paths" style={link}>
-                  Explore study paths
+                <Link href="https://bizlevel.kz/roadmaps" style={link}>
+                  Изучите пути обучения
                 </Link>{' '}
-                that match your interests
+                которые соответствуют вашим интересам
               </li>
               <li style={listItem}>
-                <Link href="https://bizlevel.dev/challenges" style={link}>
-                  Try a coding challenge
+                <Link href="https://bizlevel.kz/roadmaps" style={link}>
+                  Попробуйте бизнес-задание
                 </Link>{' '}
-                to test your skills
+                чтобы проверить свои навыки
               </li>
             </ul>
           </Section>
@@ -197,19 +197,19 @@ export default function WelcomeEmail({
           {/* Follow Development */}
           <Section style={section}>
             <Text style={text}>
-              If you want to follow along with the development of BizLevel, you can do so{' '}
-              <Link href="https://git.new/blitz" style={link}>
-                here
+              Если вы хотите следить за развитием BizLevel, вы можете делать это{' '}
+              <Link href="https://bizlevel.kz/blog" style={link}>
+                в нашем блоге
               </Link>
-              . Your support truly means the world to us.
+              . Ваша поддержка действительно много значит для нас.
             </Text>
             <Text style={text}>
-              If you have questions or feedback, please don't hesitate to reach out to me by{' '}
+              Если у вас есть вопросы или отзывы, не стесняйтесь обращаться ко мне по{' '}
               <Link
-                href={`mailto:team@bizlevel.dev?subject=Question from ${userEmail}`}
+                href={`mailto:team@bizlevel.kz?subject=Question from ${userEmail}`}
                 style={link}
               >
-                email
+                электронной почте
               </Link>
               .
             </Text>
@@ -219,12 +219,12 @@ export default function WelcomeEmail({
 
           {/* Footer */}
           <Section style={footer}>
-            <Text style={footerText}>Let's revolutionize the tech world together!</Text>
-            <Text style={footerText}>Best regards,</Text>
+            <Text style={footerText}>Давайте вместе революционизируем мир бизнеса!</Text>
+            <Text style={footerText}>С наилучшими пожеланиями,</Text>
             <Text style={footerSignature}>Logan</Text>
-            <Text style={footerFounder}>Founder, BizLevel</Text>
+            <Text style={footerFounder}>Основатель, BizLevel</Text>
 
-            {/* Social Links */}
+            {/* Social Links - BIZLEVEL: Скрыто GitHub, оставлен только Twitter */}
             <Section style={socialLinks}>
               <Link href="https://x.com/bizlevel_dev" style={socialLink}>
                 <svg
@@ -242,14 +242,6 @@ export default function WelcomeEmail({
                   ></path>
                 </svg>
               </Link>
-              <Link href="https://git.new/blitz" style={socialLink}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                  />
-                </svg>
-              </Link>{' '}
             </Section>
 
             <Text style={footerFine}>© 2025 DEV BIZLEVEL LTD. All rights reserved.</Text>

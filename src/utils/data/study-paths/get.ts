@@ -13,14 +13,15 @@ import { listQuestionsBySlugs } from '../questions/list';
  * Category order configuration for displaying study paths on the roadmaps page
  * Add categories in the order you want them to appear
  */
+// BIZLEVEL: Изменено на бизнес-категории
 export const categoryOrder = [
-  'Career Paths',
-  'Full-stack Development',
-  'JavaScript',
-  'React',
-  'HTML',
-  'CSS',
-  'Misc',
+  'Основы бизнеса',
+  'Предпринимательство', 
+  'Маркетинг',
+  'Продажи',
+  'Управление',
+  'Финансы',
+  'Разное',
 ];
 
 /**

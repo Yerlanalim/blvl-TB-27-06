@@ -11,7 +11,7 @@ import { updateUser } from '@/actions/user/authed/update-user';
 export const STEPS = {
   USER_DETAILS: 'USER_DETAILS', // get the users info
   INITIAL_QUESTIONS: 'INITIAL_QUESTIONS', // give the user 3 very simple multiple choice questions to gauge skill level and give them quick wins!
-  TIME_COMMITMENT: 'TIME_COMMITMENT', // get the users daily coding goal
+  TIME_COMMITMENT: 'TIME_COMMITMENT', // BIZLEVEL: get the users daily learning goal
   NOTIFICATIONS: 'NOTIFICATIONS', // offer push notifications
   TAGS: 'TAGS', // get the users interests
   PRICING: 'PRICING', // get the users pricing plan
@@ -26,7 +26,7 @@ export function useOnboardingSteps() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const {
-    serverUser,
+    // serverUser, // BIZLEVEL: временно не используется
     user,
     handleGetOnboardingQuestions,
     canContinue,
@@ -60,7 +60,7 @@ export function useOnboardingSteps() {
       next: STEPS.TIME_COMMITMENT,
       component: 'OnboardingInitialQuestions',
     },
-    // get the user to choose a daily amount of time to spend on coding
+    // BIZLEVEL: get the user to choose a daily amount of time to spend on learning business
     [STEPS.TIME_COMMITMENT]: {
       next: STEPS.NOTIFICATIONS,
       component: 'OnboardingTimeCommitment',

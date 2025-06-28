@@ -19,11 +19,12 @@ const footerItems = [
         href: '/features/roadmap',
         ariaLabel: 'Roadmaps',
       },
-      {
-        title: 'Coding Challenges',
-        href: '/features/coding-challenges',
-        ariaLabel: 'Coding Challenges',
-      },
+      // BIZLEVEL: Скрыто для бизнес-версии
+      // {
+      //   title: 'Coding Challenges',
+      //   href: '/features/coding-challenges',
+      //   ariaLabel: 'Coding Challenges',
+      // },
       {
         title: 'Statistics',
         href: '/features/statistics',

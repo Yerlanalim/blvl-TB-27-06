@@ -64,16 +64,16 @@ export const sendNoChallengesEmail = async ({
       const questionSlug = suggestedQuestion.slug || suggestedQuestion.uid;
 
       suggestedChallenge = {
-        title: suggestedQuestion.title || 'Daily Coding Challenge',
+        title: suggestedQuestion.title || 'Ежедневное бизнес-задание',
         difficulty: suggestedQuestion.difficulty || 'BEGINNER',
         url: `${process.env.NEXT_PUBLIC_URL}/question/${questionSlug}`,
       };
     } else {
       // Fallback challenge if no suggestions found
       suggestedChallenge = {
-        title: 'Writing Your First Function',
+        title: 'Основы бизнес-планирования',
         difficulty: 'BEGINNER',
-        url: `${process.env.NEXT_PUBLIC_URL}/question/writing-your-first-function`,
+        url: `${process.env.NEXT_PUBLIC_URL}/question/business-planning-basics`,
       };
     }
   } catch (error) {
@@ -81,9 +81,9 @@ export const sendNoChallengesEmail = async ({
 
     // Fallback challenge
     suggestedChallenge = {
-      title: 'Writing Your First Function',
+      title: 'Основы бизнес-планирования',
       difficulty: 'BEGINNER',
-      url: `${process.env.NEXT_PUBLIC_URL}/question/writing-your-first-function`,
+      url: `${process.env.NEXT_PUBLIC_URL}/question/business-planning-basics`,
     };
   }
 
@@ -100,7 +100,7 @@ export const sendNoChallengesEmail = async ({
 
   // Send the email
   await resend.emails.send({
-    from: 'BizLevel <team@bizlevel.dev>',
+    from: 'BizLevel <team@bizlevel.kz>',
     to: user.email,
     subject: emailTemplate.subject,
     html,

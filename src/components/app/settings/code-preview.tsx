@@ -1,32 +1,18 @@
 import React from 'react';
-import { Highlight, themes } from 'prism-react-renderer';
+import { themes } from 'prism-react-renderer';
 
 interface CodeEditorPreviewProps {
   theme: keyof typeof themes;
 }
 
-const sampleCode = `function greet(name) {
-  console.log(\`Hello, \${name}!\`);
-}
-
-greet('World');`;
-
+// BIZLEVEL: Заглушка для code preview - редактор кода скрыт для бизнес-версии
 export default function CodeEditorPreview({ theme }: CodeEditorPreviewProps) {
   return (
-    <div className="w-full max-w-md rounded-md overflow-hidden">
-      <Highlight theme={themes[theme]} code={sampleCode} language="javascript">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={{ ...style, padding: '1rem', fontSize: '0.875rem' }}>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+    <div className="w-full max-w-md rounded-md overflow-hidden bg-black-75 border border-black-50 p-4">
+      <div className="text-center text-gray-400">
+        <h3 className="text-sm font-medium mb-2">Настройка темы оформления</h3>
+        <p className="text-xs">Выбранная тема: {theme}</p>
+      </div>
     </div>
   );
 }

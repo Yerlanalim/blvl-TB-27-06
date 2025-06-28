@@ -20,6 +20,7 @@ import ChangeCodeTheme from '../../questions/single/change-code-theme';
 import AiQuestionHelp from '../../questions/single/ai-question-help';
 import NoDailyQuestion from '@/components/shared/no-daily-question';
 import QuestionSubmitted from '@/components/app/layout/question-single/question-submitted';
+import VerticalVideoPlayer from '@/components/business/vertical-video-player';
 
 // types
 import type { UserRecord, Question } from '@/types';
@@ -173,11 +174,25 @@ export default function QuestionCard(opts: {
       <Separator className="bg-black-50" />
       <div className="flex-1 bg-black overflow-y-auto scrollable-element relative">
         {currentLayout === 'questions' && userCanAccess && (
-          <QuestionTabs
-            question={question}
-            renderAnswerForm={renderAnswerForm}
-            totalSubmissions={totalSubmissions}
-          />
+          <>
+            {question.questionType === 'VIDEO' ? (
+              <div className="p-4">
+                <VerticalVideoPlayer
+                  videoId={question.codeSnippet || 'demo-video-id'} // BIZLEVEL: videoId хранится в codeSnippet поле
+                  onComplete={() => {
+                    // Автоматически отмечаем видео как просмотренное
+                    setCurrentLayout('answer');
+                  }}
+                />
+              </div>
+            ) : (
+              <QuestionTabs
+                question={question}
+                renderAnswerForm={renderAnswerForm}
+                totalSubmissions={totalSubmissions}
+              />
+            )}
+          </>
         )}
         {currentLayout === 'codeSnippet' &&
           question.codeSnippet &&

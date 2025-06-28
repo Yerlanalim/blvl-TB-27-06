@@ -141,10 +141,12 @@ export default function QuestionForm({ initialData, isEditing = false }: Questio
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value={QuestionType.MULTIPLE_CHOICE}>Multiple Choice</SelectItem>
-                <SelectItem value={QuestionType.CODING_CHALLENGE}>Coding Challenge</SelectItem>
+                {/* BIZLEVEL: Скрыто для бизнес-версии */}
+                {/* <SelectItem value={QuestionType.CODING_CHALLENGE}>Coding Challenge</SelectItem> */}
                 <SelectItem value={QuestionType.SIMPLE_MULTIPLE_CHOICE}>
                   Simple Multiple Choice
                 </SelectItem>
+                <SelectItem value={QuestionType.VIDEO}>Video Lesson</SelectItem>
               </SelectContent>
             </Select>
           </div>

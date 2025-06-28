@@ -110,6 +110,28 @@ export default function QuestionTabs({
       <TabsContent value="description" className="pt-2 lg:pt-4">
         {question.questionType === 'CODING_CHALLENGE' ? (
           <CodingChallengeDescription question={question} />
+        ) : question.questionType === 'VIDEO' ? (
+          // BIZLEVEL: Для VIDEO типа показываем описание урока
+          <div className="flex flex-col gap-4 p-4 pt-0">
+            {question?.title && (
+              <h1 className="font-onest font-light text-lg md:text-3xl">{question.title}</h1>
+            )}
+            <div className="flex w-full gap-2 items-center">
+              <Chip
+                color={getQuestionDifficultyColor(question.difficulty).bg}
+                text={capitalise(question.difficulty)}
+                textColor={getQuestionDifficultyColor(question.difficulty).text}
+                border={getQuestionDifficultyColor(question.difficulty).border}
+              />
+              <Chip
+                color="#22c55e33"
+                text="Видео урок"
+                textColor="#22c55e"
+                border="#22c55e"
+              />
+            </div>
+            <p className="text-sm text-gray-400 font-light font-onest mt-3">{question.question}</p>
+          </div>
         ) : (
           <div className="flex flex-col gap-4 p-4 pt-0">
             {question?.title && (

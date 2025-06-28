@@ -34,7 +34,7 @@ export default function OnboardingStepThree() {
             animate="visible"
             className="text-xl lg:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
           >
-            Here's some questions to get you started
+            Вот несколько вопросов для начала
           </motion.h1>
         </div>
         <CardDescription>
@@ -44,7 +44,7 @@ export default function OnboardingStepThree() {
             animate="visible"
             className="text-gray-300"
           >
-            Based on your interests, we've prepared some questions for you.
+            На основе ваших интересов мы подготовили для вас несколько вопросов.
           </motion.span>
         </CardDescription>
       </CardHeader>
@@ -67,7 +67,7 @@ export default function OnboardingStepThree() {
                       {question.question}
                     </h3>
                     <div className="flex items-center justify-between mt-4">
-                      <span className="text-sm text-gray-400">View question</span>
+                      <span className="text-sm text-gray-400">Посмотреть вопрос</span>
                       <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-all duration-300" />
                     </div>
                   </CardContent>

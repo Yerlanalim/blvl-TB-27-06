@@ -303,6 +303,10 @@ export const QuestionSingleContextProvider = ({
     try {
       if (question.questionType === 'CODING_CHALLENGE') {
         await validateCode(e, totalSeconds);
+      } else if (question.questionType === 'VIDEO') {
+        // BIZLEVEL: Для VIDEO типа просто отмечаем как просмотренное
+        setCorrectAnswer('correct');
+        setCurrentLayout('answer');
       } else {
         await submitQuestionAnswer(e, totalSeconds);
       }

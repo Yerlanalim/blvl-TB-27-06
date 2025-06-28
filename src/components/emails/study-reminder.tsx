@@ -23,8 +23,8 @@ interface StudyReminderEmailProps {
 }
 
 export default function StudyReminderEmail({
-  headingText = 'Keep the momentum going, Alex!',
-  studyPathTitle = 'JavaScript Fundamentals',
+  headingText = 'Продолжайте в том же духе, Alex!',
+  studyPathTitle = 'Основы предпринимательства',
   goalDate = 'June 15, 2025',
   progressPercentage = '42',
   daysRemaining = 14,
@@ -33,7 +33,7 @@ export default function StudyReminderEmail({
   return (
     <Html>
       <Head />
-      <Preview>Continue your journey with {studyPathTitle} - You're making great progress!</Preview>
+      <Preview>Продолжайте ваш путь с {studyPathTitle} - Вы делаете отличный прогресс!</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header with logo */}
@@ -51,7 +51,7 @@ export default function StudyReminderEmail({
           <Section style={heroSection}>
             <Heading style={heading}>{headingText}</Heading>
             <Text style={subheading}>
-              You're on track to master <strong>{studyPathTitle}</strong>
+              Вы на пути к освоению <strong>{studyPathTitle}</strong>
             </Text>
           </Section>
 
@@ -59,7 +59,7 @@ export default function StudyReminderEmail({
 
           {/* Progress section */}
           <Section style={progressSection}>
-            <Text style={progressTitle}>Your learning journey</Text>
+            <Text style={progressTitle}>Ваш путь обучения</Text>
             <div style={progressBarContainer}>
               <div
                 style={{
@@ -69,27 +69,27 @@ export default function StudyReminderEmail({
               />
             </div>
             <Text style={progressText}>
-              <strong>{progressPercentage}% complete</strong> - You're making excellent progress!
+              <strong>{progressPercentage}% завершено</strong> - Вы делаете отличный прогресс!
             </Text>
           </Section>
 
           {/* Goal reminder */}
           <Section style={goalSection}>
             <Text style={goalText}>
-              <span style={highlight}>Remember your goal:</span> Complete this path by{' '}
+              <span style={highlight}>Помните вашу цель:</span> Завершить этот путь к{' '}
               <strong>{goalDate}</strong>
             </Text>
             <Text style={timeRemaining}>
-              Only <strong>{daysRemaining} days remaining</strong> to reach your target!
+              Осталось только <strong>{daysRemaining} дней</strong> до достижения цели!
             </Text>
           </Section>
 
           {/* CTA section */}
           <Section style={ctaSection}>
             <Button style={{ ...button, padding: '12px 20px' }} href={link}>
-              Continue Learning Now
+              Продолжить обучение
             </Button>
-            <Text style={ctaSubtext}>Pick up right where you left off</Text>
+            <Text style={ctaSubtext}>Продолжите с того места, где остановились</Text>
           </Section>
 
           <Hr style={divider} />

@@ -32,7 +32,8 @@ export const addQuestion = async (opts: {
     url: string;
   }[];
   afterQuestionInfo?: string;
-  questionType?: 'MULTIPLE_CHOICE' | 'CODING_CHALLENGE' | 'SIMPLE_MULTIPLE_CHOICE';
+  // BIZLEVEL: Добавлен VIDEO тип для бизнес-уроков
+  questionType?: 'MULTIPLE_CHOICE' | 'CODING_CHALLENGE' | 'SIMPLE_MULTIPLE_CHOICE' | 'VIDEO';
   slug?: string;
 }) => {
   const {

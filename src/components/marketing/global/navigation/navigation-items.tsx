@@ -20,8 +20,9 @@ import Chart from '@/components/ui/icons/b-chart';
 import GithubLogo from '@/components/ui/icons/github';
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 import { Book } from 'lucide-react';
-import JavascriptIcon from '@/components/ui/icons/javascript';
-import ReactIcon from '@/components/ui/icons/react';
+// BIZLEVEL: Удалены неиспользуемые иконки программистских языков
+// import JavascriptIcon from '@/components/ui/icons/javascript';
+// import ReactIcon from '@/components/ui/icons/react';
 import Award from '@/components/ui/icons/award';
 
 const components: { title: string; href: string; description: string; icon?: React.ReactNode }[] = [
@@ -65,13 +66,14 @@ const features = [
     ariaLabel: 'Navigate to Roadmaps',
     icon: <RoadmapIcon fill="white" height="24" width="24" />,
   },
-  {
-    title: 'Coding Challenges',
-    href: '/features/coding-challenges',
-    description: 'Tackle coding challenges to sharpen your developer skills.',
-    ariaLabel: 'Navigate to Coding Challenges',
-    icon: <Document fill="white" height="24" width="24" />,
-  },
+  // BIZLEVEL: Скрыто для бизнес-версии
+  // {
+  //   title: 'Coding Challenges',
+  //   href: '/features/coding-challenges',
+  //   description: 'Tackle coding challenges to sharpen your developer skills.',
+  //   ariaLabel: 'Navigate to Coding Challenges',
+  //   icon: <Document fill="white" height="24" width="24" />,
+  // },
   {
     title: 'Statistics',
     href: '/features/statistics',
@@ -132,22 +134,23 @@ export function NavigationMenuItems() {
           <NavigationMenuTrigger aria-label="Learn menu">Learn</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              {/* BIZLEVEL: Заменено на бизнес-темы */}
               <ListItem
-                href="/coding-challenges?tag=javascript"
-                title="JavaScript"
-                icon={<JavascriptIcon className="size-4" />}
+                href="/roadmaps?category=business-basics"
+                title="Основы бизнеса"
+                icon={<Document fill="white" height="24" width="24" />}
               >
-                Learn JavaScript with our easy-to-understand coding questions.
+                Изучите фундаментальные принципы ведения бизнеса.
               </ListItem>
               <ListItem
-                href="/coding-challenges?tag=react"
-                title="React"
-                icon={<ReactIcon className="size-4" />}
+                href="/roadmaps?category=entrepreneurship"
+                title="Предпринимательство"
+                icon={<RoadmapIcon fill="white" height="24" width="24" />}
               >
-                Learn the most popular frontend library.
+                Научитесь создавать и развивать собственный бизнес.
               </ListItem>
-              <ListItem href="/roadmaps" title="Roadmaps" icon={<RoadmapIcon />}>
-                Not sure where to start? Explore our list of coding roadmaps.
+              <ListItem href="/roadmaps" title="Все курсы" icon={<RoadmapIcon />}>
+                Не знаете с чего начать? Изучите наши бизнес-курсы.
               </ListItem>
             </ul>
           </NavigationMenuContent>

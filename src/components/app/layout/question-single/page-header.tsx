@@ -53,8 +53,9 @@ export default function QuestionPageHeader({
     >
       <div className="col-span-2 flex items-center justify-start">
         <>
+          {/* BIZLEVEL: Изменено с /coding-challenges на /roadmaps */}
           <RouterBack
-            href={isStudyPathLesson ? `/roadmaps/${studyPathSlug}` : '/coding-challenges'}
+            href={isStudyPathLesson ? `/roadmaps/${studyPathSlug}` : '/roadmaps'}
             className="px-0 block md:hidden hover:opacity-80 transition-opacity"
           >
             <HomeIcon width="16" height="16" />
@@ -64,7 +65,7 @@ export default function QuestionPageHeader({
             <Tooltip>
               <TooltipTrigger asChild>
                 <RouterBack
-                  href={isStudyPathLesson ? `/roadmaps/${studyPathSlug}` : '/coding-challenges'}
+                  href={isStudyPathLesson ? `/roadmaps/${studyPathSlug}` : '/roadmaps'}
                   className="p-0 hidden md:block hover:opacity-80 transition-opacity group relative"
                 >
                   <div className="transition-opacity duration-200 group-hover:opacity-0">

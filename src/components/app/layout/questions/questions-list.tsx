@@ -35,7 +35,8 @@ export default async function QuestionsList({
           Upgrade to Premium to access custom questions.
         </p>
         <div className="flex gap-x-2">
-          <Button href="/coding-challenges">Back to all challenges</Button>
+          {/* BIZLEVEL: Изменено с /coding-challenges на /roadmaps */}
+      <Button href="/roadmaps">Back to all courses</Button>
           <Button href={getUpgradeUrl()} variant="secondary">
             Upgrade
           </Button>

@@ -18,11 +18,11 @@ import { WebPageJsonLd } from '@/types';
 
 export async function generateMetadata() {
   return createMetadata({
-    title: 'Learning Paths | BizLevel',
+    title: 'Пути обучения | BizLevel',
     description:
-      'A collection of learning paths, ranging from Javascript, React, Node, Web Development. Created to help you learn and grow your skills in different areas of programming.',
+      'Коллекция путей обучения бизнесу: предпринимательство, маркетинг, продажи, управление. Создано для развития ваших навыков в различных областях бизнеса.',
     image: {
-      text: 'Learning Paths | BizLevel',
+      text: 'Пути обучения | BizLevel',
       bgColor: '#000',
       textColor: '#fff',
     },
@@ -33,25 +33,25 @@ export async function generateMetadata() {
 const heroDescription = (
   <div className="flex flex-col gap-y-4 z-20 relative font-inter max-w-3xl">
     <p className="text-sm md:text-base text-gray-400 font-onest">
-      Explore our library of programming learning paths, consisting of many different topics on the
-      web. Set your own goals and work your way through the challenges at your own pace, and get 1%
-      better every day.
+      Изучите нашу библиотеку путей обучения бизнесу, охватывающую множество тем. 
+      Ставьте свои цели и проходите материалы в своем темпе, становясь на 1% лучше каждый день.
     </p>
     <div className="flex flex-col gap-y-2">
-      <p className="text-gray-400 font-onest">Can't find what you're looking for?</p>
+      <p className="text-gray-400 font-onest">Не можете найти то, что ищете?</p>
       <div className="flex items-center gap-x-2 pt-1">
-        <Button href="/coding-challenges" variant="secondary">
+        {/* BIZLEVEL: Убрано для бизнес-версии - нет coding challenges */}
+        {/* <Button href="/coding-challenges" variant="secondary">
           View all challenges
-        </Button>
+        </Button> */}
         <Suspense
           fallback={
             <Button variant="ghost" className="w-full">
-              Your next recommended question
+              Ваш следующий рекомендуемый вопрос
               <ArrowRightIcon className="size-4" />
             </Button>
           }
         >
-          <ContinueJourney text="Your next recommended question" variant="ghost" />
+          <ContinueJourney text="Ваш следующий рекомендуемый вопрос" variant="ghost" />
         </Suspense>
       </div>
     </div>
@@ -64,9 +64,9 @@ export default async function ExploreQuestionsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     url: `${getBaseUrl()}/roadmaps`,
-    headline: 'Learning Paths | BizLevel',
+    headline: 'Пути обучения | BizLevel',
     description:
-      'Curated lists of coding questions, ranging from Javascript, React, Node, Web Development. Perfect for your daily coding practice.',
+      'Кураторские списки бизнес-вопросов, охватывающие предпринимательство, маркетинг, продажи, управление. Идеально для ежедневной практики.',
     image:
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
     breadcrumb: {
@@ -88,7 +88,7 @@ export default async function ExploreQuestionsPage() {
       '@id': getBaseUrl(),
     },
     keywords:
-      'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
+      'изучение бизнеса бесплатно, обучение предпринимательству, интерактивные бизнес-задачи, ежедневная практика бизнеса, персональный план обучения, развитие бизнес-навыков, лучшая платформа изучения бизнеса, AI помощь в бизнесе',
     publisher: {
       '@type': 'Organization',
       name: 'BizLevel',
@@ -110,7 +110,7 @@ export default async function ExploreQuestionsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="flex flex-col gap-y-12 max-w-7xl mx-auto">
-        <Hero heading="Library" subheading={heroDescription} container={true} />
+        <Hero heading="Библиотека" subheading={heroDescription} container={true} />
         <div className="lg:container flex flex-col lg:flex-row mt-5 gap-16">
           <div className="w-full flex flex-col gap-12">
             {categories.map((category) => (

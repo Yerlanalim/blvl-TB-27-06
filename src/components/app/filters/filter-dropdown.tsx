@@ -166,7 +166,8 @@ export default function FilterDropdown() {
                 Question Type
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black border border-black-50 text-white">
-                {['CODING_CHALLENGE', 'MULTIPLE_CHOICE'].map((type) => (
+                {/* BIZLEVEL: Скрыты технические типы, показываем только бизнес-типы */}
+                {['MULTIPLE_CHOICE', 'VIDEO'].map((type) => (
                   <DropdownMenuItem
                     key={type}
                     onClick={() => updateQueryParams('questionType', type)}
