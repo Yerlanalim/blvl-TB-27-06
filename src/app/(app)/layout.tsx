@@ -19,6 +19,7 @@ import { getSuggestions } from '@/utils/data/questions/get-suggestions';
 import { Onborda, OnbordaProvider } from 'onborda';
 import { TourCard } from '@/components/app/shared/question/tour-card';
 import { steps } from '@/lib/onborda';
+import LeoChat from '@/components/app/leo-chat/leo-chat';
 
 export async function generateMetadata() {
   return createMetadata({
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </CSPostHogProvider>
               </SidebarLayout>
               <Toaster className="bg-black" />
+              <LeoChat />
             </SidebarProvider>
           </Onborda>
         </OnbordaProvider>
