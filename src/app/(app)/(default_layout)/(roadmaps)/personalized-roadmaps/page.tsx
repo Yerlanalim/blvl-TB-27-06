@@ -65,13 +65,13 @@ const roadmapHeroDescription = (
 
 const upgradeDescription = (
   <div className="flex flex-col gap-y-2">
-    <p className="text-gray-400">
+    <span className="text-gray-400">
       Looking for a more personalized experience? Upgrade to a premium account to unlock
       personalized roadmaps.{' '}
       <Link href={getUpgradeUrl()} className="text-accent underline">
         Learn more
       </Link>
-    </p>
+    </span>
   </div>
 );
 

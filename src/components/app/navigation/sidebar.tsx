@@ -76,7 +76,13 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
-  console.log('suggestion', suggestion);
+  // Only log suggestion changes in development mode with proper dependencies
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development' && suggestion) {
+      console.log('suggestion updated', suggestion);
+    }
+  }, [suggestion]);
+
   const pathname = usePathname();
 
   const { state, setOpenMobile } = useSidebar();

@@ -25,13 +25,13 @@ import { getUpgradeUrl } from '@/utils';
 
 const upgradeDescription = (
   <div className="flex flex-col gap-y-2">
-    <p className="text-gray-400">
+    <span className="text-gray-400">
       Looking for an in-depth analysis of your coding skills? Upgrade to Premium to generate
       detailed reports.{' '}
       <Link href={getUpgradeUrl()} className="text-accent underline">
         Learn more
       </Link>
-    </p>
+    </span>
   </div>
 );
 
