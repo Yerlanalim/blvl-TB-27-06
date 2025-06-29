@@ -40,7 +40,7 @@ export default function OnboardingStepTwo() {
   useEffect(() => {
     // set the selected in the context
     setSelectedTags(selectedTags);
-  }, [selectedTags]);
+  }, [selectedTags, setSelectedTags]);
 
   const progress = (selectedTags.length / 5) * 100;
 

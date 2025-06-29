@@ -5,42 +5,80 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Select, SelectItem, SelectTrigger, SelectContent } from '@/components/ui/select';
 import type { UserRecord } from '@/types';
 
-import { useState } from 'react';
-import { themes } from 'prism-react-renderer';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { updateUser } from '@/actions/user/authed/update-user';
 
 export default function ChangeCodeTheme({ user }: { user: UserRecord | null }) {
-  const [selectedTheme, setSelectedTheme] = useState<keyof typeof themes>(
-    'vs-dark' as keyof typeof themes
-  );
+  const [selectedTheme, setSelectedTheme] = useState<string>('vs-dark');
+  const [themes, setThemes] = useState<Record<string, any>>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // BIZLEVEL: Динамическая загрузка themes для оптимизации bundle
+  useEffect(() => {
+    let mounted = true;
+    
+    import('prism-react-renderer')
+      .then(({ themes }) => {
+        if (mounted) {
+          setThemes(themes);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (mounted) {
+          // Fallback themes если загрузка не удалась
+          setThemes({
+            'vs-dark': {},
+            'vs-light': {},
+            'github': {},
+            'dracula': {},
+          });
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
-    setSelectedTheme(user?.codeEditorTheme as keyof typeof themes);
+    if (user?.codeEditorTheme) {
+      setSelectedTheme(user.codeEditorTheme);
+    }
   }, [user]);
 
-  const handleThemeChange = async (theme: keyof typeof themes) => {
+  const handleThemeChange = async (theme: string) => {
     console.log('theme', theme);
     setSelectedTheme(theme);
     await updateUser({ userDetails: { codeEditorTheme: theme } });
   };
+
+  if (isLoading) {
+    return <EditorIcon />;
+  }
+
+  const themeOptions = Object.keys(themes).map((key) => ({
+    value: key,
+    label: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'),
+  }));
 
   return (
     <Popover>
       <PopoverTrigger>
         <EditorIcon />
       </PopoverTrigger>
-      <PopoverContent
-        className="bg-black-100 text-white border border-black-50 flex flex-col gap-y-2"
-        align="end"
-      >
-        <h5 className="text-lg font-semibold mb-2">Code Theme</h5>
-        <Select onValueChange={handleThemeChange} value={selectedTheme}>
-          <SelectTrigger className="border border-black-50 w-full">{selectedTheme}</SelectTrigger>
+      <PopoverContent className="w-auto p-2">
+        <Select value={selectedTheme} onValueChange={handleThemeChange}>
+          <SelectTrigger className="w-[180px]">
+            <span className="text-xs">
+              {themeOptions.find((theme) => theme.value === selectedTheme)?.label || 'Select theme'}
+            </span>
+          </SelectTrigger>
           <SelectContent>
-            {Object.entries(themes).map(([key]) => (
-              <SelectItem key={key} value={key}>
-                {key}
+            {themeOptions.map((theme) => (
+              <SelectItem key={theme.value} value={theme.value}>
+                <span className="text-xs">{theme.label}</span>
               </SelectItem>
             ))}
           </SelectContent>

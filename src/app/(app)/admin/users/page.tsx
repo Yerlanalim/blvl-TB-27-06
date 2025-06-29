@@ -1,11 +1,26 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
-import UserChart from '@/components/app/admin/user/user-chart';
-import UsersStatsCard from '@/components/app/admin/user/users-stats-card';
-import ActiveUsersMap from '@/components/app/admin/user/active-users-map';
 import { prisma } from '@/lib/prisma';
-import RecentUsers from '@/components/app/admin/user/recent-users';
+
+// BIZLEVEL: Dynamic imports для оптимизации bundle size - chart компоненты загружаются только при необходимости
+const UserChart = dynamic(() => import('@/components/app/admin/user/user-chart'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+const UsersStatsCard = dynamic(() => import('@/components/app/admin/user/users-stats-card'), {
+  loading: () => <div className="h-24 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+const ActiveUsersMap = dynamic(() => import('@/components/app/admin/user/active-users-map'), {
+  loading: () => <div className="h-96 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+const RecentUsers = dynamic(() => import('@/components/app/admin/user/recent-users'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | User Analytics',

@@ -1,7 +1,13 @@
 import { Metadata } from 'next';
-import PseoForm from '@/components/app/admin/pseo/pseo-form';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
 import Link from 'next/link';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - PseoForm загружается только при необходимости
+const PseoForm = dynamic(() => import('@/components/app/admin/pseo/pseo-form'), {
+  loading: () => <div className="h-96 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | PSEO Page Management',

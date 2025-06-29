@@ -31,7 +31,6 @@ export default function OnboardingInitialQuestions() {
     itemVariants,
     setCanContinue,
     setTotalXp,
-    user,
     setUser,
     questions,
     answerUserOnboardingQuestions,
@@ -65,6 +64,25 @@ export default function OnboardingInitialQuestions() {
     return correctCount * 10 + incorrectCount * 2 + opinionQuestions * 5;
   }, [correctAnswers, questions]);
 
+  const determineUserExperienceLevel = useCallback(() => {
+    const correctCount = correctAnswers.filter((isCorrect) => isCorrect === true).length;
+    const knowledgeQuestions = correctAnswers.filter(
+      (_, index) => questions[index].correctAnswerIndex !== null
+    ).length;
+
+    // Calculate the ratio and convert to a valid UserExperienceLevel
+    const ratio = correctCount / knowledgeQuestions;
+    const experienceLevel = Object.keys(USER_LEVEL_TO_TITLE).find(
+      (level) => USER_LEVEL_TO_TITLE[level as keyof typeof USER_LEVEL_TO_TITLE] === ratio
+    ) as UserExperienceLevel;
+
+    // Update the user with the correct property name that exists in the user object
+    setUser((prevUser) => ({
+      ...prevUser,
+      experienceLevel,
+    }));
+  }, [correctAnswers, questions, setUser]);
+
   // Process results only once when all questions are answered
   useEffect(() => {
     if (answers.length === questions.length && !resultsProcessed) {
@@ -96,9 +114,13 @@ export default function OnboardingInitialQuestions() {
     setTotalXp,
     calculateXpToAwardToUser,
     resultsProcessed,
+    answerUserOnboardingQuestions,
+    correctAnswers,
+    determineUserExperienceLevel,
+    questions,
   ]);
 
-  const handleSelectAnswer = (answer: string, optionIndex: number) => {
+  const handleSelectAnswer = useCallback((answer: string, optionIndex: number) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
@@ -117,7 +139,7 @@ export default function OnboardingInitialQuestions() {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     }
-  };
+  }, [answers, currentQuestion, questions, correctAnswers]);
 
   const getScoreSummary = useCallback(() => {
     const answeredQuestions = correctAnswers.filter(
@@ -138,25 +160,6 @@ export default function OnboardingInitialQuestions() {
   const handlePrevious = () => {
     setCurrentQuestion(Math.max(0, currentQuestion - 1));
   };
-
-  const determineUserExperienceLevel = useCallback(() => {
-    const correctCount = correctAnswers.filter((isCorrect) => isCorrect === true).length;
-    const knowledgeQuestions = correctAnswers.filter(
-      (_, index) => questions[index].correctAnswerIndex !== null
-    ).length;
-
-    // Calculate the ratio and convert to a valid UserExperienceLevel
-    const ratio = correctCount / knowledgeQuestions;
-    const experienceLevel = Object.keys(USER_LEVEL_TO_TITLE).find(
-      (level) => USER_LEVEL_TO_TITLE[level as keyof typeof USER_LEVEL_TO_TITLE] === ratio
-    ) as UserExperienceLevel;
-
-    // Update the user with the correct property name that exists in the user object
-    setUser((prevUser) => ({
-      ...prevUser,
-      experienceLevel,
-    }));
-  }, [correctAnswers, questions, setUser, user]);
 
   const hasAnsweredAllQuestions = answers.length === questions.length;
 
@@ -184,7 +187,7 @@ export default function OnboardingInitialQuestions() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentQuestion, answers, questions]);
+  }, [currentQuestion, answers, questions, handleSelectAnswer]);
 
   // Pagination dots component
   const PaginationDots = () => (

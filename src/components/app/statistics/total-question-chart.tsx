@@ -101,7 +101,7 @@ export default function QuestionChart({
       isNeutral: percentageChange === 0,
       isUp: percentageChange > 0,
     };
-  }, [chartData]);
+  }, [chartData, orderedChartData]);
 
   const maxQuestions = useMemo(() => {
     return Math.max(...chartData.map((data) => data.questions));

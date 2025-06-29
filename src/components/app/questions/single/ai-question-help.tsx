@@ -11,7 +11,8 @@ import { Send, Infinity } from 'lucide-react';
 import { Tooltip, TooltipTrigger, TooltipProvider, TooltipContent } from '@/components/ui/tooltip';
 
 import { motion } from 'framer-motion';
-import { capitalize } from 'lodash';
+// BIZLEVEL: Заменяем lodash на нативную JS функцию
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 import { DefaultRoadmapQuestions } from '@prisma/client';
 import type { Question, UserRecord, RoadmapUserQuestions } from '@/types';

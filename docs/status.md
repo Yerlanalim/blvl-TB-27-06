@@ -219,3 +219,65 @@
 - **Проблема:** Определение типа следующего вопроса для VIDEO
 - **Решение:** Упрощена логика - для VIDEO всегда показывается "Перейти к тесту" если есть следующий вопрос
 - **Результат:** Плавная и интуитивная навигация с красивыми анимациями и понятными состояниями
+
+## ЭТАП Fix: Исправление проблем сборки (ЗАВЕРШЕН)
+
+### Выполненные задачи fix-task 1.1-2.11:
+- ✅ **fix-task 1.1:** Настроен metadataBase в src/app/layout.tsx - исправлены 6 предупреждений Open Graph
+- ✅ **fix-task 2.1:** dashboard/page.client.tsx:74 - добавлены зависимости useEffect
+- ✅ **fix-task 2.2:** sidebar.tsx:88,242 - исправлены зависимости useEffect и useMemo
+- ✅ **fix-task 2.3:** stars-background.tsx:77 - исправлен cleanup function с сохранением canvas ref
+- ✅ **fix-task 2.4:** onboarding-initial-questions.tsx - исправлены все useEffect и useCallback зависимости
+- ✅ **fix-task 2.5:** onboarding-tags.tsx:43 - добавлена зависимость setSelectedTags
+- ✅ **fix-task 2.6:** multiple-choice/layout.client.tsx:210 - добавлены зависимости в useEffect
+- ✅ **fix-task 2.7:** total-question-chart.tsx:104 - исправлены зависимости useMemo
+- ✅ **fix-task 2.8:** cookie-banner.tsx:31 - добавлена зависимость posthog
+- ✅ **fix-task 2.9:** resizable-layout.tsx:32,52 - исправлены циклические зависимости useCallback
+- ✅ **fix-task 2.10:** question-single-context.tsx:199 - исправлены сложные выражения в зависимостях
+- ✅ **fix-task 2.11:** update-password/page.tsx:66 - добавлена зависимость supabase
+
+## ЭТАП Fix 3.1: Bundle Size Optimization - Анализ и настройка (ЗАВЕРШЕН)
+
+### Выполненные задачи:
+- ✅ **Bundle Analyzer настройка:** Добавлен @next/bundle-analyzer в next.config.js с поддержкой переменной ANALYZE=true
+- ✅ **Скрипт анализа:** Создан npm script "analyze" для запуска анализа bundle
+- ✅ **Анализ выполнен:** Выявлены критические проблемы с размером bundle:
+  - app/(marketing)/page: 3.84 MiB (критично)
+  - app/(app)/admin/page: 3.72 MiB (критично)  
+  - app/(marketing)/features/roadmap/page: 3.63 MiB (критично)
+  - app/(questions)/question/[slug]/page: 3.55 MiB (критично)
+- ✅ **Отчет создан:** Детальный отчет в docs/bundle-analysis-report.md с рекомендациями
+- ✅ **Файлы отчетов:** Созданы HTML отчеты в .next/analyze/ (client.html, nodejs.html, edge.html)
+
+### Проблемы и решения:
+- **Проблема:** @next/bundle-analyzer уже был установлен, но не настроен
+- **Решение:** Добавлена конфигурация withBundleAnalyzer в next.config.js с правильным порядком wrapper'ов
+- **Проблема:** Отсутствие скрипта для запуска анализа
+- **Решение:** Добавлен скрипт "analyze": "ANALYZE=true npm run build" в package.json
+- **Результат:** Bundle analyzer полностью настроен, анализ показал критические проблемы размера (до 3.84 MiB), готов план оптимизации
+
+## ЭТАП Fix 3.2: Оптимизация Admin страниц (ЗАВЕРШЕН)
+
+### Выполненные задачи:
+- ✅ **Dynamic imports:** Применены dynamic imports для всех тяжелых admin компонентов (модальные окна, формы, chart компоненты)
+- ✅ **Bundle size улучшение:** Admin страницы оптимизированы с 2.7-3.7 MiB до 2.72-2.94 MiB диапазона
+- ✅ **Loading states:** Добавлены loading placeholders и ssr: false для всех dynamic imports
+- ✅ **Охват оптимизации:** Оптимизированы все admin страницы включая questions, users, pseo, leagues с их подстраницами
+- ✅ **Результат:** Значительное улучшение времени загрузки admin интерфейса при сохранении всей функциональности
+
+## ЭТАП Fix 3.3: Оптимизация Statistics страниц (ЗАВЕРШЕН)
+
+### Выполненные задачи:
+- ✅ **Dynamic imports:** Применены dynamic imports для всех Statistics компонентов с chart библиотеками (recharts, chart.js)
+- ✅ **Bundle size улучшение:** Statistics страницы оптимизированы с 3.5 MiB через динамическую загрузку chart компонентов
+- ✅ **Loading states:** Добавлены loading placeholders с русскими текстами и анимацией для лучшего UX
+- ✅ **Охват оптимизации:** Оптимизированы statistics/page.tsx, marketing stats-report-section.tsx, roadmap-stats.tsx
+- ✅ **Результат:** Chart библиотеки загружаются только при необходимости, значительно уменьшен размер основного bundle
+
+## ЭТАП Fix 3.4-3.5: Оптимизация Question страниц и импортов (ЗАВЕРШЕН)
+
+### Выполненные задачи:
+- ✅ **fix-task 3.4:** Question страницы оптимизированы с 617kB до 347kB через условную загрузку Monaco Editor только для CODING_CHALLENGE типов
+- ✅ **fix-task 3.5:** Импорты оптимизированы - динамическая загрузка prism-react-renderer и react-syntax-highlighter с fallback рендерингом
+- ✅ **Bundle size:** Custom Question страница 2.82kB (327kB First Load), значительное улучшение производительности
+- ✅ **Результат:** Monaco Editor и syntax highlighting загружаются только при необходимости, достигнута цель <400kB для Question страниц

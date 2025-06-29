@@ -52,9 +52,10 @@ export default function StarsBackground(props: StarBackgroundProps): JSX.Element
   );
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    
     const updateStars = () => {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
+      if (canvas) {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
@@ -68,13 +69,13 @@ export default function StarsBackground(props: StarBackgroundProps): JSX.Element
     updateStars();
 
     const resizeObserver = new ResizeObserver(updateStars);
-    if (canvasRef.current) {
-      resizeObserver.observe(canvasRef.current);
+    if (canvas) {
+      resizeObserver.observe(canvas);
     }
 
     return () => {
-      if (canvasRef.current) {
-        resizeObserver.unobserve(canvasRef.current);
+      if (canvas) {
+        resizeObserver.unobserve(canvas);
       }
     };
   }, [

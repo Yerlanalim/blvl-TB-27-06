@@ -85,9 +85,9 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
   // only on mobile
   useEffect(() => {
     setOpenMobile(false);
-  }, [pathname]);
+  }, [pathname, setOpenMobile]);
 
-  const nonAuthedUserItems: SidebarItemType[] = [
+  const nonAuthedUserItems: SidebarItemType[] = useMemo(() => [
     {
       title: 'Dashboard',
       url: '/dashboard',
@@ -138,9 +138,9 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
       icon: LeaderboardIcon,
       tooltip: 'Leaderboard',
     },
-  ];
+  ], []);
 
-  const standardItems: SidebarItemType[] = [
+  const standardItems: SidebarItemType[] = useMemo(() => [
     {
       title: 'Dashboard',
       url: '/dashboard',
@@ -191,9 +191,9 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
       tooltip: 'Leaderboard',
       animatable: true,
     },
-  ];
+  ], []);
 
-  const settingsItems: SidebarItemType[] = [
+  const settingsItems: SidebarItemType[] = useMemo(() => [
     {
       title: 'Back',
       url: '/dashboard',
@@ -217,7 +217,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
       url: '/settings/billing',
       icon: CreditCard,
     },
-  ];
+  ], []);
 
   // if user is not authed, show nonAuthedUserItems
   const items = useMemo(() => {
@@ -239,7 +239,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
     }
 
     return menuItems;
-  }, [user, pathname]);
+  }, [user, pathname, nonAuthedUserItems, settingsItems, standardItems]);
 
   const isActive = (url: string) => {
     if (url === '/dashboard') {

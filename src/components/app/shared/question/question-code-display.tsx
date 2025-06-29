@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Editor } from '@monaco-editor/react';
-import { capitalize } from 'lodash';
+// BIZLEVEL: Заменяем lodash на нативную JS функцию
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 import type { z } from 'zod';
 import type { answerHelpSchema } from '@/lib/zod/schemas/ai/answer-help';
 import type { Question, RoadmapUserQuestions, UserRecord } from '@/types';

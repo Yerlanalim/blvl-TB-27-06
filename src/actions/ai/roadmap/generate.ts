@@ -8,7 +8,8 @@ import { generateRoadmapResponse } from './utils/generate-roadmap';
 import { revalidateTag } from 'next/cache';
 import type { QuestionDifficulty } from '@/types';
 import { getUser } from '@/actions/user/authed/get-user';
-import { uniqueId } from 'lodash';
+// BIZLEVEL: Заменяем lodash uniqueId на нативную JS функцию
+const uniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 import { createOrFetchUserRoadmap } from '@/actions/roadmap/create-or-fetch-user-roadmap';
 
 interface RoadmapQuestion {

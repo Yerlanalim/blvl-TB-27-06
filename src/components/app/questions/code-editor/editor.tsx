@@ -4,7 +4,8 @@ import React, { useState, memo, useEffect } from 'react';
 import { Editor, useMonaco } from '@monaco-editor/react';
 import LoadingSpinner from '@/components/ui/loading';
 import { useQuestionSingle } from '@/contexts/question-single-context';
-import { capitalize } from 'lodash';
+// BIZLEVEL: Заменяем lodash на нативную JS функцию
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 import { AnimatePresence, motion } from 'framer-motion';
 import { BUSINESS_FACTS } from '@/utils/constants/business-facts';
 import { useLocalStorage } from '@/hooks/use-local-storage';

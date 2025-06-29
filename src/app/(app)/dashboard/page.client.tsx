@@ -71,7 +71,7 @@ export default function ClientPage({
     if (onboardingRequired === 'true') {
       setShouldRedirect(true);
     }
-  }, []);
+  }, [hasAnsweredEnoughQuestions, router, user?.howDidYouHearAboutBizLevel, user?.username]);
 
   // Second effect to handle the actual redirect
   useEffect(() => {

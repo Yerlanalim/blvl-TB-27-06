@@ -1,9 +1,22 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
-import NewQuestionModal from '@/components/app/admin/questions/new-question-modal';
-import NewCodingChallengeQuestionModal from '@/components/app/admin/questions/new-coding-challenge-modal';
-import NewSimpleMultipleChoiceModal from '@/components/app/admin/questions/new-simple-multiple-choice-modal';
+import { Button } from '@/components/ui/button';
+
+// BIZLEVEL: Dynamic imports для оптимизации bundle size - тяжелые модальные компоненты загружаются только при клике
+const NewQuestionModal = dynamic(() => import('@/components/app/admin/questions/new-question-modal'), {
+  loading: () => <Button disabled>Загрузка...</Button>,
+  ssr: false
+});
+const NewCodingChallengeQuestionModal = dynamic(() => import('@/components/app/admin/questions/new-coding-challenge-modal'), {
+  loading: () => <Button disabled>Загрузка...</Button>,
+  ssr: false
+});
+const NewSimpleMultipleChoiceModal = dynamic(() => import('@/components/app/admin/questions/new-simple-multiple-choice-modal'), {
+  loading: () => <Button disabled>Загрузка...</Button>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | Question Management',

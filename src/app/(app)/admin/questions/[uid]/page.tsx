@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
 import { prisma } from '@/lib/prisma';
-import QuestionForm from '@/components/app/admin/questions/question-form';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - QuestionForm загружается только при необходимости
+const QuestionForm = dynamic(() => import('@/components/app/admin/questions/question-form'), {
+  loading: () => <div className="h-96 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 interface QuestionEditPageProps {
   params: {

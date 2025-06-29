@@ -14,7 +14,8 @@
     "knip": "knip",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "1.1.13",

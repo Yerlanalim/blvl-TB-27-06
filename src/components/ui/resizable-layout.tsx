@@ -25,12 +25,6 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
   const horizontalResizerRef = useRef<HTMLDivElement>(null);
   const verticalResizerRef = useRef<HTMLDivElement>(null);
 
-  const handleHorizontalMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    document.addEventListener('mousemove', handleHorizontalMouseMove);
-    document.addEventListener('mouseup', handleHorizontalMouseUp);
-  }, []);
-
   const handleHorizontalMouseMove = useCallback((e: MouseEvent) => {
     if (containerRef.current) {
       const containerRect = containerRef.current.getBoundingClientRect();
@@ -43,12 +37,12 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
   const handleHorizontalMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleHorizontalMouseMove);
     document.removeEventListener('mouseup', handleHorizontalMouseUp);
-  }, [handleHorizontalMouseMove]);
+  }, []);
 
-  const handleVerticalMouseDown = useCallback((e: React.MouseEvent) => {
+  const handleHorizontalMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    document.addEventListener('mousemove', handleVerticalMouseMove);
-    document.addEventListener('mouseup', handleVerticalMouseUp);
+    document.addEventListener('mousemove', handleHorizontalMouseMove);
+    document.addEventListener('mouseup', handleHorizontalMouseUp);
   }, []);
 
   const handleVerticalMouseMove = useCallback((e: MouseEvent) => {
@@ -65,7 +59,13 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
   const handleVerticalMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleVerticalMouseMove);
     document.removeEventListener('mouseup', handleVerticalMouseUp);
-  }, [handleVerticalMouseMove]);
+  }, []);
+
+  const handleVerticalMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    document.addEventListener('mousemove', handleVerticalMouseMove);
+    document.addEventListener('mouseup', handleVerticalMouseUp);
+  }, []);
 
   useEffect(() => {
     const horizontalResizer = horizontalResizerRef.current;

@@ -1,7 +1,8 @@
 'use server';
 import { revalidateTag } from 'next/cache';
 
-import { uniqueId } from 'lodash';
+// BIZLEVEL: Заменяем lodash uniqueId на нативную JS функцию
+const uniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 import { createUserMissionRecords } from '../daily-missions/create-user-missions-record';
 import { sendStudyPathCompleteEmail } from '../study-paths/send-path-complete-email';
 

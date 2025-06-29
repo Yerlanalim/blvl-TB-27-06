@@ -1,8 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
-import NewQuestionModal from '@/components/app/admin/questions/new-question-modal';
-import NewCodingChallengeQuestionModal from '@/components/app/admin/questions/new-coding-challenge-modal';
+// BIZLEVEL: Dynamic imports для оптимизации bundle size - admin компоненты загружаются только при необходимости
+const NewQuestionModal = dynamic(() => import('@/components/app/admin/questions/new-question-modal'), {
+  loading: () => <Button disabled className="w-fit">Загрузка...</Button>,
+  ssr: false
+});
+const NewCodingChallengeQuestionModal = dynamic(() => import('@/components/app/admin/questions/new-coding-challenge-modal'), {
+  loading: () => <Button disabled className="w-fit">Загрузка...</Button>,
+  ssr: false
+});
 import { addSlugFlagToQuestion, addSlugToQuestion } from '@/scripts/add-slug-to-question';
 import { addUidAsUsername } from '@/scripts/add-uid-as-username';
 import { addIsCustomUsernameToUser } from '@/scripts/add-is-custom-username-to-user';

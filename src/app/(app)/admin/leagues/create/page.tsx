@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
 import { ArrowLeft } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import CreateLeagueForm from '@/components/app/admin/leagues/create-league-form';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - CreateLeagueForm загружается только при необходимости
+const CreateLeagueForm = dynamic(() => import('@/components/app/admin/leagues/create-league-form'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | Create League',

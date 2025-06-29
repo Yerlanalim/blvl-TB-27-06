@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
 import { prisma } from '@/lib/prisma';
-import EditLeagueForm from '@/components/app/admin/leagues/edit-league-form';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - EditLeagueForm загружается только при необходимости
+const EditLeagueForm = dynamic(() => import('@/components/app/admin/leagues/edit-league-form'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | Edit League',

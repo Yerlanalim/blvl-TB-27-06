@@ -63,7 +63,7 @@ export default function UpdatePasswordPage() {
     };
 
     validateToken();
-  }, [router]);
+  }, [router, supabase.auth]);
 
   const handlePasswordReset = async (values: SchemaProps) => {
     const { password, confirmPassword } = values;

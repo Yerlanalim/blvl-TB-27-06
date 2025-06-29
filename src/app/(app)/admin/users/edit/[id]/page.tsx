@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import AdminContainer from '@/components/app/admin/admin-container';
 import { prisma } from '@/lib/prisma';
-import UserEditForm from '@/components/app/admin/user/user-edit-form';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - UserEditForm загружается только при необходимости
+const UserEditForm = dynamic(() => import('@/components/app/admin/user/user-edit-form'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: 'BizLevel | Edit User',

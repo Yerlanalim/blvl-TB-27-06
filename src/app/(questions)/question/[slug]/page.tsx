@@ -15,9 +15,27 @@ const CodeDisplayWrapper = dynamic(
     ssr: false,
   }
 );
-const CodeEditor = lazy(() => import('@/components/app/questions/code-editor/editor'));
-const TestCaseSection = lazy(
-  () => import('@/components/app/questions/code-editor/test-case-section')
+
+// BIZLEVEL: Условная загрузка Monaco Editor только для CODING_CHALLENGE
+const CodeEditor = dynamic(
+  () => import('@/components/app/questions/code-editor/editor'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-[90vh]">
+        <LoadingSpinner />
+      </div>
+    ),
+  }
+);
+
+// BIZLEVEL: Условная загрузка TestCase только для CODING_CHALLENGE с test cases
+const TestCaseSection = dynamic(
+  () => import('@/components/app/questions/code-editor/test-case-section'),
+  {
+    ssr: false,
+    loading: () => <LoadingSpinner />,
+  }
 );
 
 const TourStartModal = lazy(() => import('@/components/app/shared/question/tour-start-modal'));
@@ -25,6 +43,7 @@ const PremiumContentWrapper = lazy(
   () => import('@/components/app/shared/question/premium-content-wrapper')
 );
 
+// BIZLEVEL: Условная загрузка UI элементов только для CODING_CHALLENGE
 const AiQuestionHelp = dynamic(() => import('@/components/app/questions/single/ai-question-help'), {
   ssr: false,
   loading: () => <StarsIcon className="size-4 text-yellow-400 fill-yellow-500" />,
@@ -57,6 +76,7 @@ import { getRandomQuestion } from '@/utils/data/questions/get-random';
 
 import { useUserServer } from '@/hooks/use-user-server';
 import LoadingSpinner from '@/components/ui/loading';
+// BIZLEVEL: Оптимизированные именованные импорты вместо wildcard
 import { Expand, StarsIcon } from 'lucide-react';
 import EditorIcon from '@/components/ui/icons/editor';
 import WindowCode2 from '@/components/ui/icons/window-code';
@@ -116,6 +136,9 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
     </div>
   );
 
+  // BIZLEVEL: Условное отображение элементов только для CODING_CHALLENGE
+  const isCodingChallenge = question?.questionType === 'CODING_CHALLENGE';
+
   const rightContent = (
     <div
       className={`hidden lg:flex flex-col gap-4 p-3 lg:pl-1.5 h-full ${
@@ -126,24 +149,33 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
         id="code-snippet"
         className="bg-black-75 border border-black-50 rounded-xl relative h-full overflow-y-auto scrollable-element"
       >
-        <div className="px-4 py-2.5 text-sm flex w-full justify-between items-center bg-black-25">
-          <span className="text-xs font-medium flex items-center gap-x-2">
-            <WindowCode2 width="1.25em" height="1.25em" />
-            Code
-          </span>
-          <div className="flex items-center gap-x-3">
-            <AiQuestionHelp question={question} user={user} questionType="regular" />
-            <ChangeCodeTheme user={user} />
-            {question.codeSnippet && <ExpandedCodeModal code={question.codeSnippet} />}
-          </div>
-        </div>
-        <Separator className="bg-black-50" />
-        {question?.questionType === 'CODING_CHALLENGE' ? <CodeEditor /> : <CodeDisplayWrapper />}
+        {/* BIZLEVEL: Условное отображение заголовка и контролов только для CODING_CHALLENGE */}
+        {isCodingChallenge && (
+          <>
+            <div className="px-4 py-2.5 text-sm flex w-full justify-between items-center bg-black-25">
+              <span className="text-xs font-medium flex items-center gap-x-2">
+                <WindowCode2 width="1.25em" height="1.25em" />
+                Code
+              </span>
+              <div className="flex items-center gap-x-3">
+                <AiQuestionHelp question={question} user={user} questionType="regular" />
+                <ChangeCodeTheme user={user} />
+                {question.codeSnippet && <ExpandedCodeModal code={question.codeSnippet} />}
+              </div>
+            </div>
+            <Separator className="bg-black-50" />
+          </>
+        )}
+        {/* BIZLEVEL: Условная загрузка Monaco Editor только для CODING_CHALLENGE */}
+        {isCodingChallenge ? <CodeEditor /> : <CodeDisplayWrapper />}
       </div>
     </div>
   );
 
-  const rightBottomContent = question?.testCases?.length ? <TestCaseSection /> : null;
+  // BIZLEVEL: TestCase только для CODING_CHALLENGE с test cases
+  const rightBottomContent = isCodingChallenge && question?.testCases?.length 
+    ? <TestCaseSection /> 
+    : null;
 
   // BIZLEVEL: Специальная обработка для VIDEO типа на мобильных
   if (question.questionType === 'VIDEO') {

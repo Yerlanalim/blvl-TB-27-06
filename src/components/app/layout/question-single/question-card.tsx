@@ -29,7 +29,8 @@ import type { UserRecord, Question } from '@/types';
 import { useQuestionSingle } from '@/contexts/question-single-context';
 
 // utils
-import { capitalize } from 'lodash';
+// BIZLEVEL: Заменяем lodash на нативную JS функцию
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export default function QuestionCard(opts: {
   // optional as this is not required to render the card

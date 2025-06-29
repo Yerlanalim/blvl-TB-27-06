@@ -1,8 +1,7 @@
 import React from 'react';
-import { themes } from 'prism-react-renderer';
 
 interface CodeEditorPreviewProps {
-  theme: keyof typeof themes;
+  theme: string;
 }
 
 // BIZLEVEL: Заглушка для code preview - редактор кода скрыт для бизнес-версии

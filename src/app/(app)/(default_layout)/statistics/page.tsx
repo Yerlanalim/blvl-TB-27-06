@@ -1,17 +1,40 @@
-import StatsRangePicker from '@/components/app/statistics/range-picker';
-import QuestionChart from '@/components/app/statistics/total-question-chart';
-
+import dynamic from 'next/dynamic';
 import { useUserServer } from '@/hooks/use-user-server';
 import { StatsSteps } from '@/types';
-
 import { STATISTICS } from '@/utils/constants';
-
 import { getData } from '@/utils/data/statistics/get-stats-chart-data';
 import Hero from '@/components/shared/hero';
-import SuggestedQuestions from '@/components/app/statistics/suggested-questions';
-import StatisticsReport from '@/components/app/statistics/statistics-report';
-import StatisticsOverviewMenu from '@/components/app/statistics/statistics-overview-menu';
-import QuestionTracker from '@/components/app/statistics/question-tracker';
+
+// BIZLEVEL: Dynamic imports для оптимизации bundle size - chart компоненты загружаются только при необходимости
+const StatsRangePicker = dynamic(() => import('@/components/app/statistics/range-picker'), {
+  loading: () => <div className="h-10 w-32 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+
+const QuestionChart = dynamic(() => import('@/components/app/statistics/total-question-chart'), {
+  loading: () => <div className="h-96 bg-black-75 rounded-lg animate-pulse flex items-center justify-center"><div className="text-gray-400">Загружаем график...</div></div>,
+  ssr: false
+});
+
+const SuggestedQuestions = dynamic(() => import('@/components/app/statistics/suggested-questions'), {
+  loading: () => <div className="h-32 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+
+const StatisticsReport = dynamic(() => import('@/components/app/statistics/statistics-report'), {
+  loading: () => <div className="h-64 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+
+const StatisticsOverviewMenu = dynamic(() => import('@/components/app/statistics/statistics-overview-menu'), {
+  loading: () => <div className="h-10 w-10 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
+
+const QuestionTracker = dynamic(() => import('@/components/app/statistics/question-tracker'), {
+  loading: () => <div className="h-24 bg-black-75 rounded-lg animate-pulse"></div>,
+  ssr: false
+});
 
 export const metadata = {
   title: 'Statistics | bizlevel',

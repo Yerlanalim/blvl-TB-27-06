@@ -4,6 +4,16 @@ import { UbuntuFont } from './styles/fonts/font';
 import { SatoshiFont } from './styles/fonts/font';
 import { InterFont } from './styles/fonts/font';
 import './globals.css';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://bizlevel.kz'),
+  title: {
+    default: 'BizLevel - Обучение бизнесу',
+    template: '%s | BizLevel'
+  },
+  description: 'Платформа для изучения основ бизнеса и предпринимательства',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

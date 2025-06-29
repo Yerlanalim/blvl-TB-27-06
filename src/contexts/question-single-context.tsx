@@ -177,7 +177,8 @@ export const QuestionSingleContextProvider = ({
 
   // Reset state when question changes
   useEffect(() => {
-    devLog(`Question changed: UID=${question.uid}, Lesson Index=${searchParams?.get('lesson')}`);
+    const lessonIndex = searchParams?.get('lesson');
+    devLog(`Question changed: UID=${question.uid}, Lesson Index=${lessonIndex}`);
 
     const resetState = () => {
       setCorrectAnswer('init');
@@ -196,7 +197,7 @@ export const QuestionSingleContextProvider = ({
     };
 
     resetState();
-  }, [searchParams?.get('lesson')]);
+  }, [searchParams, question.uid, question.codeSnippet]);
 
   // Set prefilled code snippet based on selected answer
   useEffect(() => {

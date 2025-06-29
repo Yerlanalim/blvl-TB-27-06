@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeDisplay from '@/components/app/layout/question-single/code-snippet';
 import { useQuestionSingle } from '@/contexts/question-single-context';
-import { capitalize } from 'lodash';
+// BIZLEVEL: Заменяем lodash на нативную JS функцию
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export default function CodeDisplayWrapper() {
   const { prefilledCodeSnippet, user, question, answerHelp } = useQuestionSingle();

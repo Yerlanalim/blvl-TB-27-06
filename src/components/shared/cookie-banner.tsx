@@ -28,7 +28,7 @@ export default function Banner() {
         persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory',
       });
     }
-  }, [consentGiven]);
+  }, [consentGiven, posthog]);
 
   const handleAcceptCookies = () => {
     localStorage.setItem('cookie_consent', 'yes');

@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { Check, Copy, File } from 'lucide-react';
 import JavascriptIcon from './icons/javascript';
@@ -35,53 +33,126 @@ interface CodeBlockProps {
   className?: string;
 }
 
-const lightTheme = {
-  ...nightOwl,
-  'pre[class*="language-"]': {
-    ...nightOwl['pre[class*="language-"]'],
-    background: 'transparent',
-  },
-  'code[class*="language-"]': {
-    ...nightOwl['code[class*="language-"]'],
-    color: 'hsl(var(--foreground))',
-  },
-  comment: {
-    color: 'hsl(var(--muted-foreground))',
-    fontStyle: 'italic',
-  },
-  punctuation: {
-    color: 'hsl(var(--foreground))',
-  },
-  property: {
-    color: '#0550FF',
-  },
-  string: {
-    color: '#14532D',
-  },
-  keyword: {
-    color: '#9333EA',
-  },
-  function: {
-    color: '#E45C3A',
-  },
-  boolean: {
-    color: '#9333EA',
-  },
-  number: {
-    color: '#9333EA',
-  },
-  operator: {
-    color: 'hsl(var(--foreground))',
-  },
-};
+// BIZLEVEL: Динамическая загрузка SyntaxHighlighter для оптимизации bundle
+function DynamicSyntaxHighlighter({
+  code,
+  language,
+}: {
+  code: string;
+  language: string;
+}) {
+  const [SyntaxHighlighter, setSyntaxHighlighter] = useState<any>(null);
+  const [nightOwl, setNightOwl] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-const darkTheme = {
-  ...nightOwl,
-  'pre[class*="language-"]': {
-    ...nightOwl['pre[class*="language-"]'],
-    background: 'transparent',
-  },
-};
+  useEffect(() => {
+    let mounted = true;
+    
+    Promise.all([
+      import('react-syntax-highlighter').then(module => module.Prism),
+      import('react-syntax-highlighter/dist/esm/styles/prism').then(module => module.nightOwl)
+    ])
+      .then(([SyntaxHighlighterComponent, nightOwlTheme]) => {
+        if (mounted) {
+          setSyntaxHighlighter(() => SyntaxHighlighterComponent);
+          setNightOwl(nightOwlTheme);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Показываем простой код блок пока загружается syntax highlighter
+  if (isLoading || !SyntaxHighlighter || !nightOwl) {
+    return (
+      <div className="h-full overflow-auto p-4">
+        <pre
+          style={{
+            margin: 0,
+            background: 'transparent',
+            fontSize: '0.9rem',
+            color: 'hsl(var(--foreground))',
+          }}
+        >
+          <code>{code}</code>
+        </pre>
+      </div>
+    );
+  }
+
+  const lightTheme = {
+    ...nightOwl,
+    'pre[class*="language-"]': {
+      ...nightOwl['pre[class*="language-"]'],
+      background: 'transparent',
+    },
+    'code[class*="language-"]': {
+      ...nightOwl['code[class*="language-"]'],
+      color: 'hsl(var(--foreground))',
+    },
+    comment: {
+      color: 'hsl(var(--muted-foreground))',
+      fontStyle: 'italic',
+    },
+    punctuation: {
+      color: 'hsl(var(--foreground))',
+    },
+    property: {
+      color: '#0550FF',
+    },
+    string: {
+      color: '#14532D',
+    },
+    keyword: {
+      color: '#9333EA',
+    },
+    function: {
+      color: '#E45C3A',
+    },
+    boolean: {
+      color: '#9333EA',
+    },
+    number: {
+      color: '#9333EA',
+    },
+    operator: {
+      color: 'hsl(var(--foreground))',
+    },
+  };
+
+  const darkTheme = {
+    ...nightOwl,
+    'pre[class*="language-"]': {
+      ...nightOwl['pre[class*="language-"]'],
+      background: 'transparent',
+    },
+  };
+
+  return (
+    <div className="h-full overflow-auto">
+      <SyntaxHighlighter
+        language={language}
+        style={document.documentElement.classList.contains('dark') ? darkTheme : lightTheme}
+        customStyle={{
+          margin: 0,
+          padding: '1rem',
+          background: 'transparent',
+          fontSize: '0.9rem',
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </div>
+  );
+}
 
 export function CodeBlock({ files, defaultTitle, className }: CodeBlockProps) {
   const [activeTitle, setActiveTitle] = useState(defaultTitle || files[0]?.title);
@@ -128,66 +199,60 @@ export function CodeBlock({ files, defaultTitle, className }: CodeBlockProps) {
           variant="ghost"
           size="icon"
           onClick={() => copyToClipboard(code)}
-          className="size-8"
+          className="h-8 w-8 text-zinc-400 hover:text-white"
         >
-          {copied ? (
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-              <Icons.check className="size-4 text-white" />
-            </motion.div>
-          ) : (
-            <Icons.copy className="size-4 text-white" />
-          )}
+          <motion.div
+            animate={{ rotate: copied ? 360 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {copied ? <Icons.check className="h-4 w-4" /> : <Icons.copy className="h-4 w-4" />}
+          </motion.div>
         </Button>
       </div>
-      <div className="h-full overflow-auto">
-        <SyntaxHighlighter
-          language={language}
-          style={document.documentElement.classList.contains('dark') ? darkTheme : lightTheme}
-          customStyle={{
-            margin: 0,
-            padding: '1rem',
-            background: 'transparent',
-            fontSize: '0.9rem',
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
+      <div className="max-h-[400px] overflow-auto">
+        <DynamicSyntaxHighlighter code={code} language={language} />
       </div>
     </div>
   );
 }
 
 function getLanguageFromFileName(fileName: string): string {
-  const ext = fileName.split('.').pop()?.toLowerCase();
-  const languageMap: Record<string, string> = {
-    js: 'javascript',
-    jsx: 'jsx',
-    ts: 'typescript',
-    tsx: 'typescript',
-    html: 'html',
-    css: 'css',
-    json: 'json',
-  };
-  return languageMap[ext || ''] || 'javascript';
+  const extension = fileName.split('.').pop()?.toLowerCase();
+  switch (extension) {
+    case 'js':
+    case 'jsx':
+      return 'javascript';
+    case 'ts':
+    case 'tsx':
+      return 'typescript';
+    case 'css':
+      return 'css';
+    case 'html':
+      return 'html';
+    case 'json':
+      return 'json';
+    case 'md':
+      return 'markdown';
+    default:
+      return 'javascript';
+  }
 }
 
 function FileIcon({ fileName }: { fileName: string }) {
-  const ext = fileName.split('.').pop()?.toLowerCase();
-
-  const size = 'size-4';
-
-  switch (ext) {
+  const extension = fileName.split('.').pop()?.toLowerCase();
+  
+  switch (extension) {
     case 'js':
     case 'jsx':
-      return <Icons.javascript className={size} />;
+      return <Icons.javascript className="h-4 w-4" />;
     case 'ts':
     case 'tsx':
-      return <Icons.typescript className={size} />;
+      return <Icons.typescript className="h-4 w-4" />;
     case 'css':
-      return <Icons.css className={size} />;
+      return <Icons.css className="h-4 w-4" />;
     case 'html':
-      return <Icons.html className={size} />;
+      return <Icons.html className="h-4 w-4" />;
     default:
-      return <Icons.file className={size} />;
+      return <Icons.file className="h-4 w-4" />;
   }
 }

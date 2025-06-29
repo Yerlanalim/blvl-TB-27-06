@@ -1,13 +1,19 @@
 'use client';
 
 import { useState, useEffect, useMemo, Suspense } from 'react';
-import QuestionChart from '@/components/app/statistics/total-question-chart';
+import dynamic from 'next/dynamic';
 import SkewedQuestionCards from './skewed-question-cards';
 import { capitalise, generateFakeData, getQuestionDifficultyColor } from '@/utils';
 import { Badge } from '@/components/ui/badge';
 import { motion, AnimatePresence } from 'framer-motion';
 import Chip from '@/components/ui/chip';
 import { Button } from '@/components/ui/button';
+
+// BIZLEVEL: Dynamic import для оптимизации bundle size - chart компонент загружается только при необходимости
+const QuestionChart = dynamic(() => import('@/components/app/statistics/total-question-chart'), {
+  loading: () => <div className="h-96 bg-black-75 rounded-lg animate-pulse flex items-center justify-center"><div className="text-gray-400">Загружаем график...</div></div>,
+  ssr: false
+});
 
 const tags = [
   {

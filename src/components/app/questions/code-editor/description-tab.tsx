@@ -1,5 +1,6 @@
+'use client';
 import type { Question } from '@/types';
-import { Highlight, themes } from 'prism-react-renderer';
+import { useState, useEffect, memo } from 'react';
 
 // markdown to render the question description
 import Markdown from 'react-markdown';
@@ -12,6 +13,86 @@ import Chip from '@/components/ui/chip';
 import { capitalise, getQuestionDifficultyColor } from '@/utils';
 import QuestionHintTrigger from '@/components/app/questions/question-hint-trigger';
 import ShareQuestion from '@/components/app/shared/question/share-question';
+
+// BIZLEVEL: Динамическая загрузка Highlight компонента для оптимизации bundle
+const DynamicCodeHighlight = memo(function DynamicCodeHighlight({
+  children,
+}: {
+  children: string;
+}) {
+  const [HighlightComponent, setHighlightComponent] = useState<any>(null);
+  const [themes, setThemes] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Динамическая загрузка prism-react-renderer только при необходимости
+    let mounted = true;
+    
+    import('prism-react-renderer')
+      .then(({ Highlight, themes }) => {
+        if (mounted) {
+          setHighlightComponent(() => Highlight);
+          setThemes(themes);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Показываем простой код блок пока загружается syntax highlighter
+  if (isLoading || !HighlightComponent || !themes) {
+    return (
+      <pre
+        style={{
+          padding: '1rem',
+          fontSize: '0.875rem',
+          overflow: 'auto',
+          backgroundColor: '#1e1e1e',
+          color: '#d4d4d4',
+          borderRadius: '0.375rem',
+        }}
+      >
+        <code>{children}</code>
+      </pre>
+    );
+  }
+
+  return (
+    <HighlightComponent
+      theme={themes.vsDark}
+      code={children}
+      language="javascript"
+    >
+      {({ className, style, tokens, getLineProps, getTokenProps }: any) => (
+        <pre
+          className={className}
+          style={{
+            ...style,
+            padding: '1rem',
+            fontSize: '0.875rem',
+            overflow: 'auto',
+          }}
+        >
+          {tokens.map((line: any, i: number) => (
+            <div key={i} {...getLineProps({ line, key: i })}>
+              {line.map((token: any, key: number) => (
+                <span key={key} {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </HighlightComponent>
+  );
+});
 
 export default function CodingChallengeDescription(opts: { question: Question }) {
   const { question } = opts;
@@ -55,33 +136,8 @@ export default function CodingChallengeDescription(opts: { question: Question })
           className="flex flex-col gap-4"
           components={{
             code: ({ ...props }) => {
-              return (
-                <Highlight
-                  theme={themes.vsDark}
-                  code={typeof props.children === 'string' ? props.children : ''}
-                  language="javascript"
-                >
-                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre
-                      className={className}
-                      style={{
-                        ...style,
-                        padding: '1rem',
-                        fontSize: '0.875rem',
-                        overflow: 'auto',
-                      }}
-                    >
-                      {tokens.map((line, i) => (
-                        <div key={i} {...getLineProps({ line, key: i })}>
-                          {line.map((token, key) => (
-                            <span key={key} {...getTokenProps({ token, key })} />
-                          ))}
-                        </div>
-                      ))}
-                    </pre>
-                  )}
-                </Highlight>
-              );
+              const codeContent = typeof props.children === 'string' ? props.children : '';
+              return <DynamicCodeHighlight>{codeContent}</DynamicCodeHighlight>;
             },
             ul: ({ children }) => {
               return <ul className="list-disc px-4 flex flex-col gap-3">{children}</ul>;

@@ -1,5 +1,10 @@
 const createMDX = require('@next/mdx');
 
+// BIZLEVEL: Добавлен bundle analyzer для оптимизации размера bundle
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
@@ -123,5 +128,5 @@ const nextConfig = {
   },
 };
 
-// Merge MDX config with Next.js config
-module.exports = createMDX()(nextConfig);
+// BIZLEVEL: Объединяем MDX и Bundle Analyzer конфигурации
+module.exports = withBundleAnalyzer(createMDX()(nextConfig));

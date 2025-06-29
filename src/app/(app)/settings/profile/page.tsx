@@ -11,8 +11,7 @@ import LoadingSpinner from '@/components/ui/loading';
 import LogoutButton from '@/components/auth/logout';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
-import { Select, SelectTrigger, SelectContent, SelectItem } from '@/components/ui/select';
-import CodeEditorPreview from '@/components/app/settings/code-preview';
+
 
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -25,7 +24,6 @@ import { userDetailsSchema } from '@/lib/zod/schemas/user-details-schema';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { UserUpdatePayload } from '@/types';
-import { themes } from 'prism-react-renderer';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { getUpgradeUrl } from '@/utils';
@@ -429,34 +427,6 @@ export default function SettingsProfilePage() {
           />
 
           {/* BIZLEVEL: Скрыто для бизнес-версии - Code editor theme */}
-          {false && (
-            <FormField
-              control={form.control}
-              name="codeEditorTheme"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <div className="space-y-4">
-                      <Select value={field.value || 'vs-dark'} onValueChange={field.onChange}>
-                        <SelectTrigger className="border border-black-50 w-full md:w-[250px]">
-                          {field.value || user?.codeEditorTheme || 'Select a code editor theme'}
-                        </SelectTrigger>
-                        <SelectContent>
-                          {Object.entries(themes).map(([key]) => (
-                            <SelectItem key={key} value={key}>
-                              {key}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <CodeEditorPreview theme={(field.value as keyof typeof themes) || 'vs-dark'} />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
 
           <div className="flex flex-wrap gap-4">
             <Button type="submit" variant="secondary" disabled={isPending} className="text-base">

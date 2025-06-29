@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
@@ -58,13 +58,13 @@ export default function MultipleChoiceLayoutClient({
   const [startTime] = useState<number>(Date.now());
 
   // Create a default object if nextAndPreviousQuestion is null
-  const navigationData = nextAndPreviousQuestion || {
+  const navigationData = useMemo(() => nextAndPreviousQuestion || {
     previousQuestion: null,
     nextQuestion: null,
-  };
+  }, [nextAndPreviousQuestion]);
 
   // Ensure answers is an array of QuestionAnswer objects
-  const answers = Array.isArray(question.answers) ? question.answers : [];
+  const answers = useMemo(() => Array.isArray(question.answers) ? question.answers : [], [question.answers]);
 
   // check if this question has a code snippet or not
   const hasCodeSnippet = question.codeSnippet;
@@ -75,7 +75,7 @@ export default function MultipleChoiceLayoutClient({
     : 'max-w-xs md:max-w-xl lg:max-w-2xl';
 
   // Handle answer selection
-  const handleSelectAnswer = (answer: string, index: number) => {
+  const handleSelectAnswer = useCallback((answer: string, index: number) => {
     // Prevent changing answer after submission
     if (isSubmitted) return;
 
@@ -90,7 +90,7 @@ export default function MultipleChoiceLayoutClient({
       // Reset the result when a new answer is selected
       setIsCorrect(null);
     }
-  };
+  }, [isSubmitted, answers]);
 
   // Handle clearing the selected answer
   const handleClear = () => {
@@ -99,14 +99,14 @@ export default function MultipleChoiceLayoutClient({
     setIsCorrect(null);
   };
 
-  const resetQuestion = () => {
+  const resetQuestion = useCallback(() => {
     setIsSubmitted(false);
     setIsCorrect(null);
     setSelectedAnswerData(null);
-  };
+  }, []);
 
   // Handle submitting the answer
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     if (!selectedAnswerData || isSubmitting) return;
 
     setIsSubmitting(true);
@@ -147,7 +147,7 @@ export default function MultipleChoiceLayoutClient({
       // Move setting isSubmitting to false here to ensure it happens after the request completes
       setIsSubmitting(false);
     }
-  };
+  }, [selectedAnswerData, isSubmitting, question.correctAnswer, question.uid, question.difficulty, startTime]);
 
   // Determine the navigation href with study path params if necessary
   const navigationHref = isSubmitted
@@ -207,7 +207,7 @@ export default function MultipleChoiceLayoutClient({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [answers, selectedAnswerData, isSubmitted, isSubmitting, navigationData, resetQuestion]);
+  }, [answers, selectedAnswerData, isSubmitted, isSubmitting, navigationData, resetQuestion, handleSelectAnswer, handleSubmit, router, setNavigating, navigationHref]);
 
   // Find the correct answer UID for highlighting
   const correctAnswerUid = question.correctAnswer;
