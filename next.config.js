@@ -107,14 +107,78 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config, { isServer }) => {
+  // BIZLEVEL: Улучшенная конфигурация для оптимизации производительности
+  experimental: {
+    // Включаем оптимизацию CSS
+    optimizeCss: true,
+    // Включаем gzipSize анализ
+    gzipSize: true,
+  },
+  // Компрессия
+  compress: true,
+  // Оптимизация шрифтов
+  optimizeFonts: true,
+  webpack: (config, { isServer, dev }) => {
+    // Увеличиваем лимиты производительности
     config.performance = {
       ...config.performance,
       maxAssetSize: 1000000,
       maxEntrypointSize: 1000000,
     };
 
-    if (!isServer && process.env.NODE_ENV === 'development') {
+    // Оптимизация для production
+    if (!dev && !isServer) {
+      // Включаем tree shaking для лучшего удаления неиспользуемого кода
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        // Улучшенное разделение кода
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            // Отдельный chunk для vendor библиотек
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+            },
+            // Отдельный chunk для UI компонентов
+            ui: {
+              test: /[\\/]src[\\/]components[\\/]ui[\\/]/,
+              name: 'ui-components',
+              chunks: 'all',
+              priority: 5,
+            },
+            // Отдельный chunk для admin компонентов
+            admin: {
+              test: /[\\/]src[\\/]components[\\/]app[\\/]admin[\\/]/,
+              name: 'admin-components',
+              chunks: 'all',
+              priority: 5,
+            },
+            // Отдельный chunk для chart библиотек
+            charts: {
+              test: /[\\/]node_modules[\\/](recharts|chart\.js|d3)[\\/]/,
+              name: 'chart-libs',
+              chunks: 'all',
+              priority: 8,
+            },
+            // Отдельный chunk для code editor
+            editor: {
+              test: /[\\/]node_modules[\\/](monaco-editor|prism)[\\/]/,
+              name: 'code-editor',
+              chunks: 'all',
+              priority: 8,
+            },
+          },
+        },
+      };
+    }
+
+    // Warnings фильтр для development
+    if (!isServer && dev) {
       config.stats = {
         ...config.stats,
         warningsFilter: [
@@ -123,6 +187,13 @@ const nextConfig = {
         ],
       };
     }
+
+    // Алиасы для лучшего tree shaking
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Оптимизируем lodash импорты
+      'lodash': 'lodash-es',
+    };
 
     return config;
   },

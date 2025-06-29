@@ -1,6 +1,5 @@
 import { useCallback, useRef } from 'react';
 import { toast } from 'sonner';
-import { Trophy, CheckCircle, Flame, Target } from 'lucide-react';
 
 // BIZLEVEL: Система уведомлений о прогрессе обучения
 interface ProgressNotificationOptions {
@@ -83,7 +82,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
       : `Тест "${lessonName}" завершен!`;
 
     toast.success(message, {
-      icon: <CheckCircle className="w-4 h-4 text-green-500" />,
+      icon: '✅',
       description: `${icon} Отличная работа! Продолжайте обучение.`,
       duration: 4000,
       className: 'bg-black-75 border-green-500/20',
@@ -100,7 +99,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
     if (!checkAndUpdateNotificationState(key)) return;
 
     toast.success(`Уровень "${levelName}" завершен! 🎉`, {
-      icon: <Trophy className="w-4 h-4 text-yellow-500" />,
+      icon: '🏆',
       description: '🏆 Поздравляем! Вы достигли нового уровня мастерства.',
       duration: 6000,
       className: 'bg-black-75 border-yellow-500/20',
@@ -138,7 +137,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
     };
 
     toast.success(`Новое достижение: ${achievementName}! 🏆`, {
-      icon: <Trophy className={`w-4 h-4 ${rarityColor[rarity]}`} />,
+      icon: rarityEmoji[rarity],
       description: `${rarityEmoji[rarity]} Вы получили достижение уровня "${rarity}".`,
       duration: 8000,
       className: 'bg-black-75 border-accent/20',
@@ -170,7 +169,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
     }
 
     toast(message, {
-      icon: <Target className="w-4 h-4 text-accent" />,
+      icon: '🎯',
       description,
       duration: 5000,
       className: 'bg-black-75 border-accent/20',
@@ -202,7 +201,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
     }
 
     toast.success(message, {
-      icon: <Flame className="w-4 h-4 text-orange-500" />,
+      icon: '🔥',
       description,
       duration: 5000,
       className: 'bg-black-75 border-orange-500/20',
@@ -240,7 +239,7 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
     const randomMessage = messageList[Math.floor(Math.random() * messageList.length)];
 
     toast(randomMessage, {
-      icon: <Target className="w-4 h-4 text-accent" />,
+      icon: '🎯',
       duration: 4000,
       className: 'bg-black-75 border-accent/20',
     });

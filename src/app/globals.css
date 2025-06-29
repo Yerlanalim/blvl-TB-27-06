@@ -484,3 +484,96 @@ html {
     width: 100vw;
   }
 }
+
+/* BizLevel Video Player Mobile Optimizations */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Vertical Video Container optimizations */
+.vertical-video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9/16;
+  max-height: 80vh;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .vertical-video-container {
+    border-radius: 0;
+    max-height: 100vh;
+  }
+  
+  /* Hide video controls on mobile when playing */
+  .video-playing .vimeo-controls {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+/* Fullscreen video mode */
+.video-fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* For modern browsers */
+  z-index: 9999;
+  background: black;
+  
+  /* Hide system UI on mobile */
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .video-fullscreen-mode {
+    /* Ensure video takes full screen on mobile */
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    
+    /* Hide address bar and other browser UI */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* Performance optimizations for video */
+.vimeo-player {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Loading spinner improvements */
+.video-loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

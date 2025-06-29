@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import Player from '@vimeo/player';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, ChevronLeft, X } from 'lucide-react';
+
+// Lazy load Vimeo Player only when needed
+const loadVimeoPlayer = () => import('@vimeo/player');
 
 interface VerticalVideoPlayerProps {
   videoId: string;
@@ -33,76 +35,131 @@ export default function VerticalVideoPlayer({
   onExitFullscreen,
 }: VerticalVideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [playerReady, setPlayerReady] = useState(false);
 
-  useEffect(() => {
-    if (!containerRef.current || !videoId) return;
+  // Мемоизированная функция для создания плеера
+  const createPlayer = useCallback(async () => {
+    if (!containerRef.current || !videoId || playerRef.current) return;
 
-    // Проверяем прогресс из localStorage
-    const savedProgress = localStorage.getItem(`videoProgress-${videoId}`);
-    if (savedProgress) {
-      setHasStartedPlaying(true);
-      setShowNextButton(true);
-    }
-
-    // Создаем Vimeo player
-    const vimeoPlayer = new Player(containerRef.current, {
-      id: parseInt(videoId) || 0,
-      width: isFullscreen ? window.innerWidth : 320,
-      height: isFullscreen ? window.innerHeight : 568,
-      responsive: true,
-      playsinline: true, // Важно для мобильных!
-      controls: true,
-      autopause: false,
-      dnt: true, // Не отслеживать пользователей
-      autoplay: false,
-    });
-
-    // Обработчики событий
-    vimeoPlayer.on('loaded', () => {
-      setIsLoading(false);
-    });
-
-    vimeoPlayer.on('play', () => {
-      if (!hasStartedPlaying) {
+    try {
+      // Lazy load Vimeo Player
+      const { default: Player } = await loadVimeoPlayer();
+      
+      // Проверяем прогресс из localStorage
+      const savedProgress = localStorage.getItem(`videoProgress-${videoId}`);
+      if (savedProgress) {
         setHasStartedPlaying(true);
         setShowNextButton(true);
-        onPlay?.();
-        
-        // Сохраняем прогресс в localStorage
-        localStorage.setItem(`videoProgress-${videoId}`, 'started');
       }
-      // Скрываем контролы во время воспроизведения
-      setTimeout(() => setShowControls(false), 3000);
-    });
 
-    vimeoPlayer.on('pause', () => {
-      setShowControls(true);
-    });
+      // Определяем размеры в зависимости от устройства
+      const isMobile = window.innerWidth < 768;
+      const playerWidth = isFullscreen 
+        ? window.innerWidth 
+        : isMobile ? '100%' : 320;
+      const playerHeight = isFullscreen 
+        ? window.innerHeight 
+        : isMobile ? 'auto' : 568;
 
-    vimeoPlayer.on('ended', () => {
-      // Сохраняем завершение в localStorage
-      localStorage.setItem(`videoProgress-${videoId}`, 'completed');
-      setShowControls(true);
-      onComplete?.();
-    });
+      // Создаем Vimeo player с оптимизированными настройками
+      const vimeoPlayer = new Player(containerRef.current, {
+        id: parseInt(videoId) || 0,
+        width: playerWidth,
+        height: playerHeight,
+        responsive: true,
+        playsinline: true, // Критично для мобильных!
+        controls: true,
+        autopause: false,
+        dnt: true, // Не отслеживать пользователей
+        autoplay: false,
+        muted: false, // Позволяем звук
+        background: false, // Не фоновое видео
+        pip: false, // Отключаем picture-in-picture
+        keyboard: true, // Включаем клавиатурные shortcuts
+        transparent: false,
+      });
 
-    vimeoPlayer.on('error', (error) => {
-      console.error('Vimeo player error:', error);
+      playerRef.current = vimeoPlayer;
+
+      // Обработчики событий с улучшенной обработкой ошибок
+      vimeoPlayer.on('loaded', () => {
+        setIsLoading(false);
+        setPlayerReady(true);
+      });
+
+      vimeoPlayer.on('play', () => {
+        if (!hasStartedPlaying) {
+          setHasStartedPlaying(true);
+          setShowNextButton(true);
+          onPlay?.();
+          
+          // Сохраняем прогресс в localStorage
+          localStorage.setItem(`videoProgress-${videoId}`, 'started');
+        }
+        // Скрываем контролы во время воспроизведения на мобильных
+        if (window.innerWidth < 768) {
+          setTimeout(() => setShowControls(false), 2000);
+        }
+      });
+
+      vimeoPlayer.on('pause', () => {
+        setShowControls(true);
+      });
+
+      vimeoPlayer.on('ended', () => {
+        // Сохраняем завершение в localStorage
+        localStorage.setItem(`videoProgress-${videoId}`, 'completed');
+        setShowControls(true);
+        onComplete?.();
+      });
+
+      vimeoPlayer.on('error', (error) => {
+        console.error('Vimeo player error:', error);
+        setIsLoading(false);
+        // Показываем fallback UI при ошибке
+      });
+
+      // Обработка изменения размера экрана
+      const handleResize = () => {
+        if (vimeoPlayer && !isFullscreen) {
+          const isMobile = window.innerWidth < 768;
+          vimeoPlayer.setWidth(isMobile ? '100%' : 320);
+          vimeoPlayer.setHeight(isMobile ? 'auto' : 568);
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+
+    } catch (error) {
+      console.error('Failed to load Vimeo player:', error);
       setIsLoading(false);
-    });
-
-    return () => {
-      vimeoPlayer.destroy();
-    };
+    }
   }, [videoId, onComplete, onPlay, hasStartedPlaying, isFullscreen]);
 
-  // Обработчик свайп-жестов
-  const handlePan = (event: any, info: PanInfo) => {
-    if (!enableSwipeNavigation) return;
+  // Инициализация плеера
+  useEffect(() => {
+    createPlayer();
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
+  }, [createPlayer]);
+
+  // Обработчик свайп-жестов с улучшенной производительностью
+  const handlePan = useCallback((event: any, info: PanInfo) => {
+    if (!enableSwipeNavigation || !playerReady) return;
 
     const threshold = 50; // Минимальное расстояние для срабатывания свайпа
     const velocity = 0.3; // Минимальная скорость
@@ -122,19 +179,33 @@ export default function VerticalVideoPlayer({
     if (isFullscreen && info.offset.y > threshold && Math.abs(info.velocity.y) > velocity) {
       onExitFullscreen?.();
     }
-  };
+  }, [enableSwipeNavigation, playerReady, onNext, onPrevious, isFullscreen, onExitFullscreen]);
 
-  const handleNextClick = () => {
+  const handleNextClick = useCallback(() => {
     onNext ? onNext() : onComplete?.();
-  };
+  }, [onNext, onComplete]);
 
-  const handlePreviousClick = () => {
+  const handlePreviousClick = useCallback(() => {
     onPrevious?.();
-  };
+  }, [onPrevious]);
+
+  const toggleControls = useCallback(() => {
+    setShowControls(!showControls);
+  }, [showControls]);
 
   const containerClasses = isFullscreen
     ? 'fixed inset-0 z-50 bg-black flex items-center justify-center'
     : `relative ${className}`;
+
+  // Показываем превью пока загружается
+  const VideoPreview = () => (
+    <div className="absolute inset-0 flex items-center justify-center bg-black-75 rounded-lg">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent mx-auto mb-2"></div>
+        <p className="text-gray-400 text-sm">Загрузка видео...</p>
+      </div>
+    </div>
+  );
 
   return (
     <motion.div 
@@ -143,13 +214,13 @@ export default function VerticalVideoPlayer({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       onPan={handlePan}
-      onTap={() => setShowControls(!showControls)}
+      onTap={toggleControls}
     >
       {/* Кнопка выхода из полноэкранного режима */}
       {isFullscreen && (
         <motion.button
           onClick={onExitFullscreen}
-          className="absolute top-4 right-4 z-20 bg-black/70 backdrop-blur-sm rounded-full p-2 text-white"
+          className="absolute top-4 right-4 z-20 bg-black/70 backdrop-blur-sm rounded-full p-2 text-white safe-area-top"
           initial={{ opacity: 0 }}
           animate={{ opacity: showControls ? 1 : 0 }}
           transition={{ duration: 0.3 }}
@@ -161,7 +232,7 @@ export default function VerticalVideoPlayer({
       {/* Overlay с заголовком урока сверху */}
       {title && (
         <motion.div 
-          className="absolute top-4 left-4 right-16 z-10 bg-black/70 backdrop-blur-sm rounded-lg p-3"
+          className="absolute top-4 left-4 right-16 z-10 bg-black/70 backdrop-blur-sm rounded-lg p-3 safe-area-top"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: showControls ? 1 : 0, y: 0 }}
           transition={{ delay: 0.3, duration: 0.4 }}
@@ -207,17 +278,17 @@ export default function VerticalVideoPlayer({
 
       {/* Контейнер для видео */}
       <div className={`relative ${isFullscreen ? 'w-full h-full' : 'mx-auto max-w-sm'}`}>
-        {/* Loader */}
+        {/* Loader с превью */}
         <AnimatePresence>
           {isLoading && (
             <motion.div 
-              className="absolute inset-0 flex items-center justify-center bg-black-75 rounded-lg z-20"
+              className="absolute inset-0 z-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+              <VideoPreview />
             </motion.div>
           )}
         </AnimatePresence>
@@ -232,6 +303,7 @@ export default function VerticalVideoPlayer({
           }`}
           style={{
             maxHeight: isFullscreen ? '100vh' : '80vh',
+            minHeight: isFullscreen ? '100vh' : '300px', // Минимальная высота для мобильных
           }}
         />
       </div>
@@ -240,7 +312,7 @@ export default function VerticalVideoPlayer({
       <AnimatePresence>
         {showNextButton && showControls && (
           <motion.div 
-            className={`absolute z-10 ${
+            className={`absolute z-10 safe-area-bottom ${
               isFullscreen 
                 ? 'bottom-8 left-8 right-8' 
                 : 'bottom-4 left-4 right-4'
@@ -256,7 +328,7 @@ export default function VerticalVideoPlayer({
                 <Button 
                   onClick={handlePreviousClick}
                   variant="outline"
-                  className="flex-1 bg-black/70 hover:bg-black/90 text-white border-white/20 font-semibold py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm"
+                  className="flex-1 bg-black/70 hover:bg-black/90 text-white border-white/20 font-semibold py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm touch-manipulation"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Назад
@@ -266,7 +338,7 @@ export default function VerticalVideoPlayer({
               {/* Кнопка "Далее" */}
               <Button 
                 onClick={handleNextClick}
-                className="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg"
+                className="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg touch-manipulation"
               >
                 Далее
                 <ChevronRight className="w-4 h-4" />
@@ -279,7 +351,7 @@ export default function VerticalVideoPlayer({
       {/* Подсказка о свайп-жестах (показывается только при первом просмотре) */}
       {enableSwipeNavigation && !hasStartedPlaying && !isFullscreen && (
         <motion.div
-          className="absolute bottom-20 left-4 right-4 z-10 bg-black/70 backdrop-blur-sm rounded-lg p-3 lg:hidden"
+          className="absolute bottom-20 left-4 right-4 z-10 bg-black/70 backdrop-blur-sm rounded-lg p-3 lg:hidden safe-area-bottom"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}

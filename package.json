@@ -15,7 +15,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "analyze": "ANALYZE=true npm run build"
+    "analyze": "ANALYZE=true npm run build",
+    "test:performance": "npx tsc scripts/test-performance-optimizations.ts --outDir scripts/compiled && node scripts/compiled/test-performance-optimizations.js && rm -rf scripts/compiled"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "1.1.13",
