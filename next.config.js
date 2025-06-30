@@ -109,8 +109,8 @@ const nextConfig = {
   },
   // BIZLEVEL: Улучшенная конфигурация для оптимизации производительности
   experimental: {
-    // Включаем оптимизацию CSS
-    optimizeCss: true,
+    // Включаем оптимизацию CSS только в production (исправляет ошибку critters)
+    optimizeCss: process.env.NODE_ENV === 'production',
     // Включаем gzipSize анализ
     gzipSize: true,
   },
@@ -188,11 +188,11 @@ const nextConfig = {
       };
     }
 
-    // Алиасы для лучшего tree shaking
+    // Алиасы для лучшего tree shaking (исправлено для recharts совместимости)
     config.resolve.alias = {
       ...config.resolve.alias,
-      // Оптимизируем lodash импорты
-      'lodash': 'lodash-es',
+      // Убираем lodash алиас - он ломает recharts, который использует lodash/isFunction
+      // 'lodash': 'lodash-es',
     };
 
     return config;

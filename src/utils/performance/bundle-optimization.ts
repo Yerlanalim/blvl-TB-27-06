@@ -48,16 +48,17 @@ export function createDynamicComponent<T = any>(
 }
 
 /**
- * Предзагрузка критических ресурсов
+ * Предзагрузка критических ресурсов (исправлено для уменьшения webpack warnings)
  */
 export function preloadCriticalResources() {
   if (typeof window === 'undefined') return;
 
-  // Предзагружаем критические компоненты
+  // Предзагружаем критические компоненты с динамической загрузкой
+  // Убираем прямые импорты chart компонентов для уменьшения bundle size warnings
   const criticalImports = [
     () => import('@/components/app/questions/code-editor/editor'),
-    () => import('@/components/app/statistics/total-question-chart'),
     () => import('@/components/app/leo-chat/leo-chat'),
+    // Убираем total-question-chart из предзагрузки - он теперь загружается динамически
   ];
 
   // Предзагружаем с задержкой, чтобы не блокировать основную загрузку
