@@ -177,7 +177,7 @@ export default function QuestionNavigation(opts: {
   const handleNextAction = () => {
     if (isLevelCompleted && !nextQuestion) {
       // Перейти к карте уровней или следующему уровню
-      window.location.href = '/levels';
+                  window.location.href = '/roadmaps';
       return;
     }
     

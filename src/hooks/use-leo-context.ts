@@ -31,7 +31,7 @@ export function useLeoContext(): LeoContext {
     } else if (pathname === '/dashboard') {
       pageType = 'dashboard';
       context = 'Пользователь на главной странице (dashboard). Он видит свой общий прогресс обучения.';
-    } else if (pathname.startsWith('/levels')) {
+    } else if (pathname.startsWith('/roadmaps')) {
       pageType = 'general';
       context = 'Пользователь просматривает карту всех уровней обучения бизнесу.';
     } else if (pathname.startsWith('/statistics')) {

@@ -18,7 +18,7 @@ export default function WelcomeBentoBox({ hasAnsweredAnyQuestion }: WelcomeBento
 
   return (
     <Link
-      href="/levels"
+              href="/roadmaps"
       className="flex flex-col p-4 h-full group relative"
     >
       <div className="flex w-full justify-between mb-4 gap-4">

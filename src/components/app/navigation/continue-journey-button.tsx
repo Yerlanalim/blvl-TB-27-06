@@ -9,7 +9,7 @@ export default async function ContinueJourney(opts: {
   const lastLessonData = await getLastLesson();
 
   // Определяем URL и текст кнопки
-  const buttonUrl = lastLessonData.nextLessonUrl || '/levels';
+  const buttonUrl = lastLessonData.nextLessonUrl || '/roadmaps';
   const defaultText = lastLessonData.isNewUser 
     ? 'Начать обучение'
     : lastLessonData.nextLessonUrl 

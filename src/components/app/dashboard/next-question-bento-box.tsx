@@ -30,7 +30,7 @@ export default async function NextQuestionBentoBox() {
           <p className="text-sm text-gray-300">
             Вы завершили все доступные уроки. Скоро появятся новые материалы!
           </p>
-          <Button href="/levels" variant="secondary" className="w-fit">
+          <Button href="/roadmaps" variant="secondary" className="w-fit">
             Посмотреть все уровни
           </Button>
         </div>

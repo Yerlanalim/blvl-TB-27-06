@@ -135,45 +135,36 @@ export const getLastLesson = async (): Promise<{
     }
 
     // Текущий уровень завершен, ищем следующий уровень
-    const { businessLevels } = await import('@/utils/constants/business-levels');
-    const currentLevelInfo = businessLevels.find(level => level.slug === levelTag);
+    // Извлекаем номер уровня из тега (например, "level-1" -> 1)
+    const currentLevelNumber = parseInt(levelTag.replace('level-', ''));
+    const nextLevelTag = `level-${currentLevelNumber + 1}`;
     
-    if (!currentLevelInfo) {
-      // Если не можем найти информацию об уровне
-      return {
-        nextLessonSlug: null,
-        nextLessonUrl: null,
-        isNewUser: false,
-      };
-    }
-
-    // Ищем следующий уровень
-    const currentLevelIndex = businessLevels.findIndex(level => level.slug === levelTag);
-    const nextLevel = businessLevels[currentLevelIndex + 1];
-
-    if (nextLevel) {
-      // Получаем первый вопрос следующего уровня
-      const nextLevelFirstQuestion = await prisma.questions.findFirst({
-        where: {
-          tags: {
-            some: {
-              tag: {
-                name: nextLevel.slug, // Используем slug как имя тега
-              },
+    // Проверяем есть ли следующий уровень
+    const nextLevelQuestions = await prisma.questions.findMany({
+      where: {
+        tags: {
+          some: {
+            tag: {
+              name: nextLevelTag,
             },
           },
         },
-        orderBy: {
-          createdAt: 'asc',
-        },
-      });
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+
+    if (nextLevelQuestions.length > 0) {
+      // Есть следующий уровень - берем первый вопрос
+      const nextLevelFirstQuestion = nextLevelQuestions[0];
 
       if (nextLevelFirstQuestion && nextLevelFirstQuestion.slug) {
         return {
           nextLessonSlug: nextLevelFirstQuestion.slug,
           nextLessonUrl: `/question/${nextLevelFirstQuestion.slug}`,
           isNewUser: false,
-          currentLevel: nextLevel.slug,
+          currentLevel: nextLevelTag,
         };
       }
     }
