@@ -38,27 +38,27 @@ export default function SidebarFooterPremium({ user }: SidebarFooterPremiumProps
           {/** overrideDynamicTitleAndDescription
             ? `${getUserDisplayName(user)}, don't miss out!`
             : SIDEBAR_FOOTER_TITLE[pathname as keyof typeof SIDEBAR_FOOTER_TITLE] */}
-          {hasCustomCoupon ? `${getUserDisplayName(user)}, don't miss out!` : 'Limited Time Offer!'}
+          {hasCustomCoupon ? `${getUserDisplayName(user)}, не упустите возможность!` : 'Ограниченное предложение!'}
         </p>
         <p className="text-xs font-light font-onest">
           {hasCustomCoupon ? (
             <>
-              Receive 60% off your first three months with code{' '}
-              <span className="font-bold">{user?.userCustomCoupon}</span>. Offer ends{' '}
-              {user?.userCustomCouponExpiresAt?.toLocaleDateString()}.
+              Получите скидку 60% на первые три месяца с кодом{' '}
+              <span className="font-bold">{user?.userCustomCoupon}</span>. Предложение действует до{' '}
+              {user?.userCustomCouponExpiresAt?.toLocaleDateString('ru-RU')}.
             </>
           ) : (
             <>
               {overrideDynamicTitleAndDescription
-                ? '30% off our lifetime plan. One payment, yours forever!'
+                ? 'Скидка 30% на пожизненный план. Один платеж навсегда!'
                 : SIDEBAR_FOOTER_DESCRIPTION[pathname as keyof typeof SIDEBAR_FOOTER_DESCRIPTION]
                 ? SIDEBAR_FOOTER_DESCRIPTION[pathname as keyof typeof SIDEBAR_FOOTER_DESCRIPTION]
-                : 'Personalized practice, premium questions and more'}
+                : 'Персональная практика, премиум уроки и многое другое'}
             </>
           )}
         </p>
         <Button variant="premium" fullWidth className="mt-4" href={getUpgradeUrl()}>
-          Upgrade to Premium
+          Улучшить до Премиум
         </Button>
       </SidebarMenuItem>
 
@@ -72,13 +72,13 @@ export default function SidebarFooterPremium({ user }: SidebarFooterPremiumProps
                 size="icon"
                 className="size-5"
                 href={getUpgradeUrl()}
-                title="Upgrade to Premium"
+                title="Улучшить до Премиум"
               >
                 <Stars className="size-4 text-yellow-400 fill-yellow-500" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="right">
-              <p>Upgrade to Premium</p>
+              <p>Улучшить до Премиум</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

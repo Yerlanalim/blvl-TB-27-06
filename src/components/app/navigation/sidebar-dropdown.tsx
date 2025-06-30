@@ -108,12 +108,12 @@ export default function SidebarAreaComponent(opts: {
             <DropdownMenuContent className="w-56 bg-[#000] !text-white border-black-50">
               <DropdownMenuItem>
                 <Link href={getUpgradeUrl()} className="w-full">
-                  Upgrade
+                  Улучшить подписку
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/settings/profile" className="w-full">
-                  Settings
+                  Настройки
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -128,15 +128,12 @@ export default function SidebarAreaComponent(opts: {
                     padding="none"
                     className="flex items-center gap-x-2 h-auto !bg-transparent"
                   >
-                    Invite a friend
+                    Пригласить друга
                   </Button>
                 </ReferralModal>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/homepage">Homepage</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="https://git.new/blitz">GitHub</Link>
+                <Link href="/">Главная страница</Link>
               </DropdownMenuItem>
               {user && (
                 <DropdownMenuItem>

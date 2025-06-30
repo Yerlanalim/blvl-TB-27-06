@@ -13,44 +13,44 @@ const items: {
   title: string;
 }[] = [
   {
-    name: 'ES6+',
-    title: 'Modern ES6+ Features',
+    name: 'Основы',
+    title: 'Основы бизнеса',
   },
   {
-    name: 'DOM',
-    title: 'Advanced DOM Manipulation',
+    name: 'Маркетинг',
+    title: 'Маркетинг и реклама',
   },
   {
-    name: 'Patterns',
-    title: 'Design Patterns',
+    name: 'Продажи',
+    title: 'Техники продаж',
   },
   {
-    name: 'Performance',
-    title: 'Performance Optimization',
+    name: 'Финансы',
+    title: 'Финансовое планирование',
   },
   {
-    name: 'State',
-    title: 'State Management',
+    name: 'Управление',
+    title: 'Управление командой',
   },
   {
-    name: 'Testing',
-    title: 'Testing & Debugging',
+    name: 'Стратегия',
+    title: 'Бизнес-стратегия',
   },
   {
-    name: 'APIs',
-    title: 'Web APIs & Integration',
+    name: 'Лидерство',
+    title: 'Лидерство и мотивация',
   },
   {
-    name: 'Security',
-    title: 'Security Best Practices',
+    name: 'Анализ',
+    title: 'Анализ рынка',
   },
   {
-    name: 'Functional',
-    title: 'Functional Programming',
+    name: 'Инновации',
+    title: 'Инновации в бизнесе',
   },
   {
-    name: 'DSA',
-    title: 'Data Structures & Algorithms',
+    name: 'Развитие',
+    title: 'Развитие бизнеса',
   },
 ];
 
@@ -66,7 +66,7 @@ export default async function ProgressBentoBox() {
         <Chip
           textColor="text-white"
           color="bg-primary"
-          text={user?.userLevel === 'FREE' ? 'Upgrade to access Roadmaps' : 'Roadmaps'}
+          text={user?.userLevel === 'FREE' ? 'Обновите подписку для доступа к курсам' : 'Курсы'}
           border="border-black-50"
         />
       </div>
@@ -77,14 +77,14 @@ export default async function ProgressBentoBox() {
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 w-full justify-between items-end">
         <div className="space-y-1">
-          <h6 className="text-xl">Personalised Progression</h6>
+          <h6 className="text-xl">Персональный план развития</h6>
           <p className="hidden md:block font-satoshi text-sm">
-            Your very own, personalised progression framework to help you grow as a developer.
+            Ваш собственный план развития в бизнесе, который поможет вам стать успешным предпринимателем.
           </p>
         </div>
         {user?.userLevel !== 'FREE' && user?.userLevel !== 'STANDARD' && (
           <div className="items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-accent text-white shadow-sm hover:bg-accent/90 h-9 px-4 py-2 inline-flex font-ubuntu font-medium">
-            View yours now <ArrowRight className="size-3 ml-1 group-hover:ml-2 duration-300" />
+            Смотреть сейчас <ArrowRight className="size-3 ml-1 group-hover:ml-2 duration-300" />
           </div>
         )}
       </div>
@@ -98,7 +98,7 @@ export default async function ProgressBentoBox() {
                 </div>
               </TooltipTrigger>
               <TooltipContent className="font-satoshi">
-                You need to be a premium member to access this feature.
+                Для доступа к этой функции нужна премиум подписка.
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

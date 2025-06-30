@@ -27,7 +27,7 @@ export default function OnboardingPricing() {
             className="text-4xl flex flex-col items-center font-medium bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent text-center"
             variants={itemVariants}
           >
-            Supercharge your coding journey
+            Ускорь свой путь в бизнесе
           </motion.h1>
           <motion.p
             className="text-center text-gray-400 max-w-2xl text-sm font-onest"
@@ -37,12 +37,12 @@ export default function OnboardingPricing() {
             user?.userCustomCouponExpiresAt &&
             user?.userCustomCouponExpiresAt > new Date() ? (
               <>
-                Receive <span className="font-bold">60% off</span> your first three months with code{' '}
+                Получи <span className="font-bold">60% скидку</span> на первые три месяца с кодом{' '}
                 <span className="font-bold">{user?.userCustomCoupon}</span>. <br />
-                Offer ends {user?.userCustomCouponExpiresAt?.toLocaleDateString()}.
+                Предложение действует до {user?.userCustomCouponExpiresAt?.toLocaleDateString('ru-RU')}.
               </>
             ) : (
-              "Join developers worldwide learning to code through BizLevel's personalized coding platform."
+              "Присоединяйся к тысячам предпринимателей, изучающих бизнес через персонализированную платформу BizLevel."
             )}
           </motion.p>
         </div>

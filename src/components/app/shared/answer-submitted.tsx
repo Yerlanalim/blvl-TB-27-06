@@ -211,22 +211,22 @@ export default function QuestionResult({
           </div>
         )}
         <div className="flex flex-col gap-y-2 mt-5 bg-[#111111] border border-black-50 p-4 rounded-lg">
-          <h2 className="text-xl font-bold">Explain this answer</h2>
+          <h2 className="text-xl font-bold">Объяснить этот ответ</h2>
           <p className="text-sm text-gray-400">
-            Don't understand this answer? Click the button below to get an explanation.
+            Не понимаете этот ответ? Нажмите кнопку ниже, чтобы получить объяснение.
           </p>
           {/** roadmap users get unlimited tokens - no need to show token count */}
           {!isRoadmapQuestion && (
             <p className="text-sm text-white">
-              You have {user?.userLevel === 'PREMIUM' ? 'unlimited ' : tokensUsed} tokens remaining{' '}
+              У вас осталось {user?.userLevel === 'PREMIUM' ? 'неограниченно ' : tokensUsed} токенов{' '}
               <br />
               {user?.userLevel === 'FREE' && (
                 <span className="text-xs text-gray-400">
-                  (Free users get 20 tokens,{' '}
+                  (Бесплатные пользователи получают 20 токенов,{' '}
                   <Link href={getUpgradeUrl()} className="text-accent underline">
-                    upgrade to Premium
+                    улучшите до Премиум
                   </Link>{' '}
-                  to get unlimited tokens!)
+                  чтобы получить неограниченные токены!)
                 </span>
               )}
             </p>
@@ -242,7 +242,7 @@ export default function QuestionResult({
             className="hidden lg:flex"
             wrapperClassName="w-fit"
           >
-            {isPending ? 'Generating...' : 'Explain Answer'}
+            {isPending ? 'Генерируем...' : 'Объяснить ответ'}
           </Button>
           <Button
             variant="secondary"
@@ -254,7 +254,7 @@ export default function QuestionResult({
             disabled={isPending || user?.userLevel === 'FREE'}
             className="flex lg:hidden"
           >
-            {isPending ? 'Generating...' : 'Explain Answer'}
+            {isPending ? 'Генерируем...' : 'Объяснить ответ'}
           </Button>
         </div>
         {showQuestionDifficulty && (

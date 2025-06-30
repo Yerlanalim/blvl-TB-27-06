@@ -129,12 +129,12 @@ export function useProgressNotifications(options: ProgressNotificationOptions = 
       legendary: '💎'
     };
 
-    const rarityColor = {
-      common: 'text-gray-500',
-      rare: 'text-blue-500',
-      epic: 'text-purple-500',
-      legendary: 'text-yellow-500'
-    };
+    // const rarityColor = {
+    //   common: 'text-gray-500',
+    //   rare: 'text-blue-500',
+    //   epic: 'text-purple-500',
+    //   legendary: 'text-yellow-500'
+    // }; // ЭТАП 6.2: Временно не используется
 
     toast.success(`Новое достижение: ${achievementName}! 🏆`, {
       icon: rarityEmoji[rarity],

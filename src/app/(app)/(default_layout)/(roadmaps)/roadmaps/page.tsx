@@ -51,7 +51,7 @@ const heroDescription = (
             </Button>
           }
         >
-          <ContinueJourney text="Ваш следующий рекомендуемый вопрос" variant="ghost" />
+          <ContinueJourney text="Продолжить с последнего урока" variant="ghost" />
         </Suspense>
       </div>
     </div>

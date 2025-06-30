@@ -50,7 +50,7 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     const imageRef = useRef<HTMLImageElement>(null);
     
     const shouldLoadHeavyContent = useAdaptiveLoading();
-    const { isVisible, hasBeenVisible } = useIntersectionObserver(imageRef, {
+    const { hasBeenVisible } = useIntersectionObserver(imageRef, {
       threshold: 0.1,
       rootMargin: '50px'
     });

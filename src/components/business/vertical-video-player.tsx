@@ -61,10 +61,10 @@ export default function VerticalVideoPlayer({
       const isMobile = window.innerWidth < 768;
       const playerWidth = isFullscreen 
         ? window.innerWidth 
-        : isMobile ? '100%' : 320;
+        : isMobile ? window.innerWidth : 320;
       const playerHeight = isFullscreen 
         ? window.innerHeight 
-        : isMobile ? 'auto' : 568;
+        : isMobile ? Math.round(window.innerWidth * 16/9) : 568;
 
       // Создаем Vimeo player с оптимизированными настройками
       const vimeoPlayer = new Player(containerRef.current, {
@@ -126,11 +126,8 @@ export default function VerticalVideoPlayer({
 
       // Обработка изменения размера экрана
       const handleResize = () => {
-        if (vimeoPlayer && !isFullscreen) {
-          const isMobile = window.innerWidth < 768;
-          vimeoPlayer.setWidth(isMobile ? '100%' : 320);
-          vimeoPlayer.setHeight(isMobile ? 'auto' : 568);
-        }
+        // Vimeo player автоматически адаптируется к размерам контейнера
+        // с настройкой responsive: true
       };
 
       window.addEventListener('resize', handleResize);

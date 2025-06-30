@@ -122,6 +122,35 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
     );
   }
 
+  // BIZLEVEL: Условное отображение элементов только для CODING_CHALLENGE
+  const isCodingChallenge = question?.questionType === 'CODING_CHALLENGE';
+
+  // BIZLEVEL: Задача 6.4.1 - Упрощенный layout для бизнес-уроков
+  // Для VIDEO и MULTIPLE_CHOICE делаем полноширинный контент без правого сайдбара
+  if (question.questionType === 'VIDEO' || question.questionType === 'MULTIPLE_CHOICE') {
+    return (
+      <PremiumContentWrapper>
+        <TourStartModal user={user} />
+        <div className="w-full">
+          {/* BIZLEVEL: Полноширинный контент для бизнес-уроков */}
+          <div className="flex flex-col gap-y-4 p-3 lg:p-6 min-h-[calc(100vh-4rem)]">
+            <Suspense fallback={<LoadingSpinner />}>
+              <QuestionCard
+                questionPromise={questionPromise}
+                totalSubmissions={totalSubmissions}
+                user={user}
+                nextQuestion={nextQuestion}
+                identifier="slug"
+                nextAndPreviousQuestion={nextAndPreviousQuestion || undefined}
+              />
+            </Suspense>
+          </div>
+        </div>
+      </PremiumContentWrapper>
+    );
+  }
+
+  // BIZLEVEL: Оставляем ResizableLayout только для CODING_CHALLENGE
   const leftContent = (
     <div className="flex flex-col gap-y-4 p-3 lg:pr-1.5 h-full">
       <Suspense fallback={<LoadingSpinner />}>
@@ -135,9 +164,6 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
       </Suspense>
     </div>
   );
-
-  // BIZLEVEL: Условное отображение элементов только для CODING_CHALLENGE
-  const isCodingChallenge = question?.questionType === 'CODING_CHALLENGE';
 
   const rightContent = (
     <div
@@ -177,38 +203,7 @@ export default async function TodaysQuestionPage({ params }: { params: { slug: s
     ? <TestCaseSection /> 
     : null;
 
-  // BIZLEVEL: Специальная обработка для VIDEO типа на мобильных
-  if (question.questionType === 'VIDEO') {
-    return (
-      <PremiumContentWrapper>
-        <TourStartModal user={user} />
-        <div className="lg:hidden video-fullscreen-mode">
-          {/* Мобильная версия - полноэкранное видео с улучшенной навигацией */}
-          <Suspense fallback={<LoadingSpinner />}>
-            <QuestionCard
-              questionPromise={questionPromise}
-              totalSubmissions={totalSubmissions}
-              user={user}
-              nextQuestion={nextQuestion}
-              identifier="slug"
-              nextAndPreviousQuestion={nextAndPreviousQuestion || undefined}
-            />
-          </Suspense>
-        </div>
-        <div className="hidden lg:block">
-          {/* Десктопная версия - обычный layout */}
-          <ResizableLayout
-            leftContent={leftContent}
-            rightTopContent={rightContent}
-            rightBottomContent={rightBottomContent}
-            initialLeftWidth={50}
-            initialRightTopHeight={question?.testCases?.length ? 70 : 100}
-          />
-        </div>
-      </PremiumContentWrapper>
-    );
-  }
-
+  // BIZLEVEL: ResizableLayout только для CODING_CHALLENGE
   return (
     <PremiumContentWrapper>
       <TourStartModal user={user} />

@@ -4,33 +4,33 @@ import { ArrowRight } from 'lucide-react';
 
 const questions = [
   {
-    label: 'spread-operator',
-    name: 'What does the spread operator do?',
+    label: 'business-model',
+    name: 'Что такое бизнес-модель и зачем она нужна?',
     correct: false,
   },
   {
-    label: 'equality-operators',
-    name: "What's the difference between '==' and '==='?",
+    label: 'target-audience',
+    name: 'Как определить целевую аудиторию?',
     correct: true,
   },
   {
-    label: 'code-analysis',
-    name: 'What will be the outcome of the following JavaScript snippet?',
+    label: 'smart-goals',
+    name: 'Что такое SMART-цели в бизнесе?',
     correct: false,
   },
   {
-    label: 'data-structures',
-    name: 'What are the differences objects and arrays?',
+    label: 'marketing-basics',
+    name: 'Основы маркетинга для начинающих',
     correct: true,
   },
   {
-    label: 'array-methods',
-    name: 'What is the difference between .map and .forEach?',
+    label: 'sales-funnel',
+    name: 'Как создать эффективную воронку продаж?',
     correct: false,
   },
   {
-    label: 'component-lifecycle',
-    name: 'Explain component lifecycle',
+    label: 'financial-planning',
+    name: 'Основы финансового планирования',
     correct: true,
   },
 ];
@@ -42,9 +42,9 @@ export default function AllQuestionsDashboardBentoBox() {
   return (
     <section className="flex flex-col gap-y-5 group p-4 relative overflow-hidden h-[350px] lg:h-fit">
       <div className="space-y-3 z-10 relative">
-        <Chip color="bg-white" text="Questions" textColor="text-black" border="border-black-50" />
+        <Chip color="bg-white" text="Уроки" textColor="text-black" border="border-black-50" />
         <h6 className="text-lg lg:text-xl flex items-center">
-          View all Questions
+          Все уроки
           <ArrowRight className="size-4 inline-block ml-1 group-hover:ml-2 duration-300" />
         </h6>
       </div>

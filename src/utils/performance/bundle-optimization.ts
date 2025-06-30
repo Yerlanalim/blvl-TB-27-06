@@ -1,6 +1,6 @@
 // BIZLEVEL: Утилиты для оптимизации производительности bundle
 
-import { ComponentType, lazy, LazyExoticComponent } from 'react';
+import React, { ComponentType, lazy, LazyExoticComponent } from 'react';
 import dynamic from 'next/dynamic';
 
 /**
@@ -33,16 +33,15 @@ export function createDynamicComponent<T = any>(
   const { loading, ssr = false, loadingText = 'Загружаем...' } = options;
 
   return dynamic(importFn, {
-    loading: loading || (() => {
-      const React = require('react');
-      return React.createElement('div', 
+    loading: loading || (() => 
+      React.createElement('div', 
         { className: "flex items-center justify-center p-4" },
         React.createElement('div', 
           { className: "animate-pulse text-gray-400" },
           loadingText
         )
-      );
-    }) as React.ComponentType,
+      )
+    ) as any,
     ssr,
   });
 }

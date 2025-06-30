@@ -57,29 +57,6 @@ export function useSaveProgress() {
     }
   }, []);
 
-  // Отслеживание состояния сети
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-      syncOfflineProgress();
-    };
-
-    const handleOffline = () => {
-      setIsOnline(false);
-    };
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    // Проверяем начальное состояние
-    setIsOnline(navigator.onLine);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
   // Сохранение очереди в localStorage
   const saveOfflineQueue = useCallback(() => {
     try {
@@ -258,6 +235,29 @@ export function useSaveProgress() {
     setTimeout(() => setSaveStatus('idle'), 2000);
   }, [isOnline, saveToSupabase, saveOfflineQueue]);
 
+  // Отслеживание состояния сети
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+      syncOfflineProgress();
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Проверяем начальное состояние
+    setIsOnline(navigator.onLine);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [syncOfflineProgress]);
+
   // Основная функция сохранения прогресса
   const saveProgress = useCallback(async (action: ProgressAction, data: ProgressData) => {
     setSaveStatus('saving');
@@ -336,7 +336,8 @@ export function useSaveProgress() {
   // Cleanup при размонтировании
   useEffect(() => {
     return () => {
-      retryTimeouts.current.forEach(timeout => clearTimeout(timeout));
+      const currentTimeouts = retryTimeouts.current;
+      currentTimeouts.forEach(timeout => clearTimeout(timeout));
     };
   }, []);
 

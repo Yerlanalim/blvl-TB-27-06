@@ -18,10 +18,10 @@ export default function SidebarFooter({ user }: SidebarFooterProps) {
       {!user && (
         <SidebarMenuItem className="group-data-[collapsible=icon]:hidden flex flex-col gap-2">
           <Button variant="default" fullWidth className="" href={`/login?redirectUrl=${pathname}`}>
-            Login
+            Вход
           </Button>
           <Button variant="accent" fullWidth className="" href={`/signup?redirectUrl=${pathname}`}>
-            Signup
+            Регистрация
           </Button>
         </SidebarMenuItem>
       )}
@@ -29,15 +29,15 @@ export default function SidebarFooter({ user }: SidebarFooterProps) {
       <SidebarMenuItem className="group-data-[collapsible=icon]:hidden list-none">
         <ul>
           <ReferralModal>
-            <Button variant="default" fullWidth aria-label="Invite a friend">
-              Invite a friend
+            <Button variant="default" fullWidth aria-label="Пригласить друга">
+              Пригласить друга
             </Button>
           </ReferralModal>
         </ul>
       </SidebarMenuItem>
       <SidebarMenuItem className="hidden group-data-[collapsible=icon]:block">
         <ReferralModal>
-          <Button variant="ghost" size="icon" className="size-5" title="Invite a friend">
+          <Button variant="ghost" size="icon" className="size-5" title="Пригласить друга">
             <Users2 className="size-4" />
           </Button>
         </ReferralModal>

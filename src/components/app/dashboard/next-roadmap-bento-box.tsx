@@ -10,14 +10,14 @@ export default async function StreakBentoBox() {
         <h6 className="text-xl">
           {studyPath ? (
             <>
-              Continue learning <span className="font-medium">{studyPath.studyPath.title}</span>
+              Продолжить изучение <span className="font-medium">{studyPath.studyPath.title}</span>
             </>
           ) : (
-            'Start learning'
+            'Начать обучение'
           )}
         </h6>
         <p className="text-sm text-gray-400">
-          Don't let your skills go stale - take 3 minutes to answer a question from your roadmap.
+          Не останавливайтесь в развитии - потратьте 3 минуты на следующий урок из вашего курса.
         </p>
       </div>
       <div className="w-full h-fit flex items-center justify-center">

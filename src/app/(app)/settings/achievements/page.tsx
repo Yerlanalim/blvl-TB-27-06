@@ -22,7 +22,7 @@ import {
   Users
 } from 'lucide-react';
 
-import { useUser } from '@/hooks/use-user';
+// import { useUser } from '@/hooks/use-user'; // ЭТАП 6.2: Временно не используется
 
 // BIZLEVEL: Типы достижений для бизнес-обучения
 interface Achievement {
@@ -199,7 +199,7 @@ const rarityNames = {
 };
 
 export default function AchievementsPage() {
-  const { user } = useUser();
+  // const { user } = useUser(); // ЭТАП 6.2: Временно не используется
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
   const categories = Object.keys(categoryNames) as Array<keyof typeof categoryNames>;

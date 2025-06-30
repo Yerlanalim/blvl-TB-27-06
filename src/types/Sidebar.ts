@@ -11,6 +11,7 @@ export interface SidebarItem {
   tooltip?: string;
   defaultOpen?: boolean;
   animatable?: boolean;
+  hidden?: boolean;
 }
 
 interface SidebarGroupItem {

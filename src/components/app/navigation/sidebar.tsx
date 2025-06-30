@@ -26,12 +26,14 @@ import SidebarDropdown from '@/components/app/navigation/sidebar-dropdown';
 import type { SidebarItemType, UserRecord, QuestionWithTags, Profile } from '@/types';
 
 import { HomeIcon } from '@/components/ui/icons/home';
-import Award from '@/components/ui/icons/award';
+// ЭТАП 6.2: Временно скрыты иконки
+// import Award from '@/components/ui/icons/award';
 import SidebarFooter from './sidebar-footer';
-import { RouteIcon as MapIcon } from '@/components/ui/icons/map';
+// import { RouteIcon as MapIcon } from '@/components/ui/icons/map';
 import Blog3 from '@/components/ui/icons/blog-3';
-import { ChartSplineIcon as BChart3 } from '@/components/ui/icons/b-chart-3';
+// import { ChartSplineIcon as BChart3 } from '@/components/ui/icons/b-chart-3';
 import { UilPadlock } from '@/components/ui/icons/lock-animated';
+import ChatBot from '@/components/ui/icons/chat-bot';
 
 // Interface for any component that has animation controls
 interface AnimatableIconHandle {
@@ -63,11 +65,12 @@ const SidebarAnimatedIcon = forwardRef<any, SidebarAnimatedIconProps>(
 
 SidebarAnimatedIcon.displayName = 'SidebarAnimatedIcon';
 
-const LeaderboardIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M2 21V9h5.5v12zm7.25 0V3h5.5v18zm7.25 0V11H22v10z" />
-  </svg>
-);
+// ЭТАП 6.2: Временно скрыто
+// const LeaderboardIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+//     <path fill="currentColor" d="M2 21V9h5.5v12zm7.25 0V3h5.5v18zm7.25 0V11H22v10z" />
+//   </svg>
+// );
 
 interface AppSidebarProps {
   user: UserRecord | null;
@@ -95,131 +98,161 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
 
   const nonAuthedUserItems: SidebarItemType[] = useMemo(() => [
     {
-      title: 'Dashboard',
+      title: 'Главная',
       url: '/dashboard',
       icon: HomeIcon,
-      tooltip: 'Dashboard',
+      tooltip: 'Главная',
       disabled: true,
       animatable: true,
     },
     {
-      title: 'Library',
+      title: 'Карта уровней',
       url: '/roadmaps',
       icon: Blog3,
+      tooltip: 'Карта уровней',
       animatable: true,
     },
-    {
-      title: 'Personalized Learning',
-      url: '/personalized-roadmaps',
-      icon: MapIcon,
-      tooltip: 'Personalized Learning',
-      animatable: true,
-      disabled: true,
-    },
-    {
-      title: 'Stats',
-      url: '/statistics',
-      icon: BChart3,
-      tooltip: 'Statistics',
-      defaultOpen: false,
-      disabled: true,
-      animatable: true,
-      subItems: [
-        {
-          title: 'Overview',
-          url: '/statistics',
-          disabled: true,
-        },
-        {
-          title: 'Reports',
-          tooltip: 'Reports',
-          url: '/statistics/reports',
-          disabled: true,
-        },
-      ],
-    },
-    {
-      title: 'Leaderboard',
-      url: '/leaderboard',
-      icon: LeaderboardIcon,
-      tooltip: 'Leaderboard',
-    },
+    // ЭТАП 6.2: Временно скрыты для MVP
+    // {
+    //   title: 'Personalized Learning',
+    //   url: '/personalized-roadmaps',
+    //   icon: MapIcon,
+    //   tooltip: 'Personalized Learning',
+    //   animatable: true,
+    //   disabled: true,
+    //   hidden: true,
+    // },
+    // {
+    //   title: 'Stats',
+    //   url: '/statistics',
+    //   icon: BChart3,
+    //   tooltip: 'Statistics',
+    //   defaultOpen: false,
+    //   disabled: true,
+    //   animatable: true,
+    //   hidden: true,
+    //   subItems: [
+    //     {
+    //       title: 'Overview',
+    //       url: '/statistics',
+    //       disabled: true,
+    //     },
+    //     {
+    //       title: 'Reports',
+    //       tooltip: 'Reports',
+    //       url: '/statistics/reports',
+    //       disabled: true,
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: 'Leaderboard',
+    //   url: '/leaderboard',
+    //   icon: LeaderboardIcon,
+    //   tooltip: 'Leaderboard',
+    //   hidden: true,
+    // },
   ], []);
 
   const standardItems: SidebarItemType[] = useMemo(() => [
     {
-      title: 'Dashboard',
+      title: 'Главная',
       url: '/dashboard',
       icon: HomeIcon,
-      tooltip: 'Dashboard',
+      tooltip: 'Главная',
       animatable: true,
     },
     {
-      title: 'Library',
-      tooltip: 'Library',
+      title: 'Карта уровней',
+      tooltip: 'Карта уровней',
       url: '/roadmaps',
       icon: Blog3,
       animatable: true,
     },
     {
-      title: 'Personalized Learning',
-      url: '/personalized-roadmaps',
-      icon: MapIcon,
-      tooltip: 'Personalized Learning',
+      title: 'Профиль',
+      url: '/settings/profile',
+      icon: User,
+      tooltip: 'Профиль',
       animatable: true,
-      defaultOpen: true,
     },
     {
-      title: 'Stats',
-      url: '/statistics',
-      icon: BChart3,
-      tooltip: 'Statistics',
+      title: 'Чат с Leo',
+      url: '/leo-chat',
+      icon: ChatBot,
+      tooltip: 'Чат с Leo',
       animatable: true,
-      defaultOpen: false,
-      subItems: [
-        {
-          title: 'Overview',
-          url: '/statistics',
-          disabled: false,
-        },
-        {
-          title: 'Reports',
-          tooltip: 'Reports',
-          url: '/statistics/reports',
-          disabled: false,
-        },
-      ],
     },
     {
-      title: 'Leaderboard',
-      url: '/leaderboard',
-      icon: Award,
-      tooltip: 'Leaderboard',
+      title: 'Настройки',
+      url: '/settings',
+      icon: Settings,
+      tooltip: 'Настройки',
       animatable: true,
     },
+    // ЭТАП 6.2: Временно скрыты до следующих версий
+    // {
+    //   title: 'Personalized Learning',
+    //   url: '/personalized-roadmaps',
+    //   icon: MapIcon,
+    //   tooltip: 'Personalized Learning',
+    //   animatable: true,
+    //   defaultOpen: true,
+    //   hidden: true, // TODO: v2.0
+    // },
+    // {
+    //   title: 'Stats',
+    //   url: '/statistics',
+    //   icon: BChart3,
+    //   tooltip: 'Statistics',
+    //   animatable: true,
+    //   defaultOpen: false,
+    //   hidden: true, // TODO: Включить в следующей версии
+    //   subItems: [
+    //     {
+    //       title: 'Overview',
+    //       url: '/statistics',
+    //       disabled: false,
+    //     },
+    //     {
+    //       title: 'Reports',
+    //       tooltip: 'Reports',
+    //       url: '/statistics/reports',
+    //       disabled: false,
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: 'Leaderboard',
+    //   url: '/leaderboard',
+    //   icon: Award,
+    //   tooltip: 'Leaderboard',
+    //   animatable: true,
+    //   hidden: true, // TODO: Включить после добавления контента
+    // },
   ], []);
 
   const settingsItems: SidebarItemType[] = useMemo(() => [
     {
-      title: 'Back',
+      title: 'Назад',
       url: '/dashboard',
       icon: ChevronLeft,
     },
     {
-      groupLabel: 'Settings',
+      groupLabel: 'Настройки',
     },
     {
-      title: 'Profile',
+      title: 'Профиль',
       url: '/settings/profile',
       icon: User,
     },
     {
-      title: 'Account',
+      title: 'Аккаунт',
       url: '/settings/account',
       icon: Settings,
     },
     {
-      title: 'Billing',
+      title: 'Подписка',
       url: '/settings/billing',
       icon: CreditCard,
     },
@@ -316,6 +349,11 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
           </SidebarGroupLabel>
         </SidebarGroup>
       );
+    }
+
+    // ЭТАП 6.2: Скрываем элементы с hidden: true
+    if ('hidden' in item && item.hidden === true) {
+      return null;
     }
 
     // Generate a stable key for this item

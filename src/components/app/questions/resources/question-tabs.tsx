@@ -8,6 +8,8 @@ import { TabsContent, TabsTrigger, TabsList } from '@/components/ui/tabs';
 
 import QuestionResourceTab from '@/components/app/questions/resources/question-resource-tab';
 import QuestionStatsTab from './question-stats-tab';
+import LessonMaterials from '@/components/app/questions/resources/lesson-materials';
+import { shouldShowLessonMaterials, getLevelTitle } from '@/utils/business-lesson-helpers';
 
 const CodingChallengeDescription = lazy(
   () => import('@/components/app/questions/code-editor/description-tab')
@@ -49,6 +51,10 @@ export default function QuestionTabs({
 
   // Only resolve userAnswered when needed
   const hasUserAnswered = showPreviousAnswerIndicator ? use(userAnswered || false) : null;
+
+  // BIZLEVEL: Определяем нужно ли показывать материалы
+  const showMaterials = shouldShowLessonMaterials(question);
+  const levelTitle = getLevelTitle(question);
 
   if (isSubmitting) {
     return (
@@ -134,6 +140,14 @@ export default function QuestionTabs({
               />
             </div>
             <p className="text-sm text-gray-400 font-light font-onest mt-3">{question.question}</p>
+            
+            {/* BIZLEVEL: Показываем материалы только на последнем уроке уровня */}
+            {showMaterials && (
+              <LessonMaterials 
+                resources={question.QuestionResources} 
+                levelTitle={levelTitle}
+              />
+            )}
           </div>
         ) : (
           <div className="flex flex-col gap-4 p-4 pt-0">
@@ -160,12 +174,20 @@ export default function QuestionTabs({
             </div>
             <p className="text-sm text-gray-400 font-light font-onest mt-3">{question.question}</p>
             {renderAnswerForm()}
+            
+            {/* BIZLEVEL: Показываем материалы только на последнем уроке уровня */}
+            {showMaterials && (
+              <LessonMaterials 
+                resources={question.QuestionResources} 
+                levelTitle={levelTitle}
+              />
+            )}
           </div>
         )}
       </TabsContent>
       <TabsContent value="resources" className="p-4">
         <h3 className="font-inter font-light text-lg md:text-2xl">
-          A list of helpful resources to help you answer this question.
+          Дополнительные ресурсы для изучения
         </h3>
         <QuestionResourceTab
           resources={question.QuestionResources}

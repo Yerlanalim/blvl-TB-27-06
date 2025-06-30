@@ -62,7 +62,7 @@ export function useDebouncedSearch(
   delay: number = 300
 ) {
   const debouncedSearch = useCallback(
-    debounce(searchFn, delay),
+    (query: string) => debounce(searchFn, delay)(query),
     [searchFn, delay]
   );
 
@@ -77,7 +77,7 @@ export function useThrottledScroll(
   limit: number = 100
 ) {
   const throttledScroll = useCallback(
-    throttle(scrollFn, limit),
+    (event: Event) => throttle(scrollFn, limit)(event),
     [scrollFn, limit]
   );
 

@@ -46,7 +46,7 @@ export default function LeoChat() {
     if (isOpen && messages.length === 0 && !isLoadingHistory) {
       loadChatHistory();
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length, isLoadingHistory]);
 
   const loadChatHistory = async () => {
     setIsLoadingHistory(true);

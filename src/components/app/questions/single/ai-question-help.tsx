@@ -245,18 +245,18 @@ export default function AiQuestionHelp(opts: {
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center flex-grow gap-4 mb-4">
             <p className="text-center text-sm text-gray-400 font-onest">
-              Ask me anything about this question!
+              Задайте любой вопрос по этому уроку!
             </p>
             {!userIsPremium(user) && (
               <div className="bg-black-75 rounded-md p-4 text-center">
                 <p className="text-xs text-gray-400 mb-2">
-                  Premium users get unlimited AI assistance
+                  Премиум пользователи получают неограниченную помощь AI
                 </p>
                 <Link
                   href={getUpgradeUrl()}
                   className="inline-block bg-accent text-white py-1 px-3 rounded-md text-xs"
                 >
-                  Upgrade to Premium
+                  Улучшить до Премиум
                 </Link>
               </div>
             )}
@@ -355,42 +355,42 @@ export default function AiQuestionHelp(opts: {
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleQuickPrompt("I don't understand this question")}
+                  onClick={() => handleQuickPrompt("Я не понимаю этот урок")}
                   disabled={isPending || !userIsPremium(user)}
                   rounded="lg"
                   fontSize="xs"
                 >
-                  I don't understand this question
+                  Я не понимаю этот урок
                 </Button>
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleQuickPrompt('Can you explain this in simpler terms?')}
+                  onClick={() => handleQuickPrompt('Можете объяснить это проще?')}
                   disabled={isPending || !userIsPremium(user)}
                   rounded="lg"
                   fontSize="xs"
                 >
-                  Explain in simpler terms
+                  Объяснить проще
                 </Button>
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleQuickPrompt('What approach should I take?')}
+                  onClick={() => handleQuickPrompt('Какой подход мне выбрать?')}
                   disabled={isPending || !userIsPremium(user)}
                   rounded="lg"
                   fontSize="xs"
                 >
-                  What approach should I take?
+                  Какой подход выбрать?
                 </Button>
               </div>
 
               {isPending && (
-                <p className="text-xs text-gray-400 mt-1">Processing your request...</p>
+                <p className="text-xs text-gray-400 mt-1">Обрабатываем ваш запрос...</p>
               )}
             </>
           ) : (
             <Button variant="secondary" className="w-full" href={loginHref}>
-              Login to request AI assistance
+              Войти для получения помощи AI
             </Button>
           )}
         </div>

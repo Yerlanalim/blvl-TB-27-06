@@ -28,11 +28,12 @@ export function useOnboardingSteps() {
   const {
     // serverUser, // BIZLEVEL: временно не используется
     user,
-    handleGetOnboardingQuestions,
+    // ЭТАП 6.2: Временно не используемые переменные
+    // handleGetOnboardingQuestions,
     canContinue,
     timeSpendingPerDay,
-    firstQuestionSelection,
-    FIRST_QUESTION_TUTORIAL_SLUG,
+    // firstQuestionSelection,
+    // FIRST_QUESTION_TUTORIAL_SLUG,
     totalXp,
   } = useOnboardingContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -66,9 +67,11 @@ export function useOnboardingSteps() {
       component: 'OnboardingTimeCommitment',
     },
     [STEPS.NOTIFICATIONS]: {
-      next: STEPS.FIRST_QUESTION_SELECTION,
+      // ЭТАП 6.2: Убираем шаг выбора первого вопроса - направляем сразу на PRICING
+      next: STEPS.PRICING, // было: STEPS.FIRST_QUESTION_SELECTION
       component: 'OnboardingNotifications',
     },
+    // ЭТАП 6.2: Временно скрываем шаг выбора - TODO: v2.0 добавить персонализацию
     [STEPS.FIRST_QUESTION_SELECTION]: {
       next: STEPS.TAGS,
       component: 'OnboardingFirstQuestionSelection',
@@ -78,7 +81,7 @@ export function useOnboardingSteps() {
       component: 'OnboardingTags',
     },
     [STEPS.PRICING]: {
-      next: STEPS.QUESTIONS,
+      next: 'DASHBOARD', // Направляем сразу на dashboard после pricing
       component: 'OnboardingPricing',
     },
     [STEPS.QUESTIONS]: {
@@ -108,31 +111,21 @@ export function useOnboardingSteps() {
 
     setIsLoading(true);
     try {
-      // if the user wants to start from scratch, the next page needs to be the pricing page, not the tags page
-      if (
-        currentStep === STEPS.FIRST_QUESTION_SELECTION &&
-        firstQuestionSelection === 'startFromScratch'
-      ) {
-        setCurrentStepState(STEPS.PRICING);
-        return;
-      }
-
-      // if we are on the last step and the user chose to start from scratch,
-      // redirect them to the first question
-      if (currentStep === STEPS.PRICING && firstQuestionSelection === 'startFromScratch') {
+      // ЭТАП 6.2: Упрощенный онбординг - убираем логику выбора первого вопроса
+      // TODO: v2.0 - вернуть персонализацию через выбор пути обучения
+      
+      // После pricing сразу направляем на первый уровень обучения
+      if (currentStep === STEPS.PRICING) {
+        // Проверяем показывался ли pricing ранее
+        const pricingShown = localStorage.getItem('pricingShown');
+        if (!pricingShown) {
+          localStorage.setItem('pricingShown', 'true');
+        }
+        
         // remove onboarding data
         localStorage.removeItem('onboarding');
-        // then redirect
-        router.push(`/question/${FIRST_QUESTION_TUTORIAL_SLUG}?tutorial=true`);
-        return;
-      } else if (
-        currentStep === STEPS.PRICING &&
-        firstQuestionSelection === 'personalizeLearning'
-      ) {
-        await handleGetOnboardingQuestions();
-        // remove the onboarding data from local storage
-        localStorage.removeItem('onboarding');
-        setCurrentStepState(STEPS.QUESTIONS);
+        // Направляем на первый уровень обучения
+        router.push('/roadmaps?level=1&onboarding=true');
         return;
       }
 
@@ -193,13 +186,7 @@ export function useOnboardingSteps() {
   };
 
   const handleBack = () => {
-    // if the user is on the pricing page, they need to go back to the tags page only if they did not
-    // start from scratch
-    if (currentStep === STEPS.PRICING && firstQuestionSelection !== 'startFromScratch') {
-      setCurrentStepState(STEPS.TAGS);
-      return;
-    }
-
+    // ЭТАП 6.2: Упрощенная логика возврата назад
     const previousStep = Object.entries(stepConfig).find(
       ([, config]) => config.next === currentStep
     )?.[0];

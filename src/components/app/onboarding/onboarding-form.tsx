@@ -21,7 +21,9 @@ import { cn } from '@/lib/utils';
 
 // hooks
 import { useOnboardingSteps, STEPS } from '@/hooks/use-onboarding-steps';
-import OnboardingFirstQuestionSelection from './onboarding-first-question-selection';
+// ЭТАП 6.2: Временно скрыто - будет добавлено в v2.0
+// import OnboardingFirstQuestionSelection from './onboarding-first-question-selection';
+import OnboardingFirstQuestionSelectionPlaceholder from './onboarding-first-question-selection-placeholder';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -41,7 +43,8 @@ const stepComponents = {
   [STEPS.INITIAL_QUESTIONS]: OnboardingInitialQuestions,
   [STEPS.TIME_COMMITMENT]: OnboardingTimeCommitment,
   [STEPS.NOTIFICATIONS]: OnboardingNotifications,
-  [STEPS.FIRST_QUESTION_SELECTION]: OnboardingFirstQuestionSelection,
+  // ЭТАП 6.2: Временно показываем заглушку вместо полноценного компонента
+  [STEPS.FIRST_QUESTION_SELECTION]: OnboardingFirstQuestionSelectionPlaceholder,
   [STEPS.TAGS]: OnboardingTags,
   [STEPS.QUESTIONS]: OnboardingQuestions,
   [STEPS.PRICING]: OnboardingPricing,

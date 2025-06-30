@@ -37,13 +37,13 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
   const handleHorizontalMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleHorizontalMouseMove);
     document.removeEventListener('mouseup', handleHorizontalMouseUp);
-  }, []);
+  }, [handleHorizontalMouseMove]);
 
   const handleHorizontalMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     document.addEventListener('mousemove', handleHorizontalMouseMove);
     document.addEventListener('mouseup', handleHorizontalMouseUp);
-  }, []);
+  }, [handleHorizontalMouseMove, handleHorizontalMouseUp]);
 
   const handleVerticalMouseMove = useCallback((e: MouseEvent) => {
     if (containerRef.current) {
@@ -59,13 +59,13 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
   const handleVerticalMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleVerticalMouseMove);
     document.removeEventListener('mouseup', handleVerticalMouseUp);
-  }, []);
+  }, [handleVerticalMouseMove]);
 
   const handleVerticalMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     document.addEventListener('mousemove', handleVerticalMouseMove);
     document.addEventListener('mouseup', handleVerticalMouseUp);
-  }, []);
+  }, [handleVerticalMouseMove, handleVerticalMouseUp]);
 
   useEffect(() => {
     const horizontalResizer = horizontalResizerRef.current;
