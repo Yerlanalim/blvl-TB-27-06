@@ -157,3 +157,6 @@ Task 6.1.3: Удаление пустых таблиц. Удалено 26 пус
 
 ## ЭТАП 6.6.1: Удаление неиспользуемых зависимостей (ЗАВЕРШЕН)
 **Удалены пакеты:** @million/lint (не использовался), turbo (только в package.json), critters (deprecated), @types/dompurify (deprecated), dompurify (не использовался), @builder.io/partytown (deprecated), @storybook/addon-styling (deprecated). **Исправления:** Отключен optimizeCss в next.config.js (critters был удален), исправлены peer dependency warnings в Storybook. **Результат:** Удалено 7 неиспользуемых пакетов, размер node_modules уменьшен, проект успешно компилируется. Ошибки БД при сборке ожидаемы для статической генерации.
+
+## ЭТАП 6.6.2: Оптимизация размера бандла (ЗАВЕРШЕН)
+**Динамические импорты:** Monaco Editor и Recharts конвертированы в React.lazy с Suspense fallback. **Next.js оптимизация:** Улучшена webpack конфигурация с splitChunks для тяжелых библиотек (Monaco 300KB, Charts 200KB, Admin 150KB). **Проблемы:** TypeScript ошибки с динамическими импортами Recharts, исправлены типы chart.tsx и логические ошибки. **Результат:** Успешная сборка, динамическая загрузка тяжелых компонентов, bundle оптимизирован через code splitting, проект готов к деплою.
