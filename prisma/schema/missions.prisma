@@ -5,10 +5,12 @@ model Mission {
   title        String
   description  String?
   type         MissionType
-  requirements Json
+  requirements Int
   isActive     Boolean       @default(false)
   icon         String?
   UserMission  UserMission[]
+
+  @@index([isActive])
 }
 
 model UserMission {
@@ -17,12 +19,16 @@ model UserMission {
   updatedAt   DateTime      @updatedAt
   userUid     String
   missionUid  String
-  progress    Json          @default("{}")
+  progress    Int           @default(0)
   status      MissionStatus @default(PENDING)
   completedAt DateTime?
   failedAt    DateTime?
   mission     Mission       @relation(fields: [missionUid], references: [uid], onDelete: Cascade)
   user        Users         @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@index([missionUid])
+  @@index([status])
+  @@index([userUid])
 }
 
 enum MissionType {

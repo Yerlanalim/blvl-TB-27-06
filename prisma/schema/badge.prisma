@@ -1,28 +1,3 @@
-model Badge {
-  uid          String        @id @default(uuid())
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  name         String
-  description  String
-  imageUrl     String
-  type         BadgeType
-  requirements Json
-  achievements Achievement[]
-}
-
-model Achievement {
-  uid        String           @id @default(uuid())
-  createdAt  DateTime         @default(now())
-  updatedAt  DateTime         @updatedAt
-  badgeUid   String
-  userUid    String
-  unlockedAt DateTime
-  status     CompletionStatus @default(INCOMPLETE)
-  progress   Int
-  badge      Badge            @relation(fields: [badgeUid], references: [uid], onDelete: Cascade)
-  user       Users            @relation(fields: [userUid], references: [uid], onDelete: Cascade)
-}
-
 enum BadgeType {
   STREAK
   QUESTION_ANSWERED

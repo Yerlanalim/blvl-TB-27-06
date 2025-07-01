@@ -9,32 +9,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Waitlist {
-  uid       String   @id @default(cuid())
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model DemoAnswers {
-  uid           String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now())
-  questionUid   String
-  correctAnswer Boolean   @default(false)
-  userAnswer    String
-  timeTaken     Int?
-  question      Questions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
-}
-
-model AIPrompts {
-  uid       String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  prompt    String
-  name      String
-}
-
 model PseoPages {
   uid                String   @id @default(cuid())
   createdAt          DateTime @default(now())

@@ -1,13 +1,1 @@
-model UserLeoChats {
-  uid       String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userUid   String
-  message   String
-  response  String
-  context   String? // контекст страницы где был задан вопрос
-  user      Users    @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 
-  @@index([userUid])
-  @@index([createdAt])
-} 

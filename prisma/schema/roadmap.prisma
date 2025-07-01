@@ -1,101 +1,14 @@
 model UserRoadmaps {
-  uid                                 String                                @id @default(cuid())
-  createdAt                           DateTime                              @default(now())
-  updatedAt                           DateTime                              @updatedAt
-  userUid                             String
-  status                              RoadmapStatus                         @default(ACTIVE)
-  currentQuestionIndex                Int                                   @default(1)
-  hasGeneratedRoadmap                 Boolean                               @default(false)
-  description                         String?                               @default("No description provided")
-  title                               String?                               @default("Untitled Roadmap")
-  DefaultRoadmapQuestionsUsersAnswers DefaultRoadmapQuestionsUsersAnswers[]
-  questions                           RoadmapUserQuestions[]
-  user                                Users                                 @relation(fields: [userUid], references: [uid], onDelete: Cascade)
-}
-
-model RoadmapUserQuestions {
-  uid              String                            @id @default(cuid())
-  createdAt        DateTime                          @default(now())
-  updatedAt        DateTime                          @updatedAt
-  question         String
-  codeSnippet      String?
-  hint             String?
-  difficulty       QuestionDifficulty                @default(EASY)
-  completed        Boolean                           @default(false)
-  completedAt      DateTime?
-  roadmapUid       String
-  correctAnswerUid String
-  order            Int
-  userCorrect      Boolean                           @default(false)
-  roadmap          UserRoadmaps                      @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
-  answers          RoadmapUserQuestionsAnswers[]
-  userAnswers      RoadmapUserQuestionsUserAnswers[]
-  bookmarks        UserBookmarks[]
-}
-
-model RoadmapUserQuestionsAnswers {
-  uid         String               @id @default(cuid())
-  createdAt   DateTime             @default(now())
-  updatedAt   DateTime             @updatedAt
-  questionUid String
-  correct     Boolean              @default(false)
-  answer      String
-  question    RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
-}
-
-model RoadmapUserQuestionsUserAnswers {
-  uid         String               @id @default(cuid())
-  createdAt   DateTime             @default(now())
-  updatedAt   DateTime             @updatedAt
-  questionUid String
-  correct     Boolean              @default(false)
-  answer      String
-  answerUid   String               @default("")
-  difficulty  AnswerDifficulty     @default(EASY)
-  question    RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
-}
-
-model DefaultRoadmapQuestions {
-  uid                                 String                                @id @default(cuid())
-  createdAt                           DateTime                              @default(now())
-  updatedAt                           DateTime                              @updatedAt
-  question                            String
-  codeSnippet                         String?
-  hint                                String?
-  difficulty                          QuestionDifficulty                    @default(EASY)
-  correctAnswer                       String
-  order                               Int                                   @default(autoincrement())
-  aiTitle                             String?
-  answers                             DefaultRoadmapQuestionsAnswers[]
-  DefaultRoadmapQuestionsUsersAnswers DefaultRoadmapQuestionsUsersAnswers[]
-}
-
-model DefaultRoadmapQuestionsAnswers {
-  uid         String                  @id @default(cuid())
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
-  questionUid String
-  answer      String
-  question    DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
-}
-
-model DefaultRoadmapQuestionsUsersAnswers {
-  uid         String                  @id @default(cuid())
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
-  questionUid String
-  answer      String
-  correct     Boolean                 @default(false)
-  roadmapUid  String
-  question    DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
-  roadmap     UserRoadmaps            @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
-}
-
-model RoadmapGenerationProgress {
-  uid       String                  @id @default(cuid())
-  createdAt DateTime                @default(now())
-  updatedAt DateTime                @updatedAt
-  status    RoadmapGenerationStatus @default(FETCHING_DATA)
+  uid                  String        @id @default(cuid())
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  userUid              String
+  status               RoadmapStatus @default(ACTIVE)
+  currentQuestionIndex Int           @default(1)
+  hasGeneratedRoadmap  Boolean       @default(false)
+  description          String?       @default("No description provided")
+  title                String?       @default("Untitled Roadmap")
+  user                 Users         @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
 
 enum RoadmapStatus {

@@ -18,7 +18,6 @@ model Users {
   aiQuestionHelpTokens         Int                     @default(10)
   experienceLevel              UserExperienceLevel     @default(BEGINNER)
   isCustomUsername             Boolean                 @default(false)
-  howDidYouHearAboutBizLevel   String?
   referralCode                 String?
   aboutMeAiHelp                String?
   hasSent7DayNoChallengeEmail  Boolean                 @default(false)
@@ -30,21 +29,15 @@ model Users {
   userXp                       Int                     @default(0)
   weeklyUserXp                 Int                     @default(0)
   fasterThanAiGameMode         Boolean                 @default(false)
-  achievements                 Achievement[]
+  howDidYouHearAboutBizLevel   String?
   answers                      Answers[]
-  LeagueAchievement            LeagueAchievement[]
-  LeagueHistory                LeagueHistory[]
   Profile                      Profile?
-  StatisticsReport             StatisticsReport[]
   streak                       Streaks?
   studyPathGoals               StudyPathGoal[]
   subscription                 Subscriptions?
-  bookmarks                    UserBookmarks[]
-  UserLeague                   UserLeague[]
   userMissions                 UserMission[]
   roadmaps                     UserRoadmaps[]
   studyPathEnrollments         UserStudyPath[]
-  leoChats                     UserLeoChats[]
 }
 
 model Streaks {
