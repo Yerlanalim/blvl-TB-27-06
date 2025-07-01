@@ -10,9 +10,13 @@ import { updateUser } from '@/actions/user/authed/update-user';
 
 export const STEPS = {
   USER_DETAILS: 'USER_DETAILS', // get the users info
+  INTRO_VIDEO: 'INTRO_VIDEO', // ЭТАП 7.1.1: новый шаг с вводным видео
   INITIAL_QUESTIONS: 'INITIAL_QUESTIONS', // give the user 3 very simple multiple choice questions to gauge skill level and give them quick wins!
-  TIME_COMMITMENT: 'TIME_COMMITMENT', // BIZLEVEL: get the users daily learning goal
-  NOTIFICATIONS: 'NOTIFICATIONS', // offer push notifications
+  
+  // ЭТАП 7.1.1: Временно отключенные шаги - НЕ УДАЛЯЕМ для возможности отката
+  // TIME_COMMITMENT: 'TIME_COMMITMENT', // BIZLEVEL: get the users daily learning goal
+  // NOTIFICATIONS: 'NOTIFICATIONS', // offer push notifications
+  
   TAGS: 'TAGS', // get the users interests
   PRICING: 'PRICING', // get the users pricing plan
   QUESTIONS: 'QUESTIONS', // get the users questions
@@ -31,7 +35,8 @@ export function useOnboardingSteps() {
     // ЭТАП 6.2: Временно не используемые переменные
     // handleGetOnboardingQuestions,
     canContinue,
-    timeSpendingPerDay,
+    // ЭТАП 7.1.1: Временно не используемые после упрощения onboarding
+    // timeSpendingPerDay,
     // firstQuestionSelection,
     // FIRST_QUESTION_TUTORIAL_SLUG,
     totalXp,
@@ -52,25 +57,34 @@ export function useOnboardingSteps() {
   }, [currentStep]);
 
   const stepConfig = {
-    // gather user details
+    // ЭТАП 7.1.1: Упрощенный flow - USER_DETAILS → INTRO_VIDEO → первый урок
     [STEPS.USER_DETAILS]: {
-      next: STEPS.INITIAL_QUESTIONS,
+      next: STEPS.INTRO_VIDEO, // было: STEPS.INITIAL_QUESTIONS
       component: 'OnboardingUserDetails',
     },
+    [STEPS.INTRO_VIDEO]: {
+      next: 'FIRST_LESSON', // Специальный маркер для перехода к первому уроку
+      component: 'OnboardingIntroVideo',
+    },
+    
+    // ЭТАП 7.1.1: Сохраняем остальные шаги для возможности отката, но не используем в основном flow
     [STEPS.INITIAL_QUESTIONS]: {
-      next: STEPS.TIME_COMMITMENT,
+      next: STEPS.TAGS, // было: STEPS.TIME_COMMITMENT
       component: 'OnboardingInitialQuestions',
     },
-    // BIZLEVEL: get the user to choose a daily amount of time to spend on learning business
+    
+    // ЭТАП 7.1.1: Временно отключенные шаги - СОХРАНЯЕМ код для отката
+    /*
     [STEPS.TIME_COMMITMENT]: {
       next: STEPS.NOTIFICATIONS,
       component: 'OnboardingTimeCommitment',
     },
     [STEPS.NOTIFICATIONS]: {
-      // ЭТАП 6.2: Убираем шаг выбора первого вопроса - направляем сразу на PRICING
       next: STEPS.PRICING, // было: STEPS.FIRST_QUESTION_SELECTION
       component: 'OnboardingNotifications',
     },
+    */
+    
     // ЭТАП 6.2: Временно скрываем шаг выбора - TODO: v2.0 добавить персонализацию
     [STEPS.FIRST_QUESTION_SELECTION]: {
       next: STEPS.TAGS,
@@ -97,6 +111,12 @@ export function useOnboardingSteps() {
       window.location.hash = '';
       router.push('/dashboard?onboarding=true');
     }
+    // ЭТАП 7.1.1: Переход к первому уроку после INTRO_VIDEO
+    else if (nextStep === 'FIRST_LESSON') {
+      localStorage.removeItem('onboarding');
+      window.location.hash = '';
+      router.push('/question/welcome-to-business?onboarding=true');
+    }
     // if the user is skipping past the tags, redirect to the dashboard
     else if (nextStep === STEPS.TAGS) {
       localStorage.removeItem('onboarding');
@@ -111,6 +131,15 @@ export function useOnboardingSteps() {
 
     setIsLoading(true);
     try {
+      // ЭТАП 7.1.1: Новая логика для INTRO_VIDEO шага
+      if (currentStep === STEPS.INTRO_VIDEO) {
+        // После просмотра вводного видео направляем на первый урок
+        localStorage.removeItem('onboarding');
+        window.location.hash = '';
+        router.push('/question/welcome-to-business?onboarding=true');
+        return;
+      }
+
       // ЭТАП 6.2: Упрощенный онбординг - убираем логику выбора первого вопроса
       // TODO: v2.0 - вернуть персонализацию через выбор пути обучения
       
@@ -129,10 +158,15 @@ export function useOnboardingSteps() {
         return;
       }
 
+      // ЭТАП 7.1.1: Убираем логику TIME_COMMITMENT (временно отключен)
+      /*
       if (currentStep === STEPS.TIME_COMMITMENT) {
         await updateUser({ userDetails: { ...user, timeSpendingPerDay } });
         setCurrentStepState(stepConfig[STEPS.TIME_COMMITMENT].next as StepKey);
-      } else if (currentStep === STEPS.USER_DETAILS) {
+      } 
+      */
+      
+      if (currentStep === STEPS.USER_DETAILS) {
         await updateUser({ userDetails: user });
 
         // if this is false, we need to create a coupon and send the welcome email

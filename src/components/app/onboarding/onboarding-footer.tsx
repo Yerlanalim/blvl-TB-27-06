@@ -37,9 +37,8 @@ export default function OnboardingFooter({
         {(currentStep === STEPS.PRICING ||
           currentStep === STEPS.INITIAL_QUESTIONS ||
           currentStep === STEPS.QUESTIONS ||
-          currentStep === STEPS.TIME_COMMITMENT ||
+          currentStep === STEPS.INTRO_VIDEO ||
           currentStep === STEPS.TAGS ||
-          currentStep === STEPS.NOTIFICATIONS ||
           currentStep === STEPS.FIRST_QUESTION_SELECTION) && (
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -55,14 +54,12 @@ export default function OnboardingFooter({
       </AnimatePresence>
       <div className="flex items-center gap-x-3">
         {showSkipButton &&
-          // need to answer these two
           currentStep !== STEPS.FIRST_QUESTION_SELECTION &&
           currentStep !== STEPS.INITIAL_QUESTIONS && (
             <Button type="button" variant="ghost" onClick={onSkip} disabled={isLoading}>
               Skip
             </Button>
           )}
-        {/** disable if no username or how did you hear about us */}
         <Button
           variant="accent"
           type="button"
@@ -74,7 +71,7 @@ export default function OnboardingFooter({
             (!user?.howDidYouHearAboutBizLevel && currentStep === STEPS.USER_DETAILS)
           }
         >
-          Continue
+          {currentStep === STEPS.INTRO_VIDEO ? 'Начать обучение' : 'Continue'}
           {isLoading && <LoadingSpinner className="ml-2 size-4" />}
         </Button>
       </div>

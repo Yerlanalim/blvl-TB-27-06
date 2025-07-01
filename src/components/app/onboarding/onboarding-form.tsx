@@ -5,12 +5,14 @@ import { motion } from 'framer-motion';
 // components
 import { Card } from '@/components/ui/card';
 import OnboardingUserDetails from './onboarding-user-details';
-import OnboardingTimeCommitment from './onboarding-time-commitment';
+import OnboardingIntroVideo from './onboarding-intro-video'; // ЭТАП 7.1.1: новый компонент
+// ЭТАП 7.1.1: Временно отключенные компоненты
+// import OnboardingTimeCommitment from './onboarding-time-commitment';
+// import OnboardingNotifications from './onboarding-notifications';
 import OnboardingTags from './onboarding-tags';
 import OnboardingQuestions from './onboarding-questions';
 import OnboardingPricing from './onboarding-pricing';
 import OnboardingFooter from './onboarding-footer';
-import OnboardingNotifications from './onboarding-notifications';
 import OnboardingInitialQuestions from './onboarding-initial-questions';
 
 // contexts
@@ -40,9 +42,13 @@ const containerVariants = {
 
 const stepComponents = {
   [STEPS.USER_DETAILS]: OnboardingUserDetails,
+  [STEPS.INTRO_VIDEO]: OnboardingIntroVideo, // ЭТАП 7.1.1: новый шаг с вводным видео
   [STEPS.INITIAL_QUESTIONS]: OnboardingInitialQuestions,
-  [STEPS.TIME_COMMITMENT]: OnboardingTimeCommitment,
-  [STEPS.NOTIFICATIONS]: OnboardingNotifications,
+  
+  // ЭТАП 7.1.1: Временно отключенные компоненты - сохраняем для отката
+  // [STEPS.TIME_COMMITMENT]: OnboardingTimeCommitment,
+  // [STEPS.NOTIFICATIONS]: OnboardingNotifications,
+  
   // ЭТАП 6.2: Временно показываем заглушку вместо полноценного компонента
   [STEPS.FIRST_QUESTION_SELECTION]: OnboardingFirstQuestionSelectionPlaceholder,
   [STEPS.TAGS]: OnboardingTags,
@@ -64,14 +70,19 @@ export default function OnboardingForm() {
           className={cn(
             'rounded-lg shadow-xl overflow-hidden min-w-fit relative',
             currentStep === STEPS.PRICING ||
+              currentStep === STEPS.INTRO_VIDEO ||
               (currentStep === STEPS.TIME_COMMITMENT && 'lg:min-w-[58rem]'),
-            currentStep === STEPS.PRICING || currentStep === STEPS.INITIAL_QUESTIONS
+            currentStep === STEPS.PRICING || 
+              currentStep === STEPS.INITIAL_QUESTIONS ||
+              currentStep === STEPS.INTRO_VIDEO
               ? 'border-none'
               : 'border border-black-50'
           )}
           style={{
             background:
-              currentStep === STEPS.PRICING || currentStep === STEPS.INITIAL_QUESTIONS
+              currentStep === STEPS.PRICING || 
+              currentStep === STEPS.INITIAL_QUESTIONS ||
+              currentStep === STEPS.INTRO_VIDEO
                 ? 'none'
                 : 'radial-gradient(128% 107% at 0% 0%, #212121 0%, rgb(0,0,0) 77.61%)',
           }}
