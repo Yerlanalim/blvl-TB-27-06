@@ -109,8 +109,8 @@ const nextConfig = {
   },
   // BIZLEVEL: Улучшенная конфигурация для оптимизации производительности
   experimental: {
-    // Включаем оптимизацию CSS только в production (исправляет ошибку critters)
-    optimizeCss: process.env.NODE_ENV === 'production',
+    // Отключаем optimizeCss так как critters deprecated и удален
+    // optimizeCss: process.env.NODE_ENV === 'production',
     // Включаем gzipSize анализ
     gzipSize: true,
   },
