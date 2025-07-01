@@ -11,7 +11,7 @@ export const getReport = async (uid: string) => {
   return await prisma.statisticsReport.findUnique({
     where: { uid, userUid: user.uid },
     include: {
-      questions: {
+      linkedReports: {
         include: {
           answers: true,
         },

@@ -36,7 +36,7 @@ export const bookmarkQuestion = async (questionUid: string, isRoadmap = false) =
   const existingBookmark = await prisma.userBookmarks.findFirst({
     where: {
       userId: user.uid,
-      questionId: question.uid,
+      ...(isRoadmap ? { roadmapUserQuestionId: questionUid } : { questionId: questionUid }),
     },
   });
 

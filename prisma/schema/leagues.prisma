@@ -33,3 +33,117 @@ enum LeaguePowerUp {
   TIME_FREEZE
   BONUS_POINTS
 }
+
+// Individual League Data - core league configuration
+model IndividualLeagueData {
+  uid                      String               @id @default(cuid())
+  createdAt                DateTime             @default(now())
+  updatedAt                DateTime             @updatedAt
+  name                     LeagueName
+  color                    LeagueColor
+  description              String?
+  xpRequirement            Int
+  resetDate                DateTime
+  canBeRelegated           Boolean              @default(false)
+  icon                     String?
+  inactivityThresholdDays  Int?                 @default(7)
+  maxPowerUpsPerWeek       Int                  @default(3)
+  xpMultiplier             Float                @default(1.0)
+
+  // Relations
+  leagues                  Leagues[]
+  achievements             LeagueAchievement[]
+  history                  LeagueHistory[]
+
+  @@map("IndividualLeagueData")
+}
+
+// League instances
+model Leagues {
+  uid                String              @id @default(cuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  leagueDataUid      String
+  maxUsers           Int                 @default(30)
+  currentUsers       Int                 @default(0)
+  startDate          DateTime            @default(now())
+  endDate            DateTime
+  promotionCount     Int                 @default(3)
+  relegationCount    Int                 @default(5)
+  weeklyChallenge    String?
+  weeklyChallengeXP  Int?
+
+  // Relations
+  leagueData         IndividualLeagueData @relation(fields: [leagueDataUid], references: [uid], onDelete: Restrict)
+  users              UserLeague[]
+
+  @@map("Leagues")
+}
+
+// User league participation
+model UserLeague {
+  uid                String              @id @default(cuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  userUid            String
+  leagueUid          String
+  position           Int?
+  weeklyXp           Int                 @default(0)
+  promoted           Boolean             @default(false)
+  relegated          Boolean             @default(false)
+  joinedAt           DateTime            @default(now())
+  currentStreak      Int                 @default(0)
+  bestPosition       Int?
+  activePowerUps     LeaguePowerUp[]
+  powerUpExpiryTime  DateTime?
+  challengeProgress  Int                 @default(0)
+  challengeCompleted Boolean             @default(false)
+
+  // Relations
+  user               Users               @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  league             Leagues             @relation(fields: [leagueUid], references: [uid], onDelete: Cascade)
+
+  @@unique([userUid, leagueUid])
+  @@map("UserLeague")
+}
+
+// League achievements
+model LeagueAchievement {
+  uid            String                   @id @default(cuid())
+  createdAt      DateTime                 @default(now())
+  userUid        String
+  leagueDataUid  String
+  type           LeagueAchievementType
+  earnedAt       DateTime                 @default(now())
+  metadata       Json?
+  xpBonus        Int                      @default(0)
+
+  // Relations
+  user           Users                    @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  leagueData     IndividualLeagueData     @relation(fields: [leagueDataUid], references: [uid], onDelete: Cascade)
+
+  @@map("LeagueAchievement")
+}
+
+// League history
+model LeagueHistory {
+  uid                 String                @id @default(cuid())
+  createdAt           DateTime              @default(now())
+  userUid             String
+  leagueDataUid       String
+  finalPosition       Int
+  finalXp             Int
+  wasPromoted         Boolean
+  wasRelegated        Boolean
+  weekStartDate       DateTime
+  weekEndDate         DateTime
+  averageXpPerDay     Float?
+  powerUpsUsed        Int                   @default(0)
+  challengesCompleted Int                   @default(0)
+
+  // Relations
+  user                Users                 @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  leagueData          IndividualLeagueData  @relation(fields: [leagueDataUid], references: [uid], onDelete: Cascade)
+
+  @@map("LeagueHistory")
+}

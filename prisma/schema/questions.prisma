@@ -30,6 +30,8 @@ model Questions {
   answers              QuestionAnswers[]
   QuestionResources    QuestionResources[]
   tags                 QuestionTags[]
+  bookmarks            UserBookmarks[]
+  linkedReports        StatisticsReport[] @relation("SharedQuestions")
 }
 
 model Tag {

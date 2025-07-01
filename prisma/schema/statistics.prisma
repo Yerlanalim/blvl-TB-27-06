@@ -1,1 +1,16 @@
+model StatisticsReport {
+  uid            String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userUid        String
+  correctTags    String[]
+  incorrectTags  String[]
+  htmlReport     String?
+  totalTimeTaken Int?     @default(0)
 
+  // Relations
+  user           Users      @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  linkedReports  Questions[] @relation("SharedQuestions")
+
+  @@index([userUid])
+}

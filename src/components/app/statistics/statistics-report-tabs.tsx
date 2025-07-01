@@ -13,7 +13,7 @@ import type { Question } from '@/types';
 import { useUserServer } from '@/hooks/use-user-server';
 
 export default async function StatisticsReportTabs(opts: {
-  report: StatisticsReport & { questions: Question[] };
+  report: StatisticsReport & { linkedReports: Question[] };
 }) {
   const { report } = opts;
 
@@ -193,7 +193,7 @@ export default async function StatisticsReportTabs(opts: {
                 </p>
               </div>
 
-              <QuestionSuggestedCard customQuestions={report.questions ?? []} isCustomQuestion />
+              <QuestionSuggestedCard customQuestions={report.linkedReports ?? []} isCustomQuestion />
             </div>
           </CardContent>
         </Card>

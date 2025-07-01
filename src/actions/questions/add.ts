@@ -57,7 +57,9 @@ export const addQuestion = async (opts: {
     slug,
   } = opts;
 
-  console.log('hit');
+  	if (process.env.NODE_ENV === 'development') {
+		console.log('Question creation hit');
+	}
 
   if (!question || !answers.length) {
     console.error('Please provide a question, at least one answer, and a question date');
@@ -155,7 +157,6 @@ export const addQuestion = async (opts: {
           correctAnswer: correctAnswerUid,
           codeSnippet: codeSnippet || null,
           hint: hint || null,
-          DefaultRoadmapQuestionsUsersAnswers: {},
           order: order || 0,
           aiTitle: aiTitle || null,
           difficulty,

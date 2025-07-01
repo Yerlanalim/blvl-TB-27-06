@@ -121,7 +121,9 @@ export function useSaveProgress() {
           
         case 'bookmark_added':
           // Здесь будет API для закладок
-          console.log('Bookmark API not implemented yet');
+          		if (process.env.NODE_ENV === 'development') {
+			console.log('Bookmark API not implemented yet');
+		}
           response = { success: true };
           break;
           

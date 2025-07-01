@@ -40,17 +40,7 @@ interface RoadmapGenerateOpts {
 export const roadmapGenerate = async (opts: RoadmapGenerateOpts) => {
   const { generationRecordUid, generateMore = false } = opts;
 
-  // First create the progress record
-  let generationProgressRecord;
-  if (generationRecordUid) {
-    generationProgressRecord = await prisma.roadmapGenerationProgress.create({
-      data: {
-        uid: generationRecordUid,
-        status: 'FETCHING_DATA',
-      },
-    });
-  }
-
+  // Define updateGenerationProgress function at the top level so it's accessible in both try and catch blocks
   const updateGenerationProgress = async (status: 'FETCHING_DATA' | 'GENERATED' | 'ERROR') => {
     if (generationRecordUid) {
       await prisma.roadmapGenerationProgress.update({
@@ -68,16 +58,26 @@ export const roadmapGenerate = async (opts: RoadmapGenerateOpts) => {
         })
       : createOrFetchUserRoadmap());
     if (!roadmap) {
-      await updateGenerationProgress('ERROR');
       throw new Error('Roadmap not found');
     }
 
     // handle errors
     if ('code' in roadmap) {
-      await updateGenerationProgress('ERROR');
       throw new Error(roadmap.error);
     }
     const roadmapUid = roadmap.uid;
+
+    // Create the progress record after we have roadmapUid
+    let generationProgressRecord;
+    if (generationRecordUid) {
+      generationProgressRecord = await prisma.roadmapGenerationProgress.create({
+        data: {
+          uid: generationRecordUid,
+          roadmapUid: roadmapUid,
+          status: 'FETCHING_DATA',
+        },
+      });
+    }
 
     // get the user
     const user = await getUser();
@@ -200,13 +200,16 @@ export const roadmapGenerate = async (opts: RoadmapGenerateOpts) => {
 
 export const simulateRoadmapGeneration = async ({
   generationRecordUid,
+  roadmapUid,
 }: {
   generationRecordUid: string;
+  roadmapUid: string;
 }) => {
   // create a new RoadmapGenerationProgress record
   const generationProgressRecord = await prisma.roadmapGenerationProgress.create({
     data: {
       uid: generationRecordUid,
+      roadmapUid: roadmapUid,
       status: 'FETCHING_DATA', // init status
     },
   });

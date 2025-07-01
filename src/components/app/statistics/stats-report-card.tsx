@@ -71,7 +71,7 @@ export default async function StatsReportCard({ report }: { report: StatsReport 
           </div>
           <div className="w-fit">
             <Chip
-              text={`${report.questions.length} Custom questions`}
+              text={`${report.linkedReports.length} Custom questions`}
               color="black-100"
               border="black-50"
               ghost

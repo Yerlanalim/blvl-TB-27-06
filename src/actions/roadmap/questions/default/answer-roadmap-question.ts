@@ -34,6 +34,7 @@ export const answerDefaultRoadmapQuestion = async (opts: {
       where: {
         questionUid,
         roadmapUid,
+        userUid: user.uid,
       },
     });
 
@@ -55,6 +56,7 @@ export const answerDefaultRoadmapQuestion = async (opts: {
           questionUid: questionUid,
           correct: correctAnswer,
           roadmapUid: roadmapUid,
+          userUid: user.uid,
           answer: answerUid,
         },
       });

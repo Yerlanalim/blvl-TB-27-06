@@ -1,0 +1,786 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model PseoPages {
+  uid                String   @id @default(cuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  slug               String   @unique
+  /// * METADATA
+  metaTitle          String
+  metaDescription    String
+  metaKeywords       String[]
+  /// * SEO
+  canonicalUrl       String?
+  ogImage            String?
+  /// * PAGE CONTENT
+  targetingKeywords  String[]
+  title              String
+  heroHeader         String
+  heroSubheader      String
+  leftHeader         String
+  leftSubheader      String
+  learnMoreLink      Boolean  @default(false)
+  leftCta            Json?
+  roadmapTitle       String
+  roadmapDescription String
+  questionHeader     String
+  questionSubheader  String
+  contentGridTitle   String
+  contentGridItems   Json[]
+  ctaTitle           String
+  ctaDescription     String
+  contentSections    Json[]
+  faqs               Json[]
+  marketingItems     Json[]
+  templateId         String
+  templateConfig     Json?
+  authorId           String?
+  authorName         String?
+  jsonLdTitle        String?
+  jsonLdDescription  String?
+  isPublished        Boolean  @default(false)
+}
+
+// ===== From badge.prisma =====
+enum BadgeType {
+  STREAK
+  QUESTION_ANSWERED
+  QUESTION_CORRECT
+  TIME_TAKEN
+  LEADERBOARD_POSITION
+}
+
+enum CompletionStatus {
+  INCOMPLETE
+  COMPLETED
+}
+
+// ===== From leagues.prisma =====
+enum LeagueName {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+  DIAMOND
+}
+
+enum LeagueColor {
+  CD7F32
+  C0C0C0
+  FFD700
+  E5E4E2
+  b9f2ff
+  FF4D4D
+}
+
+enum LeagueAchievementType {
+  LEAGUE_WINNER
+  TOP_THREE
+  PROMOTION
+  PERFECT_WEEK
+  SURVIVAL
+  COMEBACK_KING
+  CONSISTENCY
+  SPEED_DEMON
+}
+
+enum LeaguePowerUp {
+  DOUBLE_XP
+  SHIELD
+  STREAK_SAVER
+  TIME_FREEZE
+  BONUS_POINTS
+}
+
+// Individual League Data - core league configuration
+model IndividualLeagueData {
+  uid                     String      @id @default(cuid())
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+  name                    LeagueName
+  color                   LeagueColor
+  description             String?
+  xpRequirement           Int
+  resetDate               DateTime
+  canBeRelegated          Boolean     @default(false)
+  icon                    String?
+  inactivityThresholdDays Int?        @default(7)
+  maxPowerUpsPerWeek      Int         @default(3)
+  xpMultiplier            Float       @default(1.0)
+
+  // Relations
+  leagues      Leagues[]
+  achievements LeagueAchievement[]
+  history      LeagueHistory[]
+
+  @@map("IndividualLeagueData")
+}
+
+// League instances
+model Leagues {
+  uid               String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  leagueDataUid     String
+  maxUsers          Int      @default(30)
+  currentUsers      Int      @default(0)
+  startDate         DateTime @default(now())
+  endDate           DateTime
+  promotionCount    Int      @default(3)
+  relegationCount   Int      @default(5)
+  weeklyChallenge   String?
+  weeklyChallengeXP Int?
+
+  // Relations
+  leagueData IndividualLeagueData @relation(fields: [leagueDataUid], references: [uid], onDelete: Restrict)
+  users      UserLeague[]
+
+  @@map("Leagues")
+}
+
+// User league participation
+model UserLeague {
+  uid                String          @id @default(cuid())
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  userUid            String
+  leagueUid          String
+  position           Int?
+  weeklyXp           Int             @default(0)
+  promoted           Boolean         @default(false)
+  relegated          Boolean         @default(false)
+  joinedAt           DateTime        @default(now())
+  currentStreak      Int             @default(0)
+  bestPosition       Int?
+  activePowerUps     LeaguePowerUp[]
+  powerUpExpiryTime  DateTime?
+  challengeProgress  Int             @default(0)
+  challengeCompleted Boolean         @default(false)
+
+  // Relations
+  user   Users   @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  league Leagues @relation(fields: [leagueUid], references: [uid], onDelete: Cascade)
+
+  @@unique([userUid, leagueUid])
+  @@map("UserLeague")
+}
+
+// League achievements
+model LeagueAchievement {
+  uid           String                @id @default(cuid())
+  createdAt     DateTime              @default(now())
+  userUid       String
+  leagueDataUid String
+  type          LeagueAchievementType
+  earnedAt      DateTime              @default(now())
+  metadata      Json?
+  xpBonus       Int                   @default(0)
+
+  // Relations
+  user       Users                @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  leagueData IndividualLeagueData @relation(fields: [leagueDataUid], references: [uid], onDelete: Cascade)
+
+  @@map("LeagueAchievement")
+}
+
+// League history
+model LeagueHistory {
+  uid                 String   @id @default(cuid())
+  createdAt           DateTime @default(now())
+  userUid             String
+  leagueDataUid       String
+  finalPosition       Int
+  finalXp             Int
+  wasPromoted         Boolean
+  wasRelegated        Boolean
+  weekStartDate       DateTime
+  weekEndDate         DateTime
+  averageXpPerDay     Float?
+  powerUpsUsed        Int      @default(0)
+  challengesCompleted Int      @default(0)
+
+  // Relations
+  user       Users                @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  leagueData IndividualLeagueData @relation(fields: [leagueDataUid], references: [uid], onDelete: Cascade)
+
+  @@map("LeagueHistory")
+}
+
+// ===== From leo-chats.prisma =====
+// BizLevel Leo AI Chat Schema
+
+// AI Prompts model - stores prompts for Leo AI assistant
+model AIPrompts {
+  uid       String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  prompt    String
+  name      String
+
+  @@map("AIPrompts")
+}
+
+model UserLeoChats {
+  uid       String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userUid   String
+  message   String
+  response  String
+  context   String?
+
+  user Users @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@index([userUid])
+  @@index([createdAt])
+}
+
+// ===== From missions.prisma =====
+model Mission {
+  uid          String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  title        String
+  description  String?
+  type         MissionType
+  requirements Int
+  isActive     Boolean       @default(false)
+  icon         String?
+  UserMission  UserMission[]
+
+  @@index([isActive])
+}
+
+model UserMission {
+  uid         String        @id @default(uuid())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  userUid     String
+  missionUid  String
+  progress    Int           @default(0)
+  status      MissionStatus @default(PENDING)
+  completedAt DateTime?
+  failedAt    DateTime?
+  mission     Mission       @relation(fields: [missionUid], references: [uid], onDelete: Cascade)
+  user        Users         @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@index([missionUid])
+  @@index([status])
+  @@index([userUid])
+}
+
+enum MissionType {
+  STREAK_MAINTAINED
+  QUESTION_ANSWERED
+  XP_EARNED
+  QUESTION_CORRECT
+  FRIEND_INVITED
+  QUESTION_ANSWERED_FAST
+}
+
+enum MissionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+// ===== From questions.prisma =====
+model Questions {
+  uid                  String              @id @default(uuid())
+  question             String
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  questionDate         String
+  answerResource       String?
+  correctAnswer        String
+  codeSnippet          String?
+  hint                 String?
+  dailyQuestion        Boolean             @default(false)
+  difficulty           QuestionDifficulty  @default(EASY)
+  customQuestion       Boolean             @default(false)
+  slug                 String?             @unique @default(uuid())
+  slugGenerated        Boolean             @default(false)
+  description          String?
+  title                String?
+  questionType         QuestionType        @default(MULTIPLE_CHOICE)
+  expectedParams       Json?
+  functionName         String?
+  returnType           String?
+  testCases            Json?
+  nextQuestionSlug     String?
+  previousQuestionSlug String?
+  isPremiumQuestion    Boolean             @default(false)
+  afterQuestionInfo    String?
+  aiTimeToComplete     Int?
+  videoUrl             String?
+  userAnswers          Answers[]
+  answers              QuestionAnswers[]
+  QuestionResources    QuestionResources[]
+  tags                 QuestionTags[]
+  bookmarks            UserBookmarks[]
+  linkedReports        StatisticsReport[]  @relation("SharedQuestions")
+}
+
+model Tag {
+  uid       String         @id @default(uuid())
+  name      String         @unique
+  questions QuestionTags[]
+}
+
+model QuestionTags {
+  questionId String
+  tagId      String
+  question   Questions @relation(fields: [questionId], references: [uid], onDelete: Cascade)
+  tag        Tag       @relation(fields: [tagId], references: [uid], onDelete: Cascade)
+
+  @@id([questionId, tagId])
+  @@index([tagId])
+  @@index([questionId])
+}
+
+model QuestionAnswers {
+  uid               String             @id @default(cuid())
+  answer            String
+  questionUid       String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @default(now())
+  isCodeSnippet     Boolean            @default(false)
+  answerFullSnippet String?
+  answerType        QuestionAnswerType @default(STANDARD)
+  question          Questions          @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+}
+
+model Answers {
+  uid           String           @id @default(cuid())
+  createdAt     DateTime         @default(now())
+  timeTaken     Int?
+  userAnswerUid String?
+  correctAnswer Boolean          @default(false)
+  userUid       String           @default("legacy_user")
+  questionUid   String           @default("legacy_question")
+  updatedAt     DateTime         @default(now())
+  questionDate  String           @default("")
+  difficulty    AnswerDifficulty @default(EASY)
+  question      Questions        @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+  user          Users            @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+}
+
+model QuestionResources {
+  uid         String    @id @default(cuid())
+  questionUid String
+  resource    String
+  createdAt   DateTime  @default(now())
+  title       String
+  updatedAt   DateTime  @updatedAt
+  question    Questions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+}
+
+enum QuestionDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  BEGINNER
+}
+
+enum AnswerDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum QuestionAnswerType {
+  PREFILL
+  STANDARD
+}
+
+enum QuestionType {
+  CODING_CHALLENGE
+  MULTIPLE_CHOICE
+  SIMPLE_MULTIPLE_CHOICE
+  VIDEO
+}
+
+// ===== From roadmap.prisma =====
+model UserRoadmaps {
+  uid                                 String                                @id @default(cuid())
+  createdAt                           DateTime                              @default(now())
+  updatedAt                           DateTime                              @updatedAt
+  userUid                             String
+  status                              RoadmapStatus                         @default(ACTIVE)
+  currentQuestionIndex                Int                                   @default(1)
+  hasGeneratedRoadmap                 Boolean                               @default(false)
+  description                         String?                               @default("No description provided")
+  title                               String?                               @default("Untitled Roadmap")
+  user                                Users                                 @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  questions                           RoadmapUserQuestions[]
+  generationProgress                  RoadmapGenerationProgress[]
+  defaultRoadmapQuestionsUsersAnswers DefaultRoadmapQuestionsUsersAnswers[]
+}
+
+model RoadmapUserQuestions {
+  uid              String             @id @default(cuid())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  question         String
+  codeSnippet      String?
+  hint             String?
+  difficulty       QuestionDifficulty @default(EASY)
+  completed        Boolean            @default(false)
+  completedAt      DateTime?
+  roadmapUid       String
+  correctAnswerUid String
+  order            Int
+  userCorrect      Boolean            @default(false)
+
+  // Relations
+  roadmap     UserRoadmaps                      @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
+  answers     RoadmapUserQuestionsAnswers[]
+  userAnswers RoadmapUserQuestionsUserAnswers[]
+  bookmarks   UserBookmarks[]
+
+  @@index([roadmapUid])
+  @@index([completed])
+}
+
+model RoadmapUserQuestionsAnswers {
+  uid         String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  questionUid String
+  correct     Boolean  @default(false)
+  answer      String
+  order       Int      @default(0)
+
+  question RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+}
+
+model RoadmapUserQuestionsUserAnswers {
+  uid         String           @id @default(cuid())
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  questionUid String
+  correct     Boolean          @default(false)
+  answer      String
+  difficulty  AnswerDifficulty @default(EASY)
+
+  question RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+}
+
+model DefaultRoadmapQuestions {
+  uid           String             @id @default(cuid())
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  question      String
+  codeSnippet   String?
+  hint          String?
+  difficulty    QuestionDifficulty @default(EASY)
+  correctAnswer String
+  order         Int
+  aiTitle       String?
+
+  answers      DefaultRoadmapQuestionsAnswers[]
+  usersAnswers DefaultRoadmapQuestionsUsersAnswers[]
+}
+
+model DefaultRoadmapQuestionsAnswers {
+  uid         String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  questionUid String
+  answer      String
+
+  question DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+}
+
+model DefaultRoadmapQuestionsUsersAnswers {
+  uid         String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  questionUid String
+  answer      String
+  correct     Boolean  @default(false)
+  roadmapUid  String
+  userUid     String
+
+  question DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+  roadmap  UserRoadmaps            @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
+  user     Users                   @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+}
+
+enum RoadmapStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+  CREATING
+}
+
+model RoadmapGenerationProgress {
+  uid        String                  @id @default(cuid())
+  createdAt  DateTime                @default(now())
+  updatedAt  DateTime                @updatedAt
+  roadmapUid String
+  status     RoadmapGenerationStatus @default(FETCHING_DATA)
+
+  roadmap UserRoadmaps @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
+
+  @@index([roadmapUid])
+}
+
+enum RoadmapGenerationStatus {
+  FETCHING_DATA
+  FIRST_PASS
+  SECOND_PASS
+  GENERATING_QUESTIONS
+  GENERATED
+  ERROR
+  INVALID
+}
+
+// ===== From statistics.prisma =====
+model StatisticsReport {
+  uid            String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userUid        String
+  correctTags    String[]
+  incorrectTags  String[]
+  htmlReport     String?
+  totalTimeTaken Int?     @default(0)
+
+  // Relations
+  user          Users       @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  linkedReports Questions[] @relation("SharedQuestions")
+
+  @@index([userUid])
+}
+
+// ===== From study-path.prisma =====
+/// * StudyPath is a study path that a user can enroll in.
+model StudyPath {
+  uid                   String          @id @default(uuid())
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  slug                  String          @unique
+  title                 String
+  description           String
+  heroChip              String
+  questionSlugs         String[]
+  educationLevel        String
+  averageCompletionTime Int?
+  category              String?
+  icon                  String?
+  isPublished           Boolean         @default(false)
+  nextStudyPathSlug     String?
+  overviewData          Json?
+  type                  StudyPathType   @default(LEARN)
+  categoryToolTip       String?
+  goals                 StudyPathGoal[]
+  enrollments           UserStudyPath[]
+}
+
+model UserStudyPath {
+  uid           String          @id @default(uuid())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  userUid       String
+  studyPathUid  String
+  enrolledAt    DateTime        @default(now())
+  completedAt   DateTime?
+  progress      Float           @default(0)
+  StudyPathGoal StudyPathGoal[]
+  studyPath     StudyPath       @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
+  user          Users           @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@unique([userUid, studyPathUid])
+}
+
+model StudyPathGoal {
+  uid              String         @id @default(uuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  dateSet          DateTime
+  targetDate       DateTime
+  completed        Boolean        @default(false)
+  completedAt      DateTime?
+  userUid          String
+  studyPathUid     String
+  isActive         Boolean        @default(true)
+  userStudyPathUid String?
+  studyPath        StudyPath      @relation(fields: [studyPathUid], references: [uid], onDelete: Cascade)
+  userStudyPath    UserStudyPath? @relation(fields: [userStudyPathUid], references: [uid], onDelete: Cascade)
+  user             Users          @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@unique([userUid, studyPathUid])
+}
+
+enum StudyPathType {
+  LEARN
+  PRACTICE
+  BUILD
+  REVIEW
+}
+
+// ===== From users.prisma =====
+model Users {
+  uid                                 String                                @id
+  email                               String                                @unique
+  createdAt                           DateTime                              @default(now())
+  updatedAt                           DateTime                              @updatedAt
+  lastLogin                           DateTime?
+  userLevel                           userLevel                             @default(STANDARD)
+  correctDailyStreak                  Int?                                  @default(0)
+  totalDailyStreak                    Int?                                  @default(0)
+  userProfilePicture                  String?
+  showTimeTaken                       Boolean                               @default(false)
+  firstName                           String?
+  lastName                            String?
+  username                            String?
+  sendPushNotifications               Boolean                               @default(false)
+  codeEditorTheme                     String?                               @default("vs-dark")
+  stripeEmails                        String[]                              @default([])
+  aiQuestionHelpTokens                Int                                   @default(10)
+  experienceLevel                     UserExperienceLevel                   @default(BEGINNER)
+  isCustomUsername                    Boolean                               @default(false)
+  referralCode                        String?
+  aboutMeAiHelp                       String?
+  hasSent7DayNoChallengeEmail         Boolean                               @default(false)
+  timeSpendingPerDay                  UserTimeSpendingPerDay?               @default(LESS_THAN_5_MINUTES)
+  sendPromotionalEmails               Boolean                               @default(false)
+  userCustomCoupon                    String?
+  hasCreatedCustomSignupCoupon        Boolean                               @default(false)
+  userCustomCouponExpiresAt           DateTime?
+  userXp                              Int                                   @default(0)
+  weeklyUserXp                        Int                                   @default(0)
+  fasterThanAiGameMode                Boolean                               @default(false)
+  howDidYouHearAboutBizLevel          String?
+  answers                             Answers[]
+  Profile                             Profile?
+  streak                              Streaks?
+  studyPathGoals                      StudyPathGoal[]
+  subscription                        Subscriptions?
+  userMissions                        UserMission[]
+  roadmaps                            UserRoadmaps[]
+  studyPathEnrollments                UserStudyPath[]
+  bookmarks                           UserBookmarks[]
+  leoChats                            UserLeoChats[]
+  statisticsReports                   StatisticsReport[]
+  leagueParticipations                UserLeague[]
+  leagueAchievements                  LeagueAchievement[]
+  leagueHistory                       LeagueHistory[]
+  defaultRoadmapQuestionsUsersAnswers DefaultRoadmapQuestionsUsersAnswers[]
+}
+
+model Streaks {
+  uid                String    @id @default(cuid())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  userUid            String    @unique
+  streakStart        DateTime?
+  streakEnd          DateTime?
+  currentstreakCount Int       @default(0)
+  longestStreak      Int       @default(0)
+  user               Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+}
+
+model Subscriptions {
+  uid                      String    @id @default(cuid())
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  userUid                  String    @unique
+  startDate                DateTime?
+  endDate                  DateTime?
+  active                   Boolean   @default(true)
+  planId                   String
+  planTrial                Boolean   @default(false)
+  planTrialDays            Int?
+  productId                String
+  stripeCustomerId         String?
+  stripeSubscriptionId     String?
+  stripeSubscriptionItemId String?
+  user                     Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+}
+
+model Profile {
+  uid                  String    @id @default(cuid())
+  userUid              String    @unique
+  instagram            String?
+  github               String?
+  linkedin             String?
+  twitter              String?
+  youtube              String?
+  tiktok               String?
+  twitch               String?
+  website              String?
+  bio                  String?
+  location             String?
+  country              String?
+  timezone             String?
+  company              String?
+  jobTitle             String?
+  yearsOfExperience    Int?
+  programmingLanguages String[]  @default([])
+  frameworks           String[]  @default([])
+  interests            String[]  @default([])
+  projects             String[]  @default([])
+  isPublic             Boolean   @default(true)
+  showEmail            Boolean   @default(false)
+  showLocation         Boolean   @default(true)
+  accentColor          String?
+  bannerImage          String?
+  viewCount            Int       @default(0)
+  lastViewed           DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  handle               String
+  user                 Users     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+}
+
+model UserBookmarks {
+  uid                   String   @id @default(cuid())
+  userId                String
+  questionId            String?
+  roadmapUserQuestionId String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  user                Users                 @relation(fields: [userId], references: [uid], onDelete: Cascade)
+  question            Questions?            @relation(fields: [questionId], references: [uid], onDelete: Cascade)
+  roadmapUserQuestion RoadmapUserQuestions? @relation(fields: [roadmapUserQuestionId], references: [uid], onDelete: Cascade)
+
+  @@unique([userId, questionId, roadmapUserQuestionId])
+  @@index([userId])
+  @@index([questionId])
+  @@index([roadmapUserQuestionId])
+}
+
+enum userLevel {
+  STANDARD
+  ADMIN
+  TRIAL
+  FREE
+  PREMIUM
+  LIFETIME
+}
+
+enum UserExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  MASTER
+}
+
+enum UserTimeSpendingPerDay {
+  LESS_THAN_5_MINUTES
+  BETWEEN_5_AND_15_MINUTES
+  BETWEEN_15_AND_30_MINUTES
+  BETWEEN_30_AND_60_MINUTES
+  MORE_THAN_60_MINUTES
+}

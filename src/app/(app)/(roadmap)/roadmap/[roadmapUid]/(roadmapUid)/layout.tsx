@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator';
 import { useUserServer } from '@/hooks/use-user-server';
 import SidebarLayoutTrigger from '@/components/app/navigation/sidebar-layout-trigger';
 import { fetchRoadmap } from '@/utils/data/roadmap/fetch-single-roadmap';
-import { UserRoadmaps } from '@/types';
+
 
 export default async function RoadmapOverviewPage({
   children,
@@ -22,7 +22,7 @@ export default async function RoadmapOverviewPage({
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-x-5"></div>
-          {roadmap && <RoadmapDropdown roadmap={roadmap as UserRoadmaps} />}
+          {roadmap && <RoadmapDropdown roadmap={roadmap as any} />}
         </div>
       </div>
       <Separator className="bg-black-50" />

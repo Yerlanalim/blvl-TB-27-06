@@ -15,7 +15,7 @@ import { useUserServer } from '@/hooks/use-user-server';
 export default async function StatisticsReportContent({
   report,
 }: {
-  report: StatisticsReport & { questions: Question[] };
+  report: StatisticsReport & { linkedReports: Question[] };
 }) {
   const user = await useUserServer();
 
@@ -24,7 +24,7 @@ export default async function StatisticsReportContent({
   }
 
   // Calculate stats
-  const totalQuestions = report.questions.length;
+  const totalQuestions = report.linkedReports.length;
   const correctAnswers = report.correctTags.length;
   const incorrectAnswers = report.incorrectTags.length;
   const correctPercentage = Math.round(

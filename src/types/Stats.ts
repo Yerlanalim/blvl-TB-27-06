@@ -16,5 +16,5 @@ export type StepRange = 'day' | 'week' | 'month';
 export type StatsSteps = (typeof STEPS)[number]; // '7d' | '30d' | '90d'
 
 export type StatsReport = StatisticsReport & {
-  questions: Question[];
+  linkedReports: Question[];
 };

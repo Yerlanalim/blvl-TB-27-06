@@ -1,20 +1,19 @@
 'use client';
-import { createContext, useState, useContext } from 'react';
-
-import { generateAnswerHelp } from '@/actions/ai/questions/answer-help';
-import { answerRoadmapQuestion } from '@/actions/roadmap/questions/answer-roadmap-question';
-import { answerHelpSchema } from '@/lib/zod/schemas/ai/answer-help';
-import type { RoadmapUserQuestions, UserRecord } from '@/types';
-import { RoadmapUserQuestionsAnswers, RoadmapUserQuestionsUserAnswers } from '@prisma/client';
-import { toast } from 'sonner';
+import React, { createContext, useContext, useState } from 'react';
 import { z } from 'zod';
+import { toast } from 'sonner';
+import type { RoadmapUserQuestions, RoadmapUserQuestionsUserAnswers, RoadmapUserQuestionsAnswers } from '@prisma/client';
+import type { UserRecord } from '@/types';
+import { answerRoadmapQuestion } from '@/actions/roadmap/questions/answer-roadmap-question';
+import { generateAnswerHelp } from '@/actions/ai/questions/answer-help';
 import { readStreamableValue } from 'ai/rsc';
+import { answerHelpSchema } from '@/lib/zod/schemas/ai/answer-help';
 
 type Layout = 'questions' | 'codeSnippet' | 'answer';
 type AnswerStatus = 'correct' | 'incorrect' | 'init';
 
 interface RoadmapQuestionContextType {
-  roadmapQuestion: RoadmapUserQuestions;
+  roadmapQuestion: RoadmapUserQuestions & { answers: RoadmapUserQuestionsAnswers[] };
   roadmapUid: string;
   user: UserRecord;
   currentLayout: Layout;
@@ -22,8 +21,8 @@ interface RoadmapQuestionContextType {
   handleAnswerRoadmapQuestion: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   selectedAnswer: string | null;
   setSelectedAnswer: (answer: string | null) => void;
-  newUserData: Omit<RoadmapUserQuestionsAnswers, 'answers'> | null;
-  setNewUserData: (userData: Omit<RoadmapUserQuestionsAnswers, 'answers'> | null) => void;
+  newUserData: RoadmapUserQuestionsUserAnswers | null;
+  setNewUserData: (userData: RoadmapUserQuestionsUserAnswers | null) => void;
   nextQuestion: Omit<RoadmapUserQuestions, 'answers'> | null;
   setNextQuestion: (question: Omit<RoadmapUserQuestions, 'answers'> | null) => void;
   loading: boolean;
@@ -58,7 +57,7 @@ export const useRoadmapQuestion = () => {
 
 interface ProviderProps {
   children: React.ReactNode;
-  roadmapQuestion: RoadmapUserQuestions;
+  roadmapQuestion: RoadmapUserQuestions & { answers: RoadmapUserQuestionsAnswers[] };
   roadmapUid: string;
   user: UserRecord;
 }
@@ -72,10 +71,7 @@ export const RoadmapQuestionContextProvider = ({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentLayout, setCurrentLayout] = useState<Layout>('questions');
   const [loading, setLoading] = useState(false);
-  const [newUserData, setNewUserData] = useState<Omit<
-    RoadmapUserQuestionsAnswers,
-    'answers'
-  > | null>(null);
+  const [newUserData, setNewUserData] = useState<RoadmapUserQuestionsUserAnswers | null>(null);
   const [nextQuestion, setNextQuestion] = useState<Omit<RoadmapUserQuestions, 'answers'> | null>();
   const [correctAnswer, setCorrectAnswer] = useState<AnswerStatus>('init');
   const [userAnswer, setUserAnswer] = useState<RoadmapUserQuestionsUserAnswers | null>(null);

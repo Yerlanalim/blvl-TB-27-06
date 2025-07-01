@@ -75,14 +75,14 @@ export default function ClientPage({
 
   // Second effect to handle the actual redirect
   useEffect(() => {
-    if (shouldRedirect) {
+    if (shouldRedirect && typeof window !== 'undefined') {
       window.location.href = '/onboarding';
     }
   }, [shouldRedirect]);
 
   // Clean up query params when modal closes
   useEffect(() => {
-    if (!isModalOpen) {
+    if (!isModalOpen && typeof window !== 'undefined') {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [isModalOpen]);
