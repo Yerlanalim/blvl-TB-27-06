@@ -30,7 +30,7 @@ export default function LoginPage({
     url: `${getBaseUrl()}/login`,
           headline: 'Login | BizLevel',
     description:
-      'Curated lists of coding questions, ranging from Javascript, React, Node, Web Development. Perfect for your daily coding practice.',
+      'Кураторские списки бизнес-заданий по разным темам: менеджмент, маркетинг, финансы. Идеально для ежедневной практики в бизнесе.',
     image:
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
     breadcrumb: {
@@ -62,7 +62,7 @@ export default function LoginPage({
       '@id': `${getBaseUrl()}/login`,
     },
     keywords:
-      'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
+      'изучение бизнеса бесплатно, бизнес-уроки для начинающих, интерактивные бизнес-задания, ежедневная бизнес-практика, персонализированная карта обучения, развитие бизнес-навыков, лучшая платформа для изучения бизнеса, AI-помощник в бизнесе, изучение предпринимательства',
     publisher: {
       '@type': 'Organization',
       name: 'BizLevel',

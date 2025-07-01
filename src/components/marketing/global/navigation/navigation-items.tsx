@@ -17,9 +17,8 @@ import {
 import RoadmapIcon from '@/components/ui/icons/roadmap';
 import Document from '@/components/ui/icons/document';
 import Chart from '@/components/ui/icons/b-chart';
-import GithubLogo from '@/components/ui/icons/github';
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
-import { Book } from 'lucide-react';
+import { Book, Linkedin, Instagram } from 'lucide-react';
 // BIZLEVEL: Удалены неиспользуемые иконки программистских языков
 // import JavascriptIcon from '@/components/ui/icons/javascript';
 // import ReactIcon from '@/components/ui/icons/react';
@@ -45,10 +44,16 @@ const components: { title: string; href: string; description: string; icon?: Rea
     icon: <Document fill="white" height="24" width="24" />,
   },
   {
-    title: 'Open Source',
-    href: '/open-source',
-    description: 'No secrets here, see how we build our platform.',
-    icon: <GithubLogo fill="white" height="24" width="24" />,
+    title: 'LinkedIn',
+    href: 'https://linkedin.com/company/bizlevel',
+    description: 'Присоединяйтесь к нашему бизнес-сообществу.',
+    icon: <Linkedin height="24" width="24" />,
+  },
+  {
+    title: 'Instagram',
+    href: 'https://instagram.com/bizlevel_official',
+    description: 'Мотивация и советы для предпринимателей.',
+    icon: <Instagram height="24" width="24" />,
   },
   {
     title: 'FAQs',

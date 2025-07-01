@@ -3,7 +3,6 @@ import Logo from '@/components/ui/logo';
 import { NavigationMenuItems } from '@/components/marketing/global/navigation/navigation-items';
 import { MobileMenu } from '@/components/marketing/global/navigation/mobile-menu';
 import NavigationButtons from '@/components/marketing/global/navigation/navigation-buttons';
-import { GithubStars } from '@/components/marketing/global/navigation/navigation-buttons';
 
 export default function MarketingNavigation() {
   return (
@@ -24,9 +23,8 @@ export default function MarketingNavigation() {
             <NavigationButtons />
           </div>
 
-          {/* Show GitHub stars and mobile menu on mobile */}
+          {/* Show mobile menu on mobile */}
           <div className="flex items-center gap-x-2 lg:hidden">
-            <GithubStars />
             <MobileMenu />
           </div>
         </div>

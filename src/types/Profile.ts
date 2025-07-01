@@ -2,9 +2,8 @@ export type Profile = {
   uid: string;
   userUid: string;
 
-  // Social links
+  // Social links  
   instagram?: string | null;
-  github?: string | null; // BIZLEVEL: скрыто в UI для бизнес-версии
   linkedin?: string | null;
   twitter?: string | null;
   youtube?: string | null;

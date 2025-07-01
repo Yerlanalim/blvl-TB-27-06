@@ -4,6 +4,10 @@ import { StatsSteps } from '@/types';
 import { STATISTICS } from '@/utils/constants';
 import { getData } from '@/utils/data/statistics/get-stats-chart-data';
 import Hero from '@/components/shared/hero';
+import ComingSoon from '@/components/shared/coming-soon';
+
+// TODO: /statistics - открыть для всех после добавления бизнес-метрик
+// Сейчас доступно только администраторам
 
 // BIZLEVEL: Dynamic imports для оптимизации bundle size - chart компоненты загружаются только при необходимости
 const StatsRangePicker = dynamic(() => import('@/components/app/statistics/range-picker'), {
@@ -37,8 +41,8 @@ const QuestionTracker = dynamic(() => import('@/components/app/statistics/questi
 });
 
 export const metadata = {
-  title: 'Statistics | bizlevel',
-  description: 'View your coding statistics and progress',
+  title: 'Статистика | BizLevel',
+  description: 'Просмотр статистики и прогресса обучения',
 };
 
 export default async function StatisticsPage({
@@ -46,10 +50,25 @@ export default async function StatisticsPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  // ensure only premiums users can access this page
   const user = await useUserServer();
   if (!user) {
     return null;
+  }
+
+  // TODO: В v2.0 заменить на нормальную систему ролей из БД
+  // Сейчас проверяем по email домену для админов
+  const isAdmin = user.email?.endsWith('@bizlevel.kz') || user.email?.endsWith('@techblitz.dev');
+  
+  if (!isAdmin) {
+    return (
+      <ComingSoon
+        title="Статистика обучения"
+        description="Расширенная статистика появится в следующих обновлениях"
+        expectedVersion="v2.0"
+        redirectTo="/roadmaps"
+        redirectText="Вернуться к обучению"
+      />
+    );
   }
 
   // Get and validate range param
@@ -68,9 +87,9 @@ export default async function StatisticsPage({
     <div>
       <div className="flex flex-col gap-3 md:flex-row w-full justify-between md:items-center">
         <Hero
-          heading="Coding Journey"
+          heading="Статистика обучения"
           container={false}
-          subheading="An overview of your coding journey on BizLevel."
+          subheading="Обзор вашего пути обучения бизнесу на BizLevel."
         />
         <div className="flex gap-3">
           <StatsRangePicker selectedRange={STATISTICS[range].label} />

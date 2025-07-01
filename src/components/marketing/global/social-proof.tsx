@@ -1,7 +1,4 @@
-import Link from 'next/link';
-
 import { Button } from '@/components/ui/button';
-import GithubLogo from '@/components/ui/icons/github';
 import { UserIcon } from 'lucide-react';
 import NumberFlow from '@number-flow/react';
 
@@ -10,13 +7,11 @@ import { cn } from '@/lib/utils';
 
 export default function SocialProof({
   userCount,
-  githubStars,
   dailyQuestion,
   padding = 'py-16 md:py-24 md:pt-40',
   showDescription = true,
 }: {
   userCount: number;
-  githubStars: number;
   dailyQuestion: Question | null;
   padding?: string;
   showDescription?: boolean;
@@ -27,30 +22,20 @@ export default function SocialProof({
         <div className="flex flex-col items-center gap-2">
           <div className="flex flex-col items-center text-center max-w-3xl">
             <h2 className="text-3xl md:text-4xl !font-onest !leading-[normal] text-gradient from-white to-white/55 mb-3">
-              Empowering Developers Worldwide
+              Развиваем предпринимателей по всему миру
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
               <div className="flex items-center gap-x-2">
                 <UserIcon className="size-6 text-white" />
                 <span className="text-base text-white font-onest">
-                  <NumberFlow value={userCount} />+ Developers
+                  <NumberFlow value={userCount} />+ Предпринимателей
                 </span>
               </div>
-              <Link
-                href="https://github.com/bizleveldev/BizLevel"
-                target="_blank"
-                className="flex items-center gap-x-2"
-              >
-                <GithubLogo className="size-6" />
-                <span className="text-base text-white font-onest">
-                  <NumberFlow value={githubStars} /> GitHub Stars
-                </span>
-              </Link>
             </div>
             {showDescription && (
               <p className="text-gray-400 mb-8">
-                Join a thriving community of developers who are revolutionizing their coding skills
-                and fast-tracking their careers with our cutting-edge platform.
+                Присоединяйтесь к процветающему сообществу предпринимателей, которые развивают свои бизнес-навыки
+                и ускоряют рост своего дела с помощью нашей современной платформы.
               </p>
             )}
           </div>
@@ -61,17 +46,17 @@ export default function SocialProof({
                 variant="secondary"
                 size="lg"
                 href={`/question/${dailyQuestion?.slug}`}
-                aria-label="Navigate to the Daily Challenge"
+                aria-label="Перейти к демо уроку"
               >
-                Try the demo
+                Попробовать демо
               </Button>
               <Button
                 variant="default"
                 size="lg"
-                href="/features/coding-challenges"
-                aria-label="Navigate to Daily Challenges"
+                href="/roadmaps"
+                aria-label="Перейти к обучению"
               >
-                Learn more
+                Начать обучение
               </Button>
             </div>
           )}

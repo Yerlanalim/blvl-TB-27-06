@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { InputWithLabel } from '@/components/ui/input-label';
 import GoogleLogo from '@/components/ui/icons/google';
 import OrSeparator from '@/components/auth/or-separator';
-import GithubLogo from '@/components/ui/icons/github';
+
 import { DiscordLogoIcon } from '@radix-ui/react-icons';
 
 import { toast } from 'sonner';
@@ -94,21 +94,7 @@ export default function LoginForm(opts: { redirectUrl: string; onboarding: strin
               Sign in with Google
             </Button>
           </form>
-          <form
-            onSubmit={async (event) => {
-              event.preventDefault();
-              await oauth('github', false);
-            }}
-          >
-            <Button
-              type="submit"
-              variant="outline"
-              className="w-full bg-[#24292e] text-white hover:bg-[#2f363d] border-none hover:text-white"
-            >
-              <GithubLogo className="w-5 h-5 mr-2" />
-              Sign in with GitHub
-            </Button>
-          </form>
+
           <form
             onSubmit={async (event) => {
               event.preventDefault();
@@ -184,7 +170,7 @@ export default function LoginForm(opts: { redirectUrl: string; onboarding: strin
       <OrSeparator />
 
       <Button onClick={() => setShowEmailForm(!showEmailForm)} className="w-full" variant="default">
-        {showEmailForm ? 'Sign in with Google/GitHub/Discord' : 'Sign in with Email'}
+        {showEmailForm ? 'Войти с Google/Discord' : 'Войти с Email'}
       </Button>
     </div>
   );

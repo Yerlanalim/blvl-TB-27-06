@@ -21,15 +21,15 @@ export async function generateMetadata() {
       textColor: '#fff',
     },
     keywords: [
-      'coding',
-      'subscription',
-      'affordable',
-      'premium',
-      'free coding courses',
-      'most popular',
-      'software',
-      'Javascript course',
-      'development',
+      'бизнес-обучение',
+      'подписка',
+      'доступно',
+      'премиум',
+      'бесплатные бизнес-курсы',
+      'самый популярный',
+      'предпринимательство',
+      'менеджмент курс',
+      'развитие',
     ],
     canonicalUrl: '/pricing',
   });
@@ -40,7 +40,7 @@ const jsonLd = {
   '@type': 'Product',
   name: 'bizlevel SaaS Platform',
   description:
-    'bizlevel is an online platform that helps users enhance their development knowledge through interactive questions and quizzes.',
+    'BizLevel - это онлайн-платформа, которая помогает пользователям развивать бизнес-знания через интерактивные вопросы и задания.',
   brand: {
     '@type': 'Brand',
     name: 'bizlevel',
@@ -52,7 +52,7 @@ const jsonLd = {
       price: '0',
       priceCurrency: 'USD',
       description:
-        'Access to all coding questions and daily challenges, leaderboards, statistics and more.',
+        'Доступ ко всем бизнес-заданиям и ежедневным вызовам, таблицам лидеров, статистике и многому другому.',
       url: 'https://bizlevel.dev/pricing',
       category: 'Free',
     },
@@ -61,7 +61,7 @@ const jsonLd = {
       name: 'Pro Plan',
       price: '5.99',
       priceCurrency: 'USD',
-      description: 'Unlock all questions, daily challenges, and personalized AI roadmaps.',
+      description: 'Разблокируйте все задания, ежедневные вызовы и персонализированные AI-карты обучения.',
       url: 'https://bizlevel.dev/pricing',
       category: 'Paid',
     },
@@ -71,7 +71,7 @@ const jsonLd = {
       price: '89.99',
       priceCurrency: 'USD',
       description:
-        'Unlock all questions, daily challenges, and personalized AI roadmaps. Lifetime access.',
+        'Разблокируйте все задания, ежедневные вызовы и персонализированные AI-карты обучения. Пожизненный доступ.',
       url: 'https://bizlevel.dev/pricing',
       category: 'Paid',
     },
@@ -92,49 +92,49 @@ export default async function PricingPage() {
 
   const faqs = [
     {
-      question: 'Can I use BizLevel for free?',
+      question: 'Можно ли использовать BizLevel бесплатно?',
       answer: (
         <>
-          Absolutely! BizLevel offers a free plan to get you started right away.{' '}
+          Конечно! BizLevel предлагает бесплатный план для начала прямо сейчас.{' '}
           <Link href="/signup" className="text-accent">
-            Sign up for a free account
+            Зарегистрируйтесь бесплатно
           </Link>{' '}
-          and dive into our rich library of developer resources today. Upgrade to a paid plan to
-          unlock all our features at any time.
+          и погрузитесь в нашу богатую библиотеку бизнес-ресурсов уже сегодня. Переходите на платный план для 
+          разблокировки всех функций в любое время.
         </>
       ),
     },
     {
-      question: 'What is BizLevel, and how can it help developers?',
+      question: 'Что такое BizLevel и как он помогает предпринимателям?',
       answer:
-        'BizLevel is an innovative online learning platform designed for developers of all skill levels. Our tools, including quizzes, coding roadmaps, and tutorials, help you sharpen your skills, boost productivity, and stay ahead in the tech industry.',
+        'BizLevel - это инновационная онлайн-платформа обучения, созданная для предпринимателей всех уровней. Наши инструменты, включая тесты, бизнес-карты и руководства, помогают развивать навыки, повышать продуктивность и быть впереди в бизнес-индустрии.',
     },
     {
-      question: 'What makes BizLevel different from other coding platforms?',
+      question: 'Чем BizLevel отличается от других бизнес-платформ?',
       answer:
-        'BizLevel stands out by offering concise, interactive coding challenges that are both fun and educational. Our platform is designed to be a quick and efficient way to improve your skills, without the need for extensive tutorials or long-form content.',
+        'BizLevel выделяется предложением кратких, интерактивных бизнес-кейсов, которые являются одновременно увлекательными и образовательными. Наша платформа создана для быстрого и эффективного улучшения навыков без необходимости в обширных руководствах или длинном контенте.',
     },
     {
-      question: 'What is the AI assistant?',
+      question: 'Что такое AI-помощник?',
       answer:
-        "The AI assistant is your own personal coding assistant that can give you tips and guidance to answer our challenges. Struggling to answer a question? Ask the AI assistant for help. Don't understand an answer? Ask the AI assistant for help!",
+        "AI-помощник - это ваш персональный бизнес-наставник, который может дать советы и руководство для ответа на наши задания. Сложно ответить на вопрос? Спросите AI-помощника о помощи. Не понимаете ответ? Спросите AI-помощника!",
     },
     {
-      question: 'What are the key benefits of using BizLevel?',
+      question: 'Каковы ключевые преимущества использования BizLevel?',
       answer: (
         <>
-          BizLevel provides engaging, short-form coding questions and practical roadmaps to help
-          developers enhance their skills and tackle real-world challenges. We aim to improve your
-          skills as a developer by only 10 minutes a day. You can check out our study paths{' '}
+          BizLevel предоставляет увлекательные, краткие бизнес-вопросы и практические карты для помощи
+          предпринимателям в развитии навыков и решении реальных бизнес-задач. Мы стремимся улучшить ваши
+          навыки как предпринимателя всего за 10 минут в день. Вы можете ознакомиться с нашими учебными путями{' '}
           <Link href={`/questions/explore`} className="text-accent">
-            here
+            здесь
           </Link>{' '}
-          to get a taste of what we offer.
+          чтобы получить представление о том, что мы предлагаем.
         </>
       ),
     },
     {
-      question: 'How can I get started with BizLevel?',
+      question: 'Как начать работу с BizLevel?',
       answer: (
         <>
           It’s easy!{' '}
@@ -204,15 +204,15 @@ export default async function PricingPage() {
             </span>
           </div>
           <h1 className="text-3xl lg:text-5xl !font-onest !font-medium !leading-[1.1] text-gradient from-white to-white/75">
-            Learning to code has <br />
+            Изучение бизнеса стало <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent/55">
-              never{' '}
+              проще{' '}
             </span>{' '}
-            been easier
+            чем когда-либо
           </h1>
           <p className="text-gray-400 max-w-xl">
-            Make learning to code a breeze with our affordable pricing plans. Start for free and
-            upgrade to unlock a world of personalization.
+            Сделайте изучение бизнеса легким с нашими доступными тарифными планами. Начните бесплатно и 
+            улучшите доступ к персонализации.
           </p>
           <FrequencyToggle initialFrequency={billingPeriod} onFrequencyChange={updateFrequency} />
           <div className="my-10">

@@ -1,101 +1,70 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Clock, ArrowLeft } from 'lucide-react';
-import { t } from '@/utils/translations/ru';
+import { ArrowRightIcon, ClockIcon, Construction } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ComingSoonProps {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  showBackButton?: boolean;
-  backHref?: string;
-  className?: string;
+  title: string;
+  description: string;
+  expectedVersion?: string;
+  redirectTo?: string;
+  redirectText?: string;
 }
 
-export default function ComingSoon({ 
+export default function ComingSoon({
   title,
-  subtitle,
   description,
-  showBackButton = true,
-  backHref = '/dashboard',
-  className = ''
+  expectedVersion = 'v2.0',
+  redirectTo = '/roadmaps',
+  redirectText = 'Вернуться к обучению'
 }: ComingSoonProps) {
   return (
-    <div className={`flex items-center justify-center min-h-screen bg-black ${className}`}>
-      <div className="text-center max-w-md mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-6"
-        >
-          {/* Animated Clock Icon */}
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ 
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-            className="flex justify-center"
-          >
-            <div className="w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center">
-              <Clock className="w-10 h-10 text-accent" />
-            </div>
-          </motion.div>
-
-          {/* Content */}
-          <div className="space-y-3">
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
-              {title || t('comingSoon.title')}
-            </h1>
-            <p className="text-lg text-gray-300">
-              {subtitle || t('comingSoon.subtitle')}
-            </p>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              {description || t('comingSoon.description')}
-            </p>
+    <div className="container mx-auto px-4 py-16 flex items-center justify-center min-h-[60vh]">
+      <Card className="max-w-2xl w-full text-center">
+        <CardHeader className="space-y-6">
+          <div className="mx-auto w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+            <Construction className="w-12 h-12 text-white" />
           </div>
-
-          {/* Actions */}
-          <div className="space-y-3 pt-4">
-            {showBackButton && (
-              <Link href={backHref}>
-                <Button variant="accent" className="flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4" />
-                  {t('comingSoon.backToLearning')}
-                </Button>
+          
+          <div className="space-y-2">
+            <CardTitle className="text-3xl font-bold text-white">
+              {title}
+            </CardTitle>
+            <CardDescription className="text-lg text-gray-400">
+              {description}
+            </CardDescription>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="space-y-6">
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+            <ClockIcon className="w-4 h-4" />
+            <span>Ожидается в {expectedVersion}</span>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild variant="default">
+              <Link href={redirectTo}>
+                {redirectText}
+                <ArrowRightIcon className="w-4 h-4 ml-2" />
               </Link>
-            )}
+            </Button>
             
-            <p className="text-xs text-gray-500">
-              {t('comingSoon.stayTuned')}
-            </p>
+            <Button asChild variant="outline">
+              <Link href="/leo-chat">
+                Обсудить с Leo
+              </Link>
+            </Button>
           </div>
-
-          {/* Decorative dots */}
-          <div className="flex justify-center space-x-2 pt-6">
-            {[0, 1, 2].map((index) => (
-              <motion.div
-                key={index}
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 1, 0.5]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: index * 0.2
-                }}
-                className="w-2 h-2 bg-accent rounded-full"
-              />
-            ))}
-          </div>
-        </motion.div>
-      </div>
+          
+          <p className="text-sm text-gray-500 max-w-md mx-auto">
+            Мы работаем над тем, чтобы сделать BizLevel лучшей платформой для изучения бизнеса. 
+            Следите за обновлениями!
+          </p>
+        </CardContent>
+      </Card>
     </div>
   );
 } 

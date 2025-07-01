@@ -1,5 +1,13 @@
+'use client';
+
 import { cn } from '@/lib/utils';
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
+
+// Интерфейс для анимируемых иконок
+export interface AnimatableIconHandle {
+  startAnimation: () => void;
+  stopAnimation: () => void;
+}
 
 type IconProps = {
   fill?: string;
@@ -11,7 +19,7 @@ type IconProps = {
   className?: string;
 };
 
-function ChatBot({
+const ChatBot = forwardRef<AnimatableIconHandle, IconProps>(({
   fill = '#3B82F6', // Default to a nice blue color
   secondaryfill = '#60A5FA', // Default to a lighter blue
   strokewidth = 1,
@@ -19,7 +27,17 @@ function ChatBot({
   height = '1em',
   title = 'chat bot',
   className,
-}: IconProps) {
+}, ref) => {
+  // Реализуем методы анимации (пока что заглушки)
+  useImperativeHandle(ref, () => ({
+    startAnimation: () => {
+      // TODO: Добавить анимацию при необходимости
+    },
+    stopAnimation: () => {
+      // TODO: Добавить остановку анимации при необходимости
+    },
+  }));
+
   return (
     <svg
       className={cn(className)}
@@ -84,6 +102,8 @@ function ChatBot({
       </g>
     </svg>
   );
-}
+});
+
+ChatBot.displayName = 'ChatBot';
 
 export default ChatBot;

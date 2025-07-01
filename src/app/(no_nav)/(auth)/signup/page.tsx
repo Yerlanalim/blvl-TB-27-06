@@ -2,7 +2,6 @@ import SignupForm from '@/components/auth/signup';
 import { createMetadata } from '@/utils/seo';
 import RoadmapQuestionCard from '@/components/app/roadmaps/questions/[uid]/question-card';
 import SocialProof from '@/components/marketing/global/social-proof';
-import { fetchGithubStars } from '@/utils/data/misc/get-github-stars';
 import { getUserCount } from '@/utils/data/user/get-user-count';
 import { Suspense } from 'react';
 import Link from 'next/link';
@@ -25,21 +24,21 @@ export async function generateMetadata() {
 const dummyQuestions: Partial<RoadmapUserQuestions>[] = [
   {
     uid: 'question-1',
-    question: 'How can you use Array.filter() to filter out all the even numbers from an array?',
+    question: 'Какой тип планирования помогает определить долгосрочные цели компании?',
     difficulty: 'EASY',
     completed: true,
     userCorrect: true,
   },
   {
     uid: 'question-2',
-    question: 'What is the purpose of the "useCallback" hook in React?',
+    question: 'Что такое точка безубыточности в финансовом планировании?',
     difficulty: 'MEDIUM',
     completed: true,
     userCorrect: false,
   },
   {
     uid: 'question-3',
-    question: 'What does the keyword "async" do in JavaScript?',
+    question: 'Какая главная цель маркетинговой стратегии 4P?',
     difficulty: 'EASY',
     completed: true,
     userCorrect: true,
@@ -58,7 +57,7 @@ export default async function SignupPage() {
     url: `${getBaseUrl()}/signup`,
     headline: 'Sign Up for free | BizLevel',
     description:
-      'The best coding platform for beginners to learn to code for free. No credit card required.',
+      'Лучшая платформа для изучения бизнеса с нуля для начинающих предпринимателей. Кредитная карта не требуется.',
     image:
       'https://lbycuccwrcmdaxjqyxut.supabase.co/storage/v1/object/public/marketing-images/Screenshot%202025-01-11%20at%2002.24.28.png',
     breadcrumb: {
@@ -90,7 +89,7 @@ export default async function SignupPage() {
       '@id': `${getBaseUrl()}/signup`,
     },
     keywords:
-      'learn to code for free, beginner-friendly coding lessons, interactive coding challenges, daily programming practice, personalized coding roadmap, improve coding skills, best platform to learn coding, AI-assisted coding, learn javascript',
+      'изучение бизнеса бесплатно, бизнес-уроки для начинающих, интерактивные бизнес-задания, ежедневная бизнес-практика, персонализированная карта обучения, развитие бизнес-навыков, лучшая платформа для изучения бизнеса, AI-помощник в бизнесе, изучение предпринимательства',
     publisher: {
       '@type': 'Organization',
       name: 'BizLevel',
@@ -101,10 +100,7 @@ export default async function SignupPage() {
     },
   };
 
-  const [githubStars, userCount] = await Promise.all([
-    fetchGithubStars(),
-    getUserCount().then((count) => Math.round(count / 10) * 10),
-  ]);
+  const userCount = await getUserCount().then((count) => Math.round(count / 10) * 10);
 
   return (
     <>
@@ -121,8 +117,7 @@ export default async function SignupPage() {
                 Create your BizLevel account
               </h1>
               <p className="text-sm text-gray-400 mb-4">
-                Start your journey to becoming a tech expert for free. Upgrade for a more
-                personalized experience.
+                Начните свой путь к становлению экспертом в бизнесе бесплатно. Премиум-подписка для персонализированного опыта.
               </p>
             </div>
             <Suspense>
@@ -141,7 +136,6 @@ export default async function SignupPage() {
         <div className="relative  hidden xl:flex xl:w-1/2 flex-col items-center justify-center overflow-hidden">
           <SocialProof
             userCount={userCount}
-            githubStars={githubStars?.stargazers_count || 0}
             dailyQuestion={null}
             padding="pb-5 pl-24"
             showDescription={false}

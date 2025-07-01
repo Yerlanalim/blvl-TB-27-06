@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { InputWithLabel } from '@/components/ui/input-label';
 import GoogleLogo from '@/components/ui/icons/google';
 import OrSeparator from '@/components/auth/or-separator';
-import GithubLogo from '@/components/ui/icons/github';
+
 import { DiscordLogoIcon } from '@radix-ui/react-icons';
 
 import { toast } from 'sonner';
@@ -78,21 +78,7 @@ export default function SignupForm(opts: { prefilledEmail?: string }) {
               Continue with Google
             </Button>
           </form>
-          <form
-            onSubmit={async (event) => {
-              event.preventDefault();
-              await oauth('github', true);
-            }}
-          >
-            <Button
-              type="submit"
-              variant="outline"
-              className="w-full bg-[#24292e] text-white hover:bg-[#2f363d] border-none hover:text-white"
-            >
-              <GithubLogo className="w-5 h-5 mr-2" />
-              Continue with GitHub
-            </Button>
-          </form>
+
           <form
             onSubmit={async (event) => {
               event.preventDefault();
@@ -161,7 +147,7 @@ export default function SignupForm(opts: { prefilledEmail?: string }) {
       <OrSeparator />
 
       <Button onClick={() => setShowEmailForm(!showEmailForm)} className="w-full" variant="default">
-        {showEmailForm ? 'Continue with GitHub/Discord' : 'Continue with Email'}
+        {showEmailForm ? 'Продолжить с Google/Discord' : 'Продолжить с Email'}
       </Button>
     </div>
   );

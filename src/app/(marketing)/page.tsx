@@ -8,7 +8,6 @@ const FeaturesBentoGrid = dynamic(
 );
 
 import PersonalizedBlock from '@/components/marketing/homepage/personalized/block';
-import OpenSourceBlock from '@/components/marketing/global/open-source/open-source-block';
 import CallToActionBlock from '@/components/marketing/global/blocks/call-to-action-block';
 
 import { Metadata } from 'next';
@@ -148,9 +147,9 @@ export default async function Page() {
 
   const contentGridItems: MarketingContentGridProps[] = [
     {
-      title: 'Never miss a day',
+      title: 'Ни дня без обучения',
       description:
-        'We send you a personalized coding challenge every day to keep you on track. Getting your daily coding fix in as little as 3 minutes per day.',
+        'Получайте персонализированные бизнес-задания каждый день. Изучайте основы предпринимательства всего за 3 минуты в день.',
       icon: (
         <Calendar
           fill="#334155"
@@ -162,35 +161,35 @@ export default async function Page() {
       ),
     },
     {
-      title: 'Perfect for Beginners',
+      title: 'Идеально для новичков',
       description:
-        'Start your coding journey with beginner-friendly challenges. Our step-by-step guidance and clear explanations make learning to code easy and enjoyable.',
+        'Начните свой предпринимательский путь с простых заданий. Пошаговые инструкции и ясные объяснения делают изучение бизнеса легким и увлекательным.',
       icon: <GraduationCap width="1.5em" height="1.5em" />,
     },
     {
-      title: 'Code Anywhere',
+      title: 'Учитесь везде',
       description:
-        'Learn and practice coding on any device with our mobile-optimized platform. Perfect for learning on the go.',
+        'Изучайте бизнес на любом устройстве с нашей мобильной платформой. Идеально для обучения в дороге.',
       icon: (
         <MirrorTabletPhone3 width="1.5em" height="1.5em" fill="#3b82f6" secondaryfill="#ef4444" />
       ),
     },
     {
-      title: 'Instant Feedback',
+      title: 'Мгновенная обратная связь',
       description:
-        'Get instant feedback on your code with our AI-powered coding assistant. Perfect for learning to code and improving your skills.',
+        'Получайте мгновенную обратную связь от AI-наставника Leo. Идеально для изучения бизнеса и развития навыков.',
       icon: <ChatBot className="size-6" />,
     },
     {
-      title: 'Stay on Track',
+      title: 'Достигайте целей',
       description:
-        'Set yourself study goals and get notified when you need to code. Perfect for staying on track and improving your skills.',
+        'Ставьте учебные цели и получайте уведомления. Идеально для поддержания мотивации и развития бизнес-навыков.',
       icon: <ArcheryTarget width="1.5em" height="1.5em" />,
     },
     {
-      title: 'No Credit Card Required',
+      title: 'Без кредитной карты',
       description:
-        'Try BizLevel for free, no credit card required. Perfect for learning to code and improving your skills.',
+        'Попробуйте BizLevel бесплатно, кредитная карта не требуется. Идеально для изучения основ бизнеса.',
       icon: <CreditCardIcon className="size-6" />,
     },
   ];
@@ -208,27 +207,27 @@ export default async function Page() {
 
   const featureIconGridItems = [
     {
-      title: 'Interactive Challenges',
+      title: 'Интерактивные кейсы',
       description:
-        'Practice with hands-on coding challenges that simulate real-world scenarios. Build skills while solving problems that matter.',
+        'Практикуйтесь с бизнес-кейсами, имитирующими реальные ситуации. Развивайте навыки, решая важные задачи.',
       icon: <Code width="1.5em" height="1.5em" />,
     },
     {
-      title: 'Structured Learning Paths',
+      title: 'Структурированное обучение',
       description:
-        'Follow a simple, structured learning path to boost your coding skills. Opt-in to receive daily reminders to complete it!',
+        'Следуйте простому, структурированному пути для развития бизнес-навыков. Получайте ежедневные напоминания!',
       icon: <RoadmapIcon height="1.5em" width="1.5em" />,
     },
     {
-      title: 'Generate Code Reports',
+      title: 'Отчеты о прогрессе',
       description:
-        "Don't just code blindly. Generate code reports to track your progress and understand your weaknesses.",
+        'Не учитесь вслепую. Генерируйте отчеты для отслеживания прогресса и понимания слабых мест.',
       icon: <Document width="1.5em" height="1.5em" />,
     },
     {
-      title: 'Advanced Filtering',
+      title: 'Расширенная фильтрация',
       description:
-        'Easily navigate through our vast library of coding challenges with our advanced filtering options.',
+        'Легко навигируйте по нашей обширной библиотеке бизнес-заданий с расширенными опциями фильтрации.',
       icon: <MaterialSymbolsFilterListRounded className="size-6" />,
     },
   ];
@@ -253,20 +252,19 @@ export default async function Page() {
           paddingBottom="pb-24"
         />
         <ThreeBlockShowcase
-          title="Built to build your coding skills"
-          subheader="Ensuring you get the most out of your coding journey. From beginner to advanced, we've got you covered."
+          title="Создано для развития ваших бизнес-навыков"
+          subheader="Обеспечиваем максимальную пользу от вашего предпринимательского пути. От новичка до эксперта - мы поможем вам."
           align="left"
         />
         <MarketingContentGrid
-          title='"With BizLevel, learning to code has never been easier"'
-          subheading={`- You, ${marketingContentGridSubHeading}`}
+          title='"С BizLevel изучение бизнеса стало проще, чем когда-либо"'
+          subheading={`- Вы, ${marketingContentGridSubHeading}`}
           items={contentGridItems}
         />
         <Testimonials />
-        <OpenSourceBlock />
         <CallToActionBlock
-          title="Ready to unlock your full potential?"
-          description="Join developers taking their development journey seriously. Try BizLevel for free, no credit card required."
+          title="Готовы раскрыть свой потенциал?"
+          description="Присоединяйтесь к предпринимателям, которые серьезно относятся к своему развитию. Попробуйте BizLevel бесплатно."
         />
       </div>
     </>

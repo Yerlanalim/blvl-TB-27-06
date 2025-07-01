@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { GithubIcon, LinkedinIcon } from 'lucide-react';
+import { LinkedinIcon } from 'lucide-react';
 
 import { getBlogPosts } from '@/lib/blog';
 import { createMetadata } from '@/utils/seo';
@@ -41,15 +41,6 @@ const Header = () => {
       </div>
       {/* Social Links */}
       <div className="flex gap-4 mt-4 sm:mt-8 h-fit">
-        <a
-          href="https://github.com/Logannford"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-3 rounded-full bg-black-100 hover:bg-primary-500 transition-colors duration-200"
-          aria-label="GitHub Profile"
-        >
-          <GithubIcon size={20} />
-        </a>
         <a
           href="https://x.com/bizlevel_dev"
           target="_blank"

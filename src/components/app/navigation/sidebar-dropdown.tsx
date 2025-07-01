@@ -117,7 +117,7 @@ export default function SidebarAreaComponent(opts: {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/profile/achievements" className="w-full">
+                <Link href="/settings/achievements" className="w-full">
                   Достижения
                 </Link>
               </DropdownMenuItem>

@@ -1,45 +1,25 @@
-import QuestionsList from '@/components/app/layout/questions/questions-list';
-import QuestionPageSidebar from '@/components/app/layout/questions/question-page-sidebar';
+// TODO: /coding-challenges/custom - переименовать в "Индивидуальные задания" и адаптировать под бизнес в v2.0
+// Отключено в MVP - функция появится в следующих обновлениях
 
-// Components
-import Hero from '@/components/shared/hero';
+import ComingSoon from '@/components/shared/coming-soon';
+import { createMetadata } from '@/utils/seo';
 
-// Hooks
-import { useUserServer } from '@/hooks/use-user-server';
+export async function generateMetadata() {
+  return createMetadata({
+    title: 'Индивидуальные задания | BizLevel',
+    description: 'Раздел появится в следующих обновлениях',
+    canonicalUrl: '/coding-challenges/custom',
+  });
+}
 
-// Utils
-import { parseSearchParams, validateSearchParams } from '@/utils/search-params';
-import { redirect } from 'next/navigation';
-
-export default async function CustomQuestionsPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  // we need an authed user to view this page
-  const user = await useUserServer();
-  if (!user) redirect('/login');
-
-  const filters = parseSearchParams(searchParams);
-  if (!validateSearchParams(filters)) return null;
-
+export default function CustomCodingChallengesPage() {
   return (
-    <>
-      <Hero heading="Custom Questions" subheading="Questions created just for you." />
-      <div className="flex flex-col h-full justify-between container mt-5">
-        <div className="flex flex-col lg:flex-row w-full gap-16">
-          <div className="w-full lg:min-w-[65%] space-y-6">
-            <QuestionsList
-              currentPage={filters.page || 1}
-              filters={filters}
-              customQuestions
-              showSubmissions={false}
-              paginationUrl="/coding-challenges/custom"
-            />
-          </div>
-          <QuestionPageSidebar />
-        </div>
-      </div>
-    </>
+    <ComingSoon
+      title="Индивидуальные задания"
+      description="Раздел с персонализированными бизнес-заданиями появится в следующих обновлениях"
+      expectedVersion="v2.0"
+      redirectTo="/roadmaps"
+      redirectText="Вернуться к обучению"
+    />
   );
 }
