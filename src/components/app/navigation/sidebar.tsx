@@ -481,7 +481,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
   };
 
   return (
-    <Sidebar collapsible="icon" className="z-50 group">
+    <Sidebar collapsible="icon" className="z-50 group hidden lg:flex">
       <SidebarContent className="py-6 bg-[#000000]">
         <SidebarGroup>
           <SidebarGroupLabel className="w-full flex items-center px-0">
