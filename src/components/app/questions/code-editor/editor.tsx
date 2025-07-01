@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, memo, useEffect } from 'react';
-import { Editor, useMonaco } from '@monaco-editor/react';
+import React, { useState, memo, useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import LoadingSpinner from '@/components/ui/loading';
 import { useQuestionSingle } from '@/contexts/question-single-context';
 // BIZLEVEL: Заменяем lodash на нативную JS функцию
@@ -9,6 +9,15 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 import { AnimatePresence, motion } from 'framer-motion';
 import { BUSINESS_FACTS } from '@/utils/constants/business-facts';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+
+// Динамическая загрузка Monaco Editor только когда нужен
+const MonacoEditor = dynamic(
+  () => import('@monaco-editor/react').then(mod => ({ default: mod.Editor })),
+  {
+    ssr: false,
+    loading: () => <LoadingState />
+  }
+);
 
 // memo the LoadingState component to prevent re-renders
 const LoadingState = memo(function LoadingState() {
@@ -32,13 +41,23 @@ const LoadingState = memo(function LoadingState() {
 export default function CodeEditor() {
   const { code, setCode, answerHelp, user, question } = useQuestionSingle();
   const [parsedAnswerHelp, setParsedAnswerHelp] = useState<Record<string, any>>({});
+  const [monaco, setMonaco] = useState<any>(null);
   const { value: savedLocalStorageCode, setValue: setSavedLocalStorageCode } = useLocalStorage({
     key: question.slug ? `challenge-${question.slug}` : '',
     defaultValue: '',
   });
 
-  const monaco = useMonaco();
   const userCanAccess = question.isPremiumQuestion ? user?.userLevel !== 'FREE' : true;
+
+  // Динамическая загрузка Monaco API
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      import('@monaco-editor/react').then(({ useMonaco }) => {
+        const monacoInstance = useMonaco();
+        setMonaco(monacoInstance);
+      });
+    }
+  }, []);
 
   // if the user has code in local storage, set it on init
   useEffect(() => {
@@ -60,15 +79,20 @@ export default function CodeEditor() {
     }
   }, [answerHelp]);
 
-  monaco?.editor.defineTheme('vs-dark', {
-    base: 'vs-dark',
-    inherit: true,
-    rules: [],
-    encodedTokensColors: [],
-    colors: {
-      'editor.background': '#0e0e0e',
-    },
-  });
+  // Настройка темы Monaco
+  useEffect(() => {
+    if (monaco?.editor) {
+      monaco.editor.defineTheme('vs-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [],
+        encodedTokensColors: [],
+        colors: {
+          'editor.background': '#0e0e0e',
+        },
+      });
+    }
+  }, [monaco]);
 
   if (answerHelp) {
     return (
@@ -100,30 +124,32 @@ export default function CodeEditor() {
 
   return (
     <div className="w-full relative">
-      <Editor
-        height="90vh"
-        defaultLanguage="javascript"
-        value={userCanAccess ? code : ''}
-        onChange={(value) => {
-          // update the code in the editor
-          setCode(value || '');
-          // update the code in local storage
-          setSavedLocalStorageCode(value || '');
-        }}
-        theme="vs-dark"
-        options={{
-          minimap: { enabled: false },
-          fontSize: 14,
-          guides: {
-            indentation: true,
-            bracketPairs: true,
-            bracketPairsHorizontal: true,
-            highlightActiveBracketPair: true,
-            highlightActiveIndentation: true,
-          },
-        }}
-        loading={<LoadingState />}
-      />
+      <Suspense fallback={<LoadingState />}>
+        <MonacoEditor
+          height="90vh"
+          defaultLanguage="javascript"
+          value={userCanAccess ? code : ''}
+          onChange={(value) => {
+            // update the code in the editor
+            setCode(value || '');
+            // update the code in local storage
+            setSavedLocalStorageCode(value || '');
+          }}
+          theme="vs-dark"
+          options={{
+            minimap: { enabled: false },
+            fontSize: 14,
+            guides: {
+              indentation: true,
+              bracketPairs: true,
+              bracketPairsHorizontal: true,
+              highlightActiveBracketPair: true,
+              highlightActiveIndentation: true,
+            },
+          }}
+          loading={<LoadingState />}
+        />
+      </Suspense>
     </div>
   );
 }

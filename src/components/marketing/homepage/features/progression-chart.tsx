@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
-import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
 import NumberFlow from '@number-flow/react';
+import { LineChart, Line, XAxis, CartesianGrid } from 'recharts';
 
 import {
   Card,
@@ -81,6 +81,41 @@ export default function ProgressChart({
     return () => clearInterval(interval);
   }, [chartData, isStatic]);
 
+  const renderChart = () => (
+    <LineChart
+      accessibilityLayer
+      data={chartData}
+      margin={{
+        left: 12,
+        right: 12,
+      }}
+    >
+      <CartesianGrid vertical={false} />
+      <XAxis
+        dataKey="month"
+        tickLine={false}
+        axisLine={false}
+        tickMargin={8}
+        tickFormatter={(value: string) => value.slice(0, 3)}
+      />
+      {!isStatic && (
+        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+      )}
+      <Line
+        dataKey="questions"
+        type="natural"
+        stroke="hsl(var(--accent))"
+        strokeWidth={2}
+        dot={{
+          fill: 'hsl(var(--accent))',
+        }}
+        activeDot={{
+          r: 6,
+        }}
+      />
+    </LineChart>
+  );
+
   return (
     <Card
       style={{
@@ -110,38 +145,7 @@ export default function ProgressChart({
       {hideHeader && <div className="h-4"></div>}
       <CardContent className="border-black-50">
         <ChartContainer config={chartConfig}>
-          <LineChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value: string) => value.slice(0, 3)}
-            />
-            {!isStatic && (
-              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            )}
-            <Line
-              dataKey="questions"
-              type="natural"
-              stroke="hsl(var(--accent))"
-              strokeWidth={2}
-              dot={{
-                fill: 'hsl(var(--accent))',
-              }}
-              activeDot={{
-                r: 6,
-              }}
-            />
-          </LineChart>
+          {renderChart()}
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">

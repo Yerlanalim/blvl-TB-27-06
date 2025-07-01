@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Editor } from '@monaco-editor/react';
+import dynamic from 'next/dynamic';
 // BIZLEVEL: Заменяем lodash на нативную JS функцию
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 import type { z } from 'zod';
@@ -12,6 +12,15 @@ import CodeDisplay from '@/components/app/layout/question-single/code-snippet';
 import LoadingSpinner from '@/components/ui/loading';
 import { DefaultRoadmapQuestions } from '@prisma/client';
 import TestCaseSection from '../../questions/code-editor/test-case-section';
+
+// Динамическая загрузка Monaco Editor только когда нужен
+const MonacoEditor = dynamic(
+  () => import('@monaco-editor/react').then(mod => ({ default: mod.Editor })),
+  {
+    ssr: false,
+    loading: () => <LoadingSpinner />
+  }
+);
 
 type QuestionCodeDisplayProps = {
   user: UserRecord | null;
@@ -23,7 +32,7 @@ type QuestionCodeDisplayProps = {
   currentLayout?: 'question' | 'answer';
 };
 
-export default function QuestionCodeDisplay({
+const QuestionCodeDisplay = memo(function QuestionCodeDisplay({
   user,
   answerHelp,
   question,
@@ -101,26 +110,27 @@ export default function QuestionCodeDisplay({
             className="h-full"
           >
             {isEditable ? (
-              <Editor
-                height="83vh"
-                defaultLanguage="javascript"
-                value={codeSnippet}
-                onChange={handleCodeChange}
-                theme="vs-dark"
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 16,
-                  guides: {
-                    indentation: true,
-                    bracketPairs: true,
-                    bracketPairsHorizontal: true,
-                    highlightActiveBracketPair: true,
-                    highlightActiveIndentation: true,
-                  },
-                }}
-                className="bg-black-50 !overflow-y-auto !scrollable-element"
-                loading={<LoadingSpinner />}
-              />
+              <Suspense fallback={<LoadingSpinner />}>
+                <MonacoEditor
+                  height="83vh"
+                  language="javascript"
+                  value={codeSnippet}
+                  onChange={handleCodeChange}
+                  theme="vs-dark"
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 16,
+                    guides: {
+                      indentation: true,
+                      bracketPairs: true,
+                      bracketPairsHorizontal: true,
+                      highlightActiveBracketPair: true,
+                      highlightActiveIndentation: true,
+                    },
+                  }}
+                  className="bg-black-50 !overflow-y-auto !scrollable-element"
+                />
+              </Suspense>
             ) : (
               <CodeDisplay content={codeSnippet} user={user} backgroundColor="#111111" />
             )}
@@ -129,4 +139,6 @@ export default function QuestionCodeDisplay({
       </AnimatePresence>
     </div>
   );
-}
+});
+
+export default QuestionCodeDisplay;

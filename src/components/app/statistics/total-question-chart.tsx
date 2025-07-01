@@ -2,8 +2,16 @@
 
 import React, { useMemo, useState } from 'react';
 import { TrendingUp, TrendingDown, BarChartIcon, LineChartIcon, Circle } from 'lucide-react';
-import { CartesianGrid, Bar, BarChart, Line, LineChart, XAxis, YAxis } from 'recharts';
 import NumberFlow from '@number-flow/react';
+import { 
+  BarChart, 
+  LineChart, 
+  Bar, 
+  Line, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid 
+} from 'recharts';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -210,23 +218,14 @@ export default function QuestionChart({
             </Select>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <CardDescription>
-            Last {chartData.length} {step}s
-          </CardDescription>
-        </div>
+        <CardDescription className="text-muted-foreground">
+          {step === 'day' && 'Daily questions answered over time'}
+          {step === 'week' && 'Weekly questions answered over time'}
+          {step === 'month' && 'Monthly questions answered over time'}
+        </CardDescription>
       </CardHeader>
-      <CardContent className="border-black-50 max-h-[28rem] p-2 md:p-6">
-        <ChartContainer
-          config={chartConfig}
-          className="max-h-80"
-          style={{
-            aspectRatio: '16 / 9',
-            width: '100%',
-          }}
-        >
-          {renderChart()}
-        </ChartContainer>
+      <CardContent>
+        <ChartContainer config={chartConfig}>{renderChart()}</ChartContainer>
       </CardContent>
     </Card>
   );
