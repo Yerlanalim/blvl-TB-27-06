@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { answerQuestionSchema } from '@/lib/zod/schemas/answer-question-schema';
-import type { UserRecord, RoadmapUserQuestions } from '@/types';
+import type { UserRecord, RoadmapUserQuestions, RoadmapQuestionWithAnswers } from '@/types';
 import { Form, FormControl, FormField } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import LoadingSpinner from '@/components/ui/loading';
@@ -16,7 +16,7 @@ type SchemaProps = z.infer<typeof answerQuestionSchema>;
 
 interface AnswerQuestionFormProps {
   userData: UserRecord;
-  question: RoadmapUserQuestions;
+  question: RoadmapUserQuestions | RoadmapQuestionWithAnswers;
   roadmapUid: string;
 }
 

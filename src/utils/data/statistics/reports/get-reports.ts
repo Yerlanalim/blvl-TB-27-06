@@ -17,7 +17,7 @@ export const getUserReports = async (take: number = 5) => {
       userUid: user.uid,
     },
     include: {
-      questions: {
+      linkedReports: {
         include: {
           answers: true,
         },

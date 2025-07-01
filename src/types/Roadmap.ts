@@ -5,6 +5,11 @@ import { User } from './User';
 
 type RoadmapStatus = 'ACTIVE' | 'COMPLETED' | 'ARCHIVED' | 'CREATING';
 
+// Специальный тип для roadmap question с корректной типизацией answers
+export type RoadmapQuestionWithAnswers = Omit<RoadmapUserQuestions, 'answers' | 'userAnswers'> & {
+  answers: RoadmapUserQuestionsAnswers[];
+};
+
 // Main roadmap associated with a user
 export interface UserRoadmaps extends BaseRecord {
   // Connects to the user

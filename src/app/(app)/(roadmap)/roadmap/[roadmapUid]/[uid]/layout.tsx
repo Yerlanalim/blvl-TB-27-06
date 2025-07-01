@@ -18,7 +18,7 @@ import { RoadmapQuestionNavigation } from '@/components/app/navigation/question-
 import { useUserServer } from '@/hooks/use-user-server';
 
 // types
-import { RoadmapUserQuestions, UserRecord } from '@/types';
+import { RoadmapUserQuestions, UserRecord, RoadmapQuestionWithAnswers } from '@/types';
 
 export default async function RoadmapQuestionLayout({
   children,
@@ -35,7 +35,7 @@ export default async function RoadmapQuestionLayout({
     fetchNextPrevRoadmapQuestion({ roadmapUid, questionUid: uid }),
   ])) as unknown as [
     UserRecord,
-    RoadmapUserQuestions,
+    RoadmapQuestionWithAnswers,
     {
       nextQuestion: RoadmapUserQuestions | null | undefined;
       prevQuestion: RoadmapUserQuestions | null | undefined;

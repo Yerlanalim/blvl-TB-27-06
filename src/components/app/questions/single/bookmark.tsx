@@ -8,13 +8,13 @@ import { TooltipContent, TooltipTrigger, Tooltip, TooltipProvider } from '@/comp
 import { Bookmark } from 'lucide-react';
 
 import { bookmarkQuestion } from '@/actions/questions/bookmark';
-import type { Question, RoadmapUserQuestions } from '@/types';
+import type { Question, RoadmapUserQuestions, RoadmapQuestionWithAnswers } from '@/types';
 
 export default function BookmarkQuestion({
   question,
   isRoadmap = false,
 }: {
-  question: Question | RoadmapUserQuestions;
+  question: Question | RoadmapUserQuestions | RoadmapQuestionWithAnswers;
   isRoadmap?: boolean;
 }) {
   const [isBookmarked, setIsBookmarked] = useState(

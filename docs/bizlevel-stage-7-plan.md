@@ -86,10 +86,10 @@
    - Проверь, не сломается ли функционал при скрытии sidebar
 
 2. Создай src/components/app/mobile-nav/bottom-navigation.tsx:
-   - 4 пункта: Дэшборд, Карта, Чат с Лео, Профиль
+   - 4 пункта: Главная, Карта, Чат с Лео, Профиль
    - Используй иконки из lucide-react: Home, Map, MessageCircle, User
-   - Соответствующие href: /dashboard, /roadmaps, /leo-chat, /profile
-   - Активный пункт выделен зеленым (#22c55e)
+   - Соответствующие href: /main, /roadmaps, /leo-chat, /profile
+   - Активный пункт выделен более ярким цветом
    - Фиксированный внизу экрана
 
 3. Обнови src/components/app/sidebar/sidebar.tsx:

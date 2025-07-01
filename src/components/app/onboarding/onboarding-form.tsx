@@ -70,8 +70,7 @@ export default function OnboardingForm() {
           className={cn(
             'rounded-lg shadow-xl overflow-hidden min-w-fit relative',
             currentStep === STEPS.PRICING ||
-              currentStep === STEPS.INTRO_VIDEO ||
-              (currentStep === STEPS.TIME_COMMITMENT && 'lg:min-w-[58rem]'),
+              currentStep === STEPS.INTRO_VIDEO,
             currentStep === STEPS.PRICING || 
               currentStep === STEPS.INITIAL_QUESTIONS ||
               currentStep === STEPS.INTRO_VIDEO

@@ -2,8 +2,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import type { RoadmapUserQuestions, RoadmapUserQuestionsUserAnswers, RoadmapUserQuestionsAnswers } from '@prisma/client';
-import type { UserRecord } from '@/types';
+import type { RoadmapUserQuestions, RoadmapUserQuestionsUserAnswers } from '@prisma/client';
+import type { UserRecord, RoadmapQuestionWithAnswers } from '@/types';
 import { answerRoadmapQuestion } from '@/actions/roadmap/questions/answer-roadmap-question';
 import { generateAnswerHelp } from '@/actions/ai/questions/answer-help';
 import { readStreamableValue } from 'ai/rsc';
@@ -13,7 +13,7 @@ type Layout = 'questions' | 'codeSnippet' | 'answer';
 type AnswerStatus = 'correct' | 'incorrect' | 'init';
 
 interface RoadmapQuestionContextType {
-  roadmapQuestion: RoadmapUserQuestions & { answers: RoadmapUserQuestionsAnswers[] };
+  roadmapQuestion: RoadmapQuestionWithAnswers;
   roadmapUid: string;
   user: UserRecord;
   currentLayout: Layout;
@@ -57,7 +57,7 @@ export const useRoadmapQuestion = () => {
 
 interface ProviderProps {
   children: React.ReactNode;
-  roadmapQuestion: RoadmapUserQuestions & { answers: RoadmapUserQuestionsAnswers[] };
+  roadmapQuestion: RoadmapQuestionWithAnswers;
   roadmapUid: string;
   user: UserRecord;
 }

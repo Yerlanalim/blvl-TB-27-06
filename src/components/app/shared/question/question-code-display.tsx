@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 import type { z } from 'zod';
 import type { answerHelpSchema } from '@/lib/zod/schemas/ai/answer-help';
-import type { Question, RoadmapUserQuestions, UserRecord } from '@/types';
+import type { Question, RoadmapUserQuestions, UserRecord, RoadmapQuestionWithAnswers } from '@/types';
 import CodeDisplay from '@/components/app/layout/question-single/code-snippet';
 import LoadingSpinner from '@/components/ui/loading';
 import { DefaultRoadmapQuestions } from '@prisma/client';
@@ -25,7 +25,7 @@ const MonacoEditor = dynamic(
 type QuestionCodeDisplayProps = {
   user: UserRecord | null;
   answerHelp?: z.infer<typeof answerHelpSchema> | null;
-  question: Question | RoadmapUserQuestions | DefaultRoadmapQuestions;
+  question: Question | RoadmapUserQuestions | DefaultRoadmapQuestions | RoadmapQuestionWithAnswers;
   prefilledCodeSnippet?: string | null;
   isEditable?: boolean;
   onCodeChange?: (code: string) => void;
