@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { resend } from '@/lib/resend';
 import { createUserMissionRecords } from '@/actions/daily-missions/create-user-missions-record';
+import { sendWelcomeEmail } from '@/actions/misc/send-welcome-email';
 
 const cookiesStore = cookies();
 
@@ -81,7 +82,7 @@ export const signUp = async (
       if (referralUser) {
         // send the referral user an email wih the discount code
         await resend.emails.send({
-          from: 'BizLevel <team@bizlevel.dev>',
+          from: 'BizLevel <team@bizlevel.kz>',
           to: referralUser.email,
           subject: 'Your discount code for BizLevel!',
           html: `<p>You have referred a friend to BizLevel! Use the code ${process.env.REFERRAL_CODE} to get 10% off any premium plan.</p>`,
@@ -104,6 +105,22 @@ export const signUp = async (
         updatedAt: new Date(),
       },
     });
+
+    // Send welcome email to new user (don't block registration if email fails)
+    try {
+      await sendWelcomeEmail(
+        {
+          email: user.email,
+          username: user.email.split('@')[0], // Use email prefix as default username
+          uid: user.id,
+        },
+        'WELCOME60' // Default coupon code for new users
+      );
+      console.log('Welcome email sent successfully to:', user.email);
+    } catch (emailError: any) {
+      console.error('Failed to send welcome email:', emailError);
+      // Continue with registration even if email fails
+    }
 
     // return the user object so we can extract the user.id on the front end
     return {

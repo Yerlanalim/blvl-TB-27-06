@@ -33,7 +33,7 @@ export async function generateMetadata() {
 const heroDescription = (
   <div className="flex flex-col gap-y-4 z-20 relative font-inter max-w-3xl">
     <p className="text-sm md:text-base text-gray-400 font-onest">
-      Изучите нашу библиотеку путей обучения бизнесу, охватывающую множество тем. 
+      Изучите нашу карту путей обучения бизнесу, охватывающую множество тем. 
       Ставьте свои цели и проходите материалы в своем темпе, становясь на 1% лучше каждый день.
     </p>
     <div className="flex flex-col gap-y-2">
@@ -110,7 +110,7 @@ export default async function ExploreQuestionsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="flex flex-col gap-y-12 max-w-7xl mx-auto">
-        <Hero heading="Библиотека" subheading={heroDescription} container={true} />
+        <Hero heading="Карта уровней" subheading={heroDescription} container={true} />
         <div className="lg:container flex flex-col lg:flex-row mt-5 gap-16">
           <div className="w-full flex flex-col gap-12">
             {categories.map((category) => (

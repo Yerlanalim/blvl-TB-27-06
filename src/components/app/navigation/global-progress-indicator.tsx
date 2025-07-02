@@ -3,7 +3,7 @@
 import { Progress } from '@/components/ui/progress';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Target, Trophy, Book, Zap } from 'lucide-react';
+import { Target, Trophy, Zap } from 'lucide-react';
 import { useUser } from '@/hooks/use-user';
 
 interface GlobalProgressData {
@@ -95,89 +95,60 @@ export default function GlobalProgressIndicator() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full bg-gradient-to-r from-black-75/80 to-black-50/80 backdrop-blur-sm border-b border-gray-800"
+      transition={{ duration: 0.3 }}
+      className="w-full bg-gradient-to-r from-black-75/90 to-black-50/90 backdrop-blur-sm border-b border-gray-800/50"
     >
-      {/* Desktop версия */}
+      {/* Desktop версия - компактная */}
       <div className="hidden lg:block">
-        <div className="max-w-7xl mx-auto px-6 py-3">
+        <div className="max-w-7xl mx-auto px-6 py-2">
           <div className="flex items-center justify-between">
-            {/* Левая секция - общий прогресс */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-3">
-                <Target className="w-5 h-5 text-accent" />
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm font-medium text-white">
-                      Общий прогресс курса
-                    </span>
-                    <motion.span 
-                      className="text-accent font-bold text-sm"
-                      animate={{ scale: animatedProgress !== progressData.overallProgress ? [1, 1.1, 1] : 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {Math.round(animatedProgress)}%
-                    </motion.span>
-                  </div>
-                  <Progress 
-                    value={animatedProgress} 
-                    className="h-2 w-48 bg-black-75"
-                    indicatorColor="bg-accent transition-all duration-500 ease-out"
-                  />
-                  <div className="text-xs text-gray-400 mt-1">
-                    {progressData.totalCompletedQuestions} из {progressData.totalQuestions} уроков
-                  </div>
-                </div>
-              </div>
-              
-              {/* Текущий уровень */}
+            {/* Основной прогресс */}
+            <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <Book className="w-4 h-4 text-blue-400" />
+                <Target className="w-4 h-4 text-accent" />
                 <span className="text-sm text-gray-300">
                   {progressData.currentLevelName}
                 </span>
-                {progressData.currentLevelProgress !== undefined && (
-                  <span className="text-xs text-gray-400">
-                    ({progressData.currentLevelProgress}%)
-                  </span>
-                )}
+                <motion.span 
+                  className="text-accent font-medium text-sm"
+                  animate={{ scale: animatedProgress !== progressData.overallProgress ? [1, 1.05, 1] : 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {Math.round(animatedProgress)}%
+                </motion.span>
               </div>
+              <Progress 
+                value={animatedProgress} 
+                className="h-1.5 w-32 bg-black-75"
+                indicatorColor="bg-accent transition-all duration-300 ease-out"
+              />
             </div>
 
-            {/* Правая секция - достижения и XP */}
-            <div className="flex items-center gap-4">
-              {/* Завершенные уровни */}
-              <div className="flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-yellow-500" />
-                <span className="text-sm text-gray-300">
-                  {progressData.completedLevels}/{progressData.totalLevels} уровней
-                </span>
+            {/* Компактные достижения */}
+            <div className="flex items-center gap-3 text-xs">
+              <div className="flex items-center gap-1">
+                <Trophy className="w-3 h-3 text-yellow-500" />
+                <span className="text-gray-400">{progressData.completedLevels}/{progressData.totalLevels}</span>
               </div>
-              
-              {/* XP */}
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-purple-400" />
-                <div className="text-right">
-                  <div className="text-xs text-gray-400">XP</div>
-                  <div className="text-sm font-medium text-white">{progressData.userXp}</div>
-                </div>
+              <div className="flex items-center gap-1">
+                <Zap className="w-3 h-3 text-purple-400" />
+                <span className="text-gray-400">{progressData.userXp} XP</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile версия - компактная */}
+      {/* Mobile версия - ультракомпактная */}
       <div className="lg:hidden">
-        <div className="px-4 py-2">
+        <div className="px-4 py-1.5">
           <div className="flex items-center justify-between">
-            {/* Основной прогресс */}
-            <div className="flex items-center gap-3 flex-1">
-              <Target className="w-4 h-4 text-accent flex-shrink-0" />
+            <div className="flex items-center gap-2 flex-1">
+              <Target className="w-3 h-3 text-accent flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-0.5">
                   <span className="text-xs text-gray-300 truncate">
                     {progressData.currentLevelName}
                   </span>
@@ -187,17 +158,13 @@ export default function GlobalProgressIndicator() {
                 </div>
                 <Progress 
                   value={animatedProgress} 
-                  className="h-1.5 bg-black-75"
-                  indicatorColor="bg-accent transition-all duration-500 ease-out"
+                  className="h-1 bg-black-75"
+                  indicatorColor="bg-accent transition-all duration-300 ease-out"
                 />
-                <div className="text-xs text-gray-500 mt-0.5">
-                  {progressData.totalCompletedQuestions}/{progressData.totalQuestions} уроков
-                </div>
               </div>
             </div>
             
-            {/* Достижения */}
-            <div className="flex items-center gap-3 ml-4 flex-shrink-0">
+            <div className="flex items-center gap-2 ml-3 flex-shrink-0 text-xs">
               <div className="flex items-center gap-1">
                 <Trophy className="w-3 h-3 text-yellow-500" />
                 <span className="text-xs text-gray-300">

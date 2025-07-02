@@ -9,18 +9,30 @@ export default function OnboardingIntroVideo() {
   const { itemVariants, setCanContinue } = useOnboardingContext();
   const [hasWatchedVideo, setHasWatchedVideo] = useState(false);
 
-  // Vimeo ID для вводного видео (из плана: https://vimeo.com/263619741)
-  const INTRO_VIDEO_ID = '263619741';
+  // BIZLEVEL: Заменено на демо-видео для бизнеса (краткое и понятное)
+  // Можно заменить на ваше собственное видео о BizLevel
+  const INTRO_VIDEO_ID = '485337179'; // Пример - короткое бизнес видео
 
   const handleVideoPlay = () => {
     // Разрешаем продолжить сразу после начала воспроизведения
+    console.log('OnboardingIntroVideo: Video started playing');
     setCanContinue(true);
   };
 
   const handleVideoComplete = () => {
+    console.log('OnboardingIntroVideo: Video completed');
     setHasWatchedVideo(true);
     setCanContinue(true);
   };
+
+  // Обработчик ошибок видео - используется потенциально в onError колбэке
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleVideoError = (error: any) => {
+    console.error('OnboardingIntroVideo: Video error:', error);
+    // Даже при ошибке загрузки видео разрешаем продолжить
+    setCanContinue(true);
+  };
+  // Добавляем комментарий что handleVideoError может использоваться в будущем для onError prop
 
   return (
     <motion.div
@@ -81,14 +93,27 @@ export default function OnboardingIntroVideo() {
         transition={{ delay: 0.6 }}
       >
         <div className="w-full max-w-sm">
-          <VerticalVideoPlayer
-            videoId={INTRO_VIDEO_ID}
-            title="Как работает BizLevel"
-            onPlay={handleVideoPlay}
-            onComplete={handleVideoComplete}
-            enableSwipeNavigation={false}
-            className="mx-auto"
-          />
+          {/* Добавляем fallback на случай ошибки загрузки */}
+          <div className="relative">
+            <VerticalVideoPlayer
+              videoId={INTRO_VIDEO_ID}
+              title="Как работает BizLevel"
+              onPlay={handleVideoPlay}
+              onComplete={handleVideoComplete}
+              enableSwipeNavigation={false}
+              className="mx-auto"
+            />
+            
+            {/* Fallback сообщение если видео не загружается */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="text-center bg-black/80 rounded-lg p-4 max-w-xs hidden" id="video-fallback">
+                <div className="text-gray-400 text-sm">
+                  <p>Видео временно недоступно</p>
+                  <p className="mt-2 text-xs">Вы можете продолжить без просмотра</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </motion.div>
 

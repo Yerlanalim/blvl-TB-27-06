@@ -47,10 +47,10 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     const [isLoaded, setIsLoaded] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [imageSrc, setImageSrc] = useState(src);
-    const imageRef = useRef<HTMLImageElement>(null);
+    const imageRef = useRef<HTMLImageElement | null>(null);
     
     const shouldLoadHeavyContent = useAdaptiveLoading();
-    const { hasBeenVisible } = useIntersectionObserver(imageRef, {
+    const { hasBeenVisible } = useIntersectionObserver(imageRef as React.RefObject<Element>, {
       threshold: 0.1,
       rootMargin: '50px'
     });

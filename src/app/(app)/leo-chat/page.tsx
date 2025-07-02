@@ -2,7 +2,8 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -83,12 +84,53 @@ const quickStartQuestions = [
 ];
 
 export default function LeoChatPage() {
+  const searchParams = useSearchParams();
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>(mockMessages);
   const [newMessage, setNewMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [chatHistory] = useState<ChatSession[]>(mockChatHistory);
+
+  // Обработка контекста из URL при загрузке страницы
+  useEffect(() => {
+    const context = searchParams.get('context');
+    if (context) {
+      // Начинаем новый чат с контекстом
+      setSelectedSession(null);
+      setMessages([
+        {
+          id: '1',
+          content: 'Привет! Я Leo, ваш персональный бизнес-наставник. Вижу, что у вас есть вопрос по конкретной теме. Готов помочь!',
+          isUser: false,
+          timestamp: new Date(),
+        }
+      ]);
+      
+      // Автоматически отправляем контекст как первое сообщение
+      setTimeout(() => {
+        const contextMessage: Message = {
+          id: Date.now().toString(),
+          content: decodeURIComponent(context),
+          isUser: true,
+          timestamp: new Date(),
+        };
+        
+        setMessages(prev => [...prev, contextMessage]);
+        
+        // Имитация ответа Leo на контекст
+        setTimeout(() => {
+          const leoResponse: Message = {
+            id: (Date.now() + 1).toString(),
+            content: 'Я понимаю ваш вопрос. Давайте разберём эту тему подробно...',
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, leoResponse]);
+        }, 1000);
+      }, 500);
+    }
+  }, [searchParams]);
 
   // Группировка истории по датам
   const groupedHistory = chatHistory.reduce((groups, session) => {

@@ -17,10 +17,13 @@ import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { formatSeconds } from '@/utils/time';
-import { useTransition } from 'react';
+import { useTransition, useState, useEffect } from 'react';
 import { updateAnswerDifficulty } from '@/actions/answers/answer';
 import { AnswerDifficulty } from '@prisma/client';
 import { copyLinkToClipboard, getUpgradeUrl } from '@/utils';
+import AnswerHints from './answer-hints';
+import { getAnswerAttempts } from '@/utils/data/answers/get-answer-attempts';
+import { useTranslation } from '@/utils/translations/ru';
 
 interface QuestionResultProps {
   correctAnswer: 'correct' | 'incorrect' | 'init';
@@ -41,6 +44,8 @@ interface QuestionResultProps {
   nextQuestionHref?: string;
   isOnboardingQuestion?: boolean;
   isLastQuestion?: boolean;
+  // Новые параметры для системы подсказок
+  onOpenLeoChat?: (questionContext?: string) => void;
 }
 
 /**
@@ -74,8 +79,21 @@ export default function QuestionResult({
   nextQuestionHref,
   isOnboardingQuestion = false,
   isLastQuestion = false,
+  onOpenLeoChat,
 }: QuestionResultProps) {
   const [isPending, startTransition] = useTransition();
+  const [attempts, setAttempts] = useState<number>(0);
+  const [showCorrectAnswerForced, setShowCorrectAnswerForced] = useState(false);
+  const { t } = useTranslation();
+
+  // Загружаем количество попыток при некорректном ответе
+  useEffect(() => {
+    if (correctAnswer === 'incorrect' && question?.uid) {
+      getAnswerAttempts(question.uid).then((count) => {
+        setAttempts(count);
+      });
+    }
+  }, [correctAnswer, question?.uid]);
 
   const getResultMessage = () => {
     if (isCodeEditorQuestion) {
@@ -83,9 +101,25 @@ export default function QuestionResult({
         ? 'All test cases passed.'
         : "Some test cases failed, let's review:";
     }
-    return correctAnswer === 'correct'
-      ? 'You answered correctly!'
-      : 'That was incorrect, try again!';
+    
+    if (correctAnswer === 'correct') {
+      return t('lessons.correctAnswerMessage');
+    }
+    
+    // Позитивные мотивационные сообщения для неправильных ответов
+    const motivationalMessages = [
+      t('lessons.tryAgain'),
+      t('lessons.youAreOnTheRightTrack'),
+      t('lessons.keepLearning'),
+      t('lessons.almostThere'),
+      t('lessons.dontGiveUp'),
+      t('lessons.learningIsAProcess'),
+      t('lessons.everyMistakeIsAStep'),
+    ];
+    
+    // Выбираем сообщение на основе количества попыток (вращаем через массив)
+    const messageIndex = attempts > 0 ? (attempts - 1) % motivationalMessages.length : 0;
+    return motivationalMessages[messageIndex] || motivationalMessages[0];
   };
 
   const handleDifficultySelect = async (value: AnswerDifficulty) => {
@@ -106,6 +140,25 @@ export default function QuestionResult({
       console.error('Error updating difficulty:', error);
       toast.error('Failed to update question difficulty');
     }
+  };
+
+  // Открыть Leo чат с контекстом вопроса
+  const handleAskLeo = () => {
+    const questionContext = `Вопрос: "${question.question || question.title}". 
+    Пользователь сделал ${attempts} попыток и нуждается в подсказке. 
+    Помоги разобраться с концепцией, не раскрывая ответ полностью.`;
+    
+    if (onOpenLeoChat) {
+      onOpenLeoChat(questionContext);
+    } else {
+      // Fallback - открыть чат в новой вкладке
+      window.open('/leo-chat', '_blank');
+    }
+  };
+
+  // Принудительно показать правильный ответ
+  const handleShowCorrectAnswer = () => {
+    setShowCorrectAnswerForced(true);
   };
 
   const isCode = /<pre><code/.test(userAnswer);
@@ -191,9 +244,9 @@ export default function QuestionResult({
                 />
               )}
             </div>
-            {correctAnswer === 'incorrect' && showCorrectAnswer && (
+            {correctAnswer === 'incorrect' && (showCorrectAnswer || showCorrectAnswerForced) && (
               <div className="flex flex-col gap-y-2">
-                <h2 className="text-lg font-bold">Correct Answer</h2>
+                <h2 className="text-lg font-bold">{t('lessons.correctAnswer')}</h2>
                 <CodeDisplay
                   content={
                     isRoadmapQuestion
@@ -210,6 +263,19 @@ export default function QuestionResult({
             )}
           </div>
         )}
+        
+        {/* BIZLEVEL: Система подсказок при неправильных ответах */}
+        {correctAnswer === 'incorrect' && attempts > 0 && !isCodeEditorQuestion && (
+          <AnswerHints
+            attempts={attempts}
+            questionHint={question.hint}
+            questionTitle={question.question || question.title}
+            questionUid={question.uid}
+            onAskLeo={handleAskLeo}
+            showCorrectAnswer={handleShowCorrectAnswer}
+          />
+        )}
+        
         <div className="flex flex-col gap-y-2 mt-5 bg-[#111111] border border-black-50 p-4 rounded-lg">
           <h2 className="text-xl font-bold">Объяснить этот ответ</h2>
           <p className="text-sm text-gray-400">

@@ -3,7 +3,7 @@ import MdxLink from '@/components/mdx/mdx-link';
 import MdxHeading from '@/components/mdx/mdx-heading';
 import CodeSnippet from '@/components/marketing/global/code-snippet';
 import CallToActionBlock from '@/components/marketing/global/blocks/call-to-action-block';
-import MdxQuestionDisplay from '@/components/mdx/mdx-question-display';
+// import MdxQuestionDisplay from '@/components/mdx/mdx-question-display'; // BIZLEVEL: заменен на заглушку
 import MdxList from './components/mdx/mdx-list';
 import { Button } from './components/ui/button';
 import Callout from './components/mdx/callout';
@@ -66,7 +66,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     Callout: (props: any) => <Callout {...props}>{props.children}</Callout>,
     CallToActionBlock,
-    MdxQuestionDisplay,
+    // BIZLEVEL: Временная заглушка для MDX компонента
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    MdxQuestionDisplay: (_props: any) => (
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 my-4">
+        <h3 className="text-lg font-semibold text-blue-800 mb-2">Интерактивные задания</h3>
+        <p className="text-blue-600">Эта функция появится в следующих обновлениях BizLevel.</p>
+      </div>
+    ),
     ...components,
   };
 }

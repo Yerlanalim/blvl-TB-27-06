@@ -40,6 +40,15 @@ export default function RoadmapQuestionCard(opts: {
     return currentLayout === 'questions' ? '(Tap to view code snippet)' : '(Tap to view question)';
   };
 
+  // Обработчик для открытия Leo чата с контекстом вопроса
+  const handleOpenLeoChat = (questionContext?: string) => {
+    // Открываем Leo чат в новой вкладке с контекстом
+    const url = questionContext 
+      ? `/leo-chat?context=${encodeURIComponent(questionContext)}`
+      : '/leo-chat';
+    window.open(url, '_blank');
+  };
+
   const getDescriptionContent = () => {
     if (currentLayout === 'questions') {
       return <RoadmapQuestionTabs />;
@@ -58,6 +67,7 @@ export default function RoadmapQuestionCard(opts: {
           isRoadmapQuestion={true}
           roadmapUid={roadmapUid}
           generateAiAnswerHelp={generateAiAnswerHelp}
+          onOpenLeoChat={handleOpenLeoChat}
         />
       );
     }

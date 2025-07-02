@@ -70,7 +70,7 @@ export default async function QuestionUidLayout({
   ]);
 
   if (!question || !question.slug || !question.tags) {
-    return redirect('/coding-challenges');
+    return redirect('/roadmaps');
   }
 
   const defaultQuestionDescription = `Practice ${capitalise(

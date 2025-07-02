@@ -318,12 +318,12 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
   };
 
   // Keep a map of icon refs for each sidebar item
-  const iconRefs = useRef<Map<string, React.RefObject<AnimatableIconHandle>>>(new Map());
+  const iconRefs = useRef<Map<string, React.RefObject<AnimatableIconHandle | null>>>(new Map());
 
   // Get or create a ref for a sidebar item
   const getIconRef = (itemKey: string) => {
     if (!iconRefs.current.has(itemKey)) {
-      iconRefs.current.set(itemKey, React.createRef<AnimatableIconHandle>());
+      iconRefs.current.set(itemKey, React.createRef<AnimatableIconHandle | null>());
     }
     return iconRefs.current.get(itemKey)!;
   };
@@ -331,7 +331,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
   // Handle hover for a sidebar item
   const handleItemHover = (itemKey: string, isHovering: boolean) => {
     const ref = iconRefs.current.get(itemKey);
-    if (ref?.current) {
+    if (ref?.current && typeof ref.current.startAnimation === 'function' && typeof ref.current.stopAnimation === 'function') {
       if (isHovering) {
         ref.current.startAnimation();
       } else {

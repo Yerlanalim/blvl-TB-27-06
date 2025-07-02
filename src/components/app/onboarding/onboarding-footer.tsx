@@ -67,11 +67,10 @@ export default function OnboardingFooter({
           disabled={
             isLoading ||
             !canContinue ||
-            (!user?.username && currentStep === STEPS.USER_DETAILS) ||
-            (!user?.howDidYouHearAboutBizLevel && currentStep === STEPS.USER_DETAILS)
+            (!user?.username && currentStep === STEPS.USER_DETAILS)
           }
         >
-          {currentStep === STEPS.INTRO_VIDEO ? 'Начать обучение' : 'Continue'}
+          {currentStep === STEPS.INTRO_VIDEO ? 'Начать обучение' : 'Продолжить'}
           {isLoading && <LoadingSpinner className="ml-2 size-4" />}
         </Button>
       </div>

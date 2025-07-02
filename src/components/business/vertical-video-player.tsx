@@ -46,8 +46,11 @@ export default function VerticalVideoPlayer({
   const createPlayer = useCallback(async () => {
     if (!containerRef.current || !videoId || playerRef.current) return;
 
+    console.log('VerticalVideoPlayer: Creating player for video ID:', videoId);
+
     try {
       // Lazy load Vimeo Player
+      console.log('VerticalVideoPlayer: Loading Vimeo Player...');
       const { default: Player } = await loadVimeoPlayer();
       
       // Проверяем прогресс из localStorage
@@ -67,6 +70,7 @@ export default function VerticalVideoPlayer({
         : isMobile ? Math.round(window.innerWidth * 16/9) : 568;
 
       // Создаем Vimeo player с оптимизированными настройками
+      console.log('VerticalVideoPlayer: Creating Vimeo Player instance...');
       const vimeoPlayer = new Player(containerRef.current, {
         id: parseInt(videoId) || 0,
         width: playerWidth,
@@ -84,6 +88,7 @@ export default function VerticalVideoPlayer({
         transparent: false,
       });
 
+      console.log('VerticalVideoPlayer: Vimeo Player created successfully');
       playerRef.current = vimeoPlayer;
 
       // Обработчики событий с улучшенной обработкой ошибок

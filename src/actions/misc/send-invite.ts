@@ -39,7 +39,7 @@ export const sendInvite = async (email: string) => {
     : "You've been invited to BizLevel!";
 
   await resend.emails.send({
-    from: 'BizLevel <team@bizlevel.dev>',
+    from: 'BizLevel <team@bizlevel.kz>',
     to: email,
     subject,
     html,

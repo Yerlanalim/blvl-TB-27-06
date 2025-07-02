@@ -9,8 +9,8 @@ import type { UpdatableUserFields } from '@/types';
 
 import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { InputWithLabel } from '@/components/ui/input-label';
-import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-import { Switch } from '@/components/ui/switch';
+// import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+// import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import {
   Form,
@@ -18,16 +18,17 @@ import {
   FormItem,
   FormControl,
   FormMessage,
-  FormLabel,
+  // FormLabel, // не используется
 } from '@/components/ui/form';
 import { useOnboardingContext } from '@/contexts/onboarding-context';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
+// import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { toast } from 'sonner';
 
 import { checkUsername } from '@/actions/user/authed/check-username';
-import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
+// import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const whereDidYouHearAboutBizLevel = [
   'Reddit',
   'Google',
@@ -46,6 +47,7 @@ export default function OnboardingStepOne() {
   const { user, setUser, itemVariants, setCanContinue, serverUser } = useOnboardingContext();
   const [username, setUsername] = useState(user?.username || '');
   const [isUsernameValid, setIsUsernameValid] = useState(true);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
 
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
@@ -111,10 +113,18 @@ export default function OnboardingStepOne() {
     const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
     if (file.size > maxSize) {
-      toast.error('File size must be less than 2MB');
+      toast.error('Размер файла должен быть меньше 2MB');
       return;
     }
 
+    // Проверяем тип файла
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error('Поддерживаются только изображения PNG и JPEG');
+      return;
+    }
+
+    setIsUploadingAvatar(true);
     const formData = new FormData();
     formData.append('files', file);
     formData.append('userId', serverUser.uid);
@@ -125,6 +135,12 @@ export default function OnboardingStepOne() {
         method: 'POST',
         body: formData,
       });
+      
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Ошибка загрузки');
+      }
+      
       const { logoUrl } = await res.json();
 
       if (logoUrl) {
@@ -133,10 +149,17 @@ export default function OnboardingStepOne() {
           ...prev,
           userProfilePicture: logoUrl,
         }));
+        toast.success('Фото профиля обновлено!');
+      } else {
+        throw new Error('Не удалось получить URL изображения');
       }
     } catch (e) {
-      console.error(e);
-      toast.error('Failed to upload profile picture');
+      console.error('Avatar upload error:', e);
+      toast.error(e instanceof Error ? e.message : 'Не удалось загрузить фото профиля');
+    } finally {
+      setIsUploadingAvatar(false);
+      // Сбрасываем input чтобы можно было выбрать тот же файл снова
+      data.target.value = '';
     }
   };
 
@@ -147,11 +170,11 @@ export default function OnboardingStepOne() {
           className="text-3xl font-medium bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
           variants={itemVariants}
         >
-          Welcome!
+          Добро пожаловать!
         </motion.h1>
         <CardDescription className="text-gray-400">
           <motion.span variants={itemVariants}>
-            Let's get started by setting up your account.
+            Давайте настроим ваш аккаунт для начала обучения.
           </motion.span>
         </CardDescription>
       </CardHeader>
@@ -183,7 +206,13 @@ export default function OnboardingStepOne() {
                         />
                       ) : (
                         <div className="h-full w-full bg-black flex items-center justify-center">
-                          <span className="text-gray-400">No image</span>
+                          <span className="text-gray-400 text-xs text-center">Нет изображения</span>
+                        </div>
+                      )}
+                      {/* Индикатор загрузки */}
+                      {isUploadingAvatar && (
+                        <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
                         </div>
                       )}
                     </div>
@@ -192,27 +221,34 @@ export default function OnboardingStepOne() {
                         htmlFor="logo-file-upload"
                         className="text-base font-medium text-white"
                       >
-                        Profile Picture
+                        Фото профиля
                       </Label>
                       <div className="flex gap-2">
                         <label
                           htmlFor="logo-file-upload"
-                          className="cursor-pointer bg-primary hover:bg-primary/90 border border-black-50 text-primary-foreground px-4 py-2 rounded-md text-base"
+                          className={`cursor-pointer border border-black-50 px-4 py-2 rounded-md text-base ${
+                            isUploadingAvatar 
+                              ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                              : 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                          }`}
                         >
-                          Choose File
+                          {isUploadingAvatar ? 'Загрузка...' : 'Выбрать файл'}
                         </label>
                         <Input
                           id="logo-file-upload"
                           type="file"
                           onChange={(e) => {
-                            onSubmitProfilePicture(e);
+                            if (!isUploadingAvatar) {
+                              onSubmitProfilePicture(e);
+                            }
                           }}
                           className="hidden"
                           accept="image/*"
+                          disabled={isUploadingAvatar}
                         />
                       </div>
                       <p className="text-sm text-gray-500">
-                        Recommended: Square image, at least 200x200px (max 2MB)
+                        Рекомендуется: квадратное изображение, минимум 200x200px (макс. 2MB)
                       </p>
                     </div>
                   </div>
@@ -233,10 +269,10 @@ export default function OnboardingStepOne() {
                   <FormItem>
                     <FormControl>
                       <InputWithLabel
-                        label="Username"
+                        label="Имя пользователя"
                         type="text"
                         autoComplete="username"
-                        placeholder="Username"
+                        placeholder="Имя пользователя"
                         {...field}
                         value={username}
                         onChange={handleUsernameChange}
@@ -250,7 +286,8 @@ export default function OnboardingStepOne() {
                 )}
               />
             </motion.div>
-            <motion.div initial="hidden" animate="visible" variants={itemVariants}>
+            {/* BIZLEVEL: Скрытые элементы onboarding - будут добавлены позже
+            <motion.div initial="hidden" animate="visible" variants={itemVariants} className="hidden">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -261,7 +298,7 @@ export default function OnboardingStepOne() {
                         <FormItem className="flex flex-row items-center justify-between">
                           <div className="space-y-0.5">
                             <Label htmlFor="showTimeTaken" className="text-white">
-                              Appear on leaderboards
+                              Показывать в рейтинге
                             </Label>
                           </div>
                           <FormControl>
@@ -285,12 +322,12 @@ export default function OnboardingStepOne() {
                     />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Your progress will be visible to others</p>
+                    <p>Ваш прогресс будет виден другим</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </motion.div>
-            <motion.div initial="hidden" animate="visible" variants={itemVariants}>
+            <motion.div initial="hidden" animate="visible" variants={itemVariants} className="hidden">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -337,7 +374,7 @@ export default function OnboardingStepOne() {
               initial="hidden"
               animate="visible"
               variants={itemVariants}
-              className="space-y-2 text-white"
+              className="space-y-2 text-white hidden"
             >
               <TooltipProvider>
                 <Tooltip>
@@ -386,11 +423,13 @@ export default function OnboardingStepOne() {
                 </Tooltip>
               </TooltipProvider>
             </motion.div>
+            */}
+            {/* BIZLEVEL: Скрыт элемент "How did you hear about BizLevel?" - будет добавлен позже
             <motion.div
               initial="hidden"
               animate="visible"
               variants={itemVariants}
-              className="space-y-2 text-white"
+              className="space-y-2 text-white hidden"
             >
               <FormField
                 control={form.control}
@@ -428,6 +467,7 @@ export default function OnboardingStepOne() {
                 )}
               />
             </motion.div>
+            */}
             <button type="submit" className="hidden">
               Submit
             </button>
