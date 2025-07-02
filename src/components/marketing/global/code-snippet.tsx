@@ -23,6 +23,9 @@ const languageSvgIconMap = {
   typescript: <TypescriptIcon width={16} height={16} />,
   html: <HtmlIcon width={16} height={16} />,
   css: <CssIcon width={16} height={16} />,
+  text: <FileIcon width={16} height={16} />,
+  markdown: <FileIcon width={16} height={16} />,
+  json: <FileIcon width={16} height={16} />,
 };
 
 export default function CodeSnippet({

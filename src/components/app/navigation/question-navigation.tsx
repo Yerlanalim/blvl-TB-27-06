@@ -14,6 +14,8 @@ import { studyPaths } from '@/utils/constants/study-paths';
 import LevelProgress from './level-progress';
 
 import { useQuestionSingle } from '@/contexts/question-single-context';
+import { useLeoContext } from '@/hooks/use-leo-context';
+import { triggerLeoProactiveMessage } from '@/components/app/leo-chat/leo-chat';
 
 /**
  * Component for navigation between different questions from within the
@@ -58,10 +60,22 @@ export default function QuestionNavigation(opts: {
     currentLayout
   } = useQuestionSingle();
 
+  const [nextPrevData, setNextPrevData] = useState<{
+    nextQuestion: string | null | undefined;
+    previousQuestion: string | null | undefined;
+    progress?: {
+      current: number;
+      total: number;
+      level: string;
+      percentage: number;
+    };
+  } | null>(null);
+
   // BIZLEVEL: Состояния для улучшенной навигации
   const [showCompletionState, setShowCompletionState] = useState(false);
   const [isLevelCompleted, setIsLevelCompleted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [hasTriggeredLevelCompletion, setHasTriggeredLevelCompletion] = useState(false);
 
   // BIZLEVEL: Определение состояния завершения
   useEffect(() => {
@@ -69,6 +83,7 @@ export default function QuestionNavigation(opts: {
     setShowCompletionState(false);
     setIsLevelCompleted(false);
     setShowConfetti(false);
+    setHasTriggeredLevelCompletion(false);
   }, [question.uid]);
 
   useEffect(() => {
@@ -86,10 +101,26 @@ export default function QuestionNavigation(opts: {
     if (progress && progress.current === progress.total && correctAnswer === 'correct') {
       setIsLevelCompleted(true);
       setShowConfetti(true);
+      
+      // Триггерим проактивное сообщение Leo при завершении уровня
+      if (!hasTriggeredLevelCompletion) {
+        setHasTriggeredLevelCompletion(true);
+        // Задержка для лучшего UX
+        setTimeout(() => {
+          triggerLeoProactiveMessage({ 
+            type: 'level_completion', 
+            data: { 
+              levelName: progress.level,
+              questionsCompleted: progress.total 
+            } 
+          });
+        }, 2000); // 2 секунды после показа состояния завершения
+      }
+      
       // Убрать конфетти через 3 секунды
       setTimeout(() => setShowConfetti(false), 3000);
     }
-  }, [question.questionType, currentLayout, correctAnswer, progress]);
+  }, [question.questionType, currentLayout, correctAnswer, progress, hasTriggeredLevelCompletion]);
 
   useEffect(() => {
     // if this is a study-path, get the next/prev questions from the study-path object

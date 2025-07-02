@@ -5,6 +5,10 @@ import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { MessageCircle, Eye, Lightbulb } from 'lucide-react';
 import { useTranslation } from '@/utils/translations/ru';
+import { useEffect } from 'react';
+
+// Импорт функции для проактивных сообщений Leo
+import { triggerLeoProactiveMessage } from '@/components/app/leo-chat/leo-chat';
 
 interface AnswerHintsProps {
   attempts: number;
@@ -18,7 +22,7 @@ interface AnswerHintsProps {
 /**
  * Компонент для показа подсказок при неправильных ответах
  * - После 1 попытки: показывает hint из БД или общую подсказку
- * - После 2 попытки: показывает кнопку "Спросить Leo"
+ * - После 2 попытки: показывает кнопку "Спросить Leo" + триггерит проактивное сообщение
  * - После 3+ попытки: показывает кнопку "Показать правильный ответ"
  */
 export default function AnswerHints({
@@ -30,6 +34,25 @@ export default function AnswerHints({
   showCorrectAnswer,
 }: AnswerHintsProps) {
   const { t } = useTranslation();
+
+  // Триггерим проактивное сообщение Leo при второй неправильной попытке
+  useEffect(() => {
+    if (attempts === 2) {
+      // Задержка для лучшего UX
+      const timer = setTimeout(() => {
+        triggerLeoProactiveMessage({ 
+          type: 'incorrect_answers', 
+          data: { 
+            questionTitle: _questionTitle, 
+            questionUid: _questionUid, 
+            attempts 
+          } 
+        });
+      }, 1500); // 1.5 секунды после показа подсказки
+
+      return () => clearTimeout(timer);
+    }
+  }, [attempts, _questionTitle, _questionUid]);
 
   if (attempts === 0) return null;
 

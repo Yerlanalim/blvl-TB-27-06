@@ -233,8 +233,12 @@ function getLanguageFromFileName(fileName: string): string {
       return 'json';
     case 'md':
       return 'markdown';
+    case 'txt':
+    case 'text':
+      return 'text';
+    // BIZLEVEL: По умолчанию текстовый контент вместо JavaScript
     default:
-      return 'javascript';
+      return 'text';
   }
 }
 
@@ -252,6 +256,12 @@ function FileIcon({ fileName }: { fileName: string }) {
       return <Icons.css className="h-4 w-4" />;
     case 'html':
       return <Icons.html className="h-4 w-4" />;
+    case 'txt':
+    case 'text':
+    case 'md':
+    case 'json':
+      // BIZLEVEL: Для бизнес-контента используем файловую иконку
+      return <Icons.file className="h-4 w-4" />;
     default:
       return <Icons.file className="h-4 w-4" />;
   }

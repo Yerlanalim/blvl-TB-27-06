@@ -3,11 +3,11 @@
 import { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, type MotionValue } from 'framer-motion';
 
-import JavascriptIcon from '@/components/ui/icons/javascript';
-import GitIcon from '@/components/ui/icons/git';
-import ReactIcon from '@/components/ui/icons/react';
+import TargetIcon from '@/components/ui/icons/target';
+import LightbulbIcon from '@/components/ui/icons/lightbulb';
+import StatsIcon from '@/components/ui/icons/stats';
 import GlobeIcon from '@/components/ui/icons/globe';
-import ArrayIcon from '@/components/ui/icons/array';
+import CreditCardIcon from '@/components/ui/icons/credit-card';
 
 export default function FloatingChips() {
   const mouseX = useMotionValue(0);
@@ -29,31 +29,31 @@ export default function FloatingChips() {
   return (
     <>
       <FloatingChip
-        href="/roadmaps/javascript-fundamentals"
-        Icon={JavascriptIcon}
+        href="/roadmaps?category=business-basics"
+        Icon={TargetIcon}
         top="10%"
         left="10%"
         mouseX={mouseX}
         mouseY={mouseY}
       />
       <FloatingChip
-        href="/roadmaps"
-        Icon={GitIcon}
+        href="/roadmaps?category=marketing"
+        Icon={LightbulbIcon}
         top="20%"
         right="15%"
         mouseX={mouseX}
         mouseY={mouseY}
       />
       <FloatingChip
-        href="/roadmaps/react-hooks-fundamentals"
-        Icon={ReactIcon}
+        href="/roadmaps?category=finance"
+        Icon={CreditCardIcon}
         bottom="15%"
         left="20%"
         mouseX={mouseX}
         mouseY={mouseY}
       />
       <FloatingChip
-        href="/roadmaps"
+        href="/roadmaps?category=sales"
         Icon={GlobeIcon}
         bottom="25%"
         right="10%"
@@ -61,8 +61,8 @@ export default function FloatingChips() {
         mouseY={mouseY}
       />
       <FloatingChip
-        href="/roadmaps/arrays"
-        Icon={ArrayIcon}
+        href="/roadmaps?category=management"
+        Icon={StatsIcon}
         top="5%"
         left="50%"
         mouseX={mouseX}

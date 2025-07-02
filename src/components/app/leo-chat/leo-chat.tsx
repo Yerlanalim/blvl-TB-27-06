@@ -1,22 +1,39 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState, useTransition, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import ChatBot from '@/components/ui/icons/chat-bot';
-import { Send, X, Minimize2 } from 'lucide-react';
+import { Send, X, Minimize2, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLeoContext } from '@/hooks/use-leo-context';
 import { generateLeoResponse } from '@/actions/ai/leo/leo-chat';
 import { readStreamableValue } from 'ai/rsc';
 import { getRecentLeoChats, saveLeoChat, type LeoChat } from '@/utils/data/leo-chats';
+import { getUser } from '@/actions/user/authed/get-user';
 
 // Define message types for Leo chat
 interface LeoMessage {
   type: 'user' | 'leo';
   content: string | any;
   timestamp: Date;
+  isProactive?: boolean; // Добавляем флаг для проактивных сообщений
 }
+
+// Проактивные события для Leo
+interface ProactiveEvent {
+  type: 'incorrect_answers' | 'level_completion' | 'inactivity';
+  data?: any;
+}
+
+// Глобальная функция для добавления проактивных сообщений
+let globalLeoProactiveHandler: ((event: ProactiveEvent) => void) | null = null;
+
+export const triggerLeoProactiveMessage = (event: ProactiveEvent) => {
+  if (globalLeoProactiveHandler) {
+    globalLeoProactiveHandler(event);
+  }
+};
 
 export default function LeoChat() {
   // Chat window state
@@ -30,8 +47,124 @@ export default function LeoChat() {
   const [isTyping, setIsTyping] = useState(false);
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
   
+  // Features for task 7.2.3
+  const [showNewUserHint, setShowNewUserHint] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [dailyMessageCount, setDailyMessageCount] = useState(0);
+  
+  // Проактивные сообщения
+  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
+  const [inactivityWarningShown, setInactivityWarningShown] = useState(false);
+  
   // Get context for Leo AI
-  const { systemPrompt, context } = useLeoContext();
+  const { systemPrompt, context, isLessonPage, pageType } = useLeoContext();
+
+  // Обработчик проактивных сообщений
+  const handleProactiveEvent = useCallback((event: ProactiveEvent) => {
+    const proactiveMessages = {
+      incorrect_answers: {
+        content: "Нужна помощь с этим вопросом? 🤔 Я могу объяснить концепцию простыми словами!",
+        suggestions: ['Объясни эту тему', 'Дай подсказку', 'Приведи пример']
+      },
+      level_completion: {
+        content: "Поздравляю! Уровень завершен! 🎉 Готовы обсудить следующий этап обучения?",
+        suggestions: ['Что изучать дальше?', 'Дай совет по развитию', 'Как закрепить знания?']
+      },
+      inactivity: {
+        content: "Застряли на этом уроке? 🤗 Не переживайте - я всегда готов помочь!",
+        suggestions: ['Объясни текущий урок', 'Дай мотивацию', 'Как лучше изучать?']
+      }
+    };
+
+    const messageContent = proactiveMessages[event.type];
+    if (!messageContent) return;
+
+    const proactiveMessage: LeoMessage = {
+      type: 'leo',
+      content: messageContent,
+      timestamp: new Date(),
+      isProactive: true,
+    };
+
+    // Добавляем проактивное сообщение в чат
+    setMessages(prev => [...prev, proactiveMessage]);
+    
+    // Показываем уведомление если чат закрыт
+    if (!isOpen) {
+      // Добавляем мигающий индикатор на кнопке Leo
+      const leoButton = document.querySelector('[data-leo-button]') as HTMLElement;
+      if (leoButton) {
+        leoButton.style.animation = 'pulse 2s infinite';
+        // Убираем анимацию через 10 секунд
+        setTimeout(() => {
+          if (leoButton) leoButton.style.animation = '';
+        }, 10000);
+      }
+    }
+  }, [isOpen]);
+
+  // Регистрируем глобальный обработчик
+  useEffect(() => {
+    globalLeoProactiveHandler = handleProactiveEvent;
+    return () => {
+      globalLeoProactiveHandler = null;
+    };
+  }, [handleProactiveEvent]);
+
+  // Отслеживание активности для проактивного сообщения о бездействии
+  useEffect(() => {
+    const trackActivity = () => {
+      setLastActivityTime(Date.now());
+      setInactivityWarningShown(false);
+    };
+
+    // События активности
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    events.forEach(event => {
+      document.addEventListener(event, trackActivity);
+    });
+
+    // Проверяем бездействие каждую минуту
+    const inactivityTimer = setInterval(() => {
+      const now = Date.now();
+      const inactiveTime = now - lastActivityTime;
+      
+      // 5 минут бездействия = 300000 мс
+      if (inactiveTime > 300000 && !inactivityWarningShown && isLessonPage) {
+        setInactivityWarningShown(true);
+        handleProactiveEvent({ type: 'inactivity' });
+      }
+    }, 60000); // Проверяем каждую минуту
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, trackActivity);
+      });
+      clearInterval(inactivityTimer);
+    };
+  }, [lastActivityTime, inactivityWarningShown, isLessonPage, handleProactiveEvent]);
+
+  // Load user data
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const userData = await getUser();
+        setUser(userData);
+      } catch (error) {
+        console.error('Error loading user:', error);
+      }
+    };
+    loadUser();
+  }, []);
+
+  // Check if new user should see hint
+  useEffect(() => {
+    const hasSeenHint = localStorage.getItem('leo-hint-shown');
+    if (!hasSeenHint && user) {
+      setShowNewUserHint(true);
+      localStorage.setItem('leo-hint-shown', 'true');
+    }
+  }, [user]);
 
   // Load chat state from localStorage
   useEffect(() => {
@@ -39,6 +172,13 @@ export default function LeoChat() {
     if (savedState === 'true') {
       setIsOpen(true);
     }
+  }, []);
+
+  // Load daily message count
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const savedCount = localStorage.getItem(`leo-messages-${today}`);
+    setDailyMessageCount(savedCount ? parseInt(savedCount) : 0);
   }, []);
 
   // Load chat history when chat opens
@@ -87,6 +227,7 @@ export default function LeoChat() {
   const toggleChat = () => {
     setIsOpen(!isOpen);
     setIsMinimized(false);
+    setShowNewUserHint(false); // Hide hint when user opens chat
   };
 
   const minimizeChat = () => {
@@ -97,9 +238,63 @@ export default function LeoChat() {
     setIsMinimized(false);
   };
 
+  // Update daily message count
+  const incrementMessageCount = () => {
+    const today = new Date().toDateString();
+    const newCount = dailyMessageCount + 1;
+    setDailyMessageCount(newCount);
+    localStorage.setItem(`leo-messages-${today}`, newCount.toString());
+  };
+
+  // Check if user can send messages
+  const canSendMessage = () => {
+    if (!user) return false;
+    if (user.userLevel === 'PREMIUM' || user.userLevel === 'ADMIN') return true;
+    return dailyMessageCount < 30; // FREE users get 30 messages per day
+  };
+
+  // Get message limit text
+  const getMessageLimitText = () => {
+    if (!user) return '';
+    if (user.userLevel === 'PREMIUM' || user.userLevel === 'ADMIN') {
+      return 'Неограниченные сообщения';
+    }
+    const remaining = Math.max(0, 30 - dailyMessageCount);
+    return `Осталось ${remaining} из 30 сообщений`;
+  };
+
+  // Get context-aware quick buttons
+  const getQuickButtons = () => {
+    const baseButtons = [
+      'Объясни текущий урок',
+      'Дай пример из реальной жизни',
+      'Что дальше изучать?'
+    ];
+
+    if (isLessonPage) {
+      return [
+        'Объясни текущий урок',
+        'Дай практический пример',
+        'Как применить это в бизнесе?',
+        'Какие ошибки часто делают?'
+      ];
+    }
+
+    if (pageType === 'dashboard') {
+      return [
+        'Что изучать дальше?',
+        'Как улучшить результаты?',
+        'Дай мотивацию для учебы',
+        'Расскажи о бизнес-трендах'
+      ];
+    }
+
+    return baseButtons;
+  };
+
   // AI-powered message handler
   const handleSendMessage = async () => {
-    if (!currentMessage.trim() || isPending) return;
+    if (!currentMessage.trim() || isPending || !canSendMessage()) return;
 
     const userMessage: LeoMessage = {
       type: 'user',
@@ -109,6 +304,9 @@ export default function LeoChat() {
 
     // Add user message
     setMessages((prev) => [...prev, userMessage]);
+    
+    // Increment message count
+    incrementMessageCount();
     
     // Clear input and show typing indicator
     const messageToSend = currentMessage;
@@ -198,13 +396,49 @@ export default function LeoChat() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Button
-          onClick={toggleChat}
-          className="w-14 h-14 rounded-full bg-accent hover:bg-accent/90 shadow-lg"
-          size="icon"
-        >
-          <ChatBot className="w-6 h-6" fill="white" secondaryfill="white" />
-        </Button>
+        <div className="relative">
+          {/* New user hint tooltip */}
+          <AnimatePresence>
+            {showNewUserHint && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                className="absolute bottom-16 right-0 bg-black-100 border border-accent rounded-lg p-3 w-64 shadow-xl"
+              >
+                <div className="flex items-start gap-2">
+                  <HelpCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-white text-sm font-medium">Привет! Я Leo 👋</p>
+                    <p className="text-gray-300 text-xs mt-1">
+                      Ваш помощник по бизнесу. Задайте любой вопрос!
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowNewUserHint(false)}
+                  className="absolute top-1 right-1 h-6 w-6 p-0 text-gray-400 hover:text-white"
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Pulsing animation for new users and proactive notifications */}
+          <Button
+            data-leo-button
+            onClick={toggleChat}
+            className={`w-14 h-14 rounded-full bg-accent hover:bg-accent/90 shadow-lg ${
+              showNewUserHint ? 'animate-pulse' : ''
+            }`}
+            size="icon"
+          >
+            <ChatBot className="w-6 h-6" fill="white" secondaryfill="white" />
+          </Button>
+        </div>
       </motion.div>
 
       {/* Chat window */}
@@ -232,7 +466,10 @@ export default function LeoChat() {
                 <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
                   <span className="text-white font-bold text-sm">L</span>
                 </div>
-                <h3 className="text-white font-semibold">Leo - твой бизнес-наставник</h3>
+                <div>
+                  <h3 className="text-white font-semibold text-sm">Leo - твой бизнес-наставник</h3>
+                  <p className="text-gray-400 text-xs">{getMessageLimitText()}</p>
+                </div>
               </div>
               
               <div className="flex items-center gap-2">
@@ -275,36 +512,23 @@ export default function LeoChat() {
                         <span className="text-accent font-bold text-xl">L</span>
                       </div>
                       <h4 className="text-white font-semibold mb-2">Привет! Я Leo 👋</h4>
-                      <p className="text-gray-400 text-sm max-w-xs">
+                      <p className="text-gray-400 text-sm max-w-xs mb-4">
                         Твой персональный бизнес-наставник. Задай мне любой вопрос о предпринимательстве!
                       </p>
                       
-                      {/* Quick start buttons */}
+                      {/* Context-aware quick buttons */}
                       <div className="flex flex-wrap gap-2 mt-4 max-w-xs">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setCurrentMessage("Как начать свой бизнес?")}
-                          className="text-xs border-black-50 text-gray-300 hover:bg-black-75"
-                        >
-                          Как начать бизнес?
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setCurrentMessage("Что такое бизнес-модель?")}
-                          className="text-xs border-black-50 text-gray-300 hover:bg-black-75"
-                        >
-                          Что такое бизнес-модель?
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setCurrentMessage("Как найти инвесторов?")}
-                          className="text-xs border-black-50 text-gray-300 hover:bg-black-75"
-                        >
-                          Как найти инвесторов?
-                        </Button>
+                        {getQuickButtons().map((question, index) => (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCurrentMessage(question)}
+                            className="text-xs border-black-50 text-gray-300 hover:bg-black-75"
+                          >
+                            {question}
+                          </Button>
+                        ))}
                       </div>
                     </div>
                   ) : (
@@ -316,7 +540,9 @@ export default function LeoChat() {
                         >
                           <div className="flex items-start gap-2 max-w-[80%]">
                             {message.type === 'leo' && (
-                              <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-1">
+                              <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
+                                message.isProactive ? 'bg-yellow-500' : 'bg-accent'
+                              }`}>
                                 <span className="text-white font-bold text-xs">L</span>
                               </div>
                             )}
@@ -324,6 +550,8 @@ export default function LeoChat() {
                               className={`rounded-lg p-3 ${
                                 message.type === 'user' 
                                   ? 'bg-accent text-white' 
+                                  : message.isProactive
+                                  ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-white border border-yellow-500/30'
                                   : 'bg-black-75 text-white'
                               }`}
                             >
@@ -415,11 +643,17 @@ export default function LeoChat() {
                   
                   <div className="flex items-end gap-2">
                     <Textarea
-                      placeholder={isPending ? "Leo отвечает..." : "Задай вопрос о бизнесе..."}
+                      placeholder={
+                        !canSendMessage() 
+                          ? "Лимит сообщений исчерпан. Обновитесь до Премиум для неограниченного общения!" 
+                          : isPending 
+                          ? "Leo отвечает..." 
+                          : "Задай вопрос о бизнесе..."
+                      }
                       className="min-h-10 h-10 text-white border border-black-50 resize-none bg-black-75"
                       value={currentMessage}
                       onChange={(e) => setCurrentMessage(e.target.value)}
-                      disabled={isPending}
+                      disabled={isPending || !canSendMessage()}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();
@@ -430,13 +664,29 @@ export default function LeoChat() {
                     <Button
                       size="icon"
                       variant="secondary"
-                      disabled={!currentMessage.trim() || isPending}
+                      disabled={!currentMessage.trim() || isPending || !canSendMessage()}
                       onClick={handleSendMessage}
                       className="h-10 w-10 flex-shrink-0 bg-accent hover:bg-accent/90"
                     >
                       <Send className="h-4 w-4" />
                     </Button>
                   </div>
+
+                  {/* Message limit warning for FREE users */}
+                  {user?.userLevel === 'FREE' && dailyMessageCount >= 25 && (
+                    <div className="mt-2 text-xs text-amber-400 text-center">
+                      {dailyMessageCount >= 30 ? (
+                        <>
+                          Лимит сообщений исчерпан.{' '}
+                          <a href="/pricing" className="text-accent underline">
+                            Обновиться до Премиум
+                          </a>
+                        </>
+                      ) : (
+                        `Осталось ${30 - dailyMessageCount} сообщений сегодня`
+                      )}
+                    </div>
+                  )}
                 </div>
               </>
             )}
