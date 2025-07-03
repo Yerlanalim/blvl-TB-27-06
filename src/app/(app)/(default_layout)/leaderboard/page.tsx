@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { createMetadata } from '@/utils/seo';
 import { getMostQuestionsAnswered } from '@/utils/data/leaderboard/get-most-questions-answered';
@@ -9,11 +9,14 @@ import AnswerQuestionModal from '@/components/app/leaderboard/answer-question-mo
 import { getSuggestions } from '@/utils/data/questions/get-suggestions';
 import { getUserXp } from '@/utils/data/user/authed/get-user-xp';
 
-const LeaderboardHero = dynamic(() => import('@/components/app/leaderboard/leaderboard-hero'), {
+// Отключаем статическую генерацию для страницы с БД запросами
+export const dynamic = 'force-dynamic';
+
+const LeaderboardHero = nextDynamic(() => import('@/components/app/leaderboard/leaderboard-hero'), {
   loading: () => <div>Loading hero...</div>,
 });
 
-const LeaderboardMostQuestionsAnswered = dynamic(
+const LeaderboardMostQuestionsAnswered = nextDynamic(
   () => import('@/components/app/leaderboard/leaderboard-most-questions-answered'),
   { loading: () => <div>Loading leaderboard...</div> }
 );

@@ -12,6 +12,9 @@ import { MobileIcon } from '@radix-ui/react-icons';
 import Testimonials from '@/components/marketing/global/blocks/testimonials';
 import LeaderboardPodiumShowcase from '@/components/marketing/features/leaderboard/leaderboard-podium-showcase';
 import LeaderboardFeatures from '@/components/marketing/features/leaderboard/leaderboard-features';
+
+// Отключаем статическую генерацию для страницы с БД запросами
+export const dynamic = 'force-dynamic';
 import QuestionMarquee from '@/components/marketing/global/blocks/question-marquee';
 
 // metadata

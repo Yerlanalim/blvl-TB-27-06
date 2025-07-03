@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { getUserCount } from '@/utils/data/user/get-user-count';
 import HomepageUserStats from '@/components/marketing/global/blocks/homepage-user-stats';
 
+// Отключаем статическую генерацию для страницы с БД запросами
+export const dynamic = 'force-dynamic';
+
 const faqs = [
   {
     question: 'Is JavaScript free?',

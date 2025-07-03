@@ -8,6 +8,9 @@ import Link from 'next/link';
 import type { WebPageJsonLd, RoadmapUserQuestions } from '@/types';
 import { getBaseUrl } from '@/utils';
 
+// Отключаем статическую генерацию для страницы с БД запросами
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return createMetadata({
     title: 'Sign Up | BizLevel',
