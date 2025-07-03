@@ -1,0 +1,10 @@
+-- mark_deprecated_tables.sql
+-- Purpose: Safely rename unused tables with _deprecated_ prefix.
+-- Generated as part of Stage-8 Task 8.3.2 (2025-07-03)
+--
+-- По результатам анализа (docs/db-usage-analysis.md) все проверенные таблицы активно используются.
+-- Поэтому в рамках данной миграции ни одна таблица не помечена к удалению.
+--
+-- Если в будущем появятся неиспользуемые таблицы, добавьте здесь команды:
+-- ALTER TABLE "TableName" RENAME TO "_deprecated_TableName";
+-- COMMENT ON TABLE "_deprecated_TableName" IS 'Marked for deletion on YYYY-MM-DD. Reason.'; 

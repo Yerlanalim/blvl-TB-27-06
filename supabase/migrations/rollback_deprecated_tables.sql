@@ -1,0 +1,9 @@
+-- rollback_deprecated_tables.sql
+-- Purpose: Rollback renaming of tables marked as deprecated.
+-- Generated as part of Stage-8 Task 8.3.2 (2025-07-03)
+--
+-- Так как в mark_deprecated_tables.sql не было переименований, откатные операции отсутствуют.
+--
+-- Если впоследствии будут добавлены ALTER TABLE ... RENAME TO _deprecated_,
+-- здесь добавьте обратные команды, например:
+-- ALTER TABLE "_deprecated_TableName" RENAME TO "TableName"; 

@@ -31,7 +31,7 @@ export default async function LevelDetailPage({ params }: Props) {
       slug: true,
       title: true,
       questionType: true,
-      videoId: true as any, // videoId may be null for tests
+      videoId: true,
       resources: {
         select: { title: true, resource: true },
       },
@@ -66,7 +66,7 @@ export default async function LevelDetailPage({ params }: Props) {
               </td>
               <td className="px-4 py-3">{q.title}</td>
               <td className="px-4 py-3">{q.questionType}</td>
-              <td className="px-4 py-3">{q.questionType === 'VIDEO' ? (q as any).codeSnippet : '-'}</td>
+              <td className="px-4 py-3">{q.questionType === 'VIDEO' ? q.videoId ?? '—' : '—'}</td>
               <td className="px-4 py-3">
                 {q.resources.length ? (
                   <ul className="list-disc list-inside">

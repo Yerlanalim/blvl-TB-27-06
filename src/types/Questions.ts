@@ -74,6 +74,9 @@ export type Question = {
 
   codeSnippet: string | null;
 
+  /** Идентификатор Vimeo видео для VIDEO вопросов */
+  videoId: string | null;
+
   hint: string | null;
 
   dailyQuestion: boolean;
@@ -167,5 +170,6 @@ export interface QuestionMock {
   slug?: string | null;
   slugGenerated?: boolean;
   questionType?: string;
+  videoId?: string | null;
   [key: string]: any;
 }

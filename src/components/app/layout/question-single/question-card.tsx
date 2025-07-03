@@ -191,7 +191,7 @@ export default function QuestionCard(opts: {
             {question.questionType === 'VIDEO' ? (
               <div className="p-4 lg:p-0 h-full flex items-center justify-center"> {/* Центрируем видео */}
                 <VerticalVideoPlayer
-                  videoId={question.codeSnippet || 'demo-video-id'} // BIZLEVEL: videoId хранится в codeSnippet поле
+                  videoId={question.videoId || question.codeSnippet || 'demo-video-id'}
                   title={question.title || undefined} // Добавляем заголовок урока
                   enableSwipeNavigation={true} // Включаем свайп-жесты на мобильных
                   onComplete={() => {
