@@ -87,6 +87,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               </li>
               <li className="relative group">
                 <Link
+                  href="/admin/levels"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Levels
+                </Link>
+              </li>
+              <li className="relative group">
+                <Link
                   href="/admin/leagues"
                   className="text-gray-300 hover:text-white transition-colors"
                 >

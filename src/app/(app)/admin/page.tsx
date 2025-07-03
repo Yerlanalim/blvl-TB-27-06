@@ -116,6 +116,20 @@ export default function AdminDashboardPage() {
             </Link>
           </div>
         </div>
+        <div className="bg-[#000000] rounded-lg shadow-sm border border-black-50 overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-xl font-semibold mb-2 text-white">Levels</h2>
+            <p className="text-gray-400 mb-4">Просмотр и управление учебными уровнями.</p>
+          </div>
+          <div className="bg-secondary px-6 py-3 flex justify-between">
+            <Link
+              href="/admin/levels"
+              className="text-primary hover:text-primary/90 transition-colors"
+            >
+              Overview
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Tools Section */}
