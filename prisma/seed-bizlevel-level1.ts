@@ -190,19 +190,25 @@ async function seedLevel1() {
       for (const tagName of questionData.tags) {
         const tag = await prisma.tag.findUnique({ where: { name: tagName } })
         if (tag) {
-          await prisma.questionTags.upsert({
+          // Проверяем есть ли уже связь
+          const existingLink = await prisma.questionTags.findUnique({
             where: {
               questionId_tagId: {
                 questionId: question.uid,
                 tagId: tag.uid
               }
-            },
-            update: {},
-            create: {
-              questionId: question.uid,
-              tagId: tag.uid
             }
           })
+          
+          // Создаем связь только если её нет
+          if (!existingLink) {
+            await prisma.questionTags.create({
+              data: {
+                questionId: question.uid,
+                tagId: tag.uid
+              }
+            })
+          }
         }
       }
 
@@ -261,13 +267,17 @@ async function main() {
   await seedLevel1()
 }
 
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+// Экспортируем для использования в других местах
+export default main
 
-export default main 
+// Запускаем только если файл вызывается напрямую
+if (require.main === module) {
+  main()
+    .catch((e) => {
+      console.error(e)
+      process.exit(1)
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+} 
