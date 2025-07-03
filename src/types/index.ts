@@ -14,4 +14,3 @@ export * from './StudyPath';
 export * from './Tags';
 export * from './User';
 export * from './Utils';
-export * from './chart-component';

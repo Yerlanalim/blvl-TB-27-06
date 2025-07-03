@@ -1,9 +1,6 @@
 'use server';
 
-interface TestCase {
-  input: any[];
-  expected: any;
-}
+import { TestCase } from '@/types/Questions';
 
 interface ExecutionResult {
   input: any[];

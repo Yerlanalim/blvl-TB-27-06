@@ -9,6 +9,55 @@ export type QuestionDifficulty = 'BEGINNER' | 'EASY' | 'MEDIUM' | 'HARD';
 export type QuestionType = 'MULTIPLE_CHOICE' | 'CODING_CHALLENGE' | 'SIMPLE_MULTIPLE_CHOICE' | 'VIDEO';
 
 /**
+ * Структура тест-кейса для CODING_CHALLENGE вопросов
+ */
+export interface TestCase {
+  input: any[];
+  expected: any;
+  isHidden?: boolean;
+}
+
+/**
+ * Конфигурация параметров для CODING_CHALLENGE вопросов
+ */
+export interface ParamConfig {
+  name: string;
+  type: 'string' | 'number' | 'boolean';
+  required: boolean;
+}
+
+/**
+ * Утилитарные функции для безопасного преобразования JSON данных
+ */
+export function parseTestCases(jsonValue: any): TestCase[] | null {
+  if (!jsonValue) return null;
+  if (Array.isArray(jsonValue)) return jsonValue as TestCase[];
+  if (typeof jsonValue === 'string') {
+    try {
+      const parsed = JSON.parse(jsonValue);
+      return Array.isArray(parsed) ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+export function parseExpectedParams(jsonValue: any): ParamConfig[] | null {
+  if (!jsonValue) return null;
+  if (Array.isArray(jsonValue)) return jsonValue as ParamConfig[];
+  if (typeof jsonValue === 'string') {
+    try {
+      const parsed = JSON.parse(jsonValue);
+      return Array.isArray(parsed) ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+/**
  * This type represents the shape of the data of a question.
  */
 export type Question = {
@@ -49,13 +98,13 @@ export type Question = {
 
   previousQuestionSlug: string | null;
 
-  // i am so sorry typescript lords (Json from prisma isn't nice to work with)
-  testCases: any;
+  // Строго типизированные поля для CODING_CHALLENGE (null для других типов)
+  testCases: TestCase[] | null;
 
   functionName: string | null;
 
-  // i am so sorry typescript lords
-  expectedParams: any;
+  // Строго типизированные параметры для CODING_CHALLENGE (null для других типов)
+  expectedParams: ParamConfig[] | null;
 
   bookmarks?: UserBookmarks[];
 
@@ -67,6 +116,25 @@ export type Question = {
 
   aiTimeToComplete?: number | null;
 };
+
+/**
+ * Тип для данных из Prisma (с JsonValue типами)
+ */
+export type QuestionFromDB = Omit<Question, 'testCases' | 'expectedParams'> & {
+  testCases: any; // JsonValue из Prisma
+  expectedParams: any; // JsonValue из Prisma
+};
+
+/**
+ * Функция для преобразования Question из БД в типизированный Question
+ */
+export function transformQuestionFromDB(dbQuestion: QuestionFromDB): Question {
+  return {
+    ...dbQuestion,
+    testCases: parseTestCases(dbQuestion.testCases),
+    expectedParams: parseExpectedParams(dbQuestion.expectedParams),
+  };
+}
 
 export type QuestionWithoutAnswers = Omit<
   Question,

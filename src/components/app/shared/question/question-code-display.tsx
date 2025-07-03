@@ -46,7 +46,7 @@ const ConditionalMonacoEditor = memo(function ConditionalMonacoEditor({
         height="83vh"
         language="javascript"
         value={codeSnippet}
-        onChange={onCodeChange}
+        onChange={(value: string | undefined) => onCodeChange(value || '')}
         theme="vs-dark"
         options={{
           minimap: { enabled: false },

@@ -34,10 +34,9 @@ export default function StudyPathQuestionCardPopover({
   const xp = QUESTION_XP[questionData.difficulty] || 5;
 
   // Use centralized navigation hook
-  const { generateQuestionUrl } = useQuestionNavigation({
-    type: 'study-path',
-    currentQuestion: questionData,
-    studyPathSlug: studyPath.slug,
+  const { getNextQuestionUrl } = useQuestionNavigation({
+    questionId: questionData.uid,
+    pathType: 'study-path',
   });
 
   // Determine the correct URL and button state
@@ -50,7 +49,7 @@ export default function StudyPathQuestionCardPopover({
     // If it's the next question or already answered, allow access
     if (isNextQuestion || isAnswered || canAnswer) {
       // Use centralized URL generation
-      return generateQuestionUrl(questionData.slug);
+      return `/question/${questionData.slug}`;
     }
 
     // Otherwise (sequence locked), stay on current page

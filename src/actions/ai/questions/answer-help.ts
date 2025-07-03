@@ -10,6 +10,7 @@ import { checkUserTokens, deductUserTokens } from '../utils/user-tokens';
 
 // types
 import type { Question, DefaultRoadmapQuestions, RoadmapUserQuestions } from '@/types';
+import { transformQuestionFromDB } from '@/types';
 
 // ai
 import { streamObject } from 'ai';
@@ -69,12 +70,13 @@ export const generateAnswerHelp = async (
     })) as RoadmapUserQuestions | null;
   } else if (questionType === 'regular') {
     // Get the regular question
-    question = await prisma.questions.findUnique({
+    const dbQuestion = await prisma.questions.findUnique({
       where: { uid: questionUid },
       include: {
         answers: true,
       },
     });
+    question = dbQuestion ? transformQuestionFromDB(dbQuestion as any) : null;
   } else if (questionType === 'onboarding') {
     // Get the onboarding question
     question = await prisma.defaultRoadmapQuestions.findUnique({

@@ -1,5 +1,7 @@
 import { getUser } from '@/actions/user/authed/get-user';
 import { prisma } from '@/lib/prisma';
+import { getTagsFromQuestion } from '@/utils/data/questions/tags/get-tags-from-question';
+import { transformQuestionFromDB } from '@/types';
 
 type GetQuestionsOpts = { questionSlugs: string[] };
 
@@ -28,6 +30,8 @@ export const getQuestions = async (opts: GetQuestionsOpts) => {
     },
   });
 
-  // current date
-  return res;
+  // Transform the questions
+  const questionsWithTags = getTagsFromQuestion(res as any);
+  const questionsArray = Array.isArray(questionsWithTags) ? questionsWithTags : [questionsWithTags];
+  return questionsArray.map((q: any) => transformQuestionFromDB(q));
 };

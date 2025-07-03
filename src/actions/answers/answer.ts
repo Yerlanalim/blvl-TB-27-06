@@ -13,6 +13,7 @@ import { prisma } from '@/lib/prisma';
 
 import { AnswerDifficulty } from '@prisma/client';
 import type { Answer, UserRecord, Question } from '@/types';
+import { transformQuestionFromDB } from '@/types';
 
 // Types
 interface AnswerQuestionInput {
@@ -51,18 +52,18 @@ export const findOrCreateUserStreak = async (userUid: string) => {
 };
 
 const findQuestion = async (questionUid: string) => {
-  const question = await prisma.questions.findUnique({
+  const dbQuestion = await prisma.questions.findUnique({
     where: { uid: questionUid },
     include: {
       answers: true,
     },
   });
 
-  if (!question) {
+  if (!dbQuestion) {
     throw new Error('Question not found');
   }
 
-  return question;
+  return transformQuestionFromDB(dbQuestion as any);
 };
 
 /**

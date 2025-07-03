@@ -34,10 +34,10 @@ export default function RoadmapQuestionCard(opts: {
   } = useRoadmapQuestion();
 
   // Use centralized navigation hook
-  const { generateQuestionUrl } = useQuestionNavigation({
-    type: 'roadmap',
-    currentQuestion: question,
-    roadmapSlug: roadmapUid,
+  const { getNextQuestionUrl } = useQuestionNavigation({
+    questionId: question.uid,
+    pathType: 'roadmap',
+    roadmapUid: roadmapUid,
   });
 
   const toggleLayout = () => {
@@ -70,7 +70,7 @@ export default function RoadmapQuestionCard(opts: {
           correctAnswer={correctAnswer}
           userAnswer={userAnswer}
           question={question}
-          nextQuestionHref={nextQuestion ? generateQuestionUrl(nextQuestion.uid) : undefined}
+          nextQuestionHref={nextQuestion ? getNextQuestionUrl() || undefined : undefined}
           isCodeEditorQuestion={false}
           isRoadmapQuestion={true}
           roadmapUid={roadmapUid}

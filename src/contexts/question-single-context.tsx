@@ -271,8 +271,14 @@ export const QuestionSingleContextProvider = ({
   const validateCode = async (e: React.FormEvent<HTMLFormElement>, totalSeconds: number) => {
     e.preventDefault();
 
-    if (question.questionType !== 'CODING_CHALLENGE') {
-      toast.error('No challenge found');
+    if (!user) {
+      toast.error('User is not logged in');
+      return;
+    }
+
+    // Проверяем что testCases существует для CODING_CHALLENGE
+    if (!question.testCases || !Array.isArray(question.testCases)) {
+      toast.error('No test cases available for this question');
       return;
     }
 
@@ -382,6 +388,12 @@ export const QuestionSingleContextProvider = ({
   const testRunCode = async () => {
     if (!user) {
       toast.error('User is not logged in');
+      return;
+    }
+
+    // Проверяем что testCases существует для CODING_CHALLENGE
+    if (!question.testCases || !Array.isArray(question.testCases)) {
+      toast.error('No test cases available for this question');
       return;
     }
 

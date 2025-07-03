@@ -51,19 +51,17 @@ export default function MultipleChoiceLayoutClient({
   
   // Use centralized navigation hook
   const {
-    isNavigating,
+    isLoading,
     canGoNext,
     canGoPrev,
     navigateNext,
-    navigatePrev,
-    getNextQuestionText,
-    getPrevQuestionText
+    navigatePrevious,
+    getNextActionText
   } = useQuestionNavigation({
-    type: navigationType,
-    currentQuestion: question,
-    nextAndPreviousQuestion: nextAndPreviousQuestion,
-    studyPathSlug: studyPathSlug || undefined,
-    roadmapSlug: roadmapSlug || undefined,
+    questionId: question.uid,
+    pathType: navigationType,
+    nextPrevPromise: nextAndPreviousQuestion ? Promise.resolve(nextAndPreviousQuestion) : undefined,
+    roadmapUid: roadmapSlug || undefined,
   });
 
   // determine if this question is eligible for the faster than ai game mode
@@ -333,7 +331,7 @@ export default function MultipleChoiceLayoutClient({
         onReset={resetQuestion}
         nextAndPreviousQuestion={navigationData}
         question={question as Question}
-        navigating={isNavigating}
+                    navigating={isLoading}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import { getUser } from '@/actions/user/authed/get-user';
 import { prisma } from '@/lib/prisma';
+import { transformQuestionFromDB } from '@/types';
 
 export const getUserReports = async (take: number = 5) => {
   // validate that we have a user before grabbing their user level
@@ -12,7 +13,7 @@ export const getUserReports = async (take: number = 5) => {
   }
 
   // get the user's reports
-  return await prisma.statisticsReport.findMany({
+  const reports = await prisma.statisticsReport.findMany({
     where: {
       userUid: user.uid,
     },
@@ -28,4 +29,12 @@ export const getUserReports = async (take: number = 5) => {
     },
     take,
   });
+
+  // Transform the linked reports
+  return reports.map(report => ({
+    ...report,
+    linkedReports: report.linkedReports.map(question => 
+      transformQuestionFromDB(question as any)
+    )
+  }));
 };

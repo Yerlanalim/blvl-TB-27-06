@@ -5,6 +5,7 @@ import { getUser } from '@/actions/user/authed/get-user';
 import { questionHelpSchema } from '@/lib/zod/schemas/ai/question-help';
 import { checkUserTokens, deductUserTokens } from '../utils/user-tokens';
 import type { Question, DefaultRoadmapQuestions, RoadmapUserQuestions } from '@/types';
+import { transformQuestionFromDB } from '@/types';
 
 // ai
 import { streamObject } from 'ai';
@@ -79,7 +80,7 @@ export const generateQuestionHelp = async (
     })) as RoadmapUserQuestions | null;
   } else if (questionType === 'regular' || questionType === 'study-path') {
     // Get the regular question or study path question (both use the same Questions table)
-    question = await prisma.questions.findUnique({
+    const dbQuestion = await prisma.questions.findUnique({
       where: {
         uid: questionUid,
       },
@@ -87,6 +88,7 @@ export const generateQuestionHelp = async (
         answers: true,
       },
     });
+    question = dbQuestion ? transformQuestionFromDB(dbQuestion as any) : null;
   }
 
   // if no question, return error

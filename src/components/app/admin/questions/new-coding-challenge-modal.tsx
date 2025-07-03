@@ -48,7 +48,7 @@ import { addCodingChallengeQuestion } from '@/actions/questions/add';
 
 // constants
 import { LANGUAGE_OPTIONS } from '@/utils/constants/language-options';
-import type { QuestionDifficulty } from '@/types';
+import type { QuestionDifficulty, TestCase } from '@/types';
 import { Textarea } from '@/components/ui/textarea';
 
 type SchemaProps = z.infer<typeof newCodingChallengeQuestionSchema>;
@@ -161,8 +161,8 @@ export default function NewCodingChallengeQuestionModal({ ...props }) {
     name: 'questionResources',
   });
 
-  const { mutateAsync: server_addQuestion, isPending } = useMutation({
-    mutationFn: (values: SchemaProps) => {
+  const server_addQuestion = useMutation({
+    mutationFn: async (values: SchemaProps) => {
       const {
         title = '',
         description = '',
@@ -171,6 +171,14 @@ export default function NewCodingChallengeQuestionModal({ ...props }) {
         questionResources = [],
         ...rest
       } = values;
+
+      // Парсим testCases из JSON строки в массив TestCase
+      let parsedTestCases: TestCase[] = [];
+      try {
+        parsedTestCases = JSON.parse(rest.testCases || '[]');
+      } catch (error) {
+        throw new Error('Invalid test cases JSON format');
+      }
 
       return addCodingChallengeQuestion({
         ...rest,
@@ -182,8 +190,7 @@ export default function NewCodingChallengeQuestionModal({ ...props }) {
         tags: rest.tags ? rest.tags.split(',').map((tag) => tag.trim()) : [],
         aiTitle: rest.aiTitle || '',
         difficulty: rest.difficulty as QuestionDifficulty,
-        // @ts-ignore
-        testCases: rest.testCases,
+        testCases: parsedTestCases,
         codeSnippet: rest.codeSnippet,
         dailyQuestion: rest.dailyQuestion || false,
         question: rest.question,
@@ -195,12 +202,14 @@ export default function NewCodingChallengeQuestionModal({ ...props }) {
       form.setValue('tags', '');
       editor?.commands.setContent('');
     },
-    onError: () => {
-      toast.error('Failed to add question');
+    onError: (error: Error) => {
+      toast.error(`Failed to add question: ${error.message}`);
     },
   });
 
-  const handleNewQuestion = async (values: SchemaProps) => await server_addQuestion(values);
+  const handleNewQuestion = async (values: SchemaProps) => {
+    await server_addQuestion.mutateAsync(values);
+  };
 
   return (
     <Dialog>
@@ -441,8 +450,8 @@ export default function NewCodingChallengeQuestionModal({ ...props }) {
                 </div>
               ))}
               {/* Submit Button */}
-              <Button type="submit" variant="secondary" disabled={isPending}>
-                {isPending ? 'Adding...' : 'Add Question'}
+              <Button type="submit" variant="secondary" disabled={server_addQuestion.isPending}>
+                {server_addQuestion.isPending ? 'Adding...' : 'Add Question'}
               </Button>
             </form>
           </Form>

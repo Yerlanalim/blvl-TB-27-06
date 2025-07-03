@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useQuestionSingle } from '@/contexts/question-single-context';
 import ResultCard from './result-card';
 import ICheck2 from '@/components/ui/icons/i-check-2';
+import { TestCase } from '@/types/Questions';
 
 interface ResultProps {
   passed: boolean;
@@ -17,6 +18,11 @@ export default function TestCaseSection() {
   const { question, currentLayout, result, user } = useQuestionSingle();
 
   const userCanAccess = question.isPremiumQuestion ? user?.userLevel !== 'FREE' : true;
+
+  // Проверяем что testCases существует и является массивом
+  if (!question.testCases || !Array.isArray(question.testCases)) {
+    return null;
+  }
 
   return (
     <div id="test-cases" className="h-full p-3 lg:pl-1.5 lg:pt-1.5 lg:pb-3 lg:pr-3">
@@ -40,7 +46,7 @@ export default function TestCaseSection() {
         {userCanAccess && (
           <Tabs defaultValue="test-0" key={`tabs-${question.uid}`}>
             <TabsList className="text-white rounded-lg bg-transparent flex gap-3 flex-wrap w-full justify-start px-4 py-2">
-              {question.testCases.map((_: any, index: number) => (
+              {question.testCases.map((_, index: number) => (
                 <TabsTrigger
                   key={`trigger-${question.uid}-${index}`}
                   value={`test-${index}`}
@@ -85,7 +91,7 @@ export default function TestCaseSection() {
               </>
             ) : (
               <>
-                {question.testCases.map((testCase: any, index: number) => (
+                {question.testCases.map((testCase: TestCase, index: number) => (
                   <TabsContent
                     key={`test-${question.uid}-${index}`}
                     value={`test-${index}`}

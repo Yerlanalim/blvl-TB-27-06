@@ -2,7 +2,8 @@ import { cache } from 'react';
 
 import { prisma } from '@/lib/prisma';
 import { getTagsFromQuestion } from './tags/get-tags-from-question';
-import type { Question } from '@/types';
+import type { Question, QuestionWithoutAnswers, QuestionFromDB } from '@/types/Questions';
+import { transformQuestionFromDB } from '@/types/Questions';
 
 /**
  * Retrieve a question via its uid or slug
@@ -11,49 +12,44 @@ import type { Question } from '@/types';
  * @param value - The value of the identifier
  * @returns The question object
  */
-export const getQuestion = cache(async (identifier: 'slug' | 'uid' = 'slug', value: string) => {
+export const getQuestion = cache(async (identifier: 'slug' | 'uid' = 'slug', value: string): Promise<Question | null> => {
   if (!value) {
     console.error('Please provide a uid');
     return null;
   }
 
-  let res = await prisma.questions.findUnique({
-    where: identifier === 'uid' ? { uid: value } : { slug: value },
-    include: {
-      answers: true,
-      tags: {
-        include: {
-          tag: true,
-        },
-      },
-      QuestionResources: true,
-      bookmarks: true,
-    },
-  });
-
-  // If not found, try the other identifier
-  if (!res) {
-    res = await prisma.questions.findUnique({
-      where: identifier === 'uid' ? { slug: value } : { uid: value },
+  try {
+    const whereClause = identifier === 'uid' ? { uid: value } : { slug: value };
+    const res = await prisma.questions.findUnique({
+      where: whereClause,
       include: {
         answers: true,
+        QuestionResources: true,
         tags: {
           include: {
             tag: true,
           },
         },
-        QuestionResources: true,
         bookmarks: true,
       },
     });
-  }
 
-  if (!res) {
+    if (!res) {
+      return null;
+    }
+
+    // Сначала применяем getTagsFromQuestion к сырым данным
+    const questionWithTags = getTagsFromQuestion(res as any);
+    const singleQuestion = Array.isArray(questionWithTags) ? questionWithTags[0] : questionWithTags;
+    
+    // Затем преобразуем JsonValue типы, сохраняя все поля включая answers
+    const dbQuestion = { ...singleQuestion, answers: res.answers } as unknown as QuestionFromDB;
+    const question = transformQuestionFromDB(dbQuestion);
+    
+    // Возвращаем уже преобразованный вопрос
+    return question;
+  } catch (error) {
+    console.error('Error fetching question:', error);
     return null;
   }
-
-  // get the tags from out the question
-  const question = getTagsFromQuestion(res) as unknown as Question;
-
-  return question;
 });

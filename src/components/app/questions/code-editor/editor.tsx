@@ -214,7 +214,7 @@ export default function CodeEditor() {
         height="90vh"
         defaultLanguage="javascript"
         value={userCanAccess ? code : ''}
-        onChange={(value) => {
+        onChange={(value: string | undefined) => {
           // update the code in the editor
           setCode(value || '');
           // update the code in local storage

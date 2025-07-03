@@ -6,6 +6,8 @@ import { addSlugToQuestion } from '@/scripts/add-slug-to-question';
 import { prisma } from '@/lib/prisma';
 
 import { QuestionDifficulty, QuestionAnswerType } from '@/types';
+import { QuestionAnswer } from '@/types/QuestionAnswers';
+import { TestCase } from '@/types/Questions';
 
 export const addQuestion = async (opts: {
   title?: string;
@@ -178,10 +180,7 @@ export const addCodingChallengeQuestion = async (opts: {
   question: string;
   title: string;
   description: string;
-  testCases: {
-    expected: any;
-    input: any;
-  }[];
+  testCases: TestCase[];
   codeSnippet: string;
   hint: string;
   dailyQuestion: boolean;
@@ -245,7 +244,7 @@ export const addCodingChallengeQuestion = async (opts: {
             },
           })),
         },
-        testCases: testCases || null,
+        testCases: testCases ? JSON.stringify(testCases) : undefined,
         QuestionResources: questionResources
           ? {
               createMany: {

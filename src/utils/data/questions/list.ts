@@ -2,6 +2,7 @@ import { cache } from 'react';
 
 import { prisma } from '@/lib/prisma';
 import { getTagsFromQuestion } from './tags/get-tags-from-question';
+import { transformQuestionFromDB } from '@/types';
 import type {
   QuestionFilters,
   Question,
@@ -206,13 +207,15 @@ export const listQuestions = async (opts: GetQuestionsOpts): Promise<ListQuestio
     });
 
     // Transform the questions
-    const transformedQuestions = getTagsFromQuestion(
-      questions.filter((question) => {
-        if (!question.customQuestion) return true;
-        return question.linkedReports.length > 0;
-      }) as unknown as Question[] & {
-        userAnswers: Answer[] | null;
-      }
+    const filteredQuestions = questions.filter((question) => {
+      if (!question.customQuestion) return true;
+      return question.linkedReports.length > 0;
+    });
+
+    const questionsWithTags = getTagsFromQuestion(filteredQuestions as any);
+    const questionsArray = Array.isArray(questionsWithTags) ? questionsWithTags : [questionsWithTags];
+    const transformedQuestions = questionsArray.map((q: any) => 
+      transformQuestionFromDB(q)
     );
 
     // Get total count with same security constraints
@@ -260,6 +263,8 @@ export const listQuestionsBySlugs = async ({ questionSlugs }: { questionSlugs: s
     },
   });
 
-  // current date
-  return res;
+  // Transform the questions
+  const questionsWithTags = getTagsFromQuestion(res as any);
+  const questionsArray = Array.isArray(questionsWithTags) ? questionsWithTags : [questionsWithTags];
+  return questionsArray.map((q: any) => transformQuestionFromDB(q));
 };

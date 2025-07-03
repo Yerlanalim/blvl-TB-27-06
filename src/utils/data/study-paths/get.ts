@@ -241,15 +241,15 @@ export const getAndGroupStudyPathQuestions = async ({
   const sections = Object.entries(overviewData).map(([key, section]) => {
     // Process direct section questions if they exist
     const sectionQuestions = section.questionSlugs
-      ? section.questionSlugs.map((slug) => questions.find((q) => q.slug === slug)).filter(Boolean)
+      ? section.questionSlugs.map((slug: string) => questions.find((q: any) => q.slug === slug)).filter(Boolean)
       : [];
 
     // Calculate section completion - count questions with correct answers
     const sectionAnsweredCount = sectionQuestions.filter(
-      (q) =>
+      (q: any) =>
         q?.userAnswers &&
         q.userAnswers.length > 0 &&
-        q.userAnswers.some((answer) => answer.correctAnswer === true)
+        q.userAnswers.some((answer: any) => answer.correctAnswer === true)
     ).length;
 
     const sectionCompletionPercentage =
@@ -259,22 +259,22 @@ export const getAndGroupStudyPathQuestions = async ({
 
     // Find the next unanswered question index in the section
     const nextQuestionIndex = sectionQuestions.findIndex(
-      (q, index) => index >= sectionAnsweredCount && (!q?.userAnswers || q.userAnswers.length === 0)
+      (q: any, index: number) => index >= sectionAnsweredCount && (!q?.userAnswers || q.userAnswers.length === 0)
     );
 
     // Process subsections if they exist
     const subSections = section.subSections
       ? Object.entries(section.subSections).map(([subKey, subSection]) => {
           const subSectionQuestions = subSection.questionSlugs
-            .map((slug) => questions.find((q) => q.slug === slug))
+            .map((slug: string) => questions.find((q: any) => q.slug === slug))
             .filter(Boolean);
 
           // Calculate subsection completion - ensure we're properly checking userAnswers
           const answeredCount = subSectionQuestions.filter(
-            (q) =>
+            (q: any) =>
               q?.userAnswers &&
               q.userAnswers.length > 0 &&
-              q.userAnswers.some((answer) => answer.correctAnswer === true)
+              q.userAnswers.some((answer: any) => answer.correctAnswer === true)
           ).length;
 
           const completionPercentage =
@@ -291,11 +291,11 @@ export const getAndGroupStudyPathQuestions = async ({
 
           // Find the next unanswered question index in this subsection
           const nextQuestionIndex = subSectionQuestions.findIndex(
-            (q, index) =>
+            (q: any, index: number) =>
               index >= answeredCount &&
               (!q?.userAnswers ||
                 q.userAnswers.length === 0 ||
-                !q.userAnswers.some((a) => a.correctAnswer === true))
+                !q.userAnswers.some((a: any) => a.correctAnswer === true))
           );
 
           // If we haven't found the first incomplete subsection yet and this one is incomplete
@@ -329,11 +329,11 @@ export const getAndGroupStudyPathQuestions = async ({
       ...section,
       questions: sectionQuestions,
       firstIncompleteQuestionIndex: sectionQuestions.findIndex(
-        (q, index) =>
+        (q: any, index: number) =>
           index >= sectionAnsweredCount &&
           (!q?.userAnswers ||
             q.userAnswers.length === 0 ||
-            !q.userAnswers.some((a) => a.correctAnswer === true))
+            !q.userAnswers.some((a: any) => a.correctAnswer === true))
       ),
       nextQuestionIndex: nextQuestionIndex !== -1 ? nextQuestionIndex : null,
       subSections: subSections.length > 0 ? subSections : undefined,
