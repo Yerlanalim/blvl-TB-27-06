@@ -1,4 +1,4 @@
-import { getUserDailyStats } from '@/utils/data/user/authed/get-daily-streak';
+import { getUnifiedProgress } from '@/utils/data/progress/get-unified-progress';
 import { Suspense } from 'react';
 import LoadingSpinner from './loading';
 import { cn } from '@/lib/utils';
@@ -34,20 +34,23 @@ export function SolarFlameBoldDuotone({
 }
 
 async function CurrentStreakData() {
-  const userStreak = await getUserDailyStats();
+  const progress = await getUnifiedProgress();
+  const streakCount = progress?.currentStreak ?? 0;
 
   return (
     <div className="flex items-center gap-x-1">
-      <p className="font-onest font-medium">{userStreak?.streakData?.currentstreakCount ?? 0}</p>
+      <p className="font-onest font-medium">{streakCount}</p>
     </div>
   );
 }
 
 export default async function CurrentStreak() {
-  const userStreak = await getUserDailyStats();
-  const nextRecommendedQuestion = await getSuggestions({
-    limit: 1,
-  });
+  const [progress, nextRecommendedQuestion] = await Promise.all([
+    getUnifiedProgress(),
+    getSuggestions({ limit: 1 }),
+  ]);
+
+  const streakCount = progress?.currentStreak ?? 0;
 
   return (
     <HoverCard>
@@ -55,7 +58,7 @@ export default async function CurrentStreak() {
         <div className="flex items-center gap-x-1">
           <SolarFlameBoldDuotone
             className="size-6"
-            hasActiveStreak={Boolean(userStreak?.streakData?.currentstreakCount)}
+            hasActiveStreak={Boolean(streakCount)}
           />
           <Suspense fallback={<LoadingSpinner />}>
             <CurrentStreakData />
@@ -66,9 +69,9 @@ export default async function CurrentStreak() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-y-1">
             <p className="text-xl text-gray-400 font-medium font-onest">
-              {userStreak?.streakData?.currentstreakCount} day streak
+              {streakCount} day streak
             </p>
-            {userStreak?.streakData?.currentstreakCount === 0 ? (
+            {streakCount === 0 ? (
               <p className="text-xs text-gray-400 font-medium font-onest">
                 Start your streak today by{' '}
                 <a

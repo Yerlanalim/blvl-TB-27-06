@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { getUserXp } from '@/utils/data/user/authed/get-user-xp';
+import { getUnifiedProgress } from '@/utils/data/progress/get-unified-progress';
 import { Suspense } from 'react';
 import LoadingSpinner from './loading';
 import BoltLightning from './icons/bolt-lightning';
@@ -9,7 +9,8 @@ interface UserXpProps {
 }
 
 async function UserXpData() {
-  const { userXp } = await getUserXp();
+  const progress = await getUnifiedProgress();
+  const userXp = progress?.userXp ?? 0;
 
   return <p className="font-onest font-medium">{userXp} XP</p>;
 }
