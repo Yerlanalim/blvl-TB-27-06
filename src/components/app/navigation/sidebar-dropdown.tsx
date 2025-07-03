@@ -24,19 +24,7 @@ import type { UserRecord, Profile } from '@/types';
 import { getUserDisplayName } from '@/utils/user';
 import { capitalise, getUpgradeUrl } from '@/utils';
 import ReferralModal from '@/components/shared/referral-modal';
-
-// BIZLEVEL: Заглушка для общего прогресса обучения
-// TODO: Интегрировать с реальными данными пользователя
-function getUserLearningProgress(user: UserRecord | null) {
-  if (!user) return { completedLevels: 0, totalLevels: 5, overallProgress: 0 };
-  
-  // Временная заглушка - в будущем получать из БД
-  return {
-    completedLevels: 1, // Завершенные уровни
-    totalLevels: 5,     // Общее количество уровней
-    overallProgress: 20, // Общий прогресс в процентах
-  };
-}
+import useUnifiedProgress from '@/hooks/use-unified-progress';
 
 /**
  * Sidebar area component
@@ -49,7 +37,14 @@ export default function SidebarAreaComponent(opts: {
   profile: Profile | null;
 }) {
   const { user } = opts;
-  const learningProgress = getUserLearningProgress(user);
+  const { sidebarProgress: learningProgress, isLoading } = useUnifiedProgress();
+
+  // Пока данные загружаются, можно отображать скелетон или ничего
+  if (!user || isLoading || !learningProgress) {
+    return (
+      <SidebarContent className="bg-[#000000] w-full p-0" />
+    );
+  }
 
   return (
     <SidebarContent className="bg-[#000000] w-full p-0">

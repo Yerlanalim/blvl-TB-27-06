@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
+import useUnifiedProgress from '@/hooks/use-unified-progress';
 
 interface LeoContext {
   context: string;
@@ -12,6 +13,7 @@ interface LeoContext {
 
 export function useLeoContext(): LeoContext {
   const pathname = usePathname();
+  const { globalProgress, levelDetails } = useUnifiedProgress();
 
   return useMemo(() => {
     // Определяем тип страницы
@@ -44,8 +46,27 @@ export function useLeoContext(): LeoContext {
       context = 'Пользователь на странице платформы BizLevel.';
     }
 
+    // Подготовка сводки прогресса пользователя
+    let progressSummary = '';
+    if (globalProgress) {
+      const {
+        currentLevelName,
+        currentLevelProgress,
+        completedLevels,
+        totalLevels,
+        overallProgress,
+      } = globalProgress;
+
+      // Определяем текущий уровень по levelDetails
+      const currentLevel = levelDetails?.find((l) => !l.completed) ?? null;
+
+      progressSummary = `\n\nПРОГРЕСС: Пользователь сейчас на уровне "${currentLevelName ?? currentLevel?.name ?? 'Неизвестно'}". ` +
+        (currentLevel ? `Пройдено ${currentLevel.completedQuestions} из ${currentLevel.totalQuestions} уроков этого уровня (${currentLevel.progress}%). ` : '') +
+        `Общий прогресс: ${overallProgress}% (завершено ${completedLevels} из ${totalLevels} уровней).`;
+    }
+
     // Формируем системный промпт для Leo
-    const systemPrompt = `Ты Leo - персональный бизнес-наставник платформы BizLevel. 
+    const systemPrompt = `Ты Leo - персональный бизнес-наставник платформы BizLevel.${progressSummary}
 
 КОНТЕКСТ: ${context}
 
@@ -76,5 +97,5 @@ export function useLeoContext(): LeoContext {
       isLessonPage,
       pageType,
     };
-  }, [pathname]);
+  }, [pathname, globalProgress, levelDetails]);
 } 

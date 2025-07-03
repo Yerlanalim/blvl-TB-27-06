@@ -4,6 +4,9 @@ import { getGlobalProgress } from '@/utils/data/progress/get-global-progress';
 /**
  * BIZLEVEL: API endpoint для получения глобального прогресса пользователя
  * GET /api/progress/global
+ * 
+ * @deprecated Используйте /api/progress/unified вместо этого endpoint
+ * Этот endpoint будет удален в будущих версиях
  */
 export async function GET() {
   try {

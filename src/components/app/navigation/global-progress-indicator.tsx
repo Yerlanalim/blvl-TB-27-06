@@ -5,18 +5,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Target, Trophy, Zap } from 'lucide-react';
 import { useUser } from '@/hooks/use-user';
-
-interface GlobalProgressData {
-  completedLevels: number;
-  totalLevels: number;
-  overallProgress: number;
-  currentLevelProgress?: number;
-  userXp: number;
-  weeklyXp: number;
-  currentLevelName?: string;
-  totalCompletedQuestions: number;
-  totalQuestions: number;
-}
+import useUnifiedProgress from '@/hooks/use-unified-progress';
 
 /**
  * BIZLEVEL: Глобальный индикатор прогресса для отображения на всех страницах
@@ -24,61 +13,8 @@ interface GlobalProgressData {
  */
 export default function GlobalProgressIndicator() {
   const { user } = useUser();
-  const [progressData, setProgressData] = useState<GlobalProgressData | null>(null);
+  const { data: progressData, isLoading } = useUnifiedProgress();
   const [animatedProgress, setAnimatedProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Получение данных прогресса пользователя
-  useEffect(() => {
-    if (!user) {
-      setIsLoading(false);
-      return;
-    }
-
-    const fetchProgress = async () => {
-      try {
-        // Получаем прогресс через API route
-        const response = await fetch('/api/progress/global');
-        if (response.ok) {
-          const data = await response.json();
-          setProgressData(data);
-        } else {
-          // Fallback на заглушку при ошибке
-          const mockData: GlobalProgressData = {
-            completedLevels: 1,
-            totalLevels: 5,
-            overallProgress: 20,
-            currentLevelProgress: 85,
-            userXp: user.userXp || 0,
-            weeklyXp: user.weeklyUserXp || 0,
-            currentLevelName: 'Основы бизнеса',
-            totalCompletedQuestions: 5,
-            totalQuestions: 25,
-          };
-          setProgressData(mockData);
-        }
-      } catch (error) {
-        console.error('Error fetching progress:', error);
-        // Fallback на заглушку при ошибке
-        const mockData: GlobalProgressData = {
-          completedLevels: 1,
-          totalLevels: 5,
-          overallProgress: 20,
-          currentLevelProgress: 85,
-          userXp: user.userXp || 0,
-          weeklyXp: user.weeklyUserXp || 0,
-          currentLevelName: 'Основы бизнеса',
-          totalCompletedQuestions: 5,
-          totalQuestions: 25,
-        };
-        setProgressData(mockData);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProgress();
-  }, [user]);
 
   // Анимация прогресса
   useEffect(() => {
