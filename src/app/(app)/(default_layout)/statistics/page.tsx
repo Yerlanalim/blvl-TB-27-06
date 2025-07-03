@@ -57,7 +57,7 @@ export default async function StatisticsPage({
 
   // TODO: В v2.0 заменить на нормальную систему ролей из БД
   // Сейчас проверяем по email домену для админов
-  const isAdmin = user.email?.endsWith('@bizlevel.kz') || user.email?.endsWith('@techblitz.dev');
+  const isAdmin = user.email?.endsWith('@bizlevel.kz');
   
   if (!isAdmin) {
     return (

@@ -136,7 +136,59 @@ const nextConfig = {
   // Отключаем проверки
   reactStrictMode: false,
   webpack: (config, { isServer, dev }) => {
-    // Минимальная конфигурация webpack для устранения зависания
+    // BIZLEVEL: Оптимизация Monaco Editor для lazy loading
+    if (!isServer) {
+      // Создаем отдельные chunks для тяжелых библиотек
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks?.cacheGroups,
+            // Monaco Editor в отдельном chunk с улучшенной конфигурацией
+            monaco: {
+              test: /[\\/]node_modules[\\/](@monaco-editor|monaco-editor)[\\/]/,
+              name: 'monaco-editor',
+              chunks: 'async',
+              priority: 40,
+              reuseExistingChunk: true,
+              enforce: true, // Принудительно создаем отдельный chunk
+            },
+            // Syntax highlighting в отдельном chunk
+            syntaxHighlighting: {
+              test: /[\\/]node_modules[\\/](prism-react-renderer|react-syntax-highlighter)[\\/]/,
+              name: 'syntax-highlighting',
+              chunks: 'async',
+              priority: 35,
+              reuseExistingChunk: true,
+            },
+            // Charts в отдельном chunk
+            charts: {
+              test: /[\\/]node_modules[\\/](recharts|chart\.js)[\\/]/,
+              name: 'charts',
+              chunks: 'async',
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+
+      // Оптимизация для Monaco Editor
+      config.module.rules.push({
+        test: /\.ttf$/,
+        type: 'asset/resource',
+      });
+
+      // Дополнительные оптимизации для Monaco Editor
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        // Предотвращаем загрузку всех языков Monaco
+        'monaco-editor/esm/vs/basic-languages': false,
+        'monaco-editor/esm/vs/language': false,
+      };
+    }
+    
     return config;
   },
 };

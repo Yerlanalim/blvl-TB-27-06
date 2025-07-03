@@ -22,6 +22,55 @@ const MonacoEditor = dynamic(
   }
 );
 
+// BIZLEVEL: Компонент для условного рендера Monaco Editor с оптимизацией
+const ConditionalMonacoEditor = memo(function ConditionalMonacoEditor({
+  isEditable,
+  codeSnippet,
+  onCodeChange,
+  user
+}: {
+  isEditable: boolean;
+  codeSnippet: string;
+  onCodeChange: (value: string) => void;
+  user: UserRecord | null;
+}) {
+  // Если не редактируемый, используем обычный CodeDisplay
+  if (!isEditable) {
+    return <CodeDisplay content={codeSnippet} user={user} backgroundColor="#111111" />;
+  }
+
+  // Для редактируемого кода загружаем Monaco только при необходимости
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <MonacoEditor
+        height="83vh"
+        language="javascript"
+        value={codeSnippet}
+        onChange={onCodeChange}
+        theme="vs-dark"
+        options={{
+          minimap: { enabled: false },
+          fontSize: 16,
+          guides: {
+            indentation: true,
+            bracketPairs: true,
+            bracketPairsHorizontal: true,
+            highlightActiveBracketPair: true,
+            highlightActiveIndentation: true,
+          },
+          // Оптимизации для производительности
+          wordWrap: 'on',
+          automaticLayout: true,
+          scrollBeyondLastLine: false,
+          renderLineHighlight: 'line',
+          contextmenu: false, // Отключаем контекстное меню для упрощения
+        }}
+        className="bg-black-50 !overflow-y-auto !scrollable-element"
+      />
+    </Suspense>
+  );
+});
+
 type QuestionCodeDisplayProps = {
   user: UserRecord | null;
   answerHelp?: z.infer<typeof answerHelpSchema> | null;
@@ -109,31 +158,12 @@ const QuestionCodeDisplay = memo(function QuestionCodeDisplay({
             transition={{ duration: 0.3 }}
             className="h-full"
           >
-            {isEditable ? (
-              <Suspense fallback={<LoadingSpinner />}>
-                <MonacoEditor
-                  height="83vh"
-                  language="javascript"
-                  value={codeSnippet}
-                  onChange={handleCodeChange}
-                  theme="vs-dark"
-                  options={{
-                    minimap: { enabled: false },
-                    fontSize: 16,
-                    guides: {
-                      indentation: true,
-                      bracketPairs: true,
-                      bracketPairsHorizontal: true,
-                      highlightActiveBracketPair: true,
-                      highlightActiveIndentation: true,
-                    },
-                  }}
-                  className="bg-black-50 !overflow-y-auto !scrollable-element"
-                />
-              </Suspense>
-            ) : (
-              <CodeDisplay content={codeSnippet} user={user} backgroundColor="#111111" />
-            )}
+            <ConditionalMonacoEditor
+              isEditable={isEditable}
+              codeSnippet={codeSnippet}
+              onCodeChange={handleCodeChange}
+              user={user}
+            />
           </motion.div>
         )}
       </AnimatePresence>
