@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { toast } from 'sonner';
 
@@ -17,6 +18,7 @@ import HintDrawer from '@/components/app/questions/multiple-choice/hint-drawer';
 import { answerQuestion } from '@/actions/answers/answer';
 
 import { useQuestionSingle } from '@/contexts/question-single-context';
+import { useQuestionNavigation } from '@/hooks/use-question-navigation';
 
 import type { Question, QuestionDifficulty, QuestionMock } from '@/types';
 import { cn } from '@/lib/utils';
@@ -39,6 +41,31 @@ export default function MultipleChoiceLayoutClient({
 }) {
   const { user, showHint, setShowHint } = useQuestionSingle();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Get navigation type based on URL params
+  const studyPathSlug = searchParams.get('study-path');
+  const roadmapSlug = searchParams.get('roadmap');
+  
+  const navigationType = studyPathSlug ? 'study-path' : roadmapSlug ? 'roadmap' : 'question';
+  
+  // Use centralized navigation hook
+  const {
+    isNavigating,
+    canGoNext,
+    canGoPrev,
+    navigateNext,
+    navigatePrev,
+    getNextQuestionText,
+    getPrevQuestionText
+  } = useQuestionNavigation({
+    type: navigationType,
+    currentQuestion: question,
+    nextAndPreviousQuestion: nextAndPreviousQuestion,
+    studyPathSlug: studyPathSlug || undefined,
+    roadmapSlug: roadmapSlug || undefined,
+  });
+
   // determine if this question is eligible for the faster than ai game mode
   const fasterThanAiGameMode = user?.fasterThanAiGameMode && question.aiTimeToComplete;
 
@@ -52,7 +79,6 @@ export default function MultipleChoiceLayoutClient({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [xpIncrease, setXpIncrease] = useState(0);
-  const [navigating, setNavigating] = useState(false);
 
   // Track time spent
   const [startTime] = useState<number>(Date.now());
@@ -125,10 +151,6 @@ export default function MultipleChoiceLayoutClient({
     try {
       const timeTaken = Math.floor((Date.now() - startTime) / 1000);
 
-      // Get study path param if it exists
-      const searchParams = new URLSearchParams(window.location.search);
-      const studyPathSlug = searchParams.get('study-path');
-
       const { correctAnswer, userAnswer } = await answerQuestion({
         questionUid: question.uid,
         answerUid: selectedAnswerData.uid,
@@ -147,14 +169,7 @@ export default function MultipleChoiceLayoutClient({
       // Move setting isSubmitting to false here to ensure it happens after the request completes
       setIsSubmitting(false);
     }
-  }, [selectedAnswerData, isSubmitting, question.correctAnswer, question.uid, question.difficulty, startTime]);
-
-  // Determine the navigation href with study path params if necessary
-  const navigationHref = isSubmitted
-    ? nextAndPreviousQuestion?.nextQuestion
-      ? nextAndPreviousQuestion.nextQuestion
-      : '/coding-challenges'
-    : '';
+  }, [selectedAnswerData, isSubmitting, question.correctAnswer, question.uid, question.difficulty, startTime, studyPathSlug]);
 
   // Add keyboard event handling for number keys
   useEffect(() => {
@@ -172,11 +187,10 @@ export default function MultipleChoiceLayoutClient({
           // Reset the question when Backspace is pressed after submission
           resetQuestion();
           toast.info('Question restarted');
-        } else if (key === 'Enter' && navigationData.nextQuestion) {
+        } else if (key === 'Enter' && canGoNext) {
           // Navigate to next question when Enter is pressed after submission
           // and a next question exists
-          setNavigating(true);
-          router.push(navigationHref);
+          navigateNext();
         }
       } else {
         // Controls when question is not yet submitted
@@ -207,7 +221,7 @@ export default function MultipleChoiceLayoutClient({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [answers, selectedAnswerData, isSubmitted, isSubmitting, navigationData, resetQuestion, handleSelectAnswer, handleSubmit, router, setNavigating, navigationHref]);
+  }, [answers, selectedAnswerData, isSubmitted, isSubmitting, canGoNext, resetQuestion, handleSelectAnswer, handleSubmit, navigateNext]);
 
   // Find the correct answer UID for highlighting
   const correctAnswerUid = question.correctAnswer;
@@ -319,7 +333,7 @@ export default function MultipleChoiceLayoutClient({
         onReset={resetQuestion}
         nextAndPreviousQuestion={navigationData}
         question={question as Question}
-        navigating={navigating}
+        navigating={isNavigating}
       />
     </div>
   );

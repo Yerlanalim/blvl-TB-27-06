@@ -1,5 +1,8 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useQuestionNavigation } from '@/hooks/use-question-navigation';
 import type { Question } from '@/types';
 import { getUpgradeUrl } from '@/utils';
 import { QUESTION_XP } from '@/utils/constants/question-xp';
@@ -30,6 +33,13 @@ export default function StudyPathQuestionCardPopover({
 }: StudyPathQuestionCardPopoverProps) {
   const xp = QUESTION_XP[questionData.difficulty] || 5;
 
+  // Use centralized navigation hook
+  const { generateQuestionUrl } = useQuestionNavigation({
+    type: 'study-path',
+    currentQuestion: questionData,
+    studyPathSlug: studyPath.slug,
+  });
+
   // Determine the correct URL and button state
   const getButtonHref = () => {
     // If premium locked, direct to upgrade page
@@ -39,10 +49,8 @@ export default function StudyPathQuestionCardPopover({
 
     // If it's the next question or already answered, allow access
     if (isNextQuestion || isAnswered || canAnswer) {
-      // Since this is not a subsection but a direct question, we use 'main' as the subsection
-      return `/roadmap/learn/${studyPath.slug}/main/lesson?lesson=${
-        lessonIndex !== undefined ? lessonIndex : 0
-      }`;
+      // Use centralized URL generation
+      return generateQuestionUrl(questionData.slug);
     }
 
     // Otherwise (sequence locked), stay on current page

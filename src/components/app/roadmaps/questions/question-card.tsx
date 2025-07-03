@@ -8,6 +8,7 @@ import { BookIcon, BookOpen, FileIcon, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import QuestionTabs, { type TabConfig } from '@/components/app/shared/question/question-tabs';
 import { useRoadmapQuestion } from '../../../../contexts/roadmap-question-context';
+import { useQuestionNavigation } from '@/hooks/use-question-navigation';
 import QuestionAccordion from '@/components/app/questions/single/question-accordion';
 import QuestionResult from '../../shared/answer-submitted';
 import QuestionCodeDisplay from '../../shared/question/question-code-display';
@@ -31,6 +32,13 @@ export default function RoadmapQuestionCard(opts: {
     answerHelp,
     generateAiAnswerHelp,
   } = useRoadmapQuestion();
+
+  // Use centralized navigation hook
+  const { generateQuestionUrl } = useQuestionNavigation({
+    type: 'roadmap',
+    currentQuestion: question,
+    roadmapSlug: roadmapUid,
+  });
 
   const toggleLayout = () => {
     setCurrentLayout(currentLayout === 'questions' ? 'codeSnippet' : 'questions');
@@ -62,7 +70,7 @@ export default function RoadmapQuestionCard(opts: {
           correctAnswer={correctAnswer}
           userAnswer={userAnswer}
           question={question}
-          nextQuestionHref={nextQuestion ? `/roadmap/${roadmapUid}/${nextQuestion.uid}` : undefined}
+          nextQuestionHref={nextQuestion ? generateQuestionUrl(nextQuestion.uid) : undefined}
           isCodeEditorQuestion={false}
           isRoadmapQuestion={true}
           roadmapUid={roadmapUid}

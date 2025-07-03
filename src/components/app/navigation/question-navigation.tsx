@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/button';
 
 import { RoadmapUserQuestions } from '@prisma/client';
 
-import { studyPaths } from '@/utils/constants/study-paths';
 import LevelProgress from './level-progress';
+import { useQuestionNavigation } from '@/hooks/use-question-navigation';
 
 import { useQuestionSingle } from '@/contexts/question-single-context';
 import { useLeoContext } from '@/hooks/use-leo-context';
@@ -38,10 +38,8 @@ export default function QuestionNavigation(opts: {
   randomQuestionComponent: React.ReactNode;
 }) {
   const { nextPrevPromise, navigationType = 'question', slug, randomQuestionComponent } = opts;
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const type = searchParams?.get('type');
-  const studyPathSlug = searchParams?.get('study-path');
 
   // TEMP FIX. the whole structure of study path questions are changing
   if (type === 'study-path') {
@@ -49,27 +47,27 @@ export default function QuestionNavigation(opts: {
   }
 
   const { 
-    previousQuestion, 
-    setPreviousQuestion, 
-    nextQuestion, 
-    setNextQuestion, 
-    progress, 
-    setProgress,
     question,
     correctAnswer,
     currentLayout
   } = useQuestionSingle();
 
-  const [nextPrevData, setNextPrevData] = useState<{
-    nextQuestion: string | null | undefined;
-    previousQuestion: string | null | undefined;
-    progress?: {
-      current: number;
-      total: number;
-      level: string;
-      percentage: number;
-    };
-  } | null>(null);
+  // Используем новый централизованный хук для навигации
+  const navigation = useQuestionNavigation({
+    questionId: slug,
+    pathType: navigationType as 'question' | 'roadmap',
+    nextPrevPromise,
+  });
+
+  const { 
+    nextQuestion, 
+    previousQuestion, 
+    progress, 
+    getNextActionText,
+    navigateNext,
+    canGoNext,
+    canGoPrev 
+  } = navigation;
 
   // BIZLEVEL: Состояния для улучшенной навигации
   const [showCompletionState, setShowCompletionState] = useState(false);
@@ -122,99 +120,18 @@ export default function QuestionNavigation(opts: {
     }
   }, [question.questionType, currentLayout, correctAnswer, progress, hasTriggeredLevelCompletion]);
 
-  useEffect(() => {
-    // if this is a study-path, get the next/prev questions from the study-path object
-    const studyPath =
-      type === 'study-path' && studyPathSlug
-        ? studyPaths.find((path) => path.slug === studyPathSlug)
-        : null;
-
-    if (studyPath) {
-      // Check if we're using overviewData
-      if ('overviewData' in studyPath && studyPath.overviewData) {
-        // Get all question slugs from the overviewData structure
-        const allSlugs = Object.values(studyPath.overviewData || {})
-          .flatMap((section: any) => section.questionSlugs || [])
-          .filter(Boolean);
-
-        // Find the current question's index in the flattened structure
-        const currentIndex = allSlugs.indexOf(slug);
-
-        // Get next and previous questions based on index
-        const nextSlug = currentIndex < allSlugs.length - 1 ? allSlugs[currentIndex + 1] : null;
-        const prevSlug = currentIndex > 0 ? allSlugs[currentIndex - 1] : null;
-
-        // Set the full URLs in context - using 'main' as the section slug for direct questions
-        setPreviousQuestion(
-          prevSlug ? `/roadmap/learn/${studyPathSlug}/main/lesson?lesson=${currentIndex}` : null
-        );
-        setNextQuestion(
-          nextSlug ? `/roadmap/learn/${studyPathSlug}/main/lesson?lesson=${currentIndex + 1}` : null
-        );
-      } else {
-        // Find the current question's index in the study path's questionSlugs
-        const currentIndex = studyPath.questionSlugs.indexOf(slug);
-
-        // Get next and previous questions based on index
-        const nextSlug =
-          currentIndex < studyPath.questionSlugs.length - 1
-            ? studyPath.questionSlugs[currentIndex + 1]
-            : null;
-        const prevSlug = currentIndex > 0 ? studyPath.questionSlugs[currentIndex - 1] : null;
-
-        // Set the full URLs in context
-        setPreviousQuestion(
-          prevSlug ? `/roadmap/learn/${studyPathSlug}/main/lesson?lesson=${currentIndex - 1}` : null
-        );
-        setNextQuestion(
-          nextSlug ? `/roadmap/learn/${studyPathSlug}/main/lesson?lesson=${currentIndex + 1}` : null
-        );
-      }
-    } else {
-      // Use the provided promise for non-study-path questions
-      // BIZLEVEL: Обновлено для поддержки прогресса уровня
-      nextPrevPromise.then((nextPrev) => {
-        setNextQuestion(nextPrev?.nextQuestion);
-        setPreviousQuestion(nextPrev?.previousQuestion);
-        
-        // Устанавливаем прогресс если он есть
-        if (nextPrev?.progress && setProgress) {
-          setProgress(nextPrev.progress);
-        }
-      });
-    }
-  }, [pathname, searchParams, slug, type, nextPrevPromise, studyPathSlug, setNextQuestion, setPreviousQuestion, setProgress]);
-
-  // BIZLEVEL: Функция для определения текста следующего действия
-  const getNextActionText = () => {
-    if (!progress) return 'Далее';
-    
-    if (question.questionType === 'VIDEO') {
-      // Для видео всегда показываем "Перейти к тесту" если есть следующий вопрос
-      return nextQuestion ? 'Перейти к тесту' : 'Следующий урок';
-    }
-    
-    if (question.questionType === 'MULTIPLE_CHOICE') {
-      if (isLevelCompleted) {
-        return 'Завершить уровень';
-      }
-      return nextQuestion ? 'Следующий урок' : 'Вернуться к карте уровней';
-    }
-    
-    return 'Далее';
-  };
+  // Логика навигации теперь обрабатывается в useQuestionNavigation хуке
 
   // BIZLEVEL: Функция для обработки клика на следующее действие
   const handleNextAction = () => {
     if (isLevelCompleted && !nextQuestion) {
       // Перейти к карте уровней или следующему уровню
-                  window.location.href = '/roadmaps';
+      window.location.href = '/roadmaps';
       return;
     }
     
-    if (nextQuestion) {
-      window.location.href = `/question/${nextQuestion}`;
-    }
+    // Используем централизованную логику навигации
+    navigateNext();
   };
 
   return (
@@ -323,7 +240,7 @@ export default function QuestionNavigation(opts: {
                   onClick={handleNextAction}
                   className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium flex items-center gap-2"
                 >
-                  {getNextActionText()}
+                  {getNextActionText(question.questionType, isLevelCompleted)}
                   {isLevelCompleted ? (
                     <Star className="w-4 h-4" />
                   ) : (
@@ -354,7 +271,7 @@ export default function QuestionNavigation(opts: {
                 <Button
                   href={previousQuestion || '#'}
                   className={`p-2 rounded-l-md relative group duration-200 size-8 flex items-center justify-center border-r-0 lesson-nav-btn ${
-                    !previousQuestion ? 'opacity-50 pointer-events-none' : ''
+                    !canGoPrev ? 'opacity-50 pointer-events-none' : ''
                   }`}
                   variant="ghost"
                 >
@@ -384,7 +301,7 @@ export default function QuestionNavigation(opts: {
                 <Button
                   href={nextQuestion || '#'}
                   className={`p-2 rounded-r-md relative group duration-200 size-8 flex items-center justify-center lesson-nav-btn ${
-                    !nextQuestion ? 'opacity-50 pointer-events-none' : ''
+                    !canGoNext ? 'opacity-50 pointer-events-none' : ''
                   }`}
                   variant="ghost"
                 >
