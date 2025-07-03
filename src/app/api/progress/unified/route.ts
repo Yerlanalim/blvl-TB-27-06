@@ -43,7 +43,13 @@ const calculateUnifiedProgress = cache(async (): Promise<UnifiedProgressData | n
       getUserDailyStats(),
     ]);
 
-    const totalLevels = levelTags.length;
+    const levelProgressRows = await prisma.$queryRaw<{level_tag:string,total_questions:number,completed_questions:number,progress_percent:number}[]>`
+      SELECT level_tag, total_questions, completed_questions, progress_percent
+      FROM user_level_progress
+      WHERE user_id = ${user.uid}
+      ORDER BY level_tag;`;
+
+    const totalLevels = levelProgressRows.length;
     if (totalLevels === 0) {
       return {
         completedLevels: 0,
@@ -53,9 +59,11 @@ const calculateUnifiedProgress = cache(async (): Promise<UnifiedProgressData | n
         weeklyXp: user.weeklyUserXp || 0,
         currentStreak: dailyStats?.streakData?.currentstreakCount || 0,
         nextLesson: {
-          slug: null,
-          url: null,
-          isNewUser: true,
+          slug: lastLessonData.nextLessonSlug,
+          title: undefined,
+          url: lastLessonData.nextLessonUrl,
+          isNewUser: lastLessonData.isNewUser,
+          progress: lastLessonData.progress,
         },
         totalCompletedQuestions: 0,
         totalQuestions: 0,
@@ -70,52 +78,28 @@ const calculateUnifiedProgress = cache(async (): Promise<UnifiedProgressData | n
     let currentLevelProgress = 0;
     const levelDetails: UnifiedProgressData['levelDetails'] = [];
 
-    const getDisplayName = (tagName: string) => {
-      const num = tagName.match(/\d+/)?.[0] || '1';
-      const names: Record<string, string> = {
-        '1': 'Основы бизнеса',
-        '2': 'Маркетинг и продвижение',
-        '3': 'Продажи и клиенты',
-        '4': 'Управление и команда',
-        '5': 'Финансы и инвестиции',
-      };
-      return names[num] || `Уровень ${num}`;
-    };
-
-    for (const tag of levelTags) {
-      const questions = await prisma.questions.findMany({
-        where: { tags: { some: { tag: { name: tag.name } } } },
-        select: { uid: true },
-      });
-      if (!questions.length) continue;
-
-      totalQuestions += questions.length;
-
-      const answers = await prisma.answers.findMany({
-        where: { userUid: user.uid, questionUid: { in: questions.map((q) => q.uid) }, correctAnswer: true },
-        select: { questionUid: true },
-      });
-
-      const completed = answers.length;
-      totalCompleted += completed;
-
-      const progress = Math.round((completed / questions.length) * 100);
-      const finished = progress >= 80;
+    for (const row of levelProgressRows) {
+      const finished = row.progress_percent >= 80;
       if (finished) completedLevels += 1;
 
+      totalQuestions += row.total_questions;
+      totalCompleted += row.completed_questions;
+
+      const displayName = getLevelDisplayName(row.level_tag);
+
       if (!finished && !currentLevelName) {
-        currentLevelName = getDisplayName(tag.name);
-        currentLevelProgress = progress;
+        currentLevelName = displayName;
+        currentLevelProgress = Math.round(row.progress_percent);
       }
 
       levelDetails.push({
-        levelNumber: parseInt(tag.name.replace('level-', '')),
-        name: getDisplayName(tag.name),
+        levelNumber: parseInt(row.level_tag.replace('level-', '')),
+        name: displayName,
         completed: finished,
-        progress,
-        totalQuestions: questions.length,
-        completedQuestions: completed,
-        tagName: tag.name,
+        progress: Math.round(row.progress_percent),
+        totalQuestions: row.total_questions,
+        completedQuestions: row.completed_questions,
+        tagName: row.level_tag,
       });
     }
 
