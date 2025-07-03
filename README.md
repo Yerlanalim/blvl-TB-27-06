@@ -136,3 +136,7 @@ You can view our security policy [here](https://github.com/Yerlanalim/blvl-TB-27
 ## License
 
 [Apache-2.0](http://www.apache.org/licenses/)
+
+## 📊 База данных
+
+Актуальная ER-диаграмма и описание таблиц находятся в `docs/database-schema.md`. Для каждодневной работы с контентом см. `docs/content-management.md`.
