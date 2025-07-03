@@ -15,7 +15,7 @@ async function validateLevels() {
   for (const tag of levelTags) {
     const questions = await prisma.questions.findMany({
       where: {
-        questionTags: { some: { tagId: tag.uid } },
+        tags: { some: { tagId: tag.uid } },
       },
       orderBy: { previousQuestionSlug: 'asc' },
       select: {
@@ -25,6 +25,7 @@ async function validateLevels() {
         previousQuestionSlug: true,
         nextQuestionSlug: true,
         codeSnippet: true,
+        videoUrl: true,
       },
     });
 
@@ -56,9 +57,10 @@ async function validateLevels() {
 
     // Видео
     for (const q of videoQuestions) {
-      if (!q.codeSnippet) {
+      const vimeoId = q.videoUrl || q.codeSnippet;
+      if (!vimeoId) {
         errors.push(`VIDEO урок ${q.slug} без Vimeo ID`);
-      } else if (!/^\d+$/.test(q.codeSnippet)) {
+      } else if (!/^\d+$/.test(vimeoId)) {
         errors.push(`Vimeo ID неверный у ${q.slug}`);
       }
     }
