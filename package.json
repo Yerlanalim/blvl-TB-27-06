@@ -20,7 +20,7 @@
     "test:performance": "npx tsc scripts/test-performance-optimizations.ts --outDir scripts/compiled && node scripts/compiled/test-performance-optimizations.js && rm -rf scripts/compiled",
     "seed:level1": "npx tsx scripts/seed-level1.ts",
     "test:navigation": "npx tsx scripts/test-level-navigation.ts",
-    "validate:levels": "tsx scripts/validate-levels.ts"
+    "validate:levels": "npx tsx scripts/validate-levels.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "1.1.13",
