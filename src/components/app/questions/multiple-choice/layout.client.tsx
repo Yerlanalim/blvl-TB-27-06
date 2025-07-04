@@ -14,6 +14,7 @@ import FasterThanAIWrapper from '@/components/app/questions/faster-than-ai/faste
 import MultipleChoiceFooter from '@/components/app/questions/multiple-choice/footer';
 import MultipleChoiceCard from '@/components/app/questions/multiple-choice/card';
 import HintDrawer from '@/components/app/questions/multiple-choice/hint-drawer';
+import AnswerHints from '@/components/app/shared/answer-hints';
 
 import { answerQuestion } from '@/actions/answers/answer';
 
@@ -81,6 +82,9 @@ export default function MultipleChoiceLayoutClient({
   // Track time spent
   const [startTime] = useState<number>(Date.now());
 
+  // Количество попыток ответа
+  const [attempts, setAttempts] = useState(0);
+
   // Create a default object if nextAndPreviousQuestion is null
   const navigationData = useMemo(() => nextAndPreviousQuestion || {
     previousQuestion: null,
@@ -127,6 +131,7 @@ export default function MultipleChoiceLayoutClient({
     setIsSubmitted(false);
     setIsCorrect(null);
     setSelectedAnswerData(null);
+    setAttempts(0);
   }, []);
 
   // Handle submitting the answer
@@ -144,6 +149,7 @@ export default function MultipleChoiceLayoutClient({
       setIsCorrect(false);
       setIsSubmitted(true);
       setXpIncrease(INCORRECT_ANSWER_XP);
+      setAttempts((prev) => prev + 1);
     }
 
     try {
@@ -320,6 +326,18 @@ export default function MultipleChoiceLayoutClient({
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Подсказки при неправильном ответе */}
+        {isSubmitted && isCorrect === false && (
+          <AnswerHints
+            attempts={attempts}
+            questionHint={question.hint}
+            onAskLeo={() => {
+              // переход к Leo чату с контекстом вопроса
+              router.push('/leo-chat?context=question&uid=' + question.uid);
+            }}
+          />
+        )}
       </div>
 
       <MultipleChoiceFooter
@@ -331,7 +349,8 @@ export default function MultipleChoiceLayoutClient({
         onReset={resetQuestion}
         nextAndPreviousQuestion={navigationData}
         question={question as Question}
-                    navigating={isLoading}
+        navigating={isLoading}
+        isCorrect={isCorrect === true}
       />
     </div>
   );

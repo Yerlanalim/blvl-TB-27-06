@@ -23,6 +23,7 @@ interface MultipleChoiceFooterProps {
   onReset: () => void;
   nextAndPreviousQuestion: NavigationData;
   navigating?: boolean;
+  isCorrect?: boolean;
 }
 
 export default function MultipleChoiceFooter({
@@ -35,6 +36,7 @@ export default function MultipleChoiceFooter({
   nextAndPreviousQuestion,
   question,
   navigating = false,
+  isCorrect = true,
 }: MultipleChoiceFooterProps) {
   const { user, showHint, setShowHint, studyPath } = useQuestionSingle();
 
@@ -58,7 +60,7 @@ export default function MultipleChoiceFooter({
     navigating ? (
       <Loader2 className="mr-2 size-4 animate-spin" />
     ) : (
-      'Next Question'
+      'Дальше'
     )
   ) : isSubmitting ? (
     'Submitting...'
@@ -89,8 +91,14 @@ export default function MultipleChoiceFooter({
     // Don't use asChild with conditional rendering in a Link
     submitButton = (
       <Link href={navigationHref}>
-        <Button variant="accent" className="flex items-center gap-2" disabled={navigating}>
-          {submitButtonText} {!navigating && <EnterKey width="0.75em" height="0.75em" />}
+        <Button
+          variant="accent"
+          className="flex items-center gap-2"
+          disabled={navigating || !isCorrect}
+        >
+          {submitButtonText} {!navigating && isCorrect && (
+            <EnterKey width="0.75em" height="0.75em" />
+          )}
         </Button>
       </Link>
     );

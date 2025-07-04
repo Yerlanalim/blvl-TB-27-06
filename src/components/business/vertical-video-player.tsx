@@ -15,6 +15,7 @@ interface VerticalVideoPlayerProps {
   onPlay?: () => void;
   onNext?: () => void;
   onPrevious?: () => void;
+  onContinue?: () => void;
   title?: string;
   className?: string;
   // Мобильные свайп-жесты
@@ -29,6 +30,7 @@ export default function VerticalVideoPlayer({
   onPlay,
   onNext,
   onPrevious,
+  onContinue,
   title,
   className = '',
   enableSwipeNavigation = true,
@@ -110,6 +112,7 @@ export default function VerticalVideoPlayer({
           setHasStartedPlaying(true);
           setShowNextButton(true);
           onPlay?.();
+          onContinue?.();
           
           // Сохраняем прогресс в localStorage
           localStorage.setItem(`videoProgress-${videoId}`, 'started');
@@ -153,7 +156,7 @@ export default function VerticalVideoPlayer({
       console.error('Failed to load Vimeo player:', error);
       setIsLoading(false);
     }
-  }, [videoId, onComplete, onPlay, hasStartedPlaying, isFullscreen]);
+  }, [videoId, onComplete, onPlay, onContinue, hasStartedPlaying, isFullscreen]);
 
   // Инициализация плеера
   useEffect(() => {

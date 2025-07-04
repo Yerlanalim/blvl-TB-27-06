@@ -1,6 +1,7 @@
 'use client';
 
 import { use, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // components
 import { Separator } from '@/components/ui/separator';
@@ -65,6 +66,11 @@ export default function QuestionCard(opts: {
   };
 }) {
   const { user, questionPromise, totalSubmissions } = opts;
+
+  // Router for navigation to next lesson
+  const router = useRouter();
+  // Состояние для активации кнопки «Дальше»
+  const [canContinue, setCanContinue] = useState(false);
 
   const [activeTab, setActiveTab] = useState<'description' | 'resources' | 'stats'>('description');
 
@@ -190,7 +196,7 @@ export default function QuestionCard(opts: {
         {currentLayout === 'questions' && userCanAccess && (
           <>
             {question.questionType === 'VIDEO' ? (
-              <div className="p-4 lg:p-0 h-full flex items-center justify-center"> {/* Центрируем видео */}
+              <div className="p-4 lg:p-0 h-full flex flex-col items-center justify-center gap-6"> {/* Центрируем видео */}
                 <VerticalVideoPlayer
                   videoId={
                     extractVimeoId(question.videoUrl ?? question.videoId ?? question.codeSnippet ?? '') || '000000'
@@ -219,8 +225,23 @@ export default function QuestionCard(opts: {
                     // TODO: Реализовать навигацию к предыдущему уроку
                     // navigateToPreviousLesson();
                   }}
+                  // Активация кнопки «Дальше» при первом воспроизведении
+                  onContinue={() => setCanContinue(true)}
                   className="vertical-video-container"
                 />
+
+                {/* Кнопка «Дальше» */}
+                {opts.nextAndPreviousQuestion?.nextQuestion && (
+                  <Button
+                    onClick={() => router.push(opts.nextAndPreviousQuestion!.nextQuestion!)}
+                    disabled={!canContinue}
+                    className={`mt-4 px-6 py-3 font-semibold rounded-lg transition-all ${
+                      canContinue ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
+                    }`}
+                  >
+                    Дальше
+                  </Button>
+                )}
               </div>
             ) : (
               <QuestionTabs
