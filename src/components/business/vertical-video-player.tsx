@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, ChevronLeft, X } from 'lucide-react';
+import { extractVimeoId } from '@/utils/video';
 
 // Lazy load Vimeo Player only when needed
 const loadVimeoPlayer = () => import('@vimeo/player');
@@ -46,6 +47,13 @@ export default function VerticalVideoPlayer({
   const createPlayer = useCallback(async () => {
     if (!containerRef.current || !videoId || playerRef.current) return;
 
+    const resolvedId = extractVimeoId(videoId);
+    if (!resolvedId) {
+      console.error('VerticalVideoPlayer: Некорректный videoId/videoUrl', videoId);
+      setIsLoading(false);
+      return;
+    }
+
     console.log('VerticalVideoPlayer: Creating player for video ID:', videoId);
 
     try {
@@ -72,7 +80,7 @@ export default function VerticalVideoPlayer({
       // Создаем Vimeo player с оптимизированными настройками
       console.log('VerticalVideoPlayer: Creating Vimeo Player instance...');
       const vimeoPlayer = new Player(containerRef.current, {
-        id: parseInt(videoId) || 0,
+        id: parseInt(resolvedId),
         width: playerWidth,
         height: playerHeight,
         responsive: true,

@@ -21,6 +21,7 @@ import AiQuestionHelp from '../../questions/single/ai-question-help';
 import NoDailyQuestion from '@/components/shared/no-daily-question';
 import QuestionSubmitted from '@/components/app/layout/question-single/question-submitted';
 import VerticalVideoPlayer from '@/components/business/vertical-video-player';
+import { extractVimeoId } from '@/utils/video';
 
 // types
 import type { UserRecord, Question } from '@/types';
@@ -191,7 +192,9 @@ export default function QuestionCard(opts: {
             {question.questionType === 'VIDEO' ? (
               <div className="p-4 lg:p-0 h-full flex items-center justify-center"> {/* Центрируем видео */}
                 <VerticalVideoPlayer
-                  videoId={question.videoId || question.codeSnippet || 'demo-video-id'}
+                  videoId={
+                    extractVimeoId(question.videoUrl ?? question.videoId ?? question.codeSnippet ?? '') || '000000'
+                  }
                   title={question.title || undefined} // Добавляем заголовок урока
                   enableSwipeNavigation={true} // Включаем свайп-жесты на мобильных
                   onComplete={() => {
