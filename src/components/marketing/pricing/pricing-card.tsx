@@ -23,6 +23,9 @@ export default function PricingCard(opts: {
 
   const isFree = !product.price;
 
+  // Флаг включения платежей
+  const paymentsEnabled = process.env.NEXT_PUBLIC_ENABLE_PAYMENTS === 'true';
+
   return (
     <Card
       style={{
@@ -80,17 +83,24 @@ export default function PricingCard(opts: {
         <Button
           fullWidth
           variant="secondary"
+          disabled={!paymentsEnabled && !isFree}
           href={
-            showSignup
-              ? '/signup'
-              : paymentTrigger
-                ? product.paymentLink?.production
-                : isFree
-                  ? '/signup'
-                  : '/upgrade'
+            paymentsEnabled
+              ? showSignup
+                ? '/signup'
+                : paymentTrigger
+                  ? product.paymentLink?.production
+                  : isFree
+                    ? '/signup'
+                    : '/upgrade'
+              : '#'
           }
         >
-          {isFree ? 'Start for free' : 'Get Premium'}
+          {isFree
+            ? 'Начать бесплатно'
+            : paymentsEnabled
+              ? 'Получить Premium'
+              : 'Скоро'}
         </Button>
       </CardContent>
     </Card>

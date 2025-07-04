@@ -8,11 +8,13 @@ import type { UserRecord } from '@/types';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/components/ui/tooltip';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function ProfileImage(opts: { user: UserRecord }) {
   const { user } = opts;
 
   const [userProfilePicture, setUserProfilePicture] = useState(user?.userProfilePicture);
+  const queryClient = useQueryClient();
 
   const onProfilePictureChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!user?.uid || !event.target.files) return;
@@ -30,11 +32,15 @@ export default function ProfileImage(opts: { user: UserRecord }) {
       const { logoUrl } = await res.json();
 
       if (logoUrl) {
-        toast.success('Profile picture updated successfully');
+        toast.success('Фото профиля обновлено');
+        // локально обновляем картинку
+        setUserProfilePicture(logoUrl);
+        // обновляем кэш юзера, чтобы остальные компоненты получили новый url
+        queryClient.setQueryData(['user-details'], (prev: any) => {
+          if (!prev) return prev;
+          return { ...prev, userProfilePicture: logoUrl };
+        });
       }
-
-      // set the user profile picture to the new url
-      setUserProfilePicture(logoUrl);
     } catch (e) {
       console.error(e);
       toast.error('Failed to upload profile picture');
