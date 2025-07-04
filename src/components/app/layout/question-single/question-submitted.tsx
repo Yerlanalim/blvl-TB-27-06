@@ -94,12 +94,12 @@ export default function QuestionSubmitted() {
             {correctAnswer === 'correct' ? (
               <div className="flex items-center gap-x-2">
                 <CheckCircle className="size-7 text-green-500" />
-                You answered correctly!
+                Вы ответили правильно!
               </div>
             ) : correctAnswer === 'incorrect' ? (
               <div className="flex items-center gap-x-2">
                 <XCircle className="size-7 text-red-500" />
-                That was incorrect, try again!
+                Ответ неверный, попробуйте ещё раз!
               </div>
             ) : (
               <div className="flex items-center gap-x-2">
@@ -117,7 +117,7 @@ export default function QuestionSubmitted() {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Copy link</p>
+                  <p>Скопировать ссылку</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -137,7 +137,7 @@ export default function QuestionSubmitted() {
       >
         <div className="flex flex-col gap-y-6">
           <div className="flex flex-col gap-y-2">
-            <h2 className="text-xl font-bold">Your Answer</h2>
+            <h2 className="text-xl font-bold">Ваш ответ</h2>
             {/** test if this is a code question */}
             {userAnswer &&
             /<pre><code/.test(
@@ -167,7 +167,7 @@ export default function QuestionSubmitted() {
           {/** if the user answered correctly, show the correct answer */}
           {correctAnswer === 'incorrect' && (
             <div className="flex flex-col gap-y-2">
-              <h2 className="text-lg font-bold">Correct Answer</h2>
+              <h2 className="text-lg font-bold">Правильный ответ</h2>
               <CodeDisplay
                 content={
                   question?.answers.find((answer) => answer.uid === question.correctAnswer)
@@ -179,22 +179,21 @@ export default function QuestionSubmitted() {
         </div>
         <div className="flex flex-col gap-y-2">
           {/** ai explain answer (on button click) */}
-          <h2 className="text-xl font-bold">Explain this answer</h2>
+          <h2 className="text-xl font-bold">Пояснение к ответу</h2>
           <p className="text-sm text-gray-400">
-            Don't understand this answer? Click the button below to get an explanation.
+            Не понимаете ответ? Нажмите кнопку ниже, чтобы получить объяснение.
           </p>
           <p className="text-sm text-white">
             {userIsPremium(user) ? (
               <>
-                You have {user?.userLevel === 'LIFETIME' ? user?.aiQuestionHelpTokens : 'unlimited'}{' '}
-                tokens remaining
+                У вас осталось {user?.userLevel === 'LIFETIME' ? user?.aiQuestionHelpTokens : 'безлимитное количество'} токенов
               </>
             ) : (
               <span className="text-xs text-gray-400">
                 <Link href={getUpgradeUrl()} className="text-accent underline">
-                  Upgrade to Premium
+                  Перейти на Premium
                 </Link>{' '}
-                to access AI-powered explanations!
+                чтобы получить доступ к AI-объяснениям!
               </span>
             )}
           </p>
@@ -209,7 +208,7 @@ export default function QuestionSubmitted() {
             className="hidden lg:flex"
             wrapperClassName="w-fit"
           >
-            {isPending ? 'Generating...' : 'Explain Answer'}
+            {isPending ? 'Генерация…' : 'Пояснить ответ'}
           </Button>
           <Button
             variant="secondary"
@@ -220,7 +219,7 @@ export default function QuestionSubmitted() {
             }}
             className="flex lg:hidden"
           >
-            {isPending ? 'Generating...' : 'Explain Answer'}
+            {isPending ? 'Генерация…' : 'Пояснить ответ'}
           </Button>
         </div>
 
@@ -249,16 +248,16 @@ export default function QuestionSubmitted() {
         {(question?.nextQuestionSlug || nextQuestion) && (
           <div className="flex flex-col gap-y-2">
             <p className="text-sm text-gray-400">
-              Want to continue the flow? Click the button below to go to the next question.
+              Хотите продолжить? Нажмите кнопку ниже, чтобы перейти к следующему вопросу.
             </p>
             <Button variant="secondary" href={getNextQuestionUrl()}>
               {isStudyPathLesson
                 ? nextQuestion
-                  ? 'Next Lesson'
+                  ? 'Следующий урок'
                   : question.nextQuestionSlug
-                  ? 'Next Lesson'
-                  : 'Back to Roadmap'
-                : 'Next Question'}
+                  ? 'Следующий урок'
+                  : 'Назад к дорожной карте'
+                : 'Следующий вопрос'}
             </Button>
           </div>
         )}

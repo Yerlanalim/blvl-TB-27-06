@@ -161,7 +161,7 @@ export default function QuestionCard(opts: {
           )}
           <div className="min-w-fit">
             {/* BIZLEVEL: Скрываем таймер для VIDEO типа */}
-            {user && user?.showTimeTaken && question.questionType !== 'VIDEO' && <Stopwatch totalSeconds={totalSeconds} />}
+            {user && user?.showTimeTaken && question.questionType === 'CODING_CHALLENGE' && <Stopwatch totalSeconds={totalSeconds} />}
           </div>
           <div className="flex lg:hidden text-sm w-full items-center justify-end bg-black-25 gap-x-3">
             {/** explain question ai button */}

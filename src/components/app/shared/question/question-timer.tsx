@@ -73,7 +73,7 @@ export function AnimatedStopwatchButton({
             </div>
           </motion.button>
         </TooltipTrigger>
-        <TooltipContent>{isRunning ? 'Pause' : 'Start'}</TooltipContent>
+        <TooltipContent>{isRunning ? 'Пауза' : 'Старт'}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

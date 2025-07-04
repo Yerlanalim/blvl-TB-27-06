@@ -55,6 +55,11 @@ export default function QuestionActionButtons() {
     submitAnswer(e, totalSeconds);
   };
 
+  // Скрываем панель действий для видео-и тестовых вопросов
+  if (['VIDEO', 'MULTIPLE_CHOICE', 'SIMPLE_MULTIPLE_CHOICE'].includes(question.questionType)) {
+    return null;
+  }
+
   return (
     <div id="question-action-buttons" className="flex gap-x-1 md:gap-x-2 items-center">
       <div className="flex rounded-md overflow-hidden">
@@ -74,7 +79,7 @@ export default function QuestionActionButtons() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                Reset
+                Сброс
               </motion.span>
             </AnimatePresence>
             <AnimatePresence mode="wait">
@@ -91,7 +96,7 @@ export default function QuestionActionButtons() {
             </AnimatePresence>
           </div>
         </Button>
-        {question.questionType !== 'SIMPLE_MULTIPLE_CHOICE' && (
+        {question.questionType === 'CODING_CHALLENGE' && (
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
@@ -163,7 +168,7 @@ export default function QuestionActionButtons() {
                   </AnimatePresence>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>{runningCode ? 'Running code...' : 'Run Code'}</TooltipContent>
+              <TooltipContent>{runningCode ? 'Выполняется…' : 'Запустить код'}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         )}
@@ -186,7 +191,7 @@ export default function QuestionActionButtons() {
                     transition={{ duration: 0.2, ease: 'easeInOut' }}
                   >
                     <LoadingSpinner />
-                    <span>Submitting...</span>
+                    <span>Отправка…</span>
                   </motion.div>
                 ) : (
                   <motion.span
@@ -196,7 +201,7 @@ export default function QuestionActionButtons() {
                     exit={{ opacity: 0, y: 0 }}
                     transition={{ duration: 0.2, ease: 'easeInOut' }}
                   >
-                    Submit
+                    Отправить
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -214,7 +219,7 @@ export default function QuestionActionButtons() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              Login to Submit
+              Войти, чтобы отправить
             </motion.span>
           </Button>
         )}
