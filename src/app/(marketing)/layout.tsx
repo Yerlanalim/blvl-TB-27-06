@@ -31,25 +31,23 @@ export default function Layout({
 }>) {
   return (
     <ReactQueryClientProvider>
-      <html lang="en">
-        <body
-          className={`${InterFont.variable} ${SatoshiFont.variable} ${UbuntuFont.variable} ${OnestFont.variable} overflow-x-hidden antialiased`}
-        >
-          <main>
-            <StarsBackground className="-z-10" />
-            <CSPostHogProvider>
-              <MantineProvider>
-                <MarketingNavigation />
-                {children}
-                <CookieBanner />
-                <MarketingFooter />
-              </MantineProvider>
-            </CSPostHogProvider>
-          </main>
-          <Analytics />
-          <Toaster className="bg-black" />
-        </body>
-      </html>
+      <div
+        className={`${InterFont.variable} ${SatoshiFont.variable} ${UbuntuFont.variable} ${OnestFont.variable} overflow-x-hidden antialiased`}
+      >
+        <main>
+          <StarsBackground className="-z-10" />
+          <CSPostHogProvider>
+            <MantineProvider>
+              <MarketingNavigation />
+              {children}
+              <CookieBanner />
+              <MarketingFooter />
+            </MantineProvider>
+          </CSPostHogProvider>
+        </main>
+        <Analytics />
+        <Toaster className="bg-black" />
+      </div>
     </ReactQueryClientProvider>
   );
 }

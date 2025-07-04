@@ -10,16 +10,14 @@ export default function Layout({
 }>) {
   return (
     <ReactQueryClientProvider>
-      <html lang="en">
-        <body
-          className={`${InterFont.variable} ${SatoshiFont.variable} ${UbuntuFont.variable} antialiased`}
-          suppressHydrationWarning
-        >
-          {/* Scrollable content */}
-          <main>{children}</main>
-          <Toaster className="bg-black" />
-        </body>
-      </html>
+      <div
+        className={`${InterFont.variable} ${SatoshiFont.variable} ${UbuntuFont.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        {/* Scrollable content */}
+        <main>{children}</main>
+        <Toaster className="bg-black" />
+      </div>
     </ReactQueryClientProvider>
   );
 }

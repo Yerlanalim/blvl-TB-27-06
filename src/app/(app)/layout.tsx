@@ -37,33 +37,31 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   ]);
 
   return (
-    <html lang="en">
-      <body>
-        <PerformanceOptimizer>
-          <OnbordaProvider>
-            <Onborda
-              steps={steps()}
-              showOnborda={true}
-              shadowRgb="0,0,0"
-              shadowOpacity="0.8"
-              cardComponent={TourCard}
-              cardTransition={{ duration: 0.3, type: 'tween' }}
-            >
-              <SidebarProvider>
-                <AppSidebar user={user} profile={profile} suggestion={suggestion?.[0]} />
-                <NextTopLoader color="#5b61d6" showSpinner={false} />
-                <SidebarLayout>
-                  <CSPostHogProvider>
-                    <MantineProvider>{children}</MantineProvider>
-                  </CSPostHogProvider>
-                </SidebarLayout>
-                <Toaster className="bg-black" />
-                <LeoChat />
-              </SidebarProvider>
-            </Onborda>
-          </OnbordaProvider>
-        </PerformanceOptimizer>
-      </body>
-    </html>
+    <div lang="ru">
+      <PerformanceOptimizer>
+        <OnbordaProvider>
+          <Onborda
+            steps={steps()}
+            showOnborda={true}
+            shadowRgb="0,0,0"
+            shadowOpacity="0.8"
+            cardComponent={TourCard}
+            cardTransition={{ duration: 0.3, type: 'tween' }}
+          >
+            <SidebarProvider>
+              <AppSidebar user={user} profile={profile} suggestion={suggestion?.[0]} />
+              <NextTopLoader color="#5b61d6" showSpinner={false} />
+              <SidebarLayout>
+                <CSPostHogProvider>
+                  <MantineProvider>{children}</MantineProvider>
+                </CSPostHogProvider>
+              </SidebarLayout>
+              <Toaster className="bg-black" />
+              <LeoChat />
+            </SidebarProvider>
+          </Onborda>
+        </OnbordaProvider>
+      </PerformanceOptimizer>
+    </div>
   );
 }
