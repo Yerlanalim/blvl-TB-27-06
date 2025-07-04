@@ -16,18 +16,24 @@ export const getUserFromSession = async () => {
 
 export const getUserFromDb = async (userUid: string): Promise<UserRecord | null> => {
   if (!userUid) return null;
-  const user = await prisma.users.findUnique({
-    where: {
-      uid: userUid,
-    },
-    include: {
-      studyPathEnrollments: {
-        include: {
-          studyPath: true,
+  let user;
+  try {
+    user = await prisma.users.findUnique({
+      where: {
+        uid: userUid,
+      },
+      include: {
+        studyPathEnrollments: {
+          include: {
+            studyPath: true,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (err) {
+    console.error('Prisma unavailable, returning null user', err);
+    return null;
+  }
 
   revalidateTag('user-details');
 

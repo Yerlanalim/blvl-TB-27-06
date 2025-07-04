@@ -79,26 +79,30 @@ const calculateUnifiedProgress = cache(async (): Promise<UnifiedProgressData | n
     const levelDetails: UnifiedProgressData['levelDetails'] = [];
 
     for (const row of levelProgressRows) {
-      const finished = row.progress_percent >= 80;
+      const progressPercent = Number(row.progress_percent);
+      const totalQ = Number(row.total_questions);
+      const completedQ = Number(row.completed_questions);
+
+      const finished = progressPercent >= 80;
       if (finished) completedLevels += 1;
 
-      totalQuestions += row.total_questions;
-      totalCompleted += row.completed_questions;
+      totalQuestions += totalQ;
+      totalCompleted += completedQ;
 
       const displayName = getLevelDisplayName(row.level_tag);
 
       if (!finished && !currentLevelName) {
         currentLevelName = displayName;
-        currentLevelProgress = Math.round(row.progress_percent);
+        currentLevelProgress = Math.round(progressPercent);
       }
 
       levelDetails.push({
         levelNumber: parseInt(row.level_tag.replace('level-', '')),
         name: displayName,
         completed: finished,
-        progress: Math.round(row.progress_percent),
-        totalQuestions: row.total_questions,
-        completedQuestions: row.completed_questions,
+        progress: Math.round(progressPercent),
+        totalQuestions: totalQ,
+        completedQuestions: completedQ,
         tagName: row.level_tag,
       });
     }
