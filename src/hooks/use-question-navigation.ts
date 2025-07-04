@@ -242,4 +242,23 @@ export const useQuestionNavigation = ({
     // Text helpers for UI
     getNextActionText,
   };
-}; 
+};
+
+/**
+ * Получить первый непройденный вопрос по тэгу уровня.
+ * Запрос идёт к API `/api/levels/[tag]/first-uncompleted`.
+ */
+export async function getFirstUncompletedQuestion(levelTag: string): Promise<string | null> {
+  try {
+    const res = await fetch(`/api/levels/${levelTag}/first-uncompleted`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.slug ?? null;
+  } catch (e) {
+    console.error('getFirstUncompletedQuestion error', e);
+    return null;
+  }
+} 

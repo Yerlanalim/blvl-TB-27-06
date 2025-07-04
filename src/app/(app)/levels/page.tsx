@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import LevelBlock from '@/components/app/levels/level-block';
-import useUnifiedProgress from '@/hooks/use-unified-progress';
+import LevelsList from '@/components/app/levels/levels-list';
 
 // SEO метаданные
 export const metadata: Metadata = {
@@ -68,42 +67,7 @@ export default function LevelsPage() {
     <div className="max-w-2xl mx-auto py-8 px-4">
       <h1 className="text-2xl md:text-3xl font-bold mb-6 text-white">Карта уровней</h1>
       {/* Client-side список, чтобы учитывать персональный прогресс */}
-      <LevelsList />
+      <LevelsList levels={LEVELS_INFO} />
     </div>
-  );
-}
-
-// Client component для получения прогресса
-function LevelsList() {
-  'use client';
-  const { levelDetails, isLoading } = useUnifiedProgress();
-
-  // Определяем текущий уровень: первый, который ещё не завершён
-  const currentIndex = levelDetails.findIndex((l) => !l.completed);
-
-  return (
-    <ul className="flex flex-col gap-4">
-      {LEVELS_INFO.map((level, idx) => {
-        const detail = levelDetails.find((d) => d.levelNumber === level.number);
-        const completed = detail?.completed ?? false;
-        const current = idx === currentIndex;
-        const locked = idx > currentIndex && !completed;
-
-        return (
-          <LevelBlock
-            key={level.number}
-            levelNumber={level.number}
-            title={level.title}
-            description={level.description}
-            completed={completed}
-            current={!completed && current}
-            locked={locked}
-          />
-        );
-      })}
-      {isLoading && (
-        <p className="text-gray-400 text-sm">Загружаем прогресс…</p>
-      )}
-    </ul>
   );
 } 

@@ -120,10 +120,9 @@ const nextConfig = {
     // optimizePackageImports: ['recharts', '@monaco-editor/react', 'react-syntax-highlighter', 'prism-react-renderer'],
     esmExternals: 'loose', // Помогает с ESM проблемами
   },
-  // Временно отключаем оптимизации
-  compress: false,
+  // Включаем стандартный SWC Minify для устранения предупреждения
+  swcMinify: true,
   optimizeFonts: false,
-  swcMinify: false,
   // Агрессивные настройки для устранения зависания
   typescript: {
     ignoreBuildErrors: true,
@@ -189,9 +188,23 @@ const nextConfig = {
       };
     }
     
-    return config;
+    const updated = typeof nextConfig.__originalWebpack === 'function'
+      ? nextConfig.__originalWebpack(config, { isServer, dev })
+      : config;
+
+    const webpack = require('webpack');
+    updated.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /\(marketing\)[/\\]\(landing-pages\)/,
+      }),
+    );
+
+    return updated;
   },
 };
+
+// помечаем оригинальный для внутреннего стека
+nextConfig.__originalWebpack = nextConfig.webpack;
 
 const withMDX = createMDX({
   options: {

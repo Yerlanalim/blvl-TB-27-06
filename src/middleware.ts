@@ -76,6 +76,11 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
+  // Legacy /levels/:tag/lessons redirect to new map
+  if (/^\/levels\/[^\/]+\/lessons/.test(pathname)) {
+    return NextResponse.redirect(new URL('/levels', req.url), 301);
+  }
+
   /**
    * This API route is protected: if the user's authentication session is missing,
    * the supabaseClient will return an "Auth session missing!" error.
