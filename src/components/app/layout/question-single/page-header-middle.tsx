@@ -21,13 +21,20 @@ export default function QuestionPageHeaderMiddle({
     return null;
   }
 
+  // Определяем, является ли вопрос уровневым, чтобы не дублировать прогресс-бар
+  const isLevelQuestion = question.tags?.some(
+    (t) => t.tag?.name?.startsWith('level-') || t.tagId?.startsWith('level-'),
+  );
+
   // For SIMPLE_MULTIPLE_CHOICE questions, show progress or toggle
   return (
     <div className="flex items-center justify-center w-full relative">
       {/* Container with fixed height to prevent layout shift */}
       <div className="w-full h-10 relative overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
-          {studyPathMetadata && question.questionType === 'SIMPLE_MULTIPLE_CHOICE' ? (
+          {studyPathMetadata &&
+          question.questionType === 'SIMPLE_MULTIPLE_CHOICE' &&
+          !isLevelQuestion ? (
             <motion.div
               key="progress"
               className="absolute inset-0 w-full flex items-center justify-center gap-2"

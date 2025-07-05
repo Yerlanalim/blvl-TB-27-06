@@ -34,7 +34,7 @@ export default function GlobalProgressIndicator() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-full bg-gradient-to-r from-black-75/90 to-black-50/90 backdrop-blur-sm border-b border-gray-800/50"
+      className="fixed top-0 left-0 z-40 w-full bg-gradient-to-r from-black-75/90 to-black-50/90 backdrop-blur-sm border-b border-gray-800/50"
     >
       {/* Desktop версия - компактная */}
       <div className="hidden lg:block">

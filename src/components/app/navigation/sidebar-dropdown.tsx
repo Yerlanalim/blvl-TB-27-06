@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { ChevronsUpDown, Trophy, Target } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,13 +18,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import LogoutButton from '@/components/auth/logout';
 import ProfilePicture from '@/components/ui/profile-picture';
-import { Progress } from '@/components/ui/progress';
 
 import type { UserRecord, Profile } from '@/types';
 import { getUserDisplayName } from '@/utils/user';
 import { capitalise, getUpgradeUrl } from '@/utils';
 import ReferralModal from '@/components/shared/referral-modal';
-import useUnifiedProgress from '@/hooks/use-unified-progress';
 
 /**
  * Sidebar area component
@@ -37,10 +35,9 @@ export default function SidebarAreaComponent(opts: {
   profile: Profile | null;
 }) {
   const { user } = opts;
-  const { sidebarProgress: learningProgress, isLoading } = useUnifiedProgress();
 
-  // Пока данные загружаются, можно отображать скелетон или ничего
-  if (!user || isLoading || !learningProgress) {
+  // Пока нет данных пользователя, возвращаем пустой сайдбар
+  if (!user) {
     return (
       <SidebarContent className="bg-[#000000] w-full p-0" />
     );
@@ -71,33 +68,7 @@ export default function SidebarAreaComponent(opts: {
                   <ChevronsUpDown className="ml-auto" />
                 </div>
                 
-                {/* Общий прогресс обучения */}
-                {user && (
-                  <div className="w-full mt-3 group-data-[collapsible=icon]:hidden">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center gap-1">
-                        <Target className="w-3 h-3 text-accent" />
-                        <span className="text-xs text-gray-300">Общий прогресс</span>
-                      </div>
-                      <span className="text-xs text-accent font-medium">
-                        {learningProgress.overallProgress}%
-                      </span>
-                    </div>
-                    <Progress 
-                      value={learningProgress.overallProgress} 
-                      className="h-1.5 bg-black-75"
-                      indicatorColor="bg-accent"
-                    />
-                    <div className="flex items-center justify-between mt-1">
-                      <span className="text-xs text-gray-400">
-                        Уровень {learningProgress.completedLevels}/{learningProgress.totalLevels}
-                      </span>
-                      {learningProgress.completedLevels > 0 && (
-                        <Trophy className="w-3 h-3 text-yellow-500" />
-                      )}
-                    </div>
-                  </div>
-                )}
+                {/* Индикатор прогресса убран – отображается глобальный в хедере */}
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 bg-[#000] !text-white border-black-50">

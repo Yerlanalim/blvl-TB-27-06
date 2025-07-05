@@ -107,7 +107,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
     },
     {
       title: 'Карта уровней',
-      url: '/roadmaps',
+      url: '/levels',
       icon: Blog3,
       tooltip: 'Карта уровней',
       animatable: true,
@@ -165,7 +165,7 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
     {
       title: 'Карта уровней',
       tooltip: 'Карта уровней',
-      url: '/roadmaps',
+      url: '/levels',
       icon: Blog3,
       animatable: true,
     },
@@ -287,8 +287,8 @@ export function AppSidebar({ user, profile, suggestion }: AppSidebarProps) {
     if (url.startsWith('/question')) {
       return pathname.startsWith('/question');
     }
-    if (url === '/roadmaps') {
-      return pathname.startsWith('/roadmaps') && !pathname.startsWith('/personalized-roadmaps');
+    if (url === '/levels') {
+      return pathname.startsWith('/levels');
     }
     if (url === '/personalized-roadmaps') {
       return pathname.startsWith('/personalized-roadmaps');

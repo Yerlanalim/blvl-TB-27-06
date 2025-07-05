@@ -1,11 +1,13 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+  // archive tables are ignored in Prisma models
 }
 
 model PseoPages {
@@ -47,6 +49,7 @@ model PseoPages {
   jsonLdTitle        String?
   jsonLdDescription  String?
   isPublished        Boolean  @default(false)
+  @@map("PseoPages")
 }
 
 // ===== From badge.prisma =====
@@ -423,6 +426,7 @@ model UserRoadmaps {
   questions                           RoadmapUserQuestions[]
   generationProgress                  RoadmapGenerationProgress[]
   defaultRoadmapQuestionsUsersAnswers DefaultRoadmapQuestionsUsersAnswers[]
+  @@map("UserRoadmaps")
 }
 
 model RoadmapUserQuestions {
@@ -448,6 +452,7 @@ model RoadmapUserQuestions {
 
   @@index([roadmapUid])
   @@index([completed])
+  @@map("RoadmapUserQuestions")
 }
 
 model RoadmapUserQuestionsAnswers {
@@ -460,6 +465,7 @@ model RoadmapUserQuestionsAnswers {
   order       Int      @default(0)
 
   question RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+  @@map("RoadmapUserQuestionsAnswers")
 }
 
 model RoadmapUserQuestionsUserAnswers {
@@ -472,6 +478,7 @@ model RoadmapUserQuestionsUserAnswers {
   difficulty  AnswerDifficulty @default(EASY)
 
   question RoadmapUserQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+  @@map("RoadmapUserQuestionsUserAnswers")
 }
 
 model DefaultRoadmapQuestions {
@@ -488,6 +495,7 @@ model DefaultRoadmapQuestions {
 
   answers      DefaultRoadmapQuestionsAnswers[]
   usersAnswers DefaultRoadmapQuestionsUsersAnswers[]
+  @@map("DefaultRoadmapQuestions")
 }
 
 model DefaultRoadmapQuestionsAnswers {
@@ -498,6 +506,7 @@ model DefaultRoadmapQuestionsAnswers {
   answer      String
 
   question DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
+  @@map("DefaultRoadmapQuestionsAnswers")
 }
 
 model DefaultRoadmapQuestionsUsersAnswers {
@@ -513,6 +522,7 @@ model DefaultRoadmapQuestionsUsersAnswers {
   question DefaultRoadmapQuestions @relation(fields: [questionUid], references: [uid], onDelete: Cascade)
   roadmap  UserRoadmaps            @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
   user     Users                   @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  @@map("DefaultRoadmapQuestionsUsersAnswers")
 }
 
 enum RoadmapStatus {
@@ -532,6 +542,7 @@ model RoadmapGenerationProgress {
   roadmap UserRoadmaps @relation(fields: [roadmapUid], references: [uid], onDelete: Cascade)
 
   @@index([roadmapUid])
+  @@map("RoadmapGenerationProgress")
 }
 
 enum RoadmapGenerationStatus {
@@ -783,4 +794,10 @@ enum UserTimeSpendingPerDay {
   BETWEEN_15_AND_30_MINUTES
   BETWEEN_30_AND_60_MINUTES
   MORE_THAN_60_MINUTES
+}
+
+model LegacyCodingQuestions {
+  uid String @id
+
+  @@map("LegacyCodingQuestions")
 }

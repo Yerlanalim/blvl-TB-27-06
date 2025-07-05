@@ -1,3 +1,6 @@
++'use client';
+
+import { useState } from 'react';
 import { User } from 'lucide-react';
 import { Suspense } from 'react';
 import LoadingSpinner from './loading';
@@ -10,9 +13,11 @@ export default function ProfilePicture(opts: {
   className?: string;
 }) {
   const { src, alt, className } = opts;
+  const [error, setError] = useState(false);
 
-  // if no src, return a placeholder
-  if (!src) {
+  const showPlaceholder = error || !src;
+
+  if (showPlaceholder) {
     return (
       <div
         className={cn(
@@ -33,6 +38,7 @@ export default function ProfilePicture(opts: {
         alt={alt || 'User Profile Picture'}
         width={24}
         height={24}
+        onError={() => setError(true)}
       />
     </Suspense>
   );

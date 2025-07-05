@@ -188,9 +188,7 @@ const nextConfig = {
       };
     }
     
-    const updated = typeof nextConfig.__originalWebpack === 'function'
-      ? nextConfig.__originalWebpack(config, { isServer, dev })
-      : config;
+    const updated = config;
 
     const webpack = require('webpack');
     updated.plugins.push(
@@ -202,9 +200,6 @@ const nextConfig = {
     return updated;
   },
 };
-
-// помечаем оригинальный для внутреннего стека
-nextConfig.__originalWebpack = nextConfig.webpack;
 
 const withMDX = createMDX({
   options: {

@@ -28,8 +28,8 @@ async function getLevels(): Promise<LevelStats[]> {
     // все вопросы уровня
     const questions = await prisma.questions.findMany({
       where: {
-        questionTags: {
-          some: { tag: { uid: tag.uid } },
+        tags: {
+          some: { tagId: tag.uid },
         },
       },
       select: { questionType: true },

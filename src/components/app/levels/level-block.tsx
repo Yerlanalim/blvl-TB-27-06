@@ -40,7 +40,7 @@ export default function LevelBlock({
       onClick={locked ? undefined : onClick}
       className={cn(
         'flex flex-col gap-2 p-4 border border-black-50 rounded-lg transition-transform hover:scale-105',
-        locked && 'cursor-not-allowed opacity-60',
+        locked ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
       )}
     >
       <div className="flex items-center gap-3">

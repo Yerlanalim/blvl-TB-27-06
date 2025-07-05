@@ -21,7 +21,7 @@ export default async function LevelDetailPage({ params }: Props) {
 
   const questions = await prisma.questions.findMany({
     where: {
-      questionTags: {
+      tags: {
         some: { tagId: tag.uid },
       },
     },
@@ -32,7 +32,7 @@ export default async function LevelDetailPage({ params }: Props) {
       title: true,
       questionType: true,
       videoId: true,
-      resources: {
+      QuestionResources: {
         select: { title: true, resource: true },
       },
       previousQuestionSlug: true,
@@ -68,9 +68,9 @@ export default async function LevelDetailPage({ params }: Props) {
               <td className="px-4 py-3">{q.questionType}</td>
               <td className="px-4 py-3">{q.questionType === 'VIDEO' ? q.videoId ?? '—' : '—'}</td>
               <td className="px-4 py-3">
-                {q.resources.length ? (
+                {q.QuestionResources.length ? (
                   <ul className="list-disc list-inside">
-                    {q.resources.map((r) => (
+                    {q.QuestionResources.map((r) => (
                       <li key={r.resource}>
                         <a href={r.resource} target="_blank" rel="noopener" className="text-primary hover:underline">
                           {r.title}

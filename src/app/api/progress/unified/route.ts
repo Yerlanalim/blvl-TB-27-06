@@ -135,6 +135,28 @@ const calculateUnifiedProgress = cache(async (): Promise<UnifiedProgressData | n
   }
 });
 
+// Значения по умолчанию для неаутентифицированного пользователя (гостя)
+const DEFAULT_PROGRESS_DATA: UnifiedProgressData = {
+  completedLevels: 0,
+  totalLevels: 0,
+  overallProgress: 0,
+  currentLevelProgress: 0,
+  currentLevelName: '',
+  userXp: 0,
+  weeklyXp: 0,
+  currentStreak: 0,
+  nextLesson: {
+    slug: null,
+    title: undefined,
+    url: null,
+    isNewUser: false,
+    progress: 0,
+  },
+  totalCompletedQuestions: 0,
+  totalQuestions: 0,
+  levelDetails: [],
+};
+
 /**
  * BIZLEVEL: Унифицированный API endpoint для получения всех данных прогресса
  * GET /api/progress/unified
@@ -146,11 +168,9 @@ export async function GET() {
   try {
     const progressData = await calculateUnifiedProgress();
     
+    // Если пользователь не аутентифицирован, возвращаем пустой прогресс вместо 401
     if (!progressData) {
-      return NextResponse.json(
-        { error: 'User not authenticated' },
-        { status: 401 }
-      );
+      return NextResponse.json(DEFAULT_PROGRESS_DATA, { status: 200 });
     }
 
     // Добавляем заголовки для кэширования на 5 минут

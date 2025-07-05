@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
 
 // components
 import Hero from '@/components/shared/hero';
@@ -59,6 +60,9 @@ const heroDescription = (
 );
 
 export default async function ExploreQuestionsPage() {
+  // Мгновенный редирект на новую страницу карты уровней
+  redirect('/levels');
+
   // create json ld
   const jsonLd: WebPageJsonLd = {
     '@context': 'https://schema.org',

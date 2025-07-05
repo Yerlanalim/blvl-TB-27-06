@@ -15,7 +15,9 @@ export default function LevelsList({ levels }: { levels: LevelInfo[] }) {
   const { levelDetails, isLoading } = useUnifiedProgress();
   const router = useRouter();
 
-  const currentIndex = levelDetails.findIndex((l) => !l.completed);
+  // Если данные ещё загружаются или все уровни завершены, делаем доступным первый уровень
+  const rawIndex = levelDetails.findIndex((l) => !l.completed);
+  const currentIndex = rawIndex === -1 ? 0 : rawIndex;
 
   const handleClick = async (levelNumber: number, locked: boolean) => {
     if (locked) return;

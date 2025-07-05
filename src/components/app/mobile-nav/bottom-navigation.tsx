@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
   },
   {
     label: 'Карта',
-    href: '/roadmaps', 
+    href: '/levels', 
     icon: Map,
   },
   {
@@ -41,8 +41,8 @@ export default function BottomNavigation() {
     if (href === '/dashboard') {
       return pathname === href;
     }
-    if (href === '/roadmaps') {
-      return pathname.startsWith('/roadmaps') && !pathname.startsWith('/personalized-roadmaps');
+    if (href === '/levels') {
+      return pathname.startsWith('/levels');
     }
     if (href === '/leo-chat') {
       return pathname.startsWith('/leo-chat');

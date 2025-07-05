@@ -8,9 +8,6 @@ export async function GET(
 ) {
   const { tag } = context.params;
   const user = await getUser();
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
 
   try {
     const tagRecord = await prisma.tag.findUnique({ where: { name: tag } });
@@ -20,7 +17,7 @@ export async function GET(
 
     const questions = await prisma.questions.findMany({
       where: {
-        questionTags: {
+        tags: {
           some: { tagId: tagRecord.uid },
         },
       },
@@ -39,6 +36,11 @@ export async function GET(
     });
 
     for (const q of questions) {
+      // Если пользователь не аутентифицирован, сразу возвращаем первый вопрос
+      if (!user) {
+        return NextResponse.json({ slug: q.slug });
+      }
+
       const answered = await prisma.answers.findFirst({
         where: {
           userUid: user.uid,
